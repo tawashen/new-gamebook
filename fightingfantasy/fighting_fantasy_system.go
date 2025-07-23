@@ -76,7 +76,7 @@ func (ff *FightingFantasySystem) handleStoryNode(gs *game.GameState, node game.N
 		input = strings.TrimSpace(input)
 		choiceNum, err := strconv.Atoi(input)
 		if err != nil || choiceNum < 1 || choiceNum > len(node.Choices) {
-			//s.display_status()
+			//gs.display_status()
 			continue
 		}
 
@@ -96,7 +96,7 @@ func (ff *FightingFantasySystem) handleStoryNode(gs *game.GameState, node game.N
 			gs.CurrentNodeID = choice.NextNodeID
 			break
 		} else {
-			//.display_status()
+			//gs.display_status()
 		}
 	}
 	return nil

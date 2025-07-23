@@ -49,6 +49,9 @@ func NewLoneWolfSystem(crtFile string) *LoneWolfSystem {
 	}
 }
 
+// インターフェースの実装を明示
+var _ game.GameSystem = (*LoneWolfSystem)(nil)
+
 // Initialize はLoneWolfSystemを初期化
 func (lw *LoneWolfSystem) Initialize(config *game.GameConfig) error {
 	stats, ok := config.Player["stats"].(map[string]interface{})
@@ -69,10 +72,16 @@ func (lw *LoneWolfSystem) Initialize(config *game.GameConfig) error {
 	return nil
 }
 
-// HandleNode はノードタイプに応じて処理
-func (lw *LoneWolfSystem) HandleNode(gs *game.GameState, node game.Node) error {
-	// 以前のコードをそのまま使用（game. を付けて共用構造体を参照）
-	// ...（HandleNode, handleStoryNode, handleEncounterNode, handleRandomNode の実装）
+// Encounter は敵との戦闘を処理
+func (lw *LoneWolfSystem) Encounter(gs *game.GameState, enemy game.Enemy) error {
+	playerCS := gs.Player.Stats["CombatSkill"]
+	enemyCS := enemy.Stats["CombatSkill"]
+	combatRatio := playerCS - enemyCS
+	randomNum := lw.Random()
+	damage := lw.CRT[KeyPair{CombatRatio: combatRatio, RandomNum: randomNum}]
+	gs.Player.Stats["HP"] -= damage.PlayerDamage
+	enemy.Stats["HP"] -= damage.EnemyDamage
+	fmt.Printf("Combat: Player HP=%d, Enemy HP=%d\n", gs.Player.Stats["HP"], enemy.Stats["HP"])
 	return nil
 }
 
@@ -85,4 +94,25 @@ func (lw *LoneWolfSystem) UpdatePlayer(gs *game.GameState, action string) error 
 	return nil
 }
 
-// ...（他のメソッド：makeCombatResult, normalizeCombatRatio, contains, containsInt）
+// Random は戦闘表用の乱数を生成（0-9）
+func (lw *LoneWolfSystem) Random() int {
+	return lw.Rand.Intn(10)
+}
+
+func (lw *LoneWolfSystem) HandleNode(gs *game.GameState, node game.Node) error {
+	switch node.Type {
+	case "story":
+		fmt.Printf("Story: %s\n", node.Text)
+	case "combat":
+		if node.Enemy != nil {
+			return lw.Encounter(gs, *node.Enemy)
+		}
+		return fmt.Errorf("no enemy defined for combat node")
+	case "choice":
+		fmt.Printf("Choices: %v\n", node.Choices)
+		// ...（選択肢処理）
+	default:
+		return fmt.Errorf("unknown node type: %s", node.Type)
+	}
+	return nil
+}

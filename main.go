@@ -16,15 +16,8 @@ import (
 	"github.com/BurntSushi/toml"
 )
 
-// GameSystem はゲームシステムのインターフェース
-type GameSystem interface {
-	Initialize(config *game.GameConfig) error
-	HandleNode(gs *game.GameState, node game.Node) error
-	UpdatePlayer(gs *game.GameState, action string) error
-}
-
-// NewGameSystem はシステム名に基づいて適切なGameSystemを返す
-func NewGameSystem(systemName, configDir string) (GameSystem, error) {
+// NewGameSystem はシステム名に基づいて GameSystem を返す
+func NewGameSystem(systemName, configDir string) (game.GameSystem, error) {
 	switch systemName {
 	case "lonewolf":
 		return lonewolf.NewLoneWolfSystem(configDir + "/combat_result_table.toml"), nil
@@ -35,12 +28,22 @@ func NewGameSystem(systemName, configDir string) (GameSystem, error) {
 	}
 }
 
-// NewGameState は新しいGameStateを初期化
+// NewGameState はゲーム状態を初期化
 func NewGameState(config *game.GameConfig, configDir string) (*game.GameState, error) {
 	system, err := NewGameSystem(config.System, configDir)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to create game system: %w", err)
 	}
+	if err := system.Initialize(config); err != nil {
+		return nil, fmt.Errorf("failed to initialize system: %w", err)
+	}
+
+	gs := &game.GameState{
+		Nodes:  make(map[string]game.Node),
+		Reader: bufio.NewReader(os.Stdin),
+		System: system, // System を設定
+	}
+	// ...（Player, Nodes の初期化コード）
 
 	nodeMap := make(map[string]game.Node)
 	for _, node := range config.Nodes {
@@ -75,20 +78,10 @@ func NewGameState(config *game.GameConfig, configDir string) (*game.GameState, e
 			}
 		}
 	}
-
-	gs := &game.GameState{
-		Player:        player,
-		CurrentNodeID: config.Nodes[0].ID,
-		Nodes:         nodeMap,
-		Reader:        bufio.NewReader(os.Stdin),
-		Config:        config,
-	}
-
-	if err := system.Initialize(config); err != nil {
-		return nil, err
-	}
 	return gs, nil
 }
+
+// ...（Run メソッドは game.GameState に移動）
 
 func main() {
 	tomlData, err := ioutil.ReadFile("testlw.toml")
@@ -106,5 +99,6 @@ func main() {
 		log.Fatalf("Error initializing game state: %v", err)
 	}
 
+	gameState.DisplayStatus()
 	gameState.Run()
 }

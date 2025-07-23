@@ -1,15 +1,15 @@
 package game
 
-import {
+import (
 	"bufio"
 	"fmt"
-}
+)
 
-// GameConfig はゲーム全体のTOML設定を表す
-type GameConfig struct {
-	System string                 `toml:"system"`
-	Player map[string]interface{} `toml:"player"`
-	Nodes  []Node                 `toml:"nodes"`
+// GameSystem はゲームシステムのインターフェース
+type GameSystem interface {
+	Initialize(config *GameConfig) error
+	HandleNode(gs *GameState, node Node) error
+	UpdatePlayer(gs *GameState, action string) error
 }
 
 // Node はゲームの各ステップ（ノード）を表す
@@ -52,18 +52,24 @@ type Player struct {
 	Equipment  map[string]string
 }
 
+// GameConfig はゲーム全体のTOML設定を表す
+type GameConfig struct {
+	System string                 `toml:"system"`
+	Player map[string]interface{} `toml:"player"`
+	Nodes  []Node                 `toml:"nodes"`
+}
+
 // GameState はゲームの状態を保持
 type GameState struct {
 	Player        *Player
 	CurrentNodeID string
 	Nodes         map[string]Node
 	Reader        *bufio.Reader
-	Config        *GameConfig
+	System        GameSystem // System フィールドを追加
 }
 
-
 // display_status はプレイヤーの状態を表示
-func (gs *GameState) display_status() {
+func (gs *GameState) DisplayStatus() {
 	fmt.Println("--- ステータス ---")
 	for stat, value := range gs.Player.Stats {
 		fmt.Printf("%s: %d\n", stat, value)
@@ -87,7 +93,7 @@ func (gs *GameState) Run() {
 			break
 		}
 
-		if err := gs.System.HandleNode(gs, node); err != nil {
+		if err := gs.System.HandleNode(gs, node); err != nil { // gs.Config.System → gs.System
 			fmt.Println("エラー:", err)
 			break
 		}
@@ -95,15 +101,6 @@ func (gs *GameState) Run() {
 		if node.Type == "end" {
 			fmt.Println("ゲーム終了。")
 			break
-		}
-
-		fmt.Print("アクション（例：heal, eat_meal, skip）: ")
-		action, _ := gs.Reader.ReadString('\n')
-		action = strings.TrimSpace(action)
-		if action != "skip" {
-			if err := gs.System.UpdatePlayer(gs, action); err != nil {
-				fmt.Println("アクションエラー:", err)
-			}
 		}
 	}
 }
