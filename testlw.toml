@@ -1,3 +1,11 @@
+system = "lonewolf"
+
+[player]
+stats = { CombatSkill = 25, HP = 30 }
+attributes = { SixthSense = true }
+inventory = ["Sword", "SilverKey"]
+equipment = { Weapon = "Sword" }
+
 [[nodes]]
 id = "1"
 type = "story"
