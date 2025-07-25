@@ -38,19 +38,23 @@ func NewGameState(config *game.GameConfig, configDir string) (*game.GameState, e
 		return nil, fmt.Errorf("failed to initialize system: %w", err)
 	}
 
-	gs := &game.GameState{
-		Nodes:  make(map[string]game.Node),
-		Reader: bufio.NewReader(os.Stdin),
-		System: system, // System を設定
+	gs := &game.GameState{ //GameStateを初期化
+		Nodes:         make(map[string]game.Node),
+		Reader:        bufio.NewReader(os.Stdin),
+		System:        system, // System を設定
+		CurrentNodeID: "1",
 	}
 	// ...（Player, Nodes の初期化コード）
 
+	//Nodeマップ作成　Configに
 	nodeMap := make(map[string]game.Node)
 	for _, node := range config.Nodes {
 		nodeMap[node.ID] = node
 	}
 
-	player := &game.Player{
+	gs.Nodes = nodeMap
+
+	player := &game.Player{ //gameに定義されているPlayer構造体を呼び出してインスタンス化
 		Stats:      make(map[string]int),
 		Attributes: make(map[string]bool),
 		Inventory:  []string{},
@@ -78,6 +82,7 @@ func NewGameState(config *game.GameConfig, configDir string) (*game.GameState, e
 			}
 		}
 	}
+
 	return gs, nil
 }
 
@@ -99,6 +104,6 @@ func main() {
 		log.Fatalf("Error initializing game state: %v", err)
 	}
 
-	gameState.DisplayStatus()
+	//gameState.DisplayStatus()
 	gameState.Run()
 }

@@ -196,7 +196,7 @@ func (lw *LoneWolfSystem) HandleNode(gs *game.GameState, node game.Node) error {
 	switch node.Type {
 	case "story":
 		fmt.Printf("Story: %s\n", node.Text)
-	case "combat":
+	case "encounter":
 		if node.Enemies != nil {
 			return lw.Encounter(gs, node)
 		}
