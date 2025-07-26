@@ -24,9 +24,11 @@ type Node struct {
 
 // Choice は選択肢を表す
 type Choice struct {
-	Description string            `toml:"description"`
-	NextNodeID  string            `toml:"next_node_id"`
-	Conditions  map[string]string `toml:"conditions,omitempty"`
+	Description        string            `toml:"description"`
+	NextNodeID         string            `toml:"next_node_id"`
+	RequiredDiscipline string            `toml:"required_discipline,omitempty"`
+	RequiredItem       string            `toml:"required_item,omitempty"`
+	Conditions         map[string]string `toml:"conditions,omitempty"`
 }
 
 // Enemy は戦闘の敵キャラクター
@@ -68,6 +70,7 @@ type GameState struct {
 	System        GameSystem // System フィールドを追加
 }
 
+/*
 // display_status はプレイヤーの状態を表示
 func (gs *GameState) DisplayStatus() {
 	fmt.Println("--- ステータス ---")
@@ -81,6 +84,71 @@ func (gs *GameState) DisplayStatus() {
 	}
 	fmt.Println("Inventory:", gs.Player.Inventory)
 	fmt.Println("Equipment:", gs.Player.Equipment)
+	fmt.Println("--- ステータス ---")
+}
+*/
+
+// display_status はプレイヤーの状態を表示
+func (gs *GameState) DisplayStatus() {
+	fmt.Println("--- ステータス ---")
+
+	// gs.Player が nil でないことを確認
+	if gs.Player == nil {
+		fmt.Println("プレイヤーデータが初期化されていません。")
+		fmt.Println("--- ステータス ---")
+		return // プレイヤーが nil なら、これ以上処理しない
+	}
+
+	// Stats の表示
+	fmt.Println("能力値:") // "Stats" を「能力値」に変更
+	if gs.Player.Stats != nil {
+		for stat, value := range gs.Player.Stats {
+			fmt.Printf("  %s: %d\n", stat, value)
+		}
+	} else {
+		fmt.Println("  能力値データがありません。")
+	}
+
+	// Attributes の表示
+	fmt.Println("属性:") // "Attribute" を「属性」に変更
+	if gs.Player.Attributes != nil {
+		foundAttribute := false
+		for attr, active := range gs.Player.Attributes {
+			if active {
+				fmt.Printf("  - %s\n", attr)
+				foundAttribute = true
+			}
+		}
+		if !foundAttribute {
+			fmt.Println("  有効な属性がありません。")
+		}
+	} else {
+		fmt.Println("  属性データがありません。")
+	}
+
+	// Inventory の表示
+	fmt.Println("インベントリ:")
+	if gs.Player.Inventory != nil && len(gs.Player.Inventory) > 0 {
+		for _, item := range gs.Player.Inventory {
+			fmt.Printf("  - %s\n", item)
+		}
+	} else {
+		fmt.Println("  アイテムがありません。")
+	}
+
+	// Equipment の表示
+	fmt.Println("装備:") // "Equipment" を「装備」に変更
+	if gs.Player.Equipment != nil {
+		if len(gs.Player.Equipment) == 0 {
+			fmt.Println("  装備品がありません。")
+		} else {
+			for slot, item := range gs.Player.Equipment {
+				fmt.Printf("  %s: %s\n", slot, item)
+			}
+		}
+	} else {
+		fmt.Println("  装備データがありません。")
+	}
 	fmt.Println("--- ステータス ---")
 }
 

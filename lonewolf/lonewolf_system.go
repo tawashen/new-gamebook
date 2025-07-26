@@ -3,9 +3,10 @@ package lonewolf
 import (
 	"fmt"
 	"math/rand"
-	"time"
-
 	"new-gamebook/game"
+	"strconv"
+	"strings"
+	"time"
 
 	"github.com/BurntSushi/toml"
 )
@@ -196,6 +197,8 @@ func (lw *LoneWolfSystem) HandleNode(gs *game.GameState, node game.Node) error {
 	switch node.Type {
 	case "story":
 		fmt.Printf("Story: %s\n", node.Text)
+		lw.handleStoryNode(gs, node)
+
 	case "encounter":
 		if node.Enemies != nil {
 			return lw.Encounter(gs, node)
@@ -208,4 +211,84 @@ func (lw *LoneWolfSystem) HandleNode(gs *game.GameState, node game.Node) error {
 		return fmt.Errorf("unknown node type: %s", node.Type)
 	}
 	return nil
+}
+
+// handleStoryNode はストーリーノードの処理
+func (lw *LoneWolfSystem) handleStoryNode(gs *game.GameState, node game.Node) error {
+	if len(node.Choices) == 0 {
+		fmt.Println("このノードには選択肢がありません。ゲーム終了。")
+		gs.CurrentNodeID = "game_over" // 選択肢がなければゲームオーバーに送るか、別の処理
+
+	}
+
+	fmt.Println("\n選択肢:")
+	for i, choice := range node.Choices {
+		fmt.Printf("%d. %s\n", i+1, choice.Description)
+	}
+
+	for {
+		fmt.Print("選択してください (番号): ")
+		input, _ := gs.Reader.ReadString('\n')
+		input = strings.TrimSpace(input)
+		choiceNum, err := strconv.Atoi(input)
+
+		if err != nil || choiceNum < 1 || choiceNum > len(node.Choices) {
+			gs.DisplayStatus()
+			continue
+		}
+
+		choice := node.Choices[choiceNum-1]
+		//required_discipline_name := *choice.RequiredDiscipline
+		//required_item_name := *choice.RequiredItem
+
+		var required_discipline_name string
+		if choice.RequiredDiscipline != "" {
+			required_discipline_name = choice.RequiredDiscipline
+		}
+
+		var required_item_name string
+		if choice.RequiredItem != "" {
+			required_item_name = choice.RequiredItem
+		}
+
+		//fmt.Print(required_discipline_name)
+
+		if                //err == nil && //エラーじゃなく
+		choiceNum >= 1 && //1以上で
+			choiceNum <= len(node.Choices) && //選択肢数以下で
+			choice.RequiredDiscipline == "" && //必須ディシプリンなし
+			choice.RequiredItem == "" { //必須アイテムなし
+			gs.CurrentNodeID = node.Choices[choiceNum-1].NextNodeID
+			break
+		} else if //err == nil &&
+		choiceNum >= 1 &&
+			choiceNum <= len(node.Choices) &&
+			//choice.RequiredDiscipline != nil &&
+			//choice.RequiredItem == nil &&
+			gs.Player.Attributes[required_discipline_name] {
+			gs.CurrentNodeID = node.Choices[choiceNum-1].NextNodeID
+			break
+		} else if //err == nil &&
+		choiceNum >= 1 &&
+			choiceNum <= len(node.Choices) &&
+			choice.RequiredDiscipline == "" &&
+			choice.RequiredItem != "" &&
+			contains_str(gs.Player.Inventory, required_item_name) {
+			gs.CurrentNodeID = node.Choices[choiceNum-1].NextNodeID
+			break
+		} else {
+			//fmt.Println("無効な入力です。もう一度入力してください。")
+			gs.DisplayStatus()
+		}
+	}
+	return nil
+}
+
+func contains_str(slice []string, str string) bool {
+	for _, s := range slice {
+		if s == str {
+			return true
+		}
+	}
+	return false
 }
