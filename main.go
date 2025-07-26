@@ -83,6 +83,7 @@ func NewGameState(config *game.GameConfig, configDir string) (*game.GameState, e
 		}
 	}
 
+	gs.Player = player
 	return gs, nil
 }
 
