@@ -52,8 +52,6 @@ func NewGameState(config *game.GameConfig, configDir string) (*game.GameState, e
 		nodeMap[node.ID] = node
 	}
 
-	gs.Nodes = nodeMap
-
 	player := &game.Player{ //gameに定義されているPlayer構造体を呼び出してインスタンス化
 		Stats:      make(map[string]int),
 		Attributes: make(map[string]bool),
@@ -83,6 +81,8 @@ func NewGameState(config *game.GameConfig, configDir string) (*game.GameState, e
 		}
 	}
 
+	gs.Nodes = nodeMap
+	gs.Player = player
 	return gs, nil
 }
 

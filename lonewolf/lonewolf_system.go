@@ -197,18 +197,50 @@ func (lw *LoneWolfSystem) HandleNode(gs *game.GameState, node game.Node) error {
 	switch node.Type {
 	case "story":
 		fmt.Printf("Story: %s\n", node.Text)
-		lw.handleStoryNode(gs, node)
+		return lw.handleStoryNode(gs, node)
 
 	case "encounter":
 		if node.Enemies != nil {
 			return lw.Encounter(gs, node)
 		}
 		return fmt.Errorf("no enemy defined for combat node")
-	case "choice":
-		fmt.Printf("Choices: %v\n", node.Choices)
-		// ...（選択肢処理）
+	case "random_roll":
+		return handleRandomNode(gs, node)
+
 	default:
 		return fmt.Errorf("unknown node type: %s", node.Type)
+	}
+}
+
+func handleRandomNode(gs *game.GameState, node game.Node) error {
+
+	source := rand.NewSource(time.Now().UnixNano())
+	r := rand.New(source)
+
+	randomNumber := r.Intn(10)
+
+	fmt.Printf("RandomNumberは%dです\n", randomNumber)
+
+	fmt.Println("\n選択肢:")
+	for i, choice := range node.Outcomes {
+		fmt.Printf("%d. %s\n", i+1, choice.Description)
+	}
+
+	for {
+		fmt.Print("選択してください (番号): ")
+		input, _ := gs.Reader.ReadString('\n')
+		input = strings.TrimSpace(input)
+		choiceNum, err := strconv.Atoi(input)
+
+		outcome := node.Outcomes[choiceNum-1]
+
+		if err == nil &&
+			contains_int(outcome.ConditionInt, randomNumber) {
+			gs.CurrentNodeID = outcome.NextNodeID
+			break //RunLoopへ戻る
+		} else {
+			fmt.Println("条件を満たしていません。")
+		}
 	}
 	return nil
 }
@@ -287,6 +319,15 @@ func (lw *LoneWolfSystem) handleStoryNode(gs *game.GameState, node game.Node) er
 func contains_str(slice []string, str string) bool {
 	for _, s := range slice {
 		if s == str {
+			return true
+		}
+	}
+	return false
+}
+
+func contains_int(slice []int, number int) bool {
+	for _, i := range slice {
+		if i == number {
 			return true
 		}
 	}
