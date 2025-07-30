@@ -70,24 +70,6 @@ type GameState struct {
 	System        GameSystem // System フィールドを追加
 }
 
-/*
-// display_status はプレイヤーの状態を表示
-func (gs *GameState) DisplayStatus() {
-	fmt.Println("--- ステータス ---")
-	for stat, value := range gs.Player.Stats {
-		fmt.Printf("%s: %d\n", stat, value)
-	}
-	for attr, active := range gs.Player.Attributes {
-		if active {
-			fmt.Printf("Attribute: %s\n", attr)
-		}
-	}
-	fmt.Println("Inventory:", gs.Player.Inventory)
-	fmt.Println("Equipment:", gs.Player.Equipment)
-	fmt.Println("--- ステータス ---")
-}
-*/
-
 // display_status はプレイヤーの状態を表示
 func (gs *GameState) DisplayStatus() {
 	fmt.Println("--- ステータス ---")

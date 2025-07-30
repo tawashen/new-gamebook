@@ -2,7 +2,7 @@ system = "lonewolf"
 
 [player]
 stats = { CS = 25, HP = 30 }
-attributes = { SixthSense = true }
+attributes = { SixthSense = true, Healing = true }
 inventory = ["Sword", "SilverKey"]
 equipment = { Weapon = "Sword" }
 

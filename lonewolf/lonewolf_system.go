@@ -194,6 +194,7 @@ func (lw *LoneWolfSystem) Random() int {
 }
 
 func (lw *LoneWolfSystem) HandleNode(gs *game.GameState, node game.Node) error {
+	lw.UpdatePlayer(gs, "heal")
 	switch node.Type {
 	case "story":
 		fmt.Printf("Story: %s\n", node.Text)
