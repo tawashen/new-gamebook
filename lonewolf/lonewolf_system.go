@@ -73,22 +73,6 @@ func (lw *LoneWolfSystem) Initialize(config *game.GameConfig) error {
 	return nil
 }
 
-// Encounter は敵との戦闘を処理
-func (lw *LoneWolfSystem) Encounter_old(gs *game.GameState, enemy game.Enemy) error {
-	playerCS := gs.Player.Stats["CombatSkill"]
-	enemyCS := enemy.CS
-	combatRatio := playerCS - enemyCS
-	randomNum := lw.Random()
-	damage := lw.CRT[KeyPair{RandNum: randomNum, ComRatio: combatRatio}]
-	if damage.IsKilled {
-		enemy.HP = 0
-	}
-	gs.Player.Stats["HP"] -= damage.PlayerLoss
-	enemy.HP -= damage.EnemyLoss
-	fmt.Printf("Combat: Player HP=%d, Enemy HP=%d\n", gs.Player.Stats["HP"], enemy.HP)
-	return nil
-}
-
 func normalizeCombatRatio(ratio int) int {
 	if ratio <= -11 {
 		return -11 // -11以下はすべて-11として扱う
@@ -184,6 +168,72 @@ func (lw *LoneWolfSystem) UpdatePlayer(gs *game.GameState, action string) error 
 	if action == "heal" && gs.Player.Attributes["Healing"] {
 		gs.Player.Stats["HP"] += 1
 		fmt.Println("Healing Discipline restored 1 HP!")
+	}
+	return nil
+}
+
+func (lw *LoneWolfSystem) MakingPlayer(gs *game.GameState) error {
+	fmt.Println("キャラクターメイキング")
+	for {
+		randomNumCS := lw.Rand.Intn(10)
+		fmt.Printf("戦闘力！\n運命の数は%d\n受け入れますか？(Y/N)\n", randomNumCS)
+		input, _ := gs.Reader.ReadString('\n')
+		input = strings.TrimSpace(input)
+		input = strings.ToUpper(input)
+
+		if input == "Y" {
+			gs.Player.Stats["CS"] = 10 + randomNumCS
+			fmt.Printf("お前の戦闘力は%dと定まった！\n", gs.Player.Stats["CS"])
+			break
+
+		} else if input == "N" {
+			continue
+		} else {
+			fmt.Println("Y または N を入力してください。")
+			continue
+		}
+	}
+
+	for {
+		randomNumHP := lw.Rand.Intn(10)
+		fmt.Printf("生命力！\n運命の数は%d\n受け入れますか？(Y/N)\n", randomNumHP)
+		input, _ := gs.Reader.ReadString('\n')
+		input = strings.TrimSpace(input)
+		input = strings.ToUpper(input)
+
+		if input == "Y" {
+			gs.Player.Stats["HP"] = 10 + randomNumHP
+			fmt.Printf("お前の生命力は%dと定まった！\n", gs.Player.Stats["HP"])
+			break
+
+		} else if input == "N" {
+			continue
+		} else {
+			fmt.Println("Y または N を入力してください。")
+			continue
+		}
+
+	}
+
+	for {
+		randomNumGOLD := lw.Rand.Intn(10)
+		fmt.Printf("所持金！\n運命の数は%d\n受け入れますか？(Y/N)\n", randomNumGOLD)
+		input, _ := gs.Reader.ReadString('\n')
+		input = strings.TrimSpace(input)
+		input = strings.ToUpper(input)
+
+		if input == "Y" {
+			gs.Player.Stats["HP"] = 10 + randomNum
+			fmt.Printf("お前の生命力は%dと定まった！\n", gs.Player.Stats["HP"])
+			break
+
+		} else if input == "N" {
+			continue
+		} else {
+			fmt.Println("Y または N を入力してください。")
+			continue
+		}
+
 	}
 	return nil
 }

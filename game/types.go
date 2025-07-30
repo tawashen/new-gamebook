@@ -7,6 +7,7 @@ import (
 
 // GameSystem はゲームシステムのインターフェース
 type GameSystem interface {
+	MakingPlayer(gs *GameState) error
 	Initialize(config *GameConfig) error
 	HandleNode(gs *GameState, node Node) error
 	UpdatePlayer(gs *GameState, action string) error
@@ -52,6 +53,18 @@ type Player struct {
 	Attributes map[string]bool
 	Inventory  []string
 	Equipment  map[string]string
+	Gold       int
+}
+
+type Equipment interface {
+	Get(gs *GameState)
+	Drop(gs *GameState)
+}
+
+type Equipment struct {
+	Kind   string
+	Power  int
+	Number int
 }
 
 // GameConfig はゲーム全体のTOML設定を表す
@@ -110,7 +123,8 @@ func (gs *GameState) DisplayStatus() {
 
 	// Inventory の表示
 	fmt.Println("インベントリ:")
-	if gs.Player.Inventory != nil && len(gs.Player.Inventory) > 0 {
+	if //gs.Player.Inventory != nil &&
+	len(gs.Player.Inventory) > 0 {
 		for _, item := range gs.Player.Inventory {
 			fmt.Printf("  - %s\n", item)
 		}
@@ -136,6 +150,7 @@ func (gs *GameState) DisplayStatus() {
 
 // Run はゲームループを開始
 func (gs *GameState) Run() {
+	gs.System.MakingPlayer(gs)
 	for {
 		node, exists := gs.Nodes[gs.CurrentNodeID]
 		if !exists {

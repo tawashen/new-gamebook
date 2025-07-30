@@ -58,6 +58,10 @@ func (ff *FightingFantasySystem) UpdatePlayer(gs *game.GameState, action string)
 	return nil
 }
 
+func (ff *FightingFantasySystem) MakingPlayer(gs *game.GameState) error {
+	return nil
+}
+
 // handleStoryNode はストーリーノードを処理
 func (ff *FightingFantasySystem) handleStoryNode(gs *game.GameState, node game.Node) error {
 	if len(node.Choices) == 0 {

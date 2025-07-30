@@ -57,6 +57,7 @@ func NewGameState(config *game.GameConfig, configDir string) (*game.GameState, e
 		Attributes: make(map[string]bool),
 		Inventory:  []string{},
 		Equipment:  make(map[string]string),
+		Gold:       int(32),
 	}
 
 	if stats, ok := config.Player["stats"].(map[string]interface{}); ok {
@@ -80,6 +81,16 @@ func NewGameState(config *game.GameConfig, configDir string) (*game.GameState, e
 			}
 		}
 	}
+
+	if equipment, ok := config.Player["equipment"].(map[string]interface{}); ok {
+		for k, weapon := range equipment {
+			if str, ok := weapon.(string); ok {
+				player.Equipment[k] = str
+			}
+		}
+	}
+
+	player.Gold = 0
 
 	gs.Nodes = nodeMap
 	gs.Player = player
