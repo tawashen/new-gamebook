@@ -223,7 +223,7 @@ func (lw *LoneWolfSystem) MakingPlayer(gs *game.GameState) error {
 		input = strings.ToUpper(input)
 
 		if input == "Y" {
-			gs.Player.Stats["HP"] = 10 + randomNum
+			gs.Player.Stats["HP"] = 10 + randomNumGOLD
 			fmt.Printf("お前の生命力は%dと定まった！\n", gs.Player.Stats["HP"])
 			break
 
@@ -383,4 +383,45 @@ func contains_int(slice []int, number int) bool {
 		}
 	}
 	return false
+}
+
+// こちらの方が良いのでは？
+type Player struct {
+	Stats      map[string]int
+	Attributes map[string]bool
+	Equipments *Equipment
+	Gold       int
+}
+
+type Equipment struct {
+	Head     *Armor
+	Body     *Armor
+	Weapon1  *Weapon
+	Weapon2  *Weapon
+	Shield   bool
+	Backpack []*Item
+}
+
+type Inventory interface {
+	Get(gs *game.GameState)
+	Use(gs *game.GameState) //装備品の場合は装備を行う。アイテムは自動使用だけど便宜上設定
+	Drop(gs *game.GameState)
+}
+
+type Weapon struct {
+	Name    string //WeaponSkill判定に使用予定
+	Slot    string //Weapon1 Weapon2
+	CSBonus int    //いるかなぁ？
+}
+
+type Armor struct {
+	Name    string
+	Slot    string //装備箇所
+	HPBonus int
+}
+
+type Item struct {
+	Name   string
+	Slot   string //Backpack Porch?
+	Effect string
 }

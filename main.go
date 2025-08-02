@@ -52,12 +52,18 @@ func NewGameState(config *game.GameConfig, configDir string) (*game.GameState, e
 		nodeMap[node.ID] = node
 	}
 
-	player := &game.Player{ //gameに定義されているPlayer構造体を呼び出してインスタンス化
+	player := &lonewolf.Player{
 		Stats:      make(map[string]int),
 		Attributes: make(map[string]bool),
-		Inventory:  []string{},
-		Equipment:  make(map[string]string),
-		Gold:       int(32),
+		Equipments: &lonewolf.Equipment{
+			Head:     nil,
+			Body:     nil,
+			Weapon1:  nil,
+			Weapon2:  nil,
+			Shield:   false,
+			Backpack: []*lonewolf.Item{},
+		},
+		Gold: 32,
 	}
 
 	if stats, ok := config.Player["stats"].(map[string]interface{}); ok {

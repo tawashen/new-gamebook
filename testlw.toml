@@ -8,11 +8,15 @@ equipment = {weapon1 = "Axe", weapon2 = ""}
 gold = 0
 
 
-[tables]
-skilltable = ["Camouflage", "Hunting", "SixthSense", "Tracking","Healing",
+[Tables]
+SkillTable = ["Camouflage", "Hunting", "SixthSense", "Tracking","Healing",
  "Weaponskill","Mindshield", "Mindblast", "AnimalKinship", "MindOverMatter"]
-weaponskilltable = { 0 = "Dagger", 1 = "Spear", 2 = "Mace", 3 = "Shortsword", 4 = "Warhammer", 5 = "Sword", 6 = "Axe", 7 = "Sword", 8 = "Quaterstaff", 9 = "Broadsword"}
-equipmenttable = {0 = "Broadsword", 1 = "Sword", 2 = "Helmet", 3 = ["Meal", "Meal"], 4 = "ChainmailWaistcoat", 5 = "Mace", 6 = "Healingpotion", 7 = "Quaterstaff", 8 = "Spear", 9 = "Gold"}
+WeaponSkillTable = { 0 = "Dagger", 1 = "Spear", 2 = "Mace", 3 = "Shortsword", 4 = "Warhammer", 5 = "Sword", 6 = "Axe", 7 = "Sword", 8 = "Quaterstaff", 9 = "Broadsword"}
+FirstEquipmentTable = {0 = "Broadsword", 1 = "Sword", 2 = "Helmet", 3 = "Meal", 4 = "ChainmailWaistcoat", 5 = "Mace", 6 = "HealingPotion", 7 = "Quatertaff", 8 = "Spear", 9 = "Gold"}
+    [[Tables.Armor]]
+    Name = "ChainmainWaistcoat"
+    Slot = "Body"
+    Hpbonus = 2
 
 [[nodes]]
 id = "1"

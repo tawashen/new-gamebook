@@ -3,6 +3,7 @@ package game
 import (
 	"bufio"
 	"fmt"
+	"new-gamebook/lonewolf"
 )
 
 // GameSystem はゲームシステムのインターフェース
@@ -47,25 +48,49 @@ type Outcome struct {
 	NextNodeID   string `toml:"next_node_id"`
 }
 
-// Player はプレイヤーの状態を表す
+/*
+// こちらの方が良いのでは？
 type Player struct {
 	Stats      map[string]int
 	Attributes map[string]bool
-	Inventory  []string
-	Equipment  map[string]string
-	Gold       int
-}
-
-type Equipment interface {
-	Get(gs *GameState)
-	Drop(gs *GameState)
+	Equipments *Equipment
+	Gold int
 }
 
 type Equipment struct {
-	Kind   string
-	Power  int
-	Number int
+	Head     *Armor
+	Body     *Armor
+	Weapon1  *Weapon
+	Weapon2  *Weapon
+	Shield   bool
+	Backpack []*Item
 }
+
+type Inventory interface {
+	Get(gs *GameState)
+	Use(gs *GameState) //装備品の場合は装備を行う。アイテムは自動使用だけど便宜上設定
+	Drop(gs *GameState)
+}
+
+type Weapon struct {
+	Name    string //WeaponSkill判定に使用予定
+	Slot    string //Weapon1 Weapon2
+	CSBonus int    //いるかなぁ？
+}
+
+type Armor struct {
+	Name    string
+	Slot    string //装備箇所
+	HPBonus int
+}
+
+type Item struct {
+	Name   string
+	Slot   string //Backpack Porch?
+	Effect string
+}
+
+*/
 
 // GameConfig はゲーム全体のTOML設定を表す
 type GameConfig struct {
@@ -76,7 +101,7 @@ type GameConfig struct {
 
 // GameState はゲームの状態を保持
 type GameState struct {
-	Player        *Player
+	Player        *lonewolf.Player
 	CurrentNodeID string
 	Nodes         map[string]Node
 	Reader        *bufio.Reader
