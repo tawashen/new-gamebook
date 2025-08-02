@@ -394,12 +394,13 @@ type Player struct {
 }
 
 type Equipment struct {
-	Head     *Armor
-	Body     *Armor
-	Weapon1  *Weapon
-	Weapon2  *Weapon
-	Shield   bool
-	Backpack []*Item
+	Head          *Armor
+	Body          *Armor
+	Currentweapon int //現在装備している武器スロット　デフォルト0で無装備
+	Weapon1       *Weapon
+	Weapon2       *Weapon
+	Shield        bool
+	Backpack      []*Item
 }
 
 type Inventory interface {
@@ -409,9 +410,43 @@ type Inventory interface {
 }
 
 type Weapon struct {
-	Name    string //WeaponSkill判定に使用予定
+	Kind    string //weapon skillに使用する
+	Name    string
 	Slot    string //Weapon1 Weapon2
 	CSBonus int    //いるかなぁ？
+}
+
+func (w Weapon) Get(gs *game.gameState) {
+	if gs.Player.Equipments.Weapon1 == nil {
+		gs.Player.Equipments.Weapon1 = w
+	} else if gs.Player.Equipments.Weapon2 == nil {
+		gs.Player.Equipments.Weapon = w
+	} else {
+		for { //CS変更は後で書く
+			fmt.Printf("これ以上持てません\n1:%sを捨てる\n2:%sを捨てる\n%sを諦める\n",
+				gs.Player.Equipments.Weapon1.Name, gs.Player.Equipments.Weapon2.Name, w.Name)
+
+			input, _ := gs.Reader.ReadString('\n')
+			input = strings.TrimSpace(input)
+			choiceNum, err := strconv.Atoi(input)
+
+			if err == nil && choiceNum == 1 {
+				fmt.Printf("%sを捨てて%sに持ち替えた\n", gs.Player.Equipments.Weapon1.Name, w.Name)
+				gs.Player.Equipments.Weapon1 = w
+				//CS更新
+				break
+			} else if err == nil && choiceNum == 2 {
+				fmt.Printf("%sを捨てて%sに持ち替えた\n", gs.Player.Equipments.Weapon2.Name, w.Name)
+				gs.Player.Equipments.Weapon2 = w
+				//CS更新
+				break
+			} else {
+				fmt.Printf("%sを諦めた\n", w.Name)
+				break
+			}
+
+		}
+	}
 }
 
 type Armor struct {
