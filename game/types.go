@@ -3,7 +3,10 @@ package game
 import (
 	"bufio"
 	"fmt"
-	"new-gamebook/lonewolf"
+
+	//"new-gamebook/lonewolf"
+	"strconv"
+	"strings"
 )
 
 // GameSystem はゲームシステムのインターフェース
@@ -101,7 +104,7 @@ type GameConfig struct {
 
 // GameState はゲームの状態を保持
 type GameState struct {
-	Player        *lonewolf.Player
+	Player        *Player
 	CurrentNodeID string
 	Nodes         map[string]Node
 	Reader        *bufio.Reader
@@ -149,27 +152,51 @@ func (gs *GameState) DisplayStatus() {
 	// Inventory の表示
 	fmt.Println("インベントリ:")
 	if //gs.Player.Inventory != nil &&
-	len(gs.Player.Inventory) > 0 {
-		for _, item := range gs.Player.Inventory {
-			fmt.Printf("  - %s\n", item)
+	len(gs.Player.Equipments.Backpack) > 0 {
+		for _, item := range gs.Player.Equipments.Backpack {
+			fmt.Printf("  - %s\n", item.Name)
 		}
 	} else {
 		fmt.Println("  アイテムがありません。")
 	}
 
 	// Equipment の表示
-	fmt.Println("装備:") // "Equipment" を「装備」に変更
-	if gs.Player.Equipment != nil {
-		if len(gs.Player.Equipment) == 0 {
-			fmt.Println("  装備品がありません。")
-		} else {
-			for slot, item := range gs.Player.Equipment {
-				fmt.Printf("  %s: %s\n", slot, item)
-			}
-		}
+	fmt.Println("武器") // "Equipment" を「装備」に変更
+	if gs.Player.Equipments.Currentweapon == 0 {
+		fmt.Println("  装備品がありません。")
+	} else if gs.Player.Equipments.Currentweapon == 1 {
+		fmt.Printf("装備：　%s\n", gs.Player.Equipments.Weapon1.Name)
+		fmt.Printf("予備：　%s\n", gs.Player.Equipments.Weapon2.Name)
+	} else if gs.Player.Equipments.Currentweapon == 2 {
+		fmt.Printf("装備：　%s\n", gs.Player.Equipments.Weapon2.Name)
+		fmt.Printf("予備：　%s\n", gs.Player.Equipments.Weapon1.Name)
 	} else {
-		fmt.Println("  装備データがありません。")
+		fmt.Println("  装備品がありません。")
 	}
+
+	fmt.Println("防具") // "Equipment" を「装備」に変更
+	if gs.Player.Equipments.Head == nil {
+		fmt.Println("頭：　装備品がありません")
+	} else {
+		fmt.Printf("頭：　%s\n", gs.Player.Equipments.Head.Name)
+	}
+	if gs.Player.Equipments.Body == nil {
+		fmt.Println("体：　装備品がありません")
+	} else {
+		fmt.Printf("体：　%s\n", gs.Player.Equipments.Body.Name)
+	}
+
+	fmt.Println("バックパック")
+	if len(gs.Player.Equipments.Backpack) == 0 {
+		fmt.Println("バックパックは空です")
+	} else {
+		for _, item := range gs.Player.Equipments.Backpack {
+			fmt.Printf("-%s\n", item.Name)
+		}
+	}
+
+	fmt.Printf("所持金：%dゴールド", gs.Player.Gold)
+
 	fmt.Println("--- ステータス ---")
 }
 
@@ -193,4 +220,80 @@ func (gs *GameState) Run() {
 			break
 		}
 	}
+}
+
+// こちらの方が良いのでは？
+type Player struct {
+	Stats      map[string]int
+	Attributes map[string]bool
+	Equipments *Equipment
+	Gold       int
+}
+
+type Equipment struct {
+	Head          *Armor
+	Body          *Armor
+	Currentweapon int //現在装備している武器スロット　デフォルト0で無装備
+	Weapon1       *Weapon
+	Weapon2       *Weapon
+	Shield        bool
+	Backpack      []*Item
+}
+
+type Inventory interface {
+	Get(gs *GameState)
+	Use(gs *GameState) //装備品の場合は装備を行う。アイテムは自動使用だけど便宜上設定
+	Drop(gs *GameState)
+}
+
+type Weapon struct {
+	Kind    string //weapon skillに使用する
+	Name    string
+	Slot    string //Weapon1 Weapon2
+	CSBonus int    //いるかなぁ？
+}
+
+func (w Weapon) Get(gs *GameState) {
+	if gs.Player.Equipments.Weapon1 == nil {
+		gs.Player.Equipments.Weapon1 = &w
+	} else if gs.Player.Equipments.Weapon2 == nil {
+		gs.Player.Equipments.Weapon2 = &w
+	} else {
+		for { //CS変更は後で書く
+			fmt.Printf("これ以上持てません\n1:%sを捨てる\n2:%sを捨てる\n%sを諦める\n",
+				gs.Player.Equipments.Weapon1.Name, gs.Player.Equipments.Weapon2.Name, w.Name)
+
+			input, _ := gs.Reader.ReadString('\n')
+			input = strings.TrimSpace(input)
+			choiceNum, err := strconv.Atoi(input)
+
+			if err == nil && choiceNum == 1 {
+				fmt.Printf("%sを捨てて%sに持ち替えた\n", gs.Player.Equipments.Weapon1.Name, w.Name)
+				gs.Player.Equipments.Weapon1 = &w
+				//CS更新
+				break
+			} else if err == nil && choiceNum == 2 {
+				fmt.Printf("%sを捨てて%sに持ち替えた\n", gs.Player.Equipments.Weapon2.Name, w.Name)
+				gs.Player.Equipments.Weapon2 = &w
+				//CS更新
+				break
+			} else {
+				fmt.Printf("%sを諦めた\n", w.Name)
+				break
+			}
+
+		}
+	}
+}
+
+type Armor struct {
+	Name    string
+	Slot    string //装備箇所
+	HPBonus int
+}
+
+type Item struct {
+	Name   string
+	Slot   string //Backpack Porch?
+	Effect string
 }

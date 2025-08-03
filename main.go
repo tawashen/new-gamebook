@@ -56,14 +56,15 @@ func NewGameState(config *game.GameConfig, configDir string) (*game.GameState, e
 		Stats:      make(map[string]int),
 		Attributes: make(map[string]bool),
 		Equipments: &lonewolf.Equipment{
-			Head:     nil,
-			Body:     nil,
-			Weapon1:  nil,
-			Weapon2:  nil,
-			Shield:   false,
-			Backpack: []*lonewolf.Item{},
+			Head:          nil,
+			Body:          nil,
+			Currentweapon: 0,
+			Weapon1:       nil,
+			Weapon2:       nil,
+			Shield:        false,
+			Backpack:      []*lonewolf.Item{},
 		},
-		Gold: 32,
+		Gold: 0,
 	}
 
 	if stats, ok := config.Player["stats"].(map[string]interface{}); ok {
@@ -80,23 +81,24 @@ func NewGameState(config *game.GameConfig, configDir string) (*game.GameState, e
 			}
 		}
 	}
-	if inventory, ok := config.Player["inventory"].([]interface{}); ok {
-		for _, item := range inventory {
-			if str, ok := item.(string); ok {
-				player.Inventory = append(player.Inventory, str)
+
+	/*
+		if inventory, ok := config.Player["inventory"].([]interface{}); ok {
+			for _, item := range inventory {
+				if str, ok := item.(string); ok {
+					player.Inventory = append(player.Inventory, str)
+				}
 			}
 		}
-	}
 
-	if equipment, ok := config.Player["equipment"].(map[string]interface{}); ok {
-		for k, weapon := range equipment {
-			if str, ok := weapon.(string); ok {
-				player.Equipment[k] = str
+		if equipment, ok := config.Player["equipment"].(map[string]interface{}); ok {
+			for k, weapon := range equipment {
+				if str, ok := weapon.(string); ok {
+					player.Equipment[k] = str
+				}
 			}
 		}
-	}
-
-	player.Gold = 0
+	*/
 
 	gs.Nodes = nodeMap
 	gs.Player = player

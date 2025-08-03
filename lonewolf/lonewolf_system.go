@@ -336,6 +336,10 @@ func (lw *LoneWolfSystem) handleStoryNode(gs *game.GameState, node game.Node) er
 
 		//fmt.Print(required_discipline_name)
 
+		var backpackcontains []string
+		for _, item := range gs.Player.Equipments.Backpack {
+			backpackcontains = append(backpackcontains, item.Name)
+		}
 		if                //err == nil && //エラーじゃなく
 		choiceNum >= 1 && //1以上で
 			choiceNum <= len(node.Choices) && //選択肢数以下で
@@ -356,7 +360,7 @@ func (lw *LoneWolfSystem) handleStoryNode(gs *game.GameState, node game.Node) er
 			choiceNum <= len(node.Choices) &&
 			choice.RequiredDiscipline == "" &&
 			choice.RequiredItem != "" &&
-			contains_str(gs.Player.Inventory, required_item_name) {
+			contains_str(backpackcontains, required_item_name) {
 			gs.CurrentNodeID = node.Choices[choiceNum-1].NextNodeID
 			break
 		} else {
@@ -383,80 +387,4 @@ func contains_int(slice []int, number int) bool {
 		}
 	}
 	return false
-}
-
-// こちらの方が良いのでは？
-type Player struct {
-	Stats      map[string]int
-	Attributes map[string]bool
-	Equipments *Equipment
-	Gold       int
-}
-
-type Equipment struct {
-	Head          *Armor
-	Body          *Armor
-	Currentweapon int //現在装備している武器スロット　デフォルト0で無装備
-	Weapon1       *Weapon
-	Weapon2       *Weapon
-	Shield        bool
-	Backpack      []*Item
-}
-
-type Inventory interface {
-	Get(gs *game.GameState)
-	Use(gs *game.GameState) //装備品の場合は装備を行う。アイテムは自動使用だけど便宜上設定
-	Drop(gs *game.GameState)
-}
-
-type Weapon struct {
-	Kind    string //weapon skillに使用する
-	Name    string
-	Slot    string //Weapon1 Weapon2
-	CSBonus int    //いるかなぁ？
-}
-
-func (w Weapon) Get(gs *game.gameState) {
-	if gs.Player.Equipments.Weapon1 == nil {
-		gs.Player.Equipments.Weapon1 = w
-	} else if gs.Player.Equipments.Weapon2 == nil {
-		gs.Player.Equipments.Weapon = w
-	} else {
-		for { //CS変更は後で書く
-			fmt.Printf("これ以上持てません\n1:%sを捨てる\n2:%sを捨てる\n%sを諦める\n",
-				gs.Player.Equipments.Weapon1.Name, gs.Player.Equipments.Weapon2.Name, w.Name)
-
-			input, _ := gs.Reader.ReadString('\n')
-			input = strings.TrimSpace(input)
-			choiceNum, err := strconv.Atoi(input)
-
-			if err == nil && choiceNum == 1 {
-				fmt.Printf("%sを捨てて%sに持ち替えた\n", gs.Player.Equipments.Weapon1.Name, w.Name)
-				gs.Player.Equipments.Weapon1 = w
-				//CS更新
-				break
-			} else if err == nil && choiceNum == 2 {
-				fmt.Printf("%sを捨てて%sに持ち替えた\n", gs.Player.Equipments.Weapon2.Name, w.Name)
-				gs.Player.Equipments.Weapon2 = w
-				//CS更新
-				break
-			} else {
-				fmt.Printf("%sを諦めた\n", w.Name)
-				break
-			}
-
-		}
-	}
-}
-
-type Armor struct {
-	Name    string
-	Slot    string //装備箇所
-	HPBonus int
-}
-
-type Item struct {
-	Name   string
-	Slot   string //Backpack Porch?
-	Effect string
 }
