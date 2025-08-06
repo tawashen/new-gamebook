@@ -3,7 +3,11 @@ package lonewolf
 import (
 	"fmt"
 	"math/rand"
-	"new-gamebook/game"
+
+	//"new-gamebook/game"
+
+	//"new-gamebook/game"
+	"bufio"
 	"strconv"
 	"strings"
 	"time"
@@ -51,10 +55,10 @@ func NewLoneWolfSystem(crtFile string) *LoneWolfSystem {
 }
 
 // インターフェースの実装を明示
-var _ game.GameSystem = (*LoneWolfSystem)(nil)
+//var _ game.GameSystem = (*LoneWolfSystem)(nil)
 
 // Initialize はLoneWolfSystemを初期化
-func (lw *LoneWolfSystem) Initialize(config *game.GameConfig) error {
+func (lw *LoneWolfSystem) Initialize(config *GameConfig) error {
 	stats, ok := config.Player["stats"].(map[string]interface{})
 	if !ok || stats["HP"] == nil || stats["CS"] == nil {
 		return fmt.Errorf("missing HP or CS in player stats")
@@ -105,7 +109,7 @@ func (lw *LoneWolfSystem) makeCombatResult(PCS int, ECS int) DamagePair {
 }
 
 // handleEncounterNode は遭遇戦ノードの処理 (簡易版)
-func (lw *LoneWolfSystem) Encounter(gs *game.GameState, node game.Node) error {
+func Encounter(gs *GameState, node Node) error {
 	fmt.Println("\n--- エンカウント！ ---")
 
 	for _, currentEnemy := range node.Enemies {
@@ -121,8 +125,8 @@ func (lw *LoneWolfSystem) Encounter(gs *game.GameState, node game.Node) error {
 			fmt.Println("\n力を込めて物理で殴る！")
 			time.Sleep(2 * time.Second)
 
-			Edamage := lw.makeCombatResult(gs.Player.Stats["CS"], currentEnemy.CS).EnemyLoss
-			Pdamage := lw.makeCombatResult(gs.Player.Stats["CS"], currentEnemy.CS).PlayerLoss
+			Edamage := makeCombatResult(gs.Player.Stats["CS"], currentEnemy.CS).EnemyLoss
+			Pdamage := makeCombatResult(gs.Player.Stats["CS"], currentEnemy.CS).PlayerLoss
 			currentEnemy.HP -= Edamage
 			gs.Player.Stats["HP"] -= Pdamage
 			fmt.Printf("あなたは%sに%dダメージを与えた！\nそしてあなたは%dダメージを受けた！\n",
@@ -164,7 +168,7 @@ func (lw *LoneWolfSystem) Encounter(gs *game.GameState, node game.Node) error {
 }
 
 // UpdatePlayer はプレイヤーの状態を更新
-func (lw *LoneWolfSystem) UpdatePlayer(gs *game.GameState, action string) error {
+func UpdatePlayer(gs *GameState, action string) error {
 	if action == "heal" && gs.Player.Attributes["Healing"] {
 		gs.Player.Stats["HP"] += 1
 		fmt.Println("Healing Discipline restored 1 HP!")
@@ -172,7 +176,7 @@ func (lw *LoneWolfSystem) UpdatePlayer(gs *game.GameState, action string) error 
 	return nil
 }
 
-func (lw *LoneWolfSystem) MakingPlayer(gs *game.GameState) error {
+func MakingPlayer(gs *GameState) error {
 	fmt.Println("キャラクターメイキング")
 	for {
 		randomNumCS := lw.Rand.Intn(10)
@@ -243,8 +247,8 @@ func (lw *LoneWolfSystem) Random() int {
 	return lw.Rand.Intn(10)
 }
 
-func (lw *LoneWolfSystem) HandleNode(gs *game.GameState, node game.Node) error {
-	lw.UpdatePlayer(gs, "heal")
+func HandleNode(gs *GameState, node Node) error {
+	UpdatePlayer(gs, "heal")
 	switch node.Type {
 	case "story":
 		fmt.Printf("Story: %s\n", node.Text)
@@ -263,7 +267,7 @@ func (lw *LoneWolfSystem) HandleNode(gs *game.GameState, node game.Node) error {
 	}
 }
 
-func handleRandomNode(gs *game.GameState, node game.Node) error {
+func handleRandomNode(gs *GameState, node Node) error {
 
 	source := rand.NewSource(time.Now().UnixNano())
 	r := rand.New(source)
@@ -297,7 +301,7 @@ func handleRandomNode(gs *game.GameState, node game.Node) error {
 }
 
 // handleStoryNode はストーリーノードの処理
-func (lw *LoneWolfSystem) handleStoryNode(gs *game.GameState, node game.Node) error {
+func handleStoryNode(gs *GameState, node Node) error {
 	if len(node.Choices) == 0 {
 		fmt.Println("このノードには選択肢がありません。ゲーム終了。")
 		gs.CurrentNodeID = "game_over" // 選択肢がなければゲームオーバーに送るか、別の処理
@@ -387,4 +391,251 @@ func contains_int(slice []int, number int) bool {
 		}
 	}
 	return false
+}
+
+/*
+// GameSystem はゲームシステムのインターフェース
+type GameSystem interface {
+	MakingPlayer(gs *GameState) error
+	Initialize(config *GameConfig) error
+	HandleNode(gs *GameState, node Node) error
+	UpdatePlayer(gs *GameState, action string) error
+}
+*/
+
+// Node はゲームの各ステップ（ノード）を表す
+type Node struct {
+	ID       string    `toml:"id"`
+	Type     string    `toml:"type"`
+	Text     string    `toml:"text"`
+	Choices  []Choice  `toml:"choices,omitempty"`
+	Enemies  []*Enemy  `toml:"enemies,omitempty"`
+	Outcomes []Outcome `toml:"outcomes,omitempty"`
+}
+
+// Choice は選択肢を表す
+type Choice struct {
+	Description        string            `toml:"description"`
+	NextNodeID         string            `toml:"next_node_id"`
+	RequiredDiscipline string            `toml:"required_discipline,omitempty"`
+	RequiredItem       string            `toml:"required_item,omitempty"`
+	Conditions         map[string]string `toml:"conditions,omitempty"`
+}
+
+// Enemy は戦闘の敵キャラクター
+type Enemy struct {
+	Name string `toml:"Name"`
+	HP   int    `toml:"HP"`
+	CS   int    `toml:"CS"`
+}
+
+// Outcome は遭遇戦の結果と次に進むノードを表す
+type Outcome struct {
+	Description  string `toml:"description,omitempty"`
+	Condition    string `toml:"condition,omitempty"`
+	ConditionInt []int  `toml:"condition_int,omitempty"`
+	NextNodeID   string `toml:"next_node_id"`
+}
+
+// GameState はゲームの状態を保持
+type GameState struct {
+	Player        *Player
+	CurrentNodeID string
+	Nodes         map[string]Node
+	Reader        *bufio.Reader
+	// System        GameSystem // System フィールドを追加
+}
+
+// display_status はプレイヤーの状態を表示
+func (gs *GameState) DisplayStatus() {
+	fmt.Println("--- ステータス ---")
+
+	// gs.Player が nil でないことを確認
+	if gs.Player == nil {
+		fmt.Println("プレイヤーデータが初期化されていません。")
+		fmt.Println("--- ステータス ---")
+		return // プレイヤーが nil なら、これ以上処理しない
+	}
+
+	// Stats の表示
+	fmt.Println("能力値:") // "Stats" を「能力値」に変更
+	if gs.Player.Stats != nil {
+		for stat, value := range gs.Player.Stats {
+			fmt.Printf("  %s: %d\n", stat, value)
+		}
+	} else {
+		fmt.Println("  能力値データがありません。")
+	}
+
+	// Attributes の表示
+	fmt.Println("属性:") // "Attribute" を「属性」に変更
+	if gs.Player.Attributes != nil {
+		foundAttribute := false
+		for attr, active := range gs.Player.Attributes {
+			if active {
+				fmt.Printf("  - %s\n", attr)
+				foundAttribute = true
+			}
+		}
+		if !foundAttribute {
+			fmt.Println("  有効な属性がありません。")
+		}
+	} else {
+		fmt.Println("  属性データがありません。")
+	}
+
+	// Inventory の表示
+	fmt.Println("インベントリ:")
+	if //gs.Player.Inventory != nil &&
+	len(gs.Player.Equipments.Backpack) > 0 {
+		for _, item := range gs.Player.Equipments.Backpack {
+			fmt.Printf("  - %s\n", item.Name)
+		}
+	} else {
+		fmt.Println("  アイテムがありません。")
+	}
+
+	// Equipment の表示
+	fmt.Println("武器") // "Equipment" を「装備」に変更
+	if gs.Player.Equipments.Currentweapon == 0 {
+		fmt.Println("  装備品がありません。")
+	} else if gs.Player.Equipments.Currentweapon == 1 {
+		fmt.Printf("装備：　%s\n", gs.Player.Equipments.Weapon1.Name)
+		fmt.Printf("予備：　%s\n", gs.Player.Equipments.Weapon2.Name)
+	} else if gs.Player.Equipments.Currentweapon == 2 {
+		fmt.Printf("装備：　%s\n", gs.Player.Equipments.Weapon2.Name)
+		fmt.Printf("予備：　%s\n", gs.Player.Equipments.Weapon1.Name)
+	} else {
+		fmt.Println("  装備品がありません。")
+	}
+
+	fmt.Println("防具") // "Equipment" を「装備」に変更
+	if gs.Player.Equipments.Head == nil {
+		fmt.Println("頭：　装備品がありません")
+	} else {
+		fmt.Printf("頭：　%s\n", gs.Player.Equipments.Head.Name)
+	}
+	if gs.Player.Equipments.Body == nil {
+		fmt.Println("体：　装備品がありません")
+	} else {
+		fmt.Printf("体：　%s\n", gs.Player.Equipments.Body.Name)
+	}
+
+	fmt.Println("バックパック")
+	if len(gs.Player.Equipments.Backpack) == 0 {
+		fmt.Println("バックパックは空です")
+	} else {
+		for _, item := range gs.Player.Equipments.Backpack {
+			fmt.Printf("-%s\n", item.Name)
+		}
+	}
+
+	fmt.Printf("所持金：%dゴールド", gs.Player.Gold)
+
+	fmt.Println("--- ステータス ---")
+}
+
+// Run はゲームループを開始
+func (gs *GameState) Run() {
+	gs.MakingPlayer(gs)
+	for {
+		node, exists := gs.Nodes[gs.CurrentNodeID]
+		if !exists {
+			fmt.Println("\nエラー: 存在しないノードIDに到達しました:", gs.CurrentNodeID)
+			break
+		}
+
+		if err := gs.System.HandleNode(gs, node); err != nil { // gs.Config.System → gs.System
+			fmt.Println("エラー:", err)
+			break
+		}
+
+		if node.Type == "end" {
+			fmt.Println("ゲーム終了。")
+			break
+		}
+	}
+}
+
+// こちらの方が良いのでは？
+type Player struct {
+	Stats      map[string]int
+	Attributes map[string]bool
+	Equipments *Equipment
+	Gold       int
+}
+
+type Equipment struct {
+	Head          *Armor
+	Body          *Armor
+	Currentweapon int //現在装備している武器スロット　デフォルト0で無装備
+	Weapon1       *Weapon
+	Weapon2       *Weapon
+	Shield        bool
+	Backpack      []*Item
+}
+
+type Inventory interface {
+	Get(gs *GameState)
+	Use(gs *GameState) //装備品の場合は装備を行う。アイテムは自動使用だけど便宜上設定
+	Drop(gs *GameState)
+}
+
+type Weapon struct {
+	Kind    string //weapon skillに使用する
+	Name    string
+	Slot    string //Weapon1 Weapon2
+	CSBonus int    //いるかなぁ？
+}
+
+func (w Weapon) Get(gs *GameState) {
+	if gs.Player.Equipments.Weapon1 == nil {
+		gs.Player.Equipments.Weapon1 = &w
+	} else if gs.Player.Equipments.Weapon2 == nil {
+		gs.Player.Equipments.Weapon2 = &w
+	} else {
+		for { //CS変更は後で書く
+			fmt.Printf("これ以上持てません\n1:%sを捨てる\n2:%sを捨てる\n%sを諦める\n",
+				gs.Player.Equipments.Weapon1.Name, gs.Player.Equipments.Weapon2.Name, w.Name)
+
+			input, _ := gs.Reader.ReadString('\n')
+			input = strings.TrimSpace(input)
+			choiceNum, err := strconv.Atoi(input)
+
+			if err == nil && choiceNum == 1 {
+				fmt.Printf("%sを捨てて%sに持ち替えた\n", gs.Player.Equipments.Weapon1.Name, w.Name)
+				gs.Player.Equipments.Weapon1 = &w
+				//CS更新
+				break
+			} else if err == nil && choiceNum == 2 {
+				fmt.Printf("%sを捨てて%sに持ち替えた\n", gs.Player.Equipments.Weapon2.Name, w.Name)
+				gs.Player.Equipments.Weapon2 = &w
+				//CS更新
+				break
+			} else {
+				fmt.Printf("%sを諦めた\n", w.Name)
+				break
+			}
+
+		}
+	}
+}
+
+type Armor struct {
+	Name    string
+	Slot    string //装備箇所
+	HPBonus int
+}
+
+type Item struct {
+	Name   string
+	Slot   string //Backpack Porch?
+	Effect string
+}
+
+// GameConfig はゲーム全体のTOML設定を表す
+type GameConfig struct {
+	System string                 `toml:"system"`
+	Player map[string]interface{} `toml:"player"`
+	Nodes  []Node                 `toml:"nodes"`
 }

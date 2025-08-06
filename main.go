@@ -29,7 +29,7 @@ func NewGameSystem(systemName, configDir string) (game.GameSystem, error) {
 }
 
 // NewGameState はゲーム状態を初期化
-func NewGameState(config *game.GameConfig, configDir string) (*game.GameState, error) {
+func NewGameState(config *game.GameConfig, configDir string) (*GameState, error) {
 	system, err := NewGameSystem(config.System, configDir)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create game system: %w", err)
@@ -82,30 +82,16 @@ func NewGameState(config *game.GameConfig, configDir string) (*game.GameState, e
 		}
 	}
 
-	/*
-		if inventory, ok := config.Player["inventory"].([]interface{}); ok {
-			for _, item := range inventory {
-				if str, ok := item.(string); ok {
-					player.Inventory = append(player.Inventory, str)
-				}
-			}
-		}
-
-		if equipment, ok := config.Player["equipment"].(map[string]interface{}); ok {
-			for k, weapon := range equipment {
-				if str, ok := weapon.(string); ok {
-					player.Equipment[k] = str
-				}
-			}
-		}
-	*/
-
 	gs.Nodes = nodeMap
 	gs.Player = player
 	return gs, nil
 }
 
-// ...（Run メソッドは game.GameState に移動）
+// GameConfig はゲーム全体のTOML設定を表す
+type GameConfig struct {
+	System string      `toml:"system"`
+	Nodes  []game.Node `toml:"nodes"`
+}
 
 func main() {
 	tomlData, err := ioutil.ReadFile("testlw.toml")
@@ -113,7 +99,7 @@ func main() {
 		log.Fatalf("Error reading TOML file: %v", err)
 	}
 
-	var config game.GameConfig
+	var config GameConfig
 	if _, err := toml.Decode(string(tomlData), &config); err != nil {
 		log.Fatalf("Error decoding TOML: %v", err)
 	}
