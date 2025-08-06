@@ -535,8 +535,8 @@ func (gs *GameState) DisplayStatus() {
 }
 
 // Run はゲームループを開始
-func (gs *GameState) Run() {
-	gs.MakingPlayer(gs)
+func (lw *LoneWolfSystem) Run(gs *GameState) {
+	lw.MakingPlayer(gs)
 	for {
 		node, exists := gs.Nodes[gs.CurrentNodeID]
 		if !exists {
@@ -544,7 +544,7 @@ func (gs *GameState) Run() {
 			break
 		}
 
-		if err := gs.System.HandleNode(gs, node); err != nil { // gs.Config.System → gs.System
+		if err := lw.HandleNode(gs, node); err != nil { // gs.Config.System → gs.System
 			fmt.Println("エラー:", err)
 			break
 		}
