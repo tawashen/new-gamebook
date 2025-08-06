@@ -6,7 +6,6 @@ import (
 
 	//"new-gamebook/game"
 
-	//"new-gamebook/game"
 	"bufio"
 	"strconv"
 	"strings"
@@ -109,7 +108,7 @@ func (lw *LoneWolfSystem) makeCombatResult(PCS int, ECS int) DamagePair {
 }
 
 // handleEncounterNode は遭遇戦ノードの処理 (簡易版)
-func Encounter(gs *GameState, node Node) error {
+func (lw *LoneWolfSystem) Encounter(gs *GameState, node Node) error {
 	fmt.Println("\n--- エンカウント！ ---")
 
 	for _, currentEnemy := range node.Enemies {
@@ -125,8 +124,8 @@ func Encounter(gs *GameState, node Node) error {
 			fmt.Println("\n力を込めて物理で殴る！")
 			time.Sleep(2 * time.Second)
 
-			Edamage := makeCombatResult(gs.Player.Stats["CS"], currentEnemy.CS).EnemyLoss
-			Pdamage := makeCombatResult(gs.Player.Stats["CS"], currentEnemy.CS).PlayerLoss
+			Edamage := lw.makeCombatResult(gs.Player.Stats["CS"], currentEnemy.CS).EnemyLoss
+			Pdamage := lw.makeCombatResult(gs.Player.Stats["CS"], currentEnemy.CS).PlayerLoss
 			currentEnemy.HP -= Edamage
 			gs.Player.Stats["HP"] -= Pdamage
 			fmt.Printf("あなたは%sに%dダメージを与えた！\nそしてあなたは%dダメージを受けた！\n",
@@ -176,7 +175,7 @@ func UpdatePlayer(gs *GameState, action string) error {
 	return nil
 }
 
-func MakingPlayer(gs *GameState) error {
+func (lw *LoneWolfSystem) MakingPlayer(gs *GameState) error {
 	fmt.Println("キャラクターメイキング")
 	for {
 		randomNumCS := lw.Rand.Intn(10)
@@ -247,7 +246,7 @@ func (lw *LoneWolfSystem) Random() int {
 	return lw.Rand.Intn(10)
 }
 
-func HandleNode(gs *GameState, node Node) error {
+func (lw *LoneWolfSystem) HandleNode(gs *GameState, node Node) error {
 	UpdatePlayer(gs, "heal")
 	switch node.Type {
 	case "story":
@@ -260,14 +259,14 @@ func HandleNode(gs *GameState, node Node) error {
 		}
 		return fmt.Errorf("no enemy defined for combat node")
 	case "random_roll":
-		return handleRandomNode(gs, node)
+		return lw.handleRandomNode(gs, node)
 
 	default:
 		return fmt.Errorf("unknown node type: %s", node.Type)
 	}
 }
 
-func handleRandomNode(gs *GameState, node Node) error {
+func (lw *LoneWolfSystem) handleRandomNode(gs *GameState, node Node) error {
 
 	source := rand.NewSource(time.Now().UnixNano())
 	r := rand.New(source)
@@ -301,7 +300,7 @@ func handleRandomNode(gs *GameState, node Node) error {
 }
 
 // handleStoryNode はストーリーノードの処理
-func handleStoryNode(gs *GameState, node Node) error {
+func (lw *LoneWolfSystem) handleStoryNode(gs *GameState, node Node) error {
 	if len(node.Choices) == 0 {
 		fmt.Println("このノードには選択肢がありません。ゲーム終了。")
 		gs.CurrentNodeID = "game_over" // 選択肢がなければゲームオーバーに送るか、別の処理
