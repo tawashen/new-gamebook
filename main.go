@@ -89,8 +89,9 @@ func NewGameState(config *game.GameConfig, configDir string) (*GameState, error)
 
 // GameConfig はゲーム全体のTOML設定を表す
 type GameConfig struct {
-	System string          `toml:"system"`
-	Nodes  []lonewolf.Node `toml:"nodes"`
+	System string `toml:"system"`
+	//	Player Player
+	Nodes []game.Node `toml:"nodes"`
 }
 
 func main() {

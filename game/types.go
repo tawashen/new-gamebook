@@ -7,12 +7,13 @@ package game
 //"strconv"
 //"strings"
 
-/*
 // GameSystem はゲームシステムのインターフェース
 type GameSystem interface {
-	MakingPlayer(gs *GameState) error
-	Initialize(config *GameConfig) error
-	HandleNode(gs *GameState, node Node) error
-	UpdatePlayer(gs *GameState, action string) error
+	MakingGameState()
+	/*
+		MakingPlayer(gs *GameState) error
+		Initialize(config *GameConfig) error
+		HandleNode(gs *GameState, node Node) error
+		UpdatePlayer(gs *GameState, action string) error
+	*/
 }
-*/
