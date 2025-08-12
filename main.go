@@ -91,7 +91,7 @@ func NewGameState(config *game.GameConfig, configDir string) (*GameState, error)
 type GameConfig struct {
 	System string `toml:"system"`
 	//	Player Player
-	Nodes []game.Node `toml:"nodes"`
+	//Nodes []Node `toml:"nodes"`
 }
 
 func main() {

@@ -70,6 +70,11 @@ type GameConfig struct {
 	Items               []Item
 }
 
+// TOML全体を受け取るための構造体
+type NodesFile struct {
+	Nodes []Node `toml:"nodes"`
+}
+
 // Node はゲームの各ステップ（ノード）を表す
 type Node struct {
 	ID       string    `toml:"id"`

@@ -3,6 +3,7 @@ package lonewolf
 import (
 	"fmt"
 	"math/rand"
+	"os"
 
 	//"new-gamebook/game"
 
@@ -13,7 +14,6 @@ import (
 
 	"github.com/BurntSushi/toml"
 )
-
 
 // NewLoneWolfSystem は新しいLoneWolfSystemインスタンスを生成
 func NewLoneWolfSystem(crtFile string) *LoneWolfSystem {
@@ -364,9 +364,6 @@ func contains_int(slice []int, number int) bool {
 	return false
 }
 
-
-
-
 // display_status はプレイヤーの状態を表示
 func (gs *GameState) DisplayStatus() {
 	fmt.Println("--- ステータス ---")
@@ -511,48 +508,59 @@ func (w Weapon) Get(gs *GameState) {
 	}
 }
 
+func (lw *LoneWolfSystem) MakingGameState() {
 
- 
-func (lw *LoneWolfSystem) MakingGameState () {
-gs := GameState {
+	reader := bufio.NewReader(os.Stdin)
 
-Player: Player {
-Stats: map[string]int {
-	"MaxHP": 10,
-	"HP": 10,
-	"CS": 15,
-},
-Attributes: map[string]bool {
-	"Camouflage": false, 
-	"Hunting": false,
-	"SixthSense": true, 
-	"Tracking": false,
-	"Healing": true,
- 	"Weaponskill":false,
- 	"Mindshield": false, 
- 	"Mindblast": false,
-  	"AnimalKinship": false,
-   	"MindOverMatter": false,
-},
-Equipments: Equipment {
-	Head: nil,
-	Body: nil,
-	Currentweapon: 0,
-	Weapon1: nil,
-	Weapon2: nil,
-	Shield: false,
-	Backpack: []nil,
-},
-Gold: 0,
+	var nf NodesFile
+	/*
+		if _, err := toml.DecodeFile("test.toml", &nf); err != nil {
+			return nil, fmt.Errorf("TOML読み込み失敗: %w", err)
+		}
+	*/
+
+	// map化
+	nodeMap := make(map[string]Node)
+	for _, n := range nf.Nodes {
+		nodeMap[n.ID] = n
+	}
+
+	gs := GameState{
+
+		Player: &Player{
+			Stats: map[string]int{
+				"MaxHP": 10,
+				"HP":    10,
+				"CS":    15,
+			},
+			Attributes: map[string]bool{
+				"Camouflage":     false,
+				"Hunting":        false,
+				"SixthSense":     true,
+				"Tracking":       false,
+				"Healing":        true,
+				"Weaponskill":    false,
+				"Mindshield":     false,
+				"Mindblast":      false,
+				"AnimalKinship":  false,
+				"MindOverMatter": false,
+			},
+			Equipments: &Equipment{
+				Head:          nil,
+				Body:          nil,
+				Currentweapon: 0,
+				Weapon1:       nil,
+				Weapon2:       nil,
+				Shield:        false,
+				Backpack:      []*Item{},
+			},
+			Gold: 0,
 		},
 
-CurrentNodeID: 1,
+		CurrentNodeID: "1",
+		Nodes:         nodeMap,
+		Reader:        reader,
+		System:        lw,
+	}
 
-Nodes: map[string]Node {
-	
 }
-
-	
-}
-}
-
