@@ -9,7 +9,8 @@ package game
 
 // GameSystem はゲームシステムのインターフェース
 type GameSystem interface {
-	MakingGameState()
+	//MakingGameState()
+	DummyMethod()
 	/*
 		MakingPlayer(gs *GameState) error
 		Initialize(config *GameConfig) error

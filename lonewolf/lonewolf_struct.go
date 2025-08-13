@@ -2,7 +2,8 @@ package lonewolf
 
 import (
 	"bufio"
-	"math/rand/v2"
+	//"math/rand/v2"
+	"math/rand"
 )
 
 type Armor struct {

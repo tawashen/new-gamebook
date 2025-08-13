@@ -30,10 +30,6 @@ func NewLoneWolfSystem(crtFile string) *LoneWolfSystem {
 
 // Initialize はLoneWolfSystemを初期化
 func (lw *LoneWolfSystem) Initialize(config *GameConfig) error {
-	stats, ok := config.Player["stats"].(map[string]interface{})
-	if !ok || stats["HP"] == nil || stats["CS"] == nil {
-		return fmt.Errorf("missing HP or CS in player stats")
-	}
 
 	var data CRTData
 	if _, err := toml.DecodeFile(lw.CRTFile, &data); err != nil {
@@ -508,16 +504,15 @@ func (w Weapon) Get(gs *GameState) {
 	}
 }
 
-func (lw *LoneWolfSystem) MakingGameState() {
+func (lw *LoneWolfSystem) MakingGameState() (*GameState, error) {
 
 	reader := bufio.NewReader(os.Stdin)
 
 	var nf NodesFile
-	/*
-		if _, err := toml.DecodeFile("test.toml", &nf); err != nil {
-			return nil, fmt.Errorf("TOML読み込み失敗: %w", err)
-		}
-	*/
+
+	if _, err := toml.DecodeFile("test.toml", &nf); err != nil {
+		return nil, fmt.Errorf("TOML読み込み失敗: %w", err)
+	}
 
 	// map化
 	nodeMap := make(map[string]Node)
