@@ -450,8 +450,14 @@ func (gs *GameState) DisplayStatus() {
 }
 
 // Run はゲームループを開始
-func (lw *LoneWolfSystem) Run(gs *GameState) {
-	lw.MakingPlayer(gs)
+func (lw *LoneWolfSystem) Run() {
+
+	gs, err := lw.MakingGameState()
+	if err != nil {
+		fmt.Println("GameState 作成失敗:", err)
+		return
+	}
+
 	for {
 		node, exists := gs.Nodes[gs.CurrentNodeID]
 		if !exists {
@@ -520,7 +526,7 @@ func (lw *LoneWolfSystem) MakingGameState() (*GameState, error) {
 		nodeMap[n.ID] = n
 	}
 
-	gs := GameState{
+	gs := &GameState{
 
 		Player: &Player{
 			Stats: map[string]int{
@@ -557,5 +563,7 @@ func (lw *LoneWolfSystem) MakingGameState() (*GameState, error) {
 		Reader:        reader,
 		System:        lw,
 	}
+
+	return gs, nil
 
 }

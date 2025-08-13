@@ -105,11 +105,6 @@ func main() {
 		log.Fatalf("Error decoding TOML: %v", err)
 	}
 
-	gameState, err := NewGameState(&config, ".")
-	if err != nil {
-		log.Fatalf("Error initializing game state: %v", err)
-	}
-
 	//gameState.DisplayStatus()
-	gameState.Run(gs * lonewolf.GameState)
+
 }
