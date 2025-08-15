@@ -1,33 +1,34 @@
 package main
 
 import (
-	"bufio"
-	"fmt"
 	"io/ioutil"
 	"log"
-	"os"
 
 	//"strings"
 
-	"new-gamebook/fightingfantasy"
+	//"new-gamebook/fightingfantasy"
 	"new-gamebook/game"
 	"new-gamebook/lonewolf"
 
 	"github.com/BurntSushi/toml"
 )
 
+/*
 // NewGameSystem はシステム名に基づいて GameSystem を返す
 func NewGameSystem(systemName, configDir string) (game.GameSystem, error) {
 	switch systemName {
 	case "lonewolf":
 		return lonewolf.NewLoneWolfSystem(configDir + "/combat_result_table.toml"), nil
-	case "fightingfantasy":
-		return fightingfantasy.NewFightingFantasySystem(), nil
+	//case "fightingfantasy":
+	//	return fightingfantasy.NewFightingFantasySystem(), nil
 	default:
 		return nil, fmt.Errorf("unknown system: %s", systemName)
 	}
 }
 
+*/
+
+/*
 // NewGameState はゲーム状態を初期化
 func NewGameState(config *game.GameConfig, configDir string) (*GameState, error) {
 	system, err := NewGameSystem(config.System, configDir)
@@ -86,6 +87,7 @@ func NewGameState(config *game.GameConfig, configDir string) (*GameState, error)
 	gs.Player = player
 	return gs, nil
 }
+*/
 
 // GameConfig はゲーム全体のTOML設定を表す
 type GameConfig struct {
@@ -105,6 +107,14 @@ func main() {
 		log.Fatalf("Error decoding TOML: %v", err)
 	}
 
+	var gs game.GameSystem
+
+	switch config.System {
+	case "lonewolf":
+		gs = lonewolf.NewLoneWolfSystem("combat_results_table.toml")
+	}
+
 	//gameState.DisplayStatus()
+	gs.Run()
 
 }

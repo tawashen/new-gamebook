@@ -1,13 +1,8 @@
 package fightingfantasy
 
 import (
-	"fmt"
 	"math/rand"
-	"strconv"
-	"strings"
 	"time"
-
-	"new-gamebook/game"
 )
 
 // FightingFantasySystem はFighting Fantasyゲームブックのルールを実装
@@ -22,11 +17,15 @@ func NewFightingFantasySystem() *FightingFantasySystem {
 	}
 }
 
+/*
+
 // Initialize はFightingFantasySystemを初期化
 func (ff *FightingFantasySystem) Initialize(config *game.GameConfig) error {
 	fmt.Println("Fighting Fantasy initialized successfully.")
 	return nil
 }
+
+
 
 // HandleNode はノードタイプに応じて処理
 func (ff *FightingFantasySystem) HandleNode(gs *game.GameState, node game.Node) error {
@@ -196,3 +195,5 @@ func remove(slice []string, str string) []string {
 	}
 	return result
 }
+
+*/

@@ -29,7 +29,7 @@ func NewLoneWolfSystem(crtFile string) *LoneWolfSystem {
 //var _ game.GameSystem = (*LoneWolfSystem)(nil)
 
 // Initialize はLoneWolfSystemを初期化
-func (lw *LoneWolfSystem) Initialize(config *GameConfig) error {
+func (lw *LoneWolfSystem) Initialize() error {
 
 	var data CRTData
 	if _, err := toml.DecodeFile(lw.CRTFile, &data); err != nil {
@@ -449,34 +449,6 @@ func (gs *GameState) DisplayStatus() {
 	fmt.Println("--- ステータス ---")
 }
 
-// Run はゲームループを開始
-func (lw *LoneWolfSystem) Run() {
-
-	gs, err := lw.MakingGameState()
-	if err != nil {
-		fmt.Println("GameState 作成失敗:", err)
-		return
-	}
-
-	for {
-		node, exists := gs.Nodes[gs.CurrentNodeID]
-		if !exists {
-			fmt.Println("\nエラー: 存在しないノードIDに到達しました:", gs.CurrentNodeID)
-			break
-		}
-
-		if err := lw.HandleNode(gs, node); err != nil { // gs.Config.System → gs.System
-			fmt.Println("エラー:", err)
-			break
-		}
-
-		if node.Type == "end" {
-			fmt.Println("ゲーム終了。")
-			break
-		}
-	}
-}
-
 func (w Weapon) Get(gs *GameState) {
 	if gs.Player.Equipments.Weapon1 == nil {
 		gs.Player.Equipments.Weapon1 = &w
@@ -566,4 +538,33 @@ func (lw *LoneWolfSystem) MakingGameState() (*GameState, error) {
 
 	return gs, nil
 
+}
+
+// Run はゲームループを開始
+func (lw *LoneWolfSystem) Run() {
+
+	lw.Initialize()
+	gs, err := lw.MakingGameState()
+	if err != nil {
+		fmt.Println("GameState 作成失敗:", err)
+		return
+	}
+
+	for {
+		node, exists := gs.Nodes[gs.CurrentNodeID]
+		if !exists {
+			fmt.Println("\nエラー: 存在しないノードIDに到達しました:", gs.CurrentNodeID)
+			break
+		}
+
+		if err := lw.HandleNode(gs, node); err != nil { // gs.Config.System → gs.System
+			fmt.Println("エラー:", err)
+			break
+		}
+
+		if node.Type == "end" {
+			fmt.Println("ゲーム終了。")
+			break
+		}
+	}
 }
