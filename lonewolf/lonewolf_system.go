@@ -488,7 +488,7 @@ func (lw *LoneWolfSystem) MakingGameState() (*GameState, error) {
 
 	var nf NodesFile
 
-	if _, err := toml.DecodeFile("test.toml", &nf); err != nil {
+	if _, err := toml.DecodeFile("testlw.toml", &nf); err != nil {
 		return nil, fmt.Errorf("TOML読み込み失敗: %w", err)
 	}
 
@@ -544,6 +544,7 @@ func (lw *LoneWolfSystem) MakingGameState() (*GameState, error) {
 func (lw *LoneWolfSystem) Run() {
 
 	lw.Initialize()
+
 	gs, err := lw.MakingGameState()
 	if err != nil {
 		fmt.Println("GameState 作成失敗:", err)
