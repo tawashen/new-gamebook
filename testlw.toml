@@ -2,20 +2,25 @@ system = "lonewolf"
 
 
 [Tables]
-SkillTable = ["Camouflage", "Hunting", "SixthSense", "Tracking","Healing",
+KaiTable = ["Camouflage", "Hunting", "SixthSense", "Tracking","Healing",
  "Weaponskill","Mindshield", "Mindblast", "AnimalKinship", "MindOverMatter"]
-WeaponSkillTable = { 0 = "Dagger", 1 = "Spear", 2 = "Mace", 3 = "Shortsword", 4 = "Warhammer", 5 = "Sword", 6 = "Axe", 7 = "Sword", 8 = "Quaterstaff", 9 = "Broadsword"}
-FirstEquipmentTable = {0 = "Broadsword", 1 = "Sword", 2 = "Helmet", 3 = "Meal", 4 = "ChainmailWaistcoat", 5 = "Mace", 6 = "HealingPotion", 7 = "Quatertaff", 8 = "Spear", 9 = "Gold"}
+WeaponSkillTable = ["Dagger", "Spear", "Mace", "Shortsword", "Warhammer", "Sword", "Axe", "Sword", "Quaterstaff", "Broadsword"]
+FirstEquipmentTable = {0 = "Broadsword", 1 = "Sword", 2 = "Helmet", 3 = "Meal", 4 = "ChainmailWaistcoat", 5 = "Mace", 6 = "HealingPotion", 7 = "Quaterstaff", 8 = "Spear", 9 = "Gold"}
 
     [[Tables.Armors]]
-    Name = "ChainmainWaistcoat"
+    Name = "ChainmailWaistcoat"
     Slot = "Body"
-    Hpbonus = 2
+    HPBonus = 2
 
     [[Tables.Armors]]
     Name = "Helmet"
     Slot = "Head"
-    Hpbonus = 2
+    HPBonus = 2
+
+    [[Tables.Weapons]]
+    Kind = "Axe"
+    Name = "Axe"
+
 
 [[nodes]]
 id = "1"

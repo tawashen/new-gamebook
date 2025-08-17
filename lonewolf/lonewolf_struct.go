@@ -12,9 +12,14 @@ type Armor struct {
 	HPBonus int
 }
 
+type Weapon struct {
+	Kind string //weapon skillに使用する
+	Name string
+	//CSBonus int //いるかなぁ？
+}
+
 type Item struct {
 	Name   string
-	Slot   string //Backpack Porch?
 	Effect string
 }
 
@@ -26,6 +31,15 @@ type Player struct {
 	Gold       int
 }
 
+// ゲーム内装備データ構造体
+type table struct {
+	KaiTable            []string
+	WeaponSkillTable    map[int]string
+	FirstEquipmentTable map[int]any
+	Armors              []Armor
+	Weapons             []Weapon
+	Items               []Item
+}
 type Equipment struct {
 	Head          *Armor
 	Body          *Armor
@@ -40,13 +54,6 @@ type Inventory interface {
 	Get(gs *GameState)
 	Use(gs *GameState) //装備品の場合は装備を行う。アイテムは自動使用だけど便宜上設定
 	Drop(gs *GameState)
-}
-
-type Weapon struct {
-	Kind    string //weapon skillに使用する
-	Name    string
-	Slot    string //Weapon1 Weapon2
-	CSBonus int    //いるかなぁ？
 }
 
 // GameState はゲームの状態を保持

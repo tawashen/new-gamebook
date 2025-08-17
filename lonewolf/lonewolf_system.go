@@ -145,6 +145,8 @@ func UpdatePlayer(gs *GameState, action string) error {
 
 func (lw *LoneWolfSystem) MakingPlayer(gs *GameState) error {
 	fmt.Println("キャラクターメイキング")
+
+	//CS-making
 	for {
 		randomNumCS := lw.Rand.Intn(10)
 		fmt.Printf("戦闘力！\n運命の数は%d\n受け入れますか？(Y/N)\n", randomNumCS)
@@ -165,6 +167,7 @@ func (lw *LoneWolfSystem) MakingPlayer(gs *GameState) error {
 		}
 	}
 
+	//HP-making
 	for {
 		randomNumHP := lw.Rand.Intn(10)
 		fmt.Printf("生命力！\n運命の数は%d\n受け入れますか？(Y/N)\n", randomNumHP)
@@ -186,6 +189,7 @@ func (lw *LoneWolfSystem) MakingPlayer(gs *GameState) error {
 
 	}
 
+	//Gold-making
 	for {
 		randomNumGOLD := lw.Rand.Intn(10)
 		fmt.Printf("所持金！\n運命の数は%d\n受け入れますか？(Y/N)\n", randomNumGOLD)
@@ -544,6 +548,8 @@ func (lw *LoneWolfSystem) MakingGameState() (*GameState, error) {
 func (lw *LoneWolfSystem) Run() {
 
 	lw.Initialize()
+
+	lw.MakingPlayer()
 
 	gs, err := lw.MakingGameState()
 	if err != nil {
