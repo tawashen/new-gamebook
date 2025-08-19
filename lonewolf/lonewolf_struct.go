@@ -32,7 +32,7 @@ type Player struct {
 }
 
 // ゲーム内装備データ構造体
-type table struct {
+type Tables struct {
 	KaiTable            []string
 	WeaponSkillTable    map[int]string
 	FirstEquipmentTable map[int]any
@@ -40,6 +40,7 @@ type table struct {
 	Weapons             []Weapon
 	Items               []Item
 }
+
 type Equipment struct {
 	Head          *Armor
 	Body          *Armor
@@ -63,19 +64,6 @@ type GameState struct {
 	Nodes         map[string]Node
 	Reader        *bufio.Reader
 	System        *LoneWolfSystem // System フィールドを追加
-}
-
-// GameConfig はゲーム全体のTOML設定を表す
-type GameConfig struct {
-	System string `toml:"system"`
-	//	Player Player
-	Nodes               []Node `toml:"nodes"`
-	SkillTable          []string
-	WeaponSkillTable    map[int]string
-	FirstEquipmentTable map[int]string
-	Weapons             []Weapon
-	Armors              []Armor
-	Items               []Item
 }
 
 // TOML全体を受け取るための構造体

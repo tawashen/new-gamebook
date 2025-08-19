@@ -136,7 +136,7 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node Node) error {
 
 // UpdatePlayer はプレイヤーの状態を更新
 func UpdatePlayer(gs *GameState, action string) error {
-	if action == "heal" && gs.Player.Attributes["Healing"] {
+	if action == "heal" && gs.Player.Attributes["Healing"] && gs.CurrentNodeID != "1" {
 		gs.Player.Stats["HP"] += 1
 		fmt.Println("Healing Discipline restored 1 HP!")
 	}
@@ -177,6 +177,7 @@ func (lw *LoneWolfSystem) MakingPlayer(gs *GameState) error {
 
 		if input == "Y" {
 			gs.Player.Stats["HP"] = 10 + randomNumHP
+			gs.Player.Stats["MaxHP"] = 10 + randomNumHP
 			fmt.Printf("お前の生命力は%dと定まった！\n", gs.Player.Stats["HP"])
 			break
 
@@ -198,8 +199,8 @@ func (lw *LoneWolfSystem) MakingPlayer(gs *GameState) error {
 		input = strings.ToUpper(input)
 
 		if input == "Y" {
-			gs.Player.Stats["HP"] = 10 + randomNumGOLD
-			fmt.Printf("お前の生命力は%dと定まった！\n", gs.Player.Stats["HP"])
+			gs.Player.Gold = 10 + randomNumGOLD
+			fmt.Printf("お前の所持金は%dと定まった！\n", gs.Player.Gold)
 			break
 
 		} else if input == "N" {
@@ -208,8 +209,9 @@ func (lw *LoneWolfSystem) MakingPlayer(gs *GameState) error {
 			fmt.Println("Y または N を入力してください。")
 			continue
 		}
-
 	}
+
+	//
 	return nil
 }
 
@@ -549,13 +551,13 @@ func (lw *LoneWolfSystem) Run() {
 
 	lw.Initialize()
 
-	lw.MakingPlayer()
-
 	gs, err := lw.MakingGameState()
 	if err != nil {
 		fmt.Println("GameState 作成失敗:", err)
 		return
 	}
+
+	lw.MakingPlayer(gs)
 
 	for {
 		node, exists := gs.Nodes[gs.CurrentNodeID]
