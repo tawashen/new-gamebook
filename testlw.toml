@@ -5,7 +5,7 @@ system = "lonewolf"
 KaiTable = ["Camouflage", "Hunting", "SixthSense", "Tracking","Healing",
  "Weaponskill","Mindshield", "Mindblast", "AnimalKinship", "MindOverMatter"]
 WeaponSkillTable = ["Dagger", "Spear", "Mace", "Shortsword", "Warhammer", "Sword", "Axe", "Sword", "Quaterstaff", "Broadsword"]
-FirstEquipmentTable = {0 = "Broadsword", 1 = "Sword", 2 = "Helmet", 3 = "Meal", 4 = "ChainmailWaistcoat", 5 = "Mace", 6 = "HealingPotion", 7 = "Quaterstaff", 8 = "Spear", 9 = "Gold"}
+FirstEquipmentTable = ["Broadsword", "Sword", "Helmet", "Meal", "ChainmailWaistcoat", "Mace", "HealingPotion", "Quaterstaff", "Spear", "Gold"]
 
     [[Tables.Armors]]
     Name = "ChainmailWaistcoat"
@@ -24,6 +24,18 @@ FirstEquipmentTable = {0 = "Broadsword", 1 = "Sword", 2 = "Helmet", 3 = "Meal", 
 
 [[nodes]]
 id = "1"
+type = "itemGet"
+text = """
+Dragon Slayerをゲットするチャンス！
+どうしますか？
+"""
+Item = "DragonSylayer"
+    [[node.outcomes]]
+    next_node_id = "6"
+
+
+[[nodes]]
+id = "6"
 type = "story"
 text = """
 これはテストデータです

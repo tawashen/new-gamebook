@@ -31,14 +31,18 @@ type Player struct {
 	Gold       int
 }
 
-// ゲーム内装備データ構造体
+// ゲーム内装備データ構造体　GameConfigに文字列のスライスで持たせておいて
+// LoneWolfSystemにスロットを作ってそこにインスタンスのマップを格納するというのはどうか？
 type Tables struct {
 	KaiTable            []string
-	WeaponSkillTable    map[int]string
-	FirstEquipmentTable map[int]any
+	WeaponSkillTable    []string
+	FirstEquipmentTable []string //stringを使って
 	Armors              []Armor
+	ArmorsMap           map[string]Armor
 	Weapons             []Weapon
+	WeaponsMap          map[string]Weapon
 	Items               []Item
+	ItemsMap            map[string]Item
 }
 
 type Equipment struct {
@@ -53,8 +57,8 @@ type Equipment struct {
 
 type Inventory interface {
 	Get(gs *GameState)
-	Use(gs *GameState) //装備品の場合は装備を行う。アイテムは自動使用だけど便宜上設定
-	Drop(gs *GameState)
+	//Use(gs *GameState) //装備品の場合は装備を行う。アイテムは自動使用だけど便宜上設定
+	//Drop(gs *GameState)
 }
 
 // GameState はゲームの状態を保持
@@ -79,6 +83,7 @@ type Node struct {
 	Choices  []Choice  `toml:"choices,omitempty"`
 	Enemies  []*Enemy  `toml:"enemies,omitempty"`
 	Outcomes []Outcome `toml:"outcomes,omitempty"`
+	Item     string    //処理用文字列
 }
 
 // Choice は選択肢を表す

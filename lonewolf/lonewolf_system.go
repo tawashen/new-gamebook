@@ -136,7 +136,8 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node Node) error {
 
 // UpdatePlayer はプレイヤーの状態を更新
 func UpdatePlayer(gs *GameState, action string) error {
-	if action == "heal" && gs.Player.Attributes["Healing"] && gs.CurrentNodeID != "1" {
+	if action == "heal" &&
+		gs.Player.Attributes["Healing"] && gs.CurrentNodeID != "1" && gs.Player.Stats["HP"] < gs.Player.Stats["MaxHP"] {
 		gs.Player.Stats["HP"] += 1
 		fmt.Println("Healing Discipline restored 1 HP!")
 	}
@@ -235,9 +236,16 @@ func (lw *LoneWolfSystem) HandleNode(gs *GameState, node Node) error {
 	case "random_roll":
 		return lw.handleRandomNode(gs, node)
 
+	case "itemget":
+		return lw.handleItemgetNode(gs, node)
+
 	default:
 		return fmt.Errorf("unknown node type: %s", node.Type)
 	}
+}
+
+func (lw *LoneWolfSystem) handleItemgetNode(gs *GameState, node Node) error {
+	itemInstance := node.Item //その前に各アイテムインスタンスをテーブルにGameStateの各テーブルに作成する
 }
 
 func (lw *LoneWolfSystem) handleRandomNode(gs *GameState, node Node) error {
@@ -488,6 +496,68 @@ func (w Weapon) Get(gs *GameState) {
 	}
 }
 
+func (a Armor) Get(gs *GameState) {
+	if gs.Player.Equipments.Body == nil && a.Slot == "Body" {
+		fmt.Printf("%sを身につけた\n耐久力が%d上昇した\n", a.Name, a.HPBonus)
+		gs.Player.Equipments.Body = &a
+		gs.Player.Stats["HP"] += a.HPBonus
+	} else if gs.Player.Equipments == nil && a.Slot == "Head" {
+		fmt.Printf("%sを身につけた\n耐久力が%d上昇した\n", a.Name, a.HPBonus)
+		gs.Player.Equipments.Head = &a
+		gs.Player.Stats["HP"] += a.HPBonus
+	} else if a.Slot == "Body" {
+		for {
+			fmt.Printf("体にはすでに装備しています\n1:%sを装備する\n2:%sを諦める\n",
+				a.Name, a.Name)
+			input, _ := gs.Reader.ReadString('\n')
+			input = strings.TrimSpace(input)
+			choiceNum, err := strconv.Atoi(input)
+
+			if err == nil && choiceNum == 1 {
+				fmt.Printf("%sを捨てて%sを身につけた\n", gs.Player.Equipments.Body.Name, a.Name)
+				change := a.HPBonus - gs.Player.Equipments.Body.HPBonus
+				gs.Player.Stats["MaxHP"] += change
+				gs.Player.Stats["HP"] += change
+				fmt.Printf("耐久力が%d変化した\n", change)
+				gs.Player.Equipments.Body = &a
+				break
+			} else if err == nil && choiceNum == 2 {
+				fmt.Printf("%sを諦めた\n", a.Name)
+				break
+			} else {
+				fmt.Print("無効な入力です")
+				continue
+			}
+		}
+	} else if a.Slot == "Head" {
+		for {
+			fmt.Printf("頭にはすでに装備しています\n1:%sを装備する\n2:%sを諦める\n",
+				a.Name, a.Name)
+			input, _ := gs.Reader.ReadString('\n')
+			input = strings.TrimSpace(input)
+			choiceNum, err := strconv.Atoi(input)
+
+			if err == nil && choiceNum == 1 {
+				fmt.Printf("%sを捨てて%sを身につけた\n", gs.Player.Equipments.Head.Name, a.Name)
+				change := a.HPBonus - gs.Player.Equipments.Head.HPBonus
+				gs.Player.Stats["MaxHP"] += change
+				gs.Player.Stats["HP"] += change
+				fmt.Printf("耐久力が%d変化した\n", change)
+				gs.Player.Equipments.Head = &a
+				break
+			} else if err == nil && choiceNum == 2 {
+				fmt.Printf("%sを諦めた\n", a.Name)
+				break
+			} else {
+				fmt.Println("無効な入力です")
+				continue
+			}
+		}
+	} else {
+		fmt.Println("ファッ！？")
+	}
+}
+
 func (lw *LoneWolfSystem) MakingGameState() (*GameState, error) {
 
 	reader := bufio.NewReader(os.Stdin)
@@ -508,9 +578,9 @@ func (lw *LoneWolfSystem) MakingGameState() (*GameState, error) {
 
 		Player: &Player{
 			Stats: map[string]int{
-				"MaxHP": 10,
-				"HP":    10,
-				"CS":    15,
+				"MaxHP": 0,
+				"HP":    0,
+				"CS":    0,
 			},
 			Attributes: map[string]bool{
 				"Camouflage":     false,
