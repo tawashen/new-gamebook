@@ -13,9 +13,9 @@ type Armor struct {
 }
 
 type Weapon struct {
-	Kind string //weapon skillに使用する
-	Name string
-	//CSBonus int //いるかなぁ？
+	Kind    string //weapon skillに使用する
+	Name    string
+	CSBonus int
 }
 
 type Item struct {
@@ -36,13 +36,13 @@ type Player struct {
 type Tables struct {
 	KaiTable            []string
 	WeaponSkillTable    []string
-	FirstEquipmentTable []string //stringを使って
+	FirstEquipmentTable []string
 	Armors              []Armor
-	ArmorsMap           map[string]Armor
+	ArmorsMap           map[string]*Armor
 	Weapons             []Weapon
-	WeaponsMap          map[string]Weapon
+	WeaponsMap          map[string]*Weapon
 	Items               []Item
-	ItemsMap            map[string]Item
+	ItemsMap            map[string]*Item
 }
 
 type Equipment struct {
@@ -137,4 +137,9 @@ type LoneWolfSystem struct {
 	Rand      *rand.Rand
 	CRTFile   string
 	ConfigDir string
+	Tables    Tables `toml:"Tables"`
+}
+
+type LWCfg struct {
+	Tables Tables
 }

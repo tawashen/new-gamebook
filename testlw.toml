@@ -20,6 +20,12 @@ FirstEquipmentTable = ["Broadsword", "Sword", "Helmet", "Meal", "ChainmailWaistc
     [[Tables.Weapons]]
     Kind = "Axe"
     Name = "Axe"
+    CSBonus = 1
+
+    [[Tables.Items]]
+    Name = "Meals"
+    Effect = "Meal"
+
 
 
 [[nodes]]
