@@ -69,27 +69,6 @@ func (lw *LoneWolfSystem) Initialize() error {
 	return nil
 }
 
-// makeCombatResult は戦闘結果を返す
-func (lw *LoneWolfSystem) makeCombatResult(PCS int, ECS int) DamagePair {
-	source := rand.NewSource(time.Now().UnixNano())
-	r := rand.New(source)
-	randomNumber := r.Intn(10)
-	CombatRatio := PCS - ECS // 例えば、+5 の戦闘比率だったとする
-	normalizedCR := normalizeCombatRatio(CombatRatio)
-	key := KeyPair{RandNum: randomNumber, ComRatio: normalizedCR}
-	result, ok := lw.CRT[key]
-	if ok {
-		return result
-	} else {
-		fmt.Println("Key not found in the map.")
-		return DamagePair{
-			EnemyLoss:  0,
-			PlayerLoss: 0,
-			IsKilled:   false,
-		}
-	}
-}
-
 func (lw *LoneWolfSystem) MakingGameState() (*GameState, error) {
 
 	reader := bufio.NewReader(os.Stdin)
@@ -130,7 +109,7 @@ func (lw *LoneWolfSystem) MakingGameState() (*GameState, error) {
 				Head:          nil,
 				Body:          nil,
 				Currentweapon: 0,
-				Weapon1:       nil,
+				Weapon1:       lw.Tables.WeaponsMap["Axe"],
 				Weapon2:       nil,
 				Shield:        false,
 				Backpack:      []*Item{},
@@ -216,9 +195,37 @@ func (lw *LoneWolfSystem) MakingPlayer(gs *GameState) error {
 		}
 	}
 
-	//
+	//first equipment
+
+	randomNumFirstEquipment := lw.Rand.Intn(10)
+
+	switch randomNumFirstEquipment {
+	case 0, 1, 5, 7, 8:
+		Wstring := lw.Tables.FirstEquipmentTable[randomNumFirstEquipment]
+		w := lw.Tables.WeaponsMap[Wstring]
+		gs.Player.Equipments.Weapon2 = w
+		fmt.Printf("初期装備！\n君は焼け跡から%sを発見した！\n", w.Name)
+
+	case 2:
+		gs.Player.Equipments.Head = lw.Tables.ArmorsMap["Helmet"]
+		fmt.Print("初期装備！\n君は焼け跡からHelmetを発見した！\n")
+	case 4:
+		gs.Player.Equipments.Body = lw.Tables.ArmorsMap["ChainmailWaistcoat"]
+		fmt.Print("初期装備！\n君は焼け跡からChainmailWaistcoatを発見した！\n")
+	case 3: //食料２つ
+		gs.Player.Equipments.Backpack = append(gs.Player.Equipments.Backpack, lw.Tables.ItemsMap["Meal"], lw.Tables.ItemsMap["Meal"])
+		fmt.Print("初期装備！\n君は焼け跡からMealを2つ発見した！\n")
+	case 6: //通常アイテム
+		gs.Player.Equipments.Backpack = append(gs.Player.Equipments.Backpack, lw.Tables.ItemsMap["HealingPotion"])
+		fmt.Print("初期装備！\n君は焼け跡からHealingPotionを発見した！\n")
+	case 9: //ゴールド
+		gs.Player.Gold += 12
+		fmt.Print("初期装備！\n君は焼け跡から12GoldCrownを発見した！\n")
+	}
 	return nil
 }
+
+//
 
 // UpdatePlayer はプレイヤーの状態を更新
 func UpdatePlayer(gs *GameState, action string) error {

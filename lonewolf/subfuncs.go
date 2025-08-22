@@ -1,6 +1,10 @@
 package lonewolf
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
 
 // Random は戦闘表用の乱数を生成（0-9）
 func (lw *LoneWolfSystem) Random() int {
@@ -122,4 +126,25 @@ func normalizeCombatRatio(ratio int) int {
 		return 11 // 11以上はすべて11として扱う
 	}
 	return ratio // それ以外はそのまま
+}
+
+// makeCombatResult は戦闘結果を返す
+func (lw *LoneWolfSystem) makeCombatResult(PCS int, ECS int) DamagePair {
+	source := rand.NewSource(time.Now().UnixNano())
+	r := rand.New(source)
+	randomNumber := r.Intn(10)
+	CombatRatio := PCS - ECS // 例えば、+5 の戦闘比率だったとする
+	normalizedCR := normalizeCombatRatio(CombatRatio)
+	key := KeyPair{RandNum: randomNumber, ComRatio: normalizedCR}
+	result, ok := lw.CRT[key]
+	if ok {
+		return result
+	} else {
+		fmt.Println("Key not found in the map.")
+		return DamagePair{
+			EnemyLoss:  0,
+			PlayerLoss: 0,
+			IsKilled:   false,
+		}
+	}
 }

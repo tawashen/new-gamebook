@@ -29,7 +29,7 @@ FirstEquipmentTable = ["Broadsword", "Sword", "Helmet", "Meal", "ChainmailWaistc
 
 
 [[nodes]]
-id = "1"
+id = "7"
 type = "itemGet"
 text = """
 Dragon Slayerをゲットするチャンス！
@@ -41,7 +41,7 @@ Item = "DragonSylayer"
 
 
 [[nodes]]
-id = "6"
+id = "1"
 type = "story"
 text = """
 これはテストデータです

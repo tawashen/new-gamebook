@@ -23,17 +23,17 @@ func (lw *LoneWolfSystem) HandleNode(gs *GameState, node Node) error {
 	case "random_roll":
 		return lw.handleRandomNode(gs, node)
 
-	case "itemget":
-		return lw.handleItemgetNode(gs, node)
+	//case "itemget":
+	//	return lw.handleItemgetNode(gs, node)
 
 	default:
 		return fmt.Errorf("unknown node type: %s", node.Type)
 	}
 }
 
-func (lw *LoneWolfSystem) handleItemgetNode(gs *GameState, node Node) error {
-	itemInstance := node.Item //その前に各アイテムインスタンスをテーブルにGameStateの各テーブルに作成する
-}
+//func (lw *LoneWolfSystem) handleItemgetNode(gs *GameState, node Node) error {
+//	itemInstance := node.Item //その前に各アイテムインスタンスをテーブルにGameStateの各テーブルに作成する
+//}
 
 func (lw *LoneWolfSystem) handleRandomNode(gs *GameState, node Node) error {
 
