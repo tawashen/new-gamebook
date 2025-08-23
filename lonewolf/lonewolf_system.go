@@ -29,6 +29,7 @@ func NewLoneWolfSystem(crtFile string) *LoneWolfSystem {
 // インターフェースの実装を明示
 //var _ game.GameSystem = (*LoneWolfSystem)(nil)
 
+/*
 // Initialize はLoneWolfSystemを初期化
 func (lw *LoneWolfSystem) Initialize() error {
 
@@ -64,6 +65,51 @@ func (lw *LoneWolfSystem) Initialize() error {
 	for i := range lw.Tables.Items {
 
 		lw.Tables.ItemsMap[lw.Tables.Items[i].Name] = &lw.Tables.Items[i]
+	}
+
+	return nil
+}
+*/
+
+func (lw *LoneWolfSystem) Initialize() error {
+	// CRT 読み込み（元コード）
+	var data CRTData
+	if _, err := toml.DecodeFile("combat_result_table.toml", &data); err != nil {
+		return fmt.Errorf("error decoding CRT file %q: %w", lw.CRTFile, err)
+	}
+	for _, result := range data.Results {
+		lw.CRT[result.KeyPair] = result.DamagePair
+	}
+	fmt.Println("Lone Wolf CRT initialized successfully.")
+
+	// Tables 読み込み
+	var cfg LWCfg
+	if _, err := toml.DecodeFile("testlw.toml", &cfg); err != nil {
+		return fmt.Errorf("failed to decode tables from testlw.toml: %w", err)
+	}
+	lw.Tables = cfg.Tables
+
+	// デバッグ出力：読み込まれた長さを確認
+	fmt.Printf("DEBUG: FirstEquipmentTable len=%d, Weapons=%d Armors=%d Items=%d\n",
+		len(lw.Tables.FirstEquipmentTable), len(lw.Tables.Weapons), len(lw.Tables.Armors), len(lw.Tables.Items))
+
+	// マップ組み立て（安全に、ポインタ取りの落とし穴回避）
+	lw.Tables.ArmorsMap = make(map[string]*Armor, len(lw.Tables.Armors))
+	for i := range lw.Tables.Armors {
+		a := &lw.Tables.Armors[i]
+		lw.Tables.ArmorsMap[a.Name] = a
+	}
+
+	lw.Tables.WeaponsMap = make(map[string]*Weapon, len(lw.Tables.Weapons))
+	for i := range lw.Tables.Weapons {
+		w := &lw.Tables.Weapons[i]
+		lw.Tables.WeaponsMap[w.Name] = w
+	}
+
+	lw.Tables.ItemsMap = make(map[string]*Item, len(lw.Tables.Items))
+	for i := range lw.Tables.Items {
+		it := &lw.Tables.Items[i]
+		lw.Tables.ItemsMap[it.Name] = it
 	}
 
 	return nil
@@ -335,7 +381,10 @@ func (a Armor) Get(gs *GameState) {
 // Run はゲームループを開始
 func (lw *LoneWolfSystem) Run() {
 
-	lw.Initialize()
+	if err := lw.Initialize(); err != nil {
+		fmt.Println("Initialize failed:", err)
+		return
+	}
 
 	gs, err := lw.MakingGameState()
 	if err != nil {
@@ -343,7 +392,10 @@ func (lw *LoneWolfSystem) Run() {
 		return
 	}
 
-	lw.MakingPlayer(gs)
+	if err := lw.MakingPlayer(gs); err != nil {
+		fmt.Println("MakingPlayer error:", err)
+		return
+	}
 
 	for {
 		node, exists := gs.Nodes[gs.CurrentNodeID]
