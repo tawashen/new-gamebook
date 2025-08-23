@@ -29,12 +29,11 @@ func NewLoneWolfSystem(crtFile string) *LoneWolfSystem {
 // インターフェースの実装を明示
 //var _ game.GameSystem = (*LoneWolfSystem)(nil)
 
-/*
 // Initialize はLoneWolfSystemを初期化
 func (lw *LoneWolfSystem) Initialize() error {
 
 	var data CRTData
-	if _, err := toml.DecodeFile(lw.CRTFile, &data); err != nil {
+	if _, err := toml.DecodeFile("combat_result_table.toml", &data); err != nil {
 		return fmt.Errorf("error decoding CRT file: %v", err)
 	}
 
@@ -50,6 +49,10 @@ func (lw *LoneWolfSystem) Initialize() error {
 	}
 
 	lw.Tables = cfg.Tables
+
+	// デバッグ出力：読み込まれた長さを確認
+	fmt.Printf("DEBUG: FirstEquipmentTable len=%d, Weapons=%d Armors=%d Items=%d\n",
+		len(lw.Tables.FirstEquipmentTable), len(lw.Tables.Weapons), len(lw.Tables.Armors), len(lw.Tables.Items))
 
 	lw.Tables.ArmorsMap = make(map[string]*Armor)
 	for i := range lw.Tables.Armors {
@@ -69,9 +72,8 @@ func (lw *LoneWolfSystem) Initialize() error {
 
 	return nil
 }
-*/
 
-func (lw *LoneWolfSystem) Initialize() error {
+func (lw *LoneWolfSystem) InitializeGPT() error {
 	// CRT 読み込み（元コード）
 	var data CRTData
 	if _, err := toml.DecodeFile("combat_result_table.toml", &data); err != nil {
@@ -154,7 +156,7 @@ func (lw *LoneWolfSystem) MakingGameState() (*GameState, error) {
 			Equipments: &Equipment{
 				Head:          nil,
 				Body:          nil,
-				Currentweapon: 0,
+				Currentweapon: 1,
 				Weapon1:       lw.Tables.WeaponsMap["Axe"],
 				Weapon2:       nil,
 				Shield:        false,
@@ -251,13 +253,18 @@ func (lw *LoneWolfSystem) MakingPlayer(gs *GameState) error {
 		w := lw.Tables.WeaponsMap[Wstring]
 		gs.Player.Equipments.Weapon2 = w
 		fmt.Printf("初期装備！\n君は焼け跡から%sを発見した！\n", w.Name)
+		//KaiでWeaponSkillを設定してから戻って来る
 
 	case 2:
 		gs.Player.Equipments.Head = lw.Tables.ArmorsMap["Helmet"]
 		fmt.Print("初期装備！\n君は焼け跡からHelmetを発見した！\n")
+		gs.Player.Stats["MaxHP"] += 2
+		gs.Player.Stats["HP"] += 2
 	case 4:
 		gs.Player.Equipments.Body = lw.Tables.ArmorsMap["ChainmailWaistcoat"]
 		fmt.Print("初期装備！\n君は焼け跡からChainmailWaistcoatを発見した！\n")
+		gs.Player.Stats["MaxHP"] += 4
+		gs.Player.Stats["HP"] += 4
 	case 3: //食料２つ
 		gs.Player.Equipments.Backpack = append(gs.Player.Equipments.Backpack, lw.Tables.ItemsMap["Meal"], lw.Tables.ItemsMap["Meal"])
 		fmt.Print("初期装備！\n君は焼け跡からMealを2つ発見した！\n")

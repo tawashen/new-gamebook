@@ -83,11 +83,19 @@ func (gs *GameState) DisplayStatus() {
 	if gs.Player.Equipments.Currentweapon == 0 {
 		fmt.Println("  装備品がありません。")
 	} else if gs.Player.Equipments.Currentweapon == 1 {
-		fmt.Printf("装備：　%s\n", gs.Player.Equipments.Weapon1.Name)
-		fmt.Printf("予備：　%s\n", gs.Player.Equipments.Weapon2.Name)
+		if gs.Player.Equipments.Weapon1 != nil {
+			fmt.Printf("装備：　%s\n", gs.Player.Equipments.Weapon1.Name)
+		}
+		if gs.Player.Equipments.Weapon2 != nil {
+			fmt.Printf("予備：　%s\n", gs.Player.Equipments.Weapon2.Name)
+		}
 	} else if gs.Player.Equipments.Currentweapon == 2 {
-		fmt.Printf("装備：　%s\n", gs.Player.Equipments.Weapon2.Name)
-		fmt.Printf("予備：　%s\n", gs.Player.Equipments.Weapon1.Name)
+		if gs.Player.Equipments.Weapon2 != nil {
+			fmt.Printf("装備：　%s\n", gs.Player.Equipments.Weapon2.Name)
+		}
+		if gs.Player.Equipments.Weapon1 != nil {
+			fmt.Printf("予備：　%s\n", gs.Player.Equipments.Weapon1.Name)
+		}
 	} else {
 		fmt.Println("  装備品がありません。")
 	}
@@ -113,7 +121,7 @@ func (gs *GameState) DisplayStatus() {
 		}
 	}
 
-	fmt.Printf("所持金：%dゴールド", gs.Player.Gold)
+	fmt.Printf("所持金：%dゴールド\n", gs.Player.Gold)
 
 	fmt.Println("--- ステータス ---")
 }

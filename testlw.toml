@@ -18,6 +18,31 @@ FirstEquipmentTable = ["Broadsword", "Sword", "Helmet", "Meal", "ChainmailWaistc
     HPBonus = 2
 
     [[Tables.Weapons]]
+    Kind = "Sword"
+    Name = "Broadsword"
+    CSBonus = 1
+
+    [[Tables.Weapons]]
+    Kind = "Sword"
+    Name = "Sword"
+    CSBonus = 1
+
+    [[Tables.Weapons]]
+    Kind = "Mace"
+    Name = "Mace"
+    CSBonus = 1
+
+    [[Tables.Weapons]]
+    Kind = "Staff"
+    Name = "Quaterstaff"
+    CSBonus = 1
+
+    [[Tables.Weapons]]
+    Kind = "Spear"
+    Name = "Spear"
+    CSB = 1
+
+    [[Tables.Weapons]]
     Kind = "Axe"
     Name = "Axe"
     CSBonus = 1
@@ -25,6 +50,10 @@ FirstEquipmentTable = ["Broadsword", "Sword", "Helmet", "Meal", "ChainmailWaistc
     [[Tables.Items]]
     Name = "Meals"
     Effect = "Meal"
+
+    [[Tables.Items]]
+    Name = "HealingPotion"
+    Effet = "Heal"
 
 
 
