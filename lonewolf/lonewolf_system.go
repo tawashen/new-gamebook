@@ -243,6 +243,19 @@ func (lw *LoneWolfSystem) MakingPlayer(gs *GameState) error {
 		}
 	}
 
+	//KaiDisciplines
+	for {
+		fmt.Println("KaiDisciplines!\n望みのスキルを5つ、カンマで区切って選ぶが良い！\n")
+		for index, str := range lw.Tables.KaiTable {
+			fmt.Printf("%d：%s\n", index, str)
+		}
+		input, _ := gs.Reader.ReadString('\n')
+		nuns, err := persNumbers0to9(input, 5)
+
+	)
+
+	}
+
 	//first equipment
 
 	randomNumFirstEquipment := lw.Rand.Intn(10)

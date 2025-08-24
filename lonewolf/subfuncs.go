@@ -3,6 +3,8 @@ package lonewolf
 import (
 	"fmt"
 	"math/rand"
+	"strconv"
+	"strings"
 	"time"
 )
 
@@ -155,4 +157,40 @@ func (lw *LoneWolfSystem) makeCombatResult(PCS int, ECS int) DamagePair {
 			IsKilled:   false,
 		}
 	}
+}
+
+func parseNumbers0tonine(input string, required int) ([]int, error) {
+	input = strings.ReplaceAll(input, `、`, `,`)
+	input = strings.ReplaceAll(input, `.`, `,`)
+
+	input = strings.TrimSpace(input)
+	parts := convertWideToNarrow(input)
+
+	if len(parts) != required {
+		return nil, fmt.Errorf("%d個の数値を入力してください（現在%d個）\n", required, len(parts))
+	}
+
+	nums := make([]int, 0, required)
+	seen := make(map[int]bool)
+
+	for i, p := range parts {
+
+		n, err := strconv.Atoi(p)
+		if err != nil {
+			return nil, fmt.Errorf("要素 %d: 数値に変換できません: %q", i+1, p)
+		}
+		if n < 0 || n > 9 {
+			return nil, fmt.Errorf("要素 %d: 範囲外です（0〜9 の整数のみ）: %d", i+1, n)
+		}
+		if seen[n] {
+			return nil, fmt.Errorf("重複した数値があります: %d", n)
+		}
+		seen[n] = true
+		nums = append(nums, n)
+	}
+	return nums, nil
+}
+
+func convertWideToNarrow(s string) string {
+
 }
