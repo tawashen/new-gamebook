@@ -124,7 +124,7 @@ func (lw *LoneWolfSystem) handleStoryNode(gs *GameState, node Node) error {
 			choiceNum <= len(node.Choices) &&
 			//choice.RequiredDiscipline != nil &&
 			//choice.RequiredItem == nil &&
-			gs.Player.Attributes[required_discipline_name] {
+			contains_str(gs.Player.KaiDisciplines, required_discipline_name) {
 			gs.CurrentNodeID = node.Choices[choiceNum-1].NextNodeID
 			break
 		} else if //err == nil &&

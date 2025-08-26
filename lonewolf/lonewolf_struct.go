@@ -25,10 +25,10 @@ type Item struct {
 
 // こちらの方が良いのでは？
 type Player struct {
-	Stats      map[string]int
-	Attributes map[string]bool
-	Equipments *Equipment
-	Gold       int
+	Stats          map[string]int
+	KaiDisciplines []string
+	Equipments     *Equipment
+	Gold           int
 }
 
 // ゲーム内装備データ構造体　GameConfigに文字列のスライスで持たせておいて

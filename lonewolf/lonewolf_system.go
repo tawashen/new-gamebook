@@ -141,18 +141,7 @@ func (lw *LoneWolfSystem) MakingGameState() (*GameState, error) {
 				"HP":    0,
 				"CS":    0,
 			},
-			Attributes: map[string]bool{
-				"Camouflage":     false,
-				"Hunting":        false,
-				"SixthSense":     true,
-				"Tracking":       false,
-				"Healing":        true,
-				"Weaponskill":    false,
-				"Mindshield":     false,
-				"Mindblast":      false,
-				"AnimalKinship":  false,
-				"MindOverMatter": false,
-			},
+			KaiDisciplines: []string{},
 			Equipments: &Equipment{
 				Head:          nil,
 				Body:          nil,
@@ -245,14 +234,26 @@ func (lw *LoneWolfSystem) MakingPlayer(gs *GameState) error {
 
 	//KaiDisciplines
 	for {
-		fmt.Println("KaiDisciplines!\n望みのスキルを5つ、カンマで区切って選ぶが良い！\n")
+		fmt.Print("KaiDisciplines!\n望みのスキルを5つ、カンマで区切って選ぶが良い！\n")
 		for index, str := range lw.Tables.KaiTable {
 			fmt.Printf("%d：%s\n", index, str)
 		}
-		input, _ := gs.Reader.ReadString('\n')
-		nuns, err := persNumbers0to9(input, 5)
 
-	)
+		input, _ := gs.Reader.ReadString('\n')
+
+		nums, err := parseNumbers0to9(input, 5)
+		if err != nil {
+			fmt.Println("なんらかの入力エラーです")
+			continue
+		}
+
+		for _, num := range nums {
+			kai := lw.Tables.KaiTable[num]
+			fmt.Printf("君は%sを習得した\n", kai)
+			gs.Player.KaiDisciplines = append(gs.Player.KaiDisciplines, kai)
+
+		}
+		break
 
 	}
 
@@ -296,7 +297,7 @@ func (lw *LoneWolfSystem) MakingPlayer(gs *GameState) error {
 // UpdatePlayer はプレイヤーの状態を更新
 func UpdatePlayer(gs *GameState, action string) error {
 	if action == "heal" &&
-		gs.Player.Attributes["Healing"] && gs.CurrentNodeID != "1" && gs.Player.Stats["HP"] < gs.Player.Stats["MaxHP"] {
+		contains_str(gs.Player.KaiDisciplines, "Healing") && gs.CurrentNodeID != "1" && gs.Player.Stats["HP"] < gs.Player.Stats["MaxHP"] {
 		gs.Player.Stats["HP"] += 1
 		fmt.Println("Healing Discipline restored 1 HP!")
 	}

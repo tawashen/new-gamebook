@@ -54,19 +54,13 @@ func (gs *GameState) DisplayStatus() {
 
 	// Attributes の表示
 	fmt.Println("属性:") // "Attribute" を「属性」に変更
-	if gs.Player.Attributes != nil {
-		foundAttribute := false
-		for attr, active := range gs.Player.Attributes {
-			if active {
-				fmt.Printf("  - %s\n", attr)
-				foundAttribute = true
-			}
-		}
-		if !foundAttribute {
-			fmt.Println("  有効な属性がありません。")
+	if len(gs.Player.KaiDisciplines) != 0 {
+		for num, kai := range gs.Player.KaiDisciplines {
+			fmt.Printf("%d  - %s\n", num, kai)
 		}
 	} else {
-		fmt.Println("  属性データがありません。")
+		fmt.Println("KaiDisciplinesを習得してません")
+
 	}
 
 	// Inventory の表示
@@ -159,7 +153,54 @@ func (lw *LoneWolfSystem) makeCombatResult(PCS int, ECS int) DamagePair {
 	}
 }
 
-func parseNumbers0tonine(input string, required int) ([]int, error) {
+/*
+func parseNumbers0to9(input string, required int) ([]int, error) {
+	// 許容する区切り（読点など）を全部半角カンマに寄せる
+	s := strings.TrimSpace(input)
+	s = strings.ReplaceAll(s, "、", ",")
+	s = strings.ReplaceAll(s, "，", ",")
+	s = strings.ReplaceAll(s, "．", ",")
+	s = strings.ReplaceAll(s, ".", ",") // ピリオドを区切りとして許すなら
+	s = convertWideToNarrow(s)          // 全角数字→半角数字
+
+	// カンマで分割して、空白を除去・空要素を捨てる
+	raw := strings.Split(s, ",")
+	parts := make([]string, 0, len(raw))
+	for _, p := range raw {
+		p = strings.TrimSpace(p)
+		if p == "" {
+			continue // 連続カンマや末尾カンマ対策
+		}
+		parts = append(parts, p)
+	}
+
+	if len(parts) != required {
+		return nil, fmt.Errorf("%d個の数値を入力してください（現在%d個）", required, len(parts))
+	}
+
+	nums := make([]int, 0, required)
+	seen := make(map[int]bool, required)
+
+	for i, p := range parts {
+		n, err := strconv.Atoi(p) // ここは p は string、OK
+		if err != nil {
+			return nil, fmt.Errorf("要素 %d: 数値に変換できません: %q", i+1, p)
+		}
+		if n < 0 || n > 9 {
+			return nil, fmt.Errorf("要素 %d: 範囲外です（0〜9 の整数のみ）: %d", i+1, n)
+		}
+		if seen[n] {
+			return nil, fmt.Errorf("重複した数値があります: %d", n)
+		}
+		seen[n] = true
+		nums = append(nums, n)
+	}
+	return nums, nil
+}
+*/
+
+/*
+func parseNumbers0to9(input string, required int) ([]int, error) {
 	input = strings.ReplaceAll(input, `、`, `,`)
 	input = strings.ReplaceAll(input, `.`, `,`)
 
@@ -175,6 +216,56 @@ func parseNumbers0tonine(input string, required int) ([]int, error) {
 
 	for i, p := range parts {
 
+		n, err := strconv.Atoi(string(p))
+		if err != nil {
+			return nil, fmt.Errorf("要素 %d: 数値に変換できません: %q", i+1, p)
+		}
+		if n < 0 || n > 9 {
+			return nil, fmt.Errorf("要素 %d: 範囲外です（0〜9 の整数のみ）: %d", i+1, n)
+		}
+		if seen[n] {
+			return nil, fmt.Errorf("重複した数値があります: %d", n)
+		}
+		seen[n] = true
+		nums = append(nums, n)
+	}
+	return nums, nil
+}
+
+*/
+
+func parseNumbers0to9(input string, required int) ([]int, error) {
+	// 区切り文字を正規化（全角読点・全角カンマ・ピリオドを半角カンマに）
+	s := strings.TrimSpace(input)
+	s = strings.ReplaceAll(s, "、", ",")
+	s = strings.ReplaceAll(s, "，", ",")
+	s = strings.ReplaceAll(s, "．", ",")
+	s = strings.ReplaceAll(s, ".", ",")
+
+	// 全角数字を半角に変換
+	s = convertWideToNarrow(s)
+
+	// カンマで分割し、空要素を取り除く
+	raw := strings.Split(s, ",")
+	parts := make([]string, 0, len(raw))
+	for _, p := range raw {
+		p = strings.TrimSpace(p)
+		if p == "" {
+			continue
+		}
+		parts = append(parts, p)
+	}
+
+	// 要素数チェック
+	if len(parts) != required {
+		return nil, fmt.Errorf("%d個の数値を入力してください（現在%d個）", required, len(parts))
+	}
+
+	nums := make([]int, 0, required)
+	seen := make(map[int]bool, required)
+
+	for i, p := range parts {
+		// p は string（例: "1" または "7"）。複数桁許可するならここでさらにチェック
 		n, err := strconv.Atoi(p)
 		if err != nil {
 			return nil, fmt.Errorf("要素 %d: 数値に変換できません: %q", i+1, p)
@@ -193,4 +284,10 @@ func parseNumbers0tonine(input string, required int) ([]int, error) {
 
 func convertWideToNarrow(s string) string {
 
+	return strings.Map(func(r rune) rune {
+		if r >= '０' && r <= '９' {
+			return r - '０' + '0'
+		}
+		return r
+	}, s)
 }
