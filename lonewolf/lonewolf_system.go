@@ -73,6 +73,7 @@ func (lw *LoneWolfSystem) Initialize() error {
 	return nil
 }
 
+/*
 func (lw *LoneWolfSystem) InitializeGPT() error {
 	// CRT 読み込み（元コード）
 	var data CRTData
@@ -116,6 +117,7 @@ func (lw *LoneWolfSystem) InitializeGPT() error {
 
 	return nil
 }
+*/
 
 func (lw *LoneWolfSystem) MakingGameState() (*GameState, error) {
 
@@ -142,6 +144,7 @@ func (lw *LoneWolfSystem) MakingGameState() (*GameState, error) {
 				"CS":    0,
 			},
 			KaiDisciplines: []string{},
+			FavoriteWeapon: "",
 			Equipments: &Equipment{
 				Head:          nil,
 				Body:          nil,
@@ -255,6 +258,13 @@ func (lw *LoneWolfSystem) MakingPlayer(gs *GameState) error {
 		}
 		break
 
+	}
+
+	if contains_str(gs.Player.KaiDisciplines, "WeaponSkill") {
+		randomNumWeaponSkill := lw.Rand.Intn(10)
+		favoriteWeapon := lw.Tables.WeaponSkillTable[randomNumWeaponSkill]
+		gs.Player.FavoriteWeapon = favoriteWeapon
+		fmt.Printf("ちなみにお前の得意な武器は%sである", favoriteWeapon)
 	}
 
 	//first equipment

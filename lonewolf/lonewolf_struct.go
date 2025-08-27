@@ -27,6 +27,7 @@ type Item struct {
 type Player struct {
 	Stats          map[string]int
 	KaiDisciplines []string
+	FavoriteWeapon string
 	Equipments     *Equipment
 	Gold           int
 }

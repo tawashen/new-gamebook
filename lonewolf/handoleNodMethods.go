@@ -147,12 +147,61 @@ func (lw *LoneWolfSystem) handleStoryNode(gs *GameState, node Node) error {
 func (lw *LoneWolfSystem) Encounter(gs *GameState, node Node) error {
 	fmt.Println("\n--- エンカウント！ ---")
 
+	//装備を変更するか選択
+
+	if gs.Player.Equipments.Weapon1 != nil && gs.Player.Equipments.Weapon2 != nil {
+		for {
+
+			var currentW string
+			var subW string
+			if gs.Player.Equipments.Currentweapon == 1 {
+				currentW = gs.Player.Equipments.Weapon1.Name
+				subW = gs.Player.Equipments.Weapon2.Name
+			} else if gs.Player.Equipments.Currentweapon == 2 {
+				currentW = gs.Player.Equipments.Weapon2.Name
+				subW = gs.Player.Equipments.Weapon1.Name
+			}
+
+			fmt.Printf("現在の装備は%s　別の装備%sに持ち替えるか？\n", currentW, subW)
+			battleinput, _ := gs.Reader.ReadString('\n')
+			battleinput = strings.TrimSpace(battleinput)
+			battleinput = strings.ToUpper(battleinput)
+
+			if battleinput == "Y" {
+				if gs.Player.Equipments.Currentweapon == 1 {
+					gs.Player.Equipments.Currentweapon = 2
+				} else {
+					gs.Player.Equipments.Currentweapon = 1
+				}
+				break
+			} else if battleinput == "N" {
+				break
+			} else {
+				continue
+			}
+
+		}
+	}
+
+	var csBonus int
+	var currentWeaponStr string
+	if contains_str(gs.Player.KaiDisciplines, "WeaponSkill") {
+		if gs.Player.Equipments.Currentweapon == 1 {
+			currentWeaponStr = gs.Player.Equipments.Weapon1.Name
+		} else if gs.Player.Equipments.Currentweapon == 2 {
+			currentWeaponStr = gs.Player.Equipments.Weapon2.Name
+		}
+		if currentWeaponStr == gs.Player.FavoriteWeapon {
+			csBonus = 2
+		}
+	}
+
 	for _, currentEnemy := range node.Enemies {
 		// エンカウント情報が完全かチェックし、敵を設定
 
 		for {
-			fmt.Printf("\nLone Wolf (HP:%d CS;%d)",
-				gs.Player.Stats["HP"], gs.Player.Stats["CS"])
+			fmt.Printf("\nLone Wolf (HP:%d CS;%d CSBonus:%d)",
+				gs.Player.Stats["HP"], gs.Player.Stats["CS"], csBonus)
 			fmt.Printf("\n%s (HP:%d CS:%d)\n",
 				currentEnemy.Name, currentEnemy.HP, currentEnemy.CS) // 敵のHPを更新して表示
 
@@ -160,8 +209,8 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node Node) error {
 			fmt.Println("\n力を込めて物理で殴る！")
 			time.Sleep(2 * time.Second)
 
-			Edamage := lw.makeCombatResult(gs.Player.Stats["CS"], currentEnemy.CS).EnemyLoss
-			Pdamage := lw.makeCombatResult(gs.Player.Stats["CS"], currentEnemy.CS).PlayerLoss
+			Edamage := lw.makeCombatResult(gs.Player.Stats["CS"]+csBonus, currentEnemy.CS).EnemyLoss
+			Pdamage := lw.makeCombatResult(gs.Player.Stats["CS"]+csBonus, currentEnemy.CS).PlayerLoss
 			currentEnemy.HP -= Edamage
 			gs.Player.Stats["HP"] -= Pdamage
 			fmt.Printf("あなたは%sに%dダメージを与えた！\nそしてあなたは%dダメージを受けた！\n",
@@ -187,6 +236,7 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node Node) error {
 			break // プレイヤーのHPが0以下になった場合、ゲームオーバーへ
 		}
 	}
+
 	foundOutcome := false
 	for _, outcome := range node.Outcomes {
 		if outcome.Condition == "combat_won" { // "combat_won" 条件をチェック

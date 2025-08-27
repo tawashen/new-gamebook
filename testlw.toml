@@ -3,7 +3,7 @@ system = "lonewolf"
 
 [Tables]
 KaiTable = ["Camouflage", "Hunting", "SixthSense", "Tracking","Healing",
- "Weaponskill","Mindshield", "Mindblast", "AnimalKinship", "MindOverMatter"]
+ "WeaponSkill","Mindshield", "Mindblast", "AnimalKinship", "MindOverMatter"]
 WeaponSkillTable = ["Dagger", "Spear", "Mace", "Shortsword", "Warhammer", "Sword", "Axe", "Sword", "Quaterstaff", "Broadsword"]
 FirstEquipmentTable = ["Broadsword", "Sword", "Helmet", "Meal", "ChainmailWaistcoat", "Mace", "HealingPotion", "Quaterstaff", "Spear", "Gold"]
 

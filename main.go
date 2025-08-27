@@ -18,6 +18,7 @@ type GameConfig struct {
 	System string `toml:"system"`
 	//	Player Player
 	//Nodes []Node `toml:"nodes"`
+
 }
 
 func main() {
