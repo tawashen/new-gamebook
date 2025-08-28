@@ -93,6 +93,7 @@ type Choice struct {
 	NextNodeID         string            `toml:"next_node_id"`
 	RequiredDiscipline string            `toml:"required_discipline,omitempty"`
 	RequiredItem       string            `toml:"required_item,omitempty"`
+	RequiredGold       string            `toml:"required_gold,omitempty"` //追加
 	Conditions         map[string]string `toml:"conditions,omitempty"`
 }
 

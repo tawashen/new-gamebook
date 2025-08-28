@@ -22,7 +22,7 @@ next_node_id = "275"
 
 [[nodes]]
 id = "2"
-type = ""
+type = "random_roll"
 text = """木々が密になる中を駆け抜けると、ギアクの叫び声が背後で次第に遠ざかる。
 彼らをほぼ完全に振り切ったその時、低い枝の絡まりに頭から突っ込んでしまう。
 ランダムナンバーテーブルから数字を一つ選べ。"""
@@ -96,7 +96,7 @@ next_node_id = "200"
 
 [[nodes]]
 id = "7"
-type = ""
+type = "random_roll"
 text = """Illustration I
 まるで永遠にも思える時間、群衆の奔流に、速い川の上の葉のように流される。
 足元を必死に保とうとするが、試練で弱り、めまいがし、足は鉛のように重い。
@@ -178,7 +178,7 @@ text = """護衛が疑わしげに君を見て、ドアを強く閉める。
 [[nodes.choices]]
 description = "もし10ゴールドクラウンを持ち、支払うなら、262へ進め。"
 next_node_id = "262"
-required_item = "10 Gold Crowns"
+required_gold = "10"
 
 [[nodes.choices]]
 description = "もし十分なゴールドクラウンがない、または支払いたくないなら、247へ進め。"

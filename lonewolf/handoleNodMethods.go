@@ -106,6 +106,15 @@ func (lw *LoneWolfSystem) handleStoryNode(gs *GameState, node Node) error {
 			required_item_name = choice.RequiredItem
 		}
 
+		var required_gold_num int
+		if choice.RequiredGold != "" {
+			goldnum, err := strconv.Atoi(choice.RequiredGold)
+			if err != nil {
+				fmt.Println("intじゃないよ", err)
+			}
+			required_gold_num = goldnum
+		}
+
 		//fmt.Print(required_discipline_name)
 
 		var backpackcontains []string
@@ -113,31 +122,45 @@ func (lw *LoneWolfSystem) handleStoryNode(gs *GameState, node Node) error {
 			backpackcontains = append(backpackcontains, item.Name)
 		}
 		if                //err == nil && //エラーじゃなく
-		choiceNum >= 1 && //1以上で
+		choiceNum >= 1 && //無条件で選択可能
 			choiceNum <= len(node.Choices) && //選択肢数以下で
 			choice.RequiredDiscipline == "" && //必須ディシプリンなし
+			choice.RequiredGold == "" && //お金の要求無し
 			choice.RequiredItem == "" { //必須アイテムなし
 			gs.CurrentNodeID = node.Choices[choiceNum-1].NextNodeID
 			break
-		} else if //err == nil &&
+		} else if //KaiDisciplines必要
 		choiceNum >= 1 &&
 			choiceNum <= len(node.Choices) &&
-			//choice.RequiredDiscipline != nil &&
-			//choice.RequiredItem == nil &&
+			choice.RequiredDiscipline != "" &&
+			choice.RequiredItem == "" &&
+			choice.RequiredGold == "" &&
 			contains_str(gs.Player.KaiDisciplines, required_discipline_name) {
 			gs.CurrentNodeID = node.Choices[choiceNum-1].NextNodeID
 			break
-		} else if //err == nil &&
+		} else if //アイテムが必要
 		choiceNum >= 1 &&
 			choiceNum <= len(node.Choices) &&
 			choice.RequiredDiscipline == "" &&
 			choice.RequiredItem != "" &&
+			choice.RequiredGold == "" &&
 			contains_str(backpackcontains, required_item_name) {
+			gs.CurrentNodeID = node.Choices[choiceNum-1].NextNodeID
+			break
+		} else if //選択肢を選ぶのに金銭を要求
+		choiceNum >= 1 &&
+			choiceNum <= len(node.Choices) &&
+			choice.RequiredDiscipline == "" &&
+			choice.RequiredItem == "" &&
+			choice.RequiredGold != "" &&
+			required_gold_num < gs.Player.Gold {
+			gs.Player.Gold -= required_gold_num
 			gs.CurrentNodeID = node.Choices[choiceNum-1].NextNodeID
 			break
 		} else {
 			//fmt.Println("無効な入力です。もう一度入力してください。")
 			gs.DisplayStatus()
+			continue
 		}
 	}
 	return nil
