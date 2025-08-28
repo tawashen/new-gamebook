@@ -171,69 +171,69 @@ func (lw *LoneWolfSystem) MakingPlayer(gs *GameState) error {
 	fmt.Println("キャラクターメイキング")
 
 	//CS-making
-	for {
-		randomNumCS := lw.Rand.Intn(10)
-		fmt.Printf("戦闘力！\n運命の数は%d\n受け入れますか？(Y/N)\n", randomNumCS)
-		input, _ := gs.Reader.ReadString('\n')
-		input = strings.TrimSpace(input)
-		input = strings.ToUpper(input)
+	//for {
+	randomNumCS := lw.Rand.Intn(10)
+	fmt.Printf("戦闘力！\n運命の数は%d\n受け入れますか？(Y/N)\n", randomNumCS)
+	//	input, _ := gs.Reader.ReadString('\n')
+	//	input = strings.TrimSpace(input)
+	//	input = strings.ToUpper(input)
 
-		if input == "Y" {
-			gs.Player.Stats["CS"] = 10 + randomNumCS
-			fmt.Printf("お前の戦闘力は%dと定まった！\n", gs.Player.Stats["CS"])
-			break
+	//	if input == "Y" {
+	gs.Player.Stats["CS"] = 10 + randomNumCS
+	fmt.Printf("お前の戦闘力は%dと定まった！\n", gs.Player.Stats["CS"])
+	//		break
 
-		} else if input == "N" {
-			continue
-		} else {
-			fmt.Println("Y または N を入力してください。")
-			continue
-		}
-	}
+	//	} else if input == "N" {
+	//		continue
+	//	} else {
+	//		fmt.Println("Y または N を入力してください。")
+	//		continue
+	//	}
+	//}
 
 	//HP-making
-	for {
-		randomNumHP := lw.Rand.Intn(10)
-		fmt.Printf("生命力！\n運命の数は%d\n受け入れますか？(Y/N)\n", randomNumHP)
-		input, _ := gs.Reader.ReadString('\n')
-		input = strings.TrimSpace(input)
-		input = strings.ToUpper(input)
+	//for {
+	randomNumHP := lw.Rand.Intn(10)
+	fmt.Printf("生命力！\n運命の数は%d\n受け入れますか？(Y/N)\n", randomNumHP)
+	//	input, _ := gs.Reader.ReadString('\n')
+	//	input = strings.TrimSpace(input)
+	//	input = strings.ToUpper(input)
 
-		if input == "Y" {
-			gs.Player.Stats["HP"] = 10 + randomNumHP
-			gs.Player.Stats["MaxHP"] = 10 + randomNumHP
-			fmt.Printf("お前の生命力は%dと定まった！\n", gs.Player.Stats["HP"])
-			break
+	//	if input == "Y" {
+	gs.Player.Stats["HP"] = 10 + randomNumHP
+	gs.Player.Stats["MaxHP"] = 10 + randomNumHP
+	fmt.Printf("お前の生命力は%dと定まった！\n", gs.Player.Stats["HP"])
+	//		break
 
-		} else if input == "N" {
-			continue
-		} else {
-			fmt.Println("Y または N を入力してください。")
-			continue
-		}
+	//	} else if input == "N" {
+	//		continue
+	//	} else {
+	//		fmt.Println("Y または N を入力してください。")
+	//		continue
+	//	}
 
-	}
+	//}
 
 	//Gold-making
-	for {
-		randomNumGOLD := lw.Rand.Intn(10)
-		fmt.Printf("所持金！\n運命の数は%d\n受け入れますか？(Y/N)\n", randomNumGOLD)
-		input, _ := gs.Reader.ReadString('\n')
-		input = strings.TrimSpace(input)
-		input = strings.ToUpper(input)
+	//for {
+	randomNumGOLD := lw.Rand.Intn(10)
+	fmt.Printf("所持金！\n運命の数は%d\n受け入れますか？(Y/N)\n", randomNumGOLD)
+	//	input, _ := gs.Reader.ReadString('\n')
+	//	input = strings.TrimSpace(input)
+	//	input = strings.ToUpper(input)
 
-		if input == "Y" {
-			gs.Player.Gold = 10 + randomNumGOLD
-			fmt.Printf("お前の所持金は%dと定まった！\n", gs.Player.Gold)
-			break
+	//	if input == "Y" {
+	gs.Player.Gold = 10 + randomNumGOLD
+	fmt.Printf("お前の所持金は%dと定まった！\n", gs.Player.Gold)
+	//		break
 
-		} else if input == "N" {
-			continue
-		} else {
-			fmt.Println("Y または N を入力してください。")
-			continue
-		}
-	}
+	//	} else if input == "N" {
+	//		continue
+	//	} else {
+	//		fmt.Println("Y または N を入力してください。")
+	//		continue
+	//	}
+	//}
 
 	//KaiDisciplines
 	for {
