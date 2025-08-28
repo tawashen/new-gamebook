@@ -78,13 +78,14 @@ type NodesFile struct {
 
 // Node はゲームの各ステップ（ノード）を表す
 type Node struct {
-	ID       string    `toml:"id"`
-	Type     string    `toml:"type"`
-	Text     string    `toml:"text"`
-	Choices  []Choice  `toml:"choices,omitempty"`
-	Enemies  []*Enemy  `toml:"enemies,omitempty"`
-	Outcomes []Outcome `toml:"outcomes,omitempty"`
-	Item     string    //処理用文字列
+	ID            string    `toml:"id"`
+	Type          string    `toml:"type"`
+	ItemGetBefore string    `toml:"itemgetbefore,omitempty"`
+	Text          string    `toml:"text"`
+	Choices       []Choice  `toml:"choices,omitempty"`
+	Enemies       []*Enemy  `toml:"enemies,omitempty"`
+	Outcomes      []Outcome `toml:"outcomes,omitempty"`
+	Item          string    //処理用文字列
 }
 
 // Choice は選択肢を表す

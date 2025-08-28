@@ -76,6 +76,8 @@ func (lw *LoneWolfSystem) handleStoryNode(gs *GameState, node Node) error {
 
 	}
 
+	//itemgetbeforeを実装する
+
 	fmt.Println("\n選択肢:")
 	for i, choice := range node.Choices {
 		fmt.Printf("%d. %s\n", i+1, choice.Description)

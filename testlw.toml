@@ -55,78 +55,4052 @@ FirstEquipmentTable = ["Broadsword", "Sword", "Helmet", "Meal", "ChainmailWaistc
     Name = "HealingPotion"
     Effet = "Heal"
 
-
-
-[[nodes]]
-id = "7"
-type = "itemGet"
-text = """
-Dragon Slayerをゲットするチャンス！
-どうしますか？
-"""
-Item = "DragonSylayer"
-    [[node.outcomes]]
-    next_node_id = "6"
-
-
 [[nodes]]
 id = "1"
 type = "story"
-text = """
-これはテストデータです
-テキストも仮のものです
-"""
-    [[nodes.choices]]
-    description = "If you wish to use your Kai Discipline of Sixth Sense, turn to 2."
-    next_node_id = "2"
-    required_discipline = "SixthSense"
+text = """急がねばならぬ。焼け落ちた修道院の煙る廃墟に長居するのは危険だと、第六の感覚が告げている。
+黒い翼を持つ獣たちが、いつまた戻ってくるかもしれぬ。ソムレンディングの首都ホルムガードへ急ぎ、王にこの恐ろしい惨劇を伝えねばならぬ。カイの精鋭戦士たちが、君を除いて皆殺しにされたのだ。
+カイの領主がいなければ、ソマーランドの軍は古の敵、ダークロードの手に落ちるだろう。
+涙をこらえ、死にゆく仲間たちに別れを告げる。心の中で、静かに彼らの仇を討つと誓う。
+廃墟に背を向け、険しい坂道を慎重に下る。
+丘のふもとで、道は二手に分かれ、どちらも大きな森へと続いている。"""
+[[nodes.choices]]
+description = "もしカイの第六の感覚の技を使いたいなら、141へ進め。"
+next_node_id = "141"
+required_discipline = "Sixth Sense"
 
-    [[nodes.choices]]
-    description = "If you wish to take the right path into the wood, turn to 3."
-    next_node_id = "3"
-    required_item = "SilverKey"
+[[nodes.choices]]
+description = "もし森へ続く右の道を選ぶなら、85へ進め。"
+next_node_id = "85"
 
-    [[nodes.choices]]
-    description = "If you wish to follow the left track, turn to 4."
-    next_node_id = "4"
+[[nodes.choices]]
+description = "もし左の道を進むなら、275へ進め。"
+next_node_id = "275"
 
 [[nodes]]
 id = "2"
-type = "encounter"
-text = """
-これはテストデータです
-アークデーモンが現れた
-"""
-    [[nodes.enemies]]
-    Name = "アークデーモンA"
-    HP = 10
-    CS = 5
-    [[nodes.enemies]]
-    Name = "アークデーモンB"
-    HP = 10
-    CS = 5
-    [[node.outcomes]]
-    condition = "combat_won"
-    next_node_id = "5"
-    [[node.outcomes]]
-    condition = "combat_lost"
-    next_node_id = "game_over"
+type = "random_roll"
+text = """木々が密になる中を駆け抜けると、ギアクの叫び声が背後で次第に遠ざかる。
+彼らをほぼ完全に振り切ったその時、低い枝の絡まりに頭から突っ込んでしまう。
+ランダムナンバーテーブルから数字を一つ選べ。"""
+[[nodes.choices]]
+description = "もし選んだ数字が0～4なら、343へ進め。"
+next_node_id = "343"
+
+[[nodes.choices]]
+description = "もし選んだ数字が5～9なら、276へ進め。"
+next_node_id = "276"
 
 [[nodes]]
 id = "3"
+type = "story"
+text = """将校の後ろにぴたりと寄り添い、拱門をくぐり、短い階段を上って長い廊下へと進む。
+兵士たちが、華やかな巻物に記された命令を手に、城壁に配置された将校たちへと走り回る。
+傷だらけのやつれた男が、白と紫の王宮のローブをまとい、近づいてくる。彼は君に、王の城塞へついてくるよう促す。"""
+[[nodes.choices]]
+description = "もしこの男についていくなら、196へ進め。"
+next_node_id = "196"
+
+[[nodes.choices]]
+description = "もしその申し出を断り、混雑した街路に戻るなら、144へ進め。"
+next_node_id = "144"
+
+[[nodes]]
+id = "4"
+type = "story"
+text = """それは小さな一人乗りのカヌーで、ひどく傷んでいる。
+木材は割れ、反っており、いたるところから水が漏れているようだ。
+急いで粘土でひどい穴を塞ぎ、水をかき出す。
+これでひとまずは漏れが止まったようだ。装備を船首に収め、流木を櫂代わりにして川を下り始める。
+しばらくすると、左岸から馬が疾走する音が聞こえてくる。"""
+[[nodes.choices]]
+description = "もしカイの第六の感覚の技を使いたいなら、218へ進め。"
+next_node_id = "218"
+required_discipline = "Sixth Sense"
+
+[[nodes.choices]]
+description = "もしカヌーの底に隠れるなら、75へ進め。"
+next_node_id = "75"
+
+[[nodes.choices]]
+description = "もし彼らの注意を引こうとするなら、175へ進め。"
+next_node_id = "175"
+
+[[nodes]]
+id = "5"
+type = "story"
+text = """約一時間の歩行の後、道は徐々に東に曲がっていく。
+浅い渡渉点にたどり着く。そこでは急な岩だらけの道を、速い流れの小川が南へ向かって流れている。
+渡渉点のすぐ先には交差点があり、道が南北に走るより広い道と交差している。
+北へ向かう道は首都から遠ざかることを悟り、交差点で右に曲がり、南へ進む。"""
+[[nodes.choices]]
+description = "111へ進め。"
+next_node_id = "111"
+
+[[nodes]]
+id = "6"
+type = "story"
+text = """遠くで馬が駆ける音が聞こえてくる。
+木の陰に身を潜め、騎手たちが近づくのを待つ。
+彼らは国王衛兵の騎兵で、陛下の軍の白い制服を着ている。"""
+[[nodes.choices]]
+description = "もし彼らを呼びたいなら、183へ進め。"
+next_node_id = "183"
+
+[[nodes.choices]]
+description = "もし彼らを通り過ぎさせ、森を進むなら、200へ進め。"
+next_node_id = "200"
+
+[[nodes]]
+id = "7"
 type = "random_roll"
-text = "1-5なら6へ　6-0なら7へ"
-    [[nodes.outcomes]]
-    description = "1-5なので6へ"
-    condition_int = [1,2,3,4,5]
-    next_node_id = "6"
-    [[nodes.outcomes]]
-    description = "6-0なので7へ"
-    condition_int = [6,7,8,9,0]
-    next_node_id = "7"
+text = """Illustration I
+まるで永遠にも思える時間、群衆の奔流に、速い川の上の葉のように流される。
+足元を必死に保とうとするが、試練で弱り、めまいがし、足は鉛のように重い。
+突然、細長い石の階段が宿屋の屋根に続くのが見える。
+最後の力を振り絞り、階段に飛びつき、ゆっくりと登る。
+そこからホルムガードの屋根や尖塔の壮麗な景色が見え、城塞の高く輝く石壁が陽光に映える。
+首都の家や建物は互いに密接に建ち、屋根から屋根へ飛び移ることが可能だ。
+実際、ホルムガードの市民は、秋の豪雨で舗装されていない道が泥だらけになると、「ルーフウェイ」と呼ばれるこの経路を使っていた。
+しかし多くの事故の後、王の布告でその使用は禁じられた。
+熟慮の末、王にたどり着く唯一の手段として「ルーフウェイ」を使うことにする。
+数々の通りを飛び、跳ね、飛んで、城塞まであと一つの通りというところに来る。
+次の屋根への跳躍は、これまで試みたどの距離よりも遠い。胃が蝶でいっぱいになるような感覚だ。
+城塞に到達する決意を固め、長い助走をつける。
+耳に血が脈打つ音を聞きながら、屋根の端まで疾走し、対岸の屋根に目を固定して宙へ跳ぶ。
+ランダムナンバーテーブルから数字を一つ選べ。"""
+[[nodes.choices]]
+description = "もし選んだ数字が0～2なら、108へ進め。"
+next_node_id = "108"
+
+[[nodes.choices]]
+description = "もし選んだ数字が3～9なら、25へ進め。"
+next_node_id = "25"
+
+[[nodes]]
+id = "8"
+type = "story"
+text = """カイの第六の感覚が、南で激しい戦闘が繰り広げられていると警告している。
+常識は、南が首都への最速の道でもあると告げている。"""
+[[nodes.choices]]
+description = "70へ進み、ルートを選べ。"
+next_node_id = "70"
+
+[[nodes]]
+id = "9"
+type = "story"
+text = """動けぬ。強力な力に縛られ、身動きが取れない。
+視線は骸骨の口元に引き寄せられる。
+地中深くから、数百万の怒れる蜂のような低い唸り声が聞こえる。
+死した王の空虚な眼窩に鈍い赤い光が現れ、唸り声は耳をつんざく轟音となる。
+君は、ダークロードよりも古く、強い古代の悪の存在に直面している。"""
+[[nodes.choices]]
+description = "もしヴォルダック・ジェムを持っているなら、236へ進め。"
+next_node_id = "236"
+required_item = "Vordak Gem"
+
+[[nodes.choices]]
+description = "持っていないなら、292へ進め。"
+next_node_id = "292"
+
+[[nodes]]
+id = "10"
+type = "story"
+text = """汗をかき、足が痛む。
+遠くにいくつかの小屋が見える。"""
+[[nodes.choices]]
+description = "もし小屋に入って休息したいなら、115へ進め。"
+next_node_id = "115"
+
+[[nodes.choices]]
+description = "もし先に進むなら、83へ進め。"
+next_node_id = "83"
+
+[[nodes]]
+id = "11"
+type = "story"
+text = """急いで馬屋の入り口に飛び込み、外科医のマントを藁の中に隠す。詐欺師として見られるより、カイの領主として見られた方が良い。
+一秒も無駄にせず、広場の向こう側の大広間へ向かう。"""
+[[nodes.choices]]
+description = "139へ進め。"
+next_node_id = "139"
+
+[[nodes]]
+id = "12"
+type = "story"
+text = """護衛が疑わしげに君を見て、ドアを強く閉める。
+キャラバンの中から声が聞こえる。
+突然、ドアが開き、裕福な商人の顔が現れる。
+彼は乗車代として10ゴールドクラウンを要求する。"""
+[[nodes.choices]]
+description = "もし10ゴールドクラウンを持ち、支払うなら、262へ進め。"
+next_node_id = "262"
+required_gold = "10"
+
+[[nodes.choices]]
+description = "もし十分なゴールドクラウンがない、または支払いたくないなら、247へ進め。"
+next_node_id = "247"
+
+[[nodes]]
+id = "13"
+type = "story"
+text = """道はすぐに広い空き地に終わる。
+空き地の中央には、森で見たどの木よりも大きく太い木がそびえる。
+太い枝を見上げると、地上25～30フィートに大きなツリーハウスが見える。
+梯子はないが、木の節くれだった樹皮は多くの足がかりを提供している。"""
+[[nodes.choices]]
+description = "もし木に登り、ツリーハウスを調べたいなら、307へ進め。"
+next_node_id = "307"
+
+[[nodes.choices]]
+description = "もし先に進むなら、213へ進め。"
+next_node_id = "213"
+
+[[nodes]]
+id = "14"
+type = "story"
+text = """小さな森の丘の頂上にたどり着く。そこではいくつかの大きな岩が粗い円を形成している。
+突然、左の岩の後ろから大きな唸り声が聞こえる。"""
+[[nodes.choices]]
+description = "もし武器を抜いて戦う準備をするなら、43へ進め。"
+next_node_id = "43"
+
+[[nodes.choices]]
+description = "もし回避行動を取り、全速力で丘を駆け下りるなら、106へ進め。"
+next_node_id = "106"
+
+[[nodes]]
+id = "15"
+type = "story"
+itemgetbefore = "Sword"
+text = """長い、暗い枝のトンネルを抜け、大きな空き地に出る。
+空き地の中央の石の台座には、黒い革の鞘に収められた剣がある。
+柄には手書きのメモが結ばれているが、君には知らない言語だ。
+望むなら剣を取っても良い。アクションチャートに記録せよ。
+空き地には三つの出口がある。"""
+[[nodes.choices]]
+description = "東へ進むなら、207へ進め。"
+next_node_id = "207"
+
+[[nodes.choices]]
+description = "西へ進むなら、201へ進め。"
+next_node_id = "201"
+
+[[nodes.choices]]
+description = "南へ進むなら、35へ進め。"
+next_node_id = "35"
+
+[[nodes]]
+id = "16"
+type = "story"
+text = """キャラバンから馬を解放し、近づくドゥームウルフの匂いと、邪悪な騎手ギアクの叫び声に怯える馬を落ち着かせる。
+武器を構え、臆病な馬を敵に向かって駆り立てる。
+敵は50ヤード以内に迫り、槍を下げて近づいてくる。
+互いに正面から突進している。"""
+[[nodes.choices]]
+description = "192へ進め。"
+next_node_id = "192"
+
+[[nodes]]
+id = "17"
+type = ""
+text = """武器を振り上げ、獣の鋭い牙の口が頭の数インチ手前で閉じる瞬間を狙う。
+翼の羽ばたきに押され、立っているのが難しい。
+COMBAT SKILLから1ポイントを引いて、クラーンと戦え。
+クラーン：COMBAT SKILL 16 ENDURANCE 24
+もしこの生物を倒したら、ギアクを避けるため丘の反対側を急いで下る。
+ランダムナンバーテーブルから数字を一つ選べ。"""
+[[nodes.choices]]
+description = "もし0を選んだなら、53へ進め。"
+next_node_id = "53"
+
+[[nodes.choices]]
+description = "もし1～2を選んだなら、274へ進め。"
+next_node_id = "274"
+
+[[nodes.choices]]
+description = "もし3～9を選んだなら、316へ進め。"
+next_node_id = "316"
+
+[[nodes]]
+id = "18"
+type = "story"
+text = """遠くで軍の音に目を覚ます。
+湖の向こうに、ドラッカリムの黒いマントの姿と、ドゥームウルフとその騎手たちが見える。
+クラーンが木々の上から現れ、小さな木造の小屋の屋根に着地する。
+赤い服の生物が乗っている。クラーンが飛び立ち、君が隠れている湖のこちら側へ飛んでくる。"""
+[[nodes.choices]]
+description = "もしカイの偽装の技を使いたいなら、114へ進め。"
+next_node_id = "114"
+required_discipline = "Camouflage"
+
+[[nodes.choices]]
+description = "もし森の奥深くへ進むなら、239へ進め。"
+next_node_id = "239"
+
+[[nodes.choices]]
+description = "もしこの生物と戦うなら、29へ進め。"
+next_node_id = "29"
+
+[[nodes]]
+id = "19"
+type = "story"
+text = """高い木々の間を進むと、暗赤色のガロウブラシの茂みが見える。鋭い深紅の棘を持つ茨だ。
+この森の雑草は「スリープトゥース」と呼ばれ、棘は非常に鋭く、肌をかすめると弱り、眠気を誘う。"""
+[[nodes.choices]]
+description = "もしカイの追跡の技を持っているなら、69へ進め。"
+next_node_id = "69"
+required_discipline = "Tracking"
+
+[[nodes.choices]]
+description = "スリープトゥースを避けるため、道に戻るなら、272へ進め。"
+next_node_id = "272"
+
+[[nodes.choices]]
+description = "茨を押し進み、森の奥へ進むなら、119へ進め。"
+next_node_id = "119"
+
+[[nodes]]
+id = "20"
+type = "story"
+text = """ここに住んでいた者は、最近、急いで去ったようだ。
+テーブルには食べかけの食事が残り、ダークジャラのマグはまだ温かい。
+箱や小さな衣装棚を調べると、バックパック、食料（2食分）、短剣が見つかる。"""
+[[nodes.choices]]
+description = "これらのアイテムを取るなら、アクションチャートに記録せよ。任務を続けるなら、273へ進め。"
+next_node_id = "273"
+
+[[nodes]]
+id = "21"
+type = ""
+text = """2マイルほど木々の絡まる中を進むと、地面が非常に沼地になる。
+ランダムナンバーテーブルから数字を一つ選べ。
+もし5未満なら、馬が突然、腹まで深い泥に沈む。
+もし5以上なら、泥沼を回避し、189へ進める。
+もし泥に嵌まった場合、再度ランダムナンバーテーブルから数字を選べ。
+今度、7以下なら、泥が腋まで君を飲み込む。
+馬は最後の絶望的な叫び声を上げ、鼻が泡立つ泥に沈む。
+もし7を超えたなら、固い地面に這い上がり、189へ進む。
+それでも駄目なら、これが最後の機会だ！
+9以外の数字を選んだなら、悪臭を放つ沼が君を飲み込み、また一人の犠牲者を奪う。
+君の命と任務はここで終わる。だが、もし9を選んだなら、312へ進め。"""
+[[nodes.choices]]
+description = "もし5未満なら、馬が突然、腹まで深い泥に沈む。"
+next_node_id = "189"
+
+[[nodes.choices]]
+description = "もし5以上なら、泥沼を回避し、189へ進める。"
+next_node_id = "189"
+
+[[nodes.choices]]
+description = "もし7以下なら、泥が腋まで君を飲み込む。"
+next_node_id = "189"
+
+[[nodes.choices]]
+description = "もし7を超えたなら、固い地面に這い上がり、189へ進む。"
+next_node_id = "189"
+
+[[nodes.choices]]
+description = "もし9以外の数字を選んだなら、悪臭を放つ沼が君を飲み込み、また一人の犠牲者を奪う。"
+next_node_id = "312"
+
+[[nodes.choices]]
+description = "もし9を選んだなら、312へ進め。"
+next_node_id = "312"
+
+[[nodes]]
+id = "22"
+type = ""
+text = """リーダーを押し退け、大道を駆け出す。
+背後で、クロスボウが装填される不吉なクリック音が背筋を凍らせる。
+ランダムナンバーテーブルから数字を一つ選べ。"""
+[[nodes.choices]]
+description = "もし選んだ数字が0～4なら、181へ進め。"
+next_node_id = "181"
+
+[[nodes.choices]]
+description = "もし選んだ数字が5～9なら、145へ進め。"
+next_node_id = "145"
+
+[[nodes]]
+id = "23"
+type = "story"
+text = """Illustration II
+廊下はすぐに大きなホールに広がる。
+奥には石の階段が巨大な扉に続いている。
+階段の両側に黒い蝋燭が二本、部屋を薄暗く照らす。
+近づくと、蝋が溶けていないことに気づき、熱も発していない。
+壁の石には古代の彫刻が刻まれている。
+この邪悪な墓から一刻も早く脱出したいと思い、扉の錠を調べる。
+装飾されたピンが扉をロックしているようだが、錠プレートには鍵穴もある。"""
+[[nodes.choices]]
+description = "もしゴールデンキーを持ち、使用するなら、326へ進め。"
+next_node_id = "326"
+required_item = "Golden Key"
+
+[[nodes.choices]]
+description = "もしカイの精神支配の技を持っているなら、151へ進め。"
+next_node_id = "151"
+required_discipline = "Mind Over Matter"
+
+[[nodes.choices]]
+description = "もしピンを外すなら、337へ進め。"
+next_node_id = "337"
+
+[[nodes]]
+id = "24"
+type = "story"
+text = """商人がキャラバンの御者に飛び降りるよう叫ぶ。「襲われている！」と叫びながら、彼は円形の窓から姿を消す。"""
+[[nodes.choices]]
+description = "もし彼の後を跳ぶなら、234へ進め。"
+next_node_id = "234"
+
+[[nodes.choices]]
+description = "もしキャラバンを駆け抜け、馬車の馬の手綱を掴むなら、184へ進め。"
+next_node_id = "184"
+
+[[nodes]]
+id = "25"
+type = "story"
+text = """対岸の屋根に激しく着地し、息が詰まり、仰向けに倒れる。頭がぐるぐるする。
+しばらくして、無事に着地したことに気づく。
+大丈夫だと確信すると、跳び上がり、技術と大胆さに喜びの叫びを上げる。
+すぐに屋根を渡る道を見つけ、長い排水管を伝って下の通りに降りる。
+城塞の大きな鉄の扉が開き、2頭の馬に引かれた荷車が外に出ようとしている。
+馬は騒がしい群衆に怯え、両方とも立ち上がり、荷車は前輪を扉にぶつけて壊す。
+混乱の中、潜り込む機会を見つけ、衛兵が扉を閉める直前に素早く中に入る。"""
+[[nodes.choices]]
+description = "139へ進め。"
+next_node_id = "139"
+
+[[nodes]]
+id = "26"
+type = "story"
+text = """慎重に廊下を進むと、急に東に曲がる角にたどり着く。
+遠くに奇妙な緑色の光が見える。"""
+[[nodes.choices]]
+description = "もし進むなら、249へ進め。"
+next_node_id = "249"
+
+[[nodes.choices]]
+description = "もし戻って南のルートを試すなら、100へ進め。"
+next_node_id = "100"
+
+[[nodes]]
+id = "27"
+type = "story"
+text = """この道を1時間以上歩き、クラーンの再襲撃に備えて空を注意深く見張る。
+前方に、大きな木が道を塞いでいる。近づくと、巨大な幹の向こうから声が聞こえる。"""
+[[nodes.choices]]
+description = "もし攻撃するなら、250へ進め。"
+next_node_id = "250"
+
+[[nodes.choices]]
+description = "もし声に耳を傾けるなら、52へ進め。"
+next_node_id = "52"
+
+[[nodes]]
+id = "28"
+type = "story"
+text = """数百ヤード進むと、道は南北に走る別の道と交差する。"""
+[[nodes.choices]]
+description = "もし北へ進むなら、130へ進め。"
+next_node_id = "130"
+
+[[nodes.choices]]
+description = "もし南へ進むなら、147へ進め。"
+next_node_id = "147"
+
+[[nodes]]
+id = "29"
+type = ""
+text = """湖畔に堂々と立ち、戦闘の準備をする。
+クラーンとその騎手が君を見つけ、湖面すれすれを疾走してくる。
+騎手が血を凍らせる叫び声を上げる。彼はダークロードの猛烈な副官、ヴォルダックだ。
+彼が襲いかかり、戦わねばならぬ。マインドシールドのカイの技がない場合、COMBAT SKILLから2ポイントを引く。この生物はマインドフォースと巨大な黒いメイスで攻撃してくる。
+ヴォルダック：COMBAT SKILL 17 ENDURANCE 25"""
+[[nodes.choices]]
+description = "もし戦いに勝つなら、270へ進め。"
+next_node_id = "270"
+
+[[nodes]]
+id = "30"
+type = "story"
+text = """人々は疲れ、飢えている。彼らは燃える街から遠く逃れてきた。
+突然、北から大きな翼の音が聞こえる。
+「クラーン、クラーン！隠れろ！」と道沿いに叫び声が響く。
+目の前で、子供たちを乗せた荷車が故障し、右輪が溝に嵌まる。
+子供たちがパニックで叫ぶ。"""
+[[nodes.choices]]
+description = "もし子供たちを助けるなら、194へ進め。"
+next_node_id = "194"
+
+[[nodes.choices]]
+description = "もし木々の陰に逃げるなら、261へ進め。"
+next_node_id = "261"
+
+[[nodes]]
+id = "31"
+type = "story"
+text = """傷ついた男をできる限り慰めるが、彼の傷は重く、すぐに意識を失う。
+彼をマントで覆い、森の奥へと進む。"""
+[[nodes.choices]]
+description = "264へ進め。"
+next_node_id = "264"
+
+[[nodes]]
+id = "32"
+type = "story"
+text = """約3マイル進むと、木々がまばらになり、5頭の大きなドゥームウルフのシルエットが見える。
+その背にはギアクが乗っている。彼らは道が開けた牧草地に下る先へ進んでいるようだ。
+突然、一人のギアクが他を離れ、君に向かって道を戻ってくる。"""
+[[nodes.choices]]
+description = "もし茂みに隠れて通り過ぎさせるなら、176へ進め。"
+next_node_id = "176"
+
+[[nodes.choices]]
+description = "もし彼と戦うなら、340へ進め。"
+next_node_id = "340"
+
+[[nodes]]
+id = "33"
+type = "story"
+text = """洞窟の床は乾燥し、埃っぽい。
+薄暗い中で奥へ進むと、腐った肉の臭いが漂う。
+隙間には小さな動物の骨、毛、歯が散乱している。
+その中に小さな布の袋を見つけ、開けると3ゴールドクラウンがある。
+これを懐にしまい、山猫の巣窟らしい場所を後にし、慎重に丘を下る。"""
+[[nodes.choices]]
+description = "248へ進め。"
+next_node_id = "248"
+
+[[nodes]]
+id = "34"
+type = ""
+text = """Illustration III
+警告もなく、赤いローブの恐ろしい亡魂がクラーンの背に乗って空から急降下する。
+その叫び声は血を凍らせる。ダークロードの猛烈な副官、ヴォルダックだ。
+彼が君の上に迫り、戦わねばならぬ。マインドシールドのカイの技がない場合、COMBAT SKILLから2ポイントを引く。この生物はマインドフォースと巨大な黒いメイスで攻撃してくる。
+ヴォルダック：COMBAT SKILL 17 ENDURANCE 25"""
+[[nodes.choices]]
+description = "もし勝つなら、328へ進め。"
+next_node_id = "328"
+
+[[nodes]]
+id = "35"
+type = "story"
+text = """森はますます密になり、道は棘のある茨で絡まる。
+下草にほぼ隠された、東へ分岐する別の道に気づく。
+現在の道は茨だらけの行き止まりのようだ。東の新しい道を進むことにする。"""
+[[nodes.choices]]
+description = "207へ進め。"
+next_node_id = "207"
+
+[[nodes]]
+id = "36"
+type = ""
+text = """古い監視塔の梯子は腐っており、登る際にいくつかの段が壊れる。
+ランダムナンバーテーブルから数字を一つ選べ。"""
+[[nodes.choices]]
+description = "もし4以下なら、落下する。"
+next_node_id = "140"
+
+[[nodes.choices]]
+description = "ENDURANCEを2ポイント失い、140へ進め。"
+next_node_id = "140"
+
+[[nodes.choices]]
+description = "もし5以上なら、落下しない。"
+next_node_id = "323"
+
+[[nodes]]
+id = "37"
+type = "story"
+text = """疲れと空腹を感じ、食事のために立ち止まる。
+食事を終え、城塞に戻り、そびえ立つ石壁を歩き回る。
+東側に別の入り口を見つけ、以前と同じく二人の武装した兵士が守っている。"""
+[[nodes.choices]]
+description = "もしカイの偽装の技を使いたいなら、282へ進め。"
+next_node_id = "282"
+required_discipline = "Camouflage"
+
+[[nodes.choices]]
+description = "もし近づいて自分の話を伝えたいなら、289へ進め。"
+next_node_id = "289"
+
+[[nodes]]
+id = "38"
+type = "story"
+text = """30分以上、豊かな植生とシダの中を進む。
+小さな清らかな小川に出くわし、数分間立ち止まって顔を洗い、冷たく新鮮な水を飲む。
+活力を取り戻し、小川を渡って進む。すぐに北から木の煙の匂いが漂ってくるのに気づく。"""
+[[nodes.choices]]
+description = "もし木の煙の出所を調べるなら、128へ進め。"
+next_node_id = "128"
+
+[[nodes.choices]]
+description = "もし煙の出所を避けるなら、347へ進め。"
+next_node_id = "347"
+
+[[nodes]]
+id = "39"
+type = "story"
+text = """数秒後、幹の向こうから二つの小さな毛むくじゃらの顔が神経質に現れる。
+彼らはカカルミと名乗り、クラーンがどこにでもいると言う。
+西には彼らの村の残骸があるが、今はほとんど何も残っていない。
+「黒い翼」の攻撃で森に逃げた部族の残りを探している。
+彼らは背後の東の道を指し、その道は行き止まりに見えるが、数ヤード進むと監視塔があり、そこで道が三方向に分かれると教える。
+東の道は、首都ホルムガードと北の港トランを結ぶ王の街道に続く。
+カカルミに感謝し、別れを告げる。"""
+[[nodes.choices]]
+description = "228へ進め。"
+next_node_id = "228"
+
+[[nodes]]
+id = "40"
+type = "story"
+text = """敵の気配を警戒しながら、木やシダの陰を縫って空き地を進む。
+道に戻り、フォグウッドから急いで離れる。"""
+[[nodes.choices]]
+description = "105へ進め。"
+next_node_id = "105"
+
+[[nodes]]
+id = "41"
+type = "story"
+text = """Illustration IV
+三人の騎兵が川岸を疾走し、唸るドゥームウルフに乗ったギアクが後を追う。
+ギアクのリーダーは5人の部下に弓で君を攻撃するよう命じる。
+急な岸で君は見つかり、ギアクのリーダーが5人の部下に弓で攻撃するよう命じる。
+黒い矢が雨のように降り注ぐ。"""
+[[nodes.choices]]
+description = "もし全速力で川を下るなら、174へ進め。"
+next_node_id = "174"
+
+[[nodes.choices]]
+description = "もし対岸の木々の陰に逃げるなら、116へ進め。"
+next_node_id = "116"
+
+[[nodes]]
+id = "42"
+type = "story"
+text = """ほぼ1時間、道を進むと十字路にたどり着く。"""
+[[nodes.choices]]
+description = "もし東へ進むなら、86へ進め。"
+next_node_id = "86"
+
+[[nodes.choices]]
+description = "もし北へ進むなら、238へ進め。"
+next_node_id = "238"
+
+[[nodes.choices]]
+description = "もし南へ進むなら、157へ進め。"
+next_node_id = "157"
+
+[[nodes.choices]]
+description = "もし西へ進むなら、147へ進め。"
+next_node_id = "147"
+
+[[nodes]]
+id = "43"
+type = ""
+text = """岩の後ろから巨大な黒熊が現れる。
+ゆっくりと君に向かい、口を開け、怒りと痛みに顔を歪める。
+首と背中から血を流し、ひどく傷ついているのがわかる。戦わねばならぬ。
+黒熊：COMBAT SKILL 16 ENDURANCE 10"""
+[[nodes.choices]]
+description = "もし勝つなら、195へ進め。"
+next_node_id = "195"
+
+[[nodes.choices]]
+description = "3ラウンドの戦闘後、丘を駆け下りる位置を取る。"
+next_node_id = "106"
+
+[[nodes.choices]]
+description = "もしこの時点で逃げるなら、106へ進み、逃げる際に傷つく可能性に挑む。"
+next_node_id = "106"
+
+[[nodes]]
+id = "44"
+type = ""
+text = """警告もなく、古い道が急な斜面の縁で突然終わる。
+ここは地面が非常に緩く、不安定だ。足を滑らせ、頭から斜面を転げ落ちる。
+ランダムナンバーテーブルから数字を一つ選べ。"""
+[[nodes.choices]]
+description = "もし選んだ数字が0～4なら、277へ進め。"
+next_node_id = "277"
+
+[[nodes.choices]]
+description = "もし選んだ数字が5～9なら、338へ進め。"
+next_node_id = "338"
+
+[[nodes]]
+id = "45"
+type = "story"
+text = """この者たちは見た目通りではない。
+リーダーのチュニックは本物だが、襟元は血でひどく汚れており、本当の持ち主が殺されたかのようだ。
+彼らの武器は軍のものではなく、ドゥレノールの鎧職人が作るような高価で豪華な装飾が施されている。
+リーダーの背にはクロスボウが掛かっている。逃げるのは自殺行為だ。
+武器を下ろせば即座に殺されると悟り、戦う決意をする。"""
+[[nodes.choices]]
+description = "180へ進め。"
+next_node_id = "180"
+
+[[nodes]]
+id = "46"
+type = "story"
+text = """約2マイル進むと、木々がまばらになり、湖のほとりに小さな木造の小屋が見える。
+マントをまとった男が近づき、2ゴールドクラウンの料金で君と馬を湖の対岸に渡すと申し出る。"""
+[[nodes.choices]]
+description = "もしカイの第六の感覚の技を持っているなら、296へ進め。"
+next_node_id = "296"
+required_discipline = "Sixth Sense"
+
+[[nodes.choices]]
+description = "もし申し出を受け入れるなら、246へ進め。"
+next_node_id = "246"
+
+[[nodes.choices]]
+description = "もし断り、湖の周りを進むなら、90へ進め。"
+next_node_id = "90"
+
+[[nodes]]
+id = "47"
+type = "story"
+text = """息を切らし、汗をかきながら、丘の頂上を目指して這う。
+突然、大きな翼の影が丘を横切る。見上げると、クラーンが頂上を旋回している。
+背後ではギアクが迫ってくる。
+高台を利用してその場でギアクと戦うか？"""
+[[nodes.choices]]
+description = "もしそうするなら、136へ進め。"
+next_node_id = "136"
+
+[[nodes.choices]]
+description = "それとも歯を食いしばり、丘の頂上を目指すか？"
+next_node_id = "322"
+
+[[nodes]]
+id = "48"
+type = "story"
+text = """第六の感覚が、これらの兵士が見た目通りではないと警告する。
+彼らには邪悪な気配が漂う。ダークロードに仕えているのだ。
+見つかる前に急いでここを去らねばならぬ。"""
+[[nodes.choices]]
+description = "243へ進め。"
+next_node_id = "243"
+
+[[nodes]]
+id = "49"
+type = ""
+text = """碑文を読み始めると、スクリーンの後ろから影が動くのが見える。
+ランダムナンバーテーブルから数字を一つ選べ。"""
+[[nodes.choices]]
+description = "もし選んだ数字が0～4なら、339へ進め。"
+next_node_id = "339"
+
+[[nodes.choices]]
+description = "もし選んだ数字が5～9なら、60へ進め。"
+next_node_id = "60"
+
+[[nodes]]
+id = "50"
+type = "story"
+text = """遠くで戦闘の音が聞こえる。"""
+[[nodes.choices]]
+description = "もし戦闘の音の方へ進むなら、97へ進め。"
+next_node_id = "97"
+
+[[nodes.choices]]
+description = "もし戦闘を避け、方向を変えるなら、243へ進め。"
+next_node_id = "243"
+
+[[nodes]]
+id = "51"
+type = "story"
+text = """Illustration V
+川の木々の生い茂る岸を登ると、野戦陣地の丸太の壁が遠くに消えているのが見える。
+約2マイル先で戦闘が繰り広げられ、ダークロードが攻撃する箇所で丸太の壁がいくつか崩れている。
+前方の野戦陣地のほとんどは無人で、兵士たちは戦闘の援軍に向かっている。
+丸太の壁に門がある。"""
+[[nodes.choices]]
+description = "もし門に近づくなら、288へ進め。"
+next_node_id = "288"
+
+[[nodes.choices]]
+description = "もし壁を登るなら、221へ進め。"
+next_node_id = "221"
 
 
 [[nodes]]
-id = "game_over"
-type = "end"
-text = "ゲームオーバー。あなたの旅はここで終わりました。"
+id = "52"
+type = "story"
+text = """近づくにつれ、声が人間のものではないと分かる。
+それはまるで、唸り声や甲高い鳴き声のような音だ。"""
+[[nodes.choices]]
+description = "もしカイの動物親和の技を持っているなら、225へ進め。"
+next_node_id = "225"
+required_discipline = "Animal Kinship"
+
+[[nodes.choices]]
+description = "そうでなければ、木を登り、向こう側に潜むものと対峙せねばならぬ。"
+next_node_id = "250"
+
+[[nodes]]
+id = "53"
+type = "story"
+text = """右足に灼けるような痛みが走り、体の重さで足がねじれ、潰れる。
+転げ落ち、丘のふもとの溝に激しく落ち、息が詰まり、意識を失う。
+胸を刺す鋭い痛みに目を覚ます。それはギアクの槍の先端だ。
+その持ち主の悪意に満ちた嘲笑が君を迎え、左腕を地面に押さえつける。
+本能的に武器に手を伸ばすが、もはやそこにはない。
+無防備な君に、残酷なギアクが迫る。最後に見るものは、喉に向かって突き進むギアクの槍の鋭い先端だ。
+君の任務はここで終わる。"""
+
+[[nodes]]
+id = "54"
+type = "story"
+text = """天は君の祈りを聞いてはいなかったようだ。
+槍が頭上を掠め、疾走する馬の首に突き刺さる。
+馬は痛みの叫び声を上げ、前に倒れ、君と馬は大道で絡み合って転がる。
+馬の死体の重さに押し潰され、呆然とする中、最後に記憶するのは、ギアクの槍の鋭い先端だ。
+君の任務は失敗に終わる。"""
+
+[[nodes]]
+id = "55"
+type = ""
+text = """ギアクが跳びかかる瞬間、君は前に飛び出し、武器を振り下ろし、若き魔法使いの背中からその者を弾き飛ばす。
+もがくギアクに飛び乗り、再び攻撃する。奇襲の効果により、この戦闘中はCOMBAT SKILLに4ポイント加算せよ。ただし、戦闘が終われば元に戻すこと。
+ギアク：COMBAT SKILL 9 ENDURANCE 9"""
+[[nodes.choices]]
+description = "もし勝つなら、325へ進め。"
+next_node_id = "325"
+
+[[nodes]]
+id = "56"
+type = "story"
+text = """木々の上で大きな翼の獣の叫び声が響く。
+それはダークロードの恐ろしい下僕、クラーンだ。急いでシダの茂みの下に身を隠し、その恐ろしい叫び声が遠ざかるのを待つ。"""
+[[nodes.choices]]
+description = "222へ進め。"
+next_node_id = "222"
+
+[[nodes]]
+id = "57"
+type = "story"
+text = """小屋は一部屋だけだ。そこには木製のテーブルと二つのベンチ、藁を束ねた大きなベッド、色とりどりの液体の瓶数本、そして床の中央に刺繍された絨毯がある。"""
+[[nodes.choices]]
+description = "もし瓶を詳しく見たいなら、164へ進め。"
+next_node_id = "164"
+
+[[nodes.choices]]
+description = "もし絨毯をめくるなら、109へ進め。"
+next_node_id = "109"
+
+[[nodes.choices]]
+description = "もし部屋を離れ、馬屋を調べるなら、308へ進め。"
+next_node_id = "308"
+
+[[nodes]]
+id = "58"
+type = "story"
+text = """走る準備を整え、尾根を安定したペースで下り始める。
+西には、ダークロードの軍が、まるで山間にこぼれた巨大な黒インクの壺が下の大地に広がるように見える。
+20分ほど走ると、右の浅い尾根にドゥームウルフの群れが並んでいるのが見える。"""
+[[nodes.choices]]
+description = "もし道の脇の岩に身を伏せ、彼らが通り過ぎるのを待つなら、251へ進め。"
+next_node_id = "251"
+
+[[nodes.choices]]
+description = "もし走り続けるが、攻撃に備えて武器を抜くなら、160へ進め。"
+next_node_id = "160"
+
+[[nodes]]
+id = "59"
+type = "story"
+text = """暗闇を覗き込むと、土に切り取られた粗い階段が見え、洞窟の入り口が実はトンネルの入り口であることが分かる。
+滑りやすい階段を慎重に下りると、階段の底の棚に小さな銀の箱があるのに気づく。"""
+[[nodes.choices]]
+description = "もし銀の箱を開けるなら、124へ進め。"
+next_node_id = "124"
+
+[[nodes.choices]]
+description = "もし地上に戻り、先に進むなら、106へ進め。"
+next_node_id = "106"
+
+[[nodes.choices]]
+description = "もしトンネルをさらに調べるなら、211へ進め。"
+next_node_id = "211"
+
+[[nodes]]
+id = "60"
+type = "story"
+text = """闇が君を飲み込む前に、最後に覚えているのは、長く曲がった鋼のナイフの閃光だ。
+君は賢者とその強盗の息子のもう一人の犠牲者となった。ちょうど今、君の喉を切り裂いたその者に！
+君の冒険はここで終わる。"""
+
+[[nodes]]
+id = "61"
+type = "story"
+text = """ついに外郭都市を囲む木の野戦陣地にたどり着く。哨戒所に向かって走ると、衛兵たちの興奮した歓声が聞こえる。神々に感謝、彼らは君を認識している。ぼろぼろで怪しい姿に見えるだろう。マントは破れ、ボロボロに垂れ下がり、顔は傷つき、血と墓地の埃で覆われている。
+浅い小川を飛び越え、門に向かってよろめく。墓地での遭遇の恐怖が君を追い詰める。疲労で意識を失う前に覚えている最後のことは、野戦陣地から走り出て助けに来た二人の兵士の腕に倒れ込むことだ。"""
+[[nodes.choices]]
+description = "268へ進め。"
+next_node_id = "268"
+
+[[nodes]]
+id = "62"
+type = "story"
+text = """「兵士」たちは足元で死に絶える。彼らはトランからの難民や、周辺の放棄された家や農場から盗みを働く盗賊だった。
+彼らの体を調べると、28ゴールドクラウンと、3食分の食料が入ったバックパック2つが見つかる。彼らはクロスボウと3本の剣で武装していた。クロスボウは戦闘で壊れたが、剣は無傷で、望むなら1本を取っても良い。
+装備を整え、西を慎重に見やり、首都の外郭防衛線へ走り続ける。"""
+[[nodes.choices]]
+description = "288へ進め。"
+next_node_id = "288"
+
+[[nodes]]
+id = "63"
+type = ""
+text = """Illustration VI
+狂った老人が君に叫び、戦争の責任を君に押し付け、カイの領主をダークロードの代理人と呪う。彼は道理を聞かず、戦わねばならぬ。
+狂人：COMBAT SKILL 11 ENDURANCE 10"""
+[[nodes.choices]]
+description = "もし勝つなら、269へ進め。"
+next_node_id = "269"
+
+[[nodes]]
+id = "64"
+type = "story"
+text = """キャラバンの上を旋回するクラーンの叫び声で目を覚ます。早朝で、空は澄み渡り明るい。前方の街道に、4分の1マイル足らずの距離でドゥームウルフの群れが見える。彼らは攻撃の準備をしている。迅速に行動せねばならぬ。
+狂った老人が君に叫んでいる。"""
+[[nodes.choices]]
+description = "もし装備を集め、木々の陰に逃げるなら、188へ進め。"
+next_node_id = "188"
+[[nodes.choices]]
+description = "もし馬を解放し、攻撃するドゥームウルフを突破して先の開けた道を目指すなら、16へ進め。"
+next_node_id = "16"
+
+[[nodes]]
+id = "65"
+type = "story"
+text = """第六の感覚が、この場所が非常に邪悪だと叫んでいる。一刻も早く去らねばならぬ。"""
+[[nodes.choices]]
+description = "104へ進め。"
+next_node_id = "104"
+
+[[nodes]]
+id = "66"
+type = "story"
+text = """驚くことに、背後から屈強な軍曹と二人の兵士が剣を抜いて走ってくる。彼らは攻撃するつもりで、問答無用に見える。身構えるが、突然軍曹が部下を止める。彼は君のマントを認識したのだ。彼らは武器をしまい、誤りを何度も詫びる。
+軍曹は部下の一人に衛兵隊長を呼ぶよう命じ、君を大広間の扉に導く。
+背が高く凛々しい戦士が君を迎え、話に熱心に耳を傾ける。首都までの危険な旅の話を終えると、彼の目に涙が光る。彼に導かれ、内宮の壮麗なホールと廊下を歩く。その豪華さに驚嘆する。やがて銀の鎧を着た二人の兵士が守る大きな彫刻の扉に着く。
+君は王に会おうとしている。"""
+[[nodes.choices]]
+description = "350へ進め。"
+next_node_id = "350"
+
+[[nodes]]
+id = "67"
+type = "story"
+text = """カイの追跡の技が、南の道に続く新鮮な足跡を明らかにする。
+それは黒熊の足跡で、その獰猛さで知られる獣だ。東の道がはるかに安全だと判断する。"""
+[[nodes.choices]]
+description = "252へ進め。"
+next_node_id = "252"
+
+[[nodes]]
+id = "68"
+type = "story"
+text = """短い歩行の後、西から東に走る道と交差する分岐点にたどり着く。"""
+[[nodes.choices]]
+description = "もし西へ進むなら、130へ進め。"
+next_node_id = "130"
+[[nodes.choices]]
+description = "もし東へ進むなら、15へ進め。"
+next_node_id = "15"
+
+[[nodes]]
+id = "69"
+type = "story"
+text = """友好的な村がすぐ近くにある。
+ガロウブラシを避け、272へ進め。"""
+[[nodes.choices]]
+description = "272へ進め。"
+next_node_id = "272"
+
+[[nodes]]
+id = "70"
+type = "story"
+text = """小さな橋にたどり着く。流れに沿って東へ続く道と、はるかに狭い南へ向かう森の道がある。"""
+[[nodes.choices]]
+description = "もしカイの第六の感覚の技を使うなら、8へ進め。"
+required_discipline = "Sixth Sense"
+next_node_id = "8"
+[[nodes.choices]]
+description = "もし東へ進むなら、28へ進め。"
+next_node_id = "28"
+[[nodes.choices]]
+description = "もし南へ進むなら、157へ進め。"
+next_node_id = "157"
+
+[[nodes]]
+id = "71"
+type = "story"
+text = """息を切らし、15フィートほどの高さから地下の墓の屋根を突き破って落ちる。壁は切り立って登れない。東へ続く拱形のトンネルがあり、その前には古代の貴人の石棺がある。"""
+[[nodes.choices]]
+description = "もしカイの第六の感覚の技を使うなら、65へ進め。"
+required_discipline = "Sixth Sense"
+next_node_id = "65"
+[[nodes.choices]]
+description = "もし石棺を開けて宝物を調べるなら、242へ進め。"
+next_node_id = "242"
+[[nodes.choices]]
+description = "もしトンネルを通って去るなら、104へ進め。"
+next_node_id = "104"
+
+[[nodes]]
+id = "72"
+type = ""
+text = """振り返ると、ギアクとその鋭い牙の騎獣が唸る。彼らを一体の敵として戦わねばならぬ。
+ギアク＋ドゥームウルフ：COMBAT SKILL 15 ENDURANCE 24"""
+[[nodes.choices]]
+description = "もし勝つなら、265へ進め。"
+next_node_id = "265"
+
+[[nodes]]
+id = "73"
+type = "story"
+text = """緑のマントを身にまとい、木々の葉や岩に溶け込む。慎重に道を見上げると、彼らが王の兵士でないことに衝撃を受ける。
+彼らはドラッカリム、ダークロードの最も残忍な部隊だ。王の兵士に変装して森の奥まで進んできたのだ。カイの訓練に感謝し、命を救われ、静かに小川から離れ、森の奥へ進む。"""
+[[nodes.choices]]
+description = "243へ進め。"
+next_node_id = "243"
+
+[[nodes]]
+id = "74"
+type = "story"
+text = """クラーンとその騎手たちが、君が隠れている場所からわずか10フィートの道に着地する。
+ギアクがクラーンの鱗の背から飛び降り、槍を構えて君に向かってくる。君は見つかってしまった。"""
+[[nodes.choices]]
+description = "もし彼らと戦うなら、138へ進め。"
+next_node_id = "138"
+[[nodes.choices]]
+description = "もし遅滞なく森の奥へ逃げるなら、281へ進め。"
+next_node_id = "281"
+
+[[nodes]]
+id = "75"
+type = "story"
+text = """慎重に覗くと、緑の服を着た三人の男が馬で岸を疾走している。彼らは西部国境を警備する王の軍の国境騎兵だ。一人が負傷し、馬の首に倒れ込んでいる。すぐ後ろには20頭のドゥームウルフが追い、ギアクの騎手が矢を放ち、矢が彼らの周りに降り注ぐ。一人の騎兵が馬から落ち、右足に黒い矢が深く刺さり、川岸を転がり落ちる。"""
+[[nodes.choices]]
+description = "もし騎兵を助けるなら、260へ進め。"
+next_node_id = "260"
+[[nodes.choices]]
+description = "もし隠れて川を下るなら、163へ進め。"
+next_node_id = "163"
+
+[[nodes]]
+id = "76"
+type = "story"
+text = """ジェムは熱く、手を焼く。ENDURANCEを2ポイント失う。急いでマントの端で掴み、ジャケットのポケットに滑り込ませる。この大きさのジェムは数百クラウンの価値があるだろう！幸運に微笑み、馬に乗り、南の道を進む。"""
+[[nodes.choices]]
+description = "118へ進め。"
+next_node_id = "118"
+
+[[nodes]]
+id = "77"
+type = "story"
+text = """山のギアクは森での追跡に慣れておらず、すぐに彼らを振り切る。ついに彼らの唸り声や呪いの声が完全に消える。
+追跡を諦めたと確信し、数分間立ち止まって息を整え、装備を確認する。修道院の焼け跡がまだ心に燃え、わずかな持ち物を集め、先に進む。"""
+[[nodes.choices]]
+description = "19へ進め。"
+next_node_id = "19"
+
+[[nodes]]
+id = "78"
+type = "story"
+text = """キャラバンが通り過ぎる中、尾板に飛びつき、しっかりと掴む。体を引き起こすと、荷車の後部扉に続く梯子の最下段に立っている。突然、扉の上半分が開き、怒った護衛の顔が現れる。"""
+[[nodes.choices]]
+description = "もしカイの領主として王に急ぎの伝言があると告げるなら、132へ進め。"
+next_node_id = "132"
+[[nodes.choices]]
+description = "もし安全な通行のためにゴールドクラウンを差し出すなら、12へ進め。"
+required_item = "Gold Crowns"
+next_node_id = "12"
+[[nodes.choices]]
+description = "もし武器で護衛を攻撃するなら、220へ進め。"
+next_node_id = "220"
+
+[[nodes]]
+id = "79"
+type = "story"
+text = """小さな歩道橋が、速い流れの小川を渡っている。橋の向こうで道は南に曲がる。橋を渡り、道を進む。"""
+[[nodes.choices]]
+description = "204へ進め。"
+next_node_id = "204"
+
+[[nodes]]
+id = "80"
+type = "story"
+text = """焼けた胸を両手で押さえ、よろめきながら表の扉を通り抜ける。店から煙が立ち上り、賢者やその強盗の息子に捕まる前に逃げねばならぬ。
+大通りに戻り、群衆の流れに紛れる。"""
+[[nodes.choices]]
+description = "7へ進め。"
+next_node_id = "7"
+
+[[nodes]]
+id = "81"
+type = "story"
+text = """約1時間後、クラーンとその残忍な騎手たちが西へ消える。衝撃を受けた難民たちが森から出てくる中、遠くで馬の疾走する音が近づく。身を隠し、騎手たちが近づくのを待つ。彼らは国王衛兵の騎兵で、陛下の軍の白い制服を着ている。"""
+[[nodes.choices]]
+description = "もし彼らを呼ぶなら、183へ進め。"
+next_node_id = "183"
+[[nodes.choices]]
+description = "もし森の縁を南へ進むなら、200へ進め。"
+next_node_id = "200"
+
+[[nodes]]
+id = "82"
+type = "story"
+text = """巨大なグルガズが足元で死に、その邪悪な従者たちが君を睨み、橋から退却する。王子の兵士たちが君と瀕死のリーダーを盾で守る壁を作る。黒い矢が頭上を掠める。
+瀕死の王子が君の目を見つめ、言う。「カイの領主よ、父に伝言を届けてくれ。敵は強すぎ、持ちこたえられぬ。王はドゥレノールにあるものを求めねば、すべてが失われる。私の馬に乗り、首都へ急げ。神の幸運が共にあらんことを。」
+王子に悲しき別れを告げ、白い馬に乗り、森の道を南へ進む。背後では、王子の兵士たちが橋での新たな攻撃を防ぐ戦いが続く。"""
+[[nodes.choices]]
+description = "235へ進め。"
+next_node_id = "235"
+
+[[nodes]]
+id = "83"
+type = "story"
+text = """約1マイル走ると、三人の兵士が小さな歩道橋の下から現れ、立ち止まり、武器と装備を捨てるよう要求する。
+彼らは血に染まり、髭が伸び放題だ。リーダーはトラン駐屯地の兵士のチュニックを着ている。"""
+[[nodes.choices]]
+description = "もしカイの第六の感覚の技を持っているなら、45へ進め。"
+required_discipline = "Sixth Sense"
+next_node_id = "45"
+[[nodes.choices]]
+description = "もし彼らの言う通りにするなら、205へ進め。"
+next_node_id = "205"
+[[nodes.choices]]
+description = "もし彼らと戦う準備をするなら、180へ進め。"
+next_node_id = "180"
+[[nodes.choices]]
+description = "もし彼らの目的を問うなら、232へ進め。"
+next_node_id = "232"
+
+[[nodes]]
+id = "84"
+type = "story"
+text = """背中に風を感じ、馬から滑り落ち、転がり、大道脇の泥の溝に飛び込む。
+怪我はない。急いで立ち上がり、木々の陰へ走るが、30ヤードを残し、クラーンが再び急降下のために旋回しているのが見える。"""
+[[nodes.choices]]
+description = "188へ進め。"
+next_node_id = "188"
+
+[[nodes]]
+id = "85"
+type = "story"
+text = """道は広く、まっすぐに深い下草へ続く。木々は高く、異様に静かだ。1マイル以上歩くと、突然、頭上で大きな翼の音が響く。見上げると、クラーンの不気味な黒い影が攻撃のために急降下してくる。"""
+[[nodes.choices]]
+description = "もし武器を抜いて戦う準備をするなら、229へ進め。"
+next_node_id = "229"
+[[nodes.choices]]
+description = "もし攻撃を避け、南へ森の奥へ走るなら、99へ進め。"
+next_node_id = "99"
+
+[[nodes]]
+id = "86"
+type = "story"
+text = """すぐに別の十字路にたどり着く。"""
+[[nodes.choices]]
+description = "もし東へ進むなら、6へ進め。"
+next_node_id = "6"
+[[nodes.choices]]
+description = "もし北へ進むなら、35へ進め。"
+next_node_id = "35"
+[[nodes.choices]]
+description = "もし南へ進むなら、167へ進め。"
+next_node_id = "167"
+[[nodes.choices]]
+description = "もし西へ進むなら、42へ進め。"
+next_node_id = "42"
+
+[[nodes]]
+id = "87"
+type = "story"
+text = """錠に意識を集中し、内部の仕組みを頭に描く。徐々にその姿が心の目に浮かぶ。古く錆びているが、まだ機能している。集中が途切れそうになるが、かすかなカチッという音が努力が無駄ではなかったことを告げる。
+ピンは簡単だ。ゆっくりと錠から浮き上がり、床に落ちる。花崗岩の扉が隠された蝶番で開き、墓地の灰色の薄光が墓に流れ込む。出口は墓草で覆われ、顔や手に小さな傷を負いながら這い出る。突然の音に驚く。振り返ると、死体の首が笑っている。
+盲目のパニックに駆られ、不気味な死者の都を南の門へ走る。"""
+[[nodes.choices]]
+description = "61へ進め。"
+next_node_id = "61"
+
+[[nodes]]
+id = "88"
+type = "story"
+text = """岩の陰から慎重に覗くと、仰向けの兵士がいる。彼の脇には槍と盾があり、盾には白いペガサス、ソマーランドの王子の紋章が描かれている。彼は王子の兵士で、意識がわずかにある。制服はひどく破れ、左腕に深い傷がある。近づくと、彼の目が開く。「我が君、癒してください」と彼は懇願する。「腕の感覚がほとんどない。」"""
+[[nodes.choices]]
+description = "もしカイの癒しの技を持ち、使うなら、216へ進め。"
+required_discipline = "Healing"
+next_node_id = "216"
+[[nodes.choices]]
+description = "もしその技を持っていない、または使わないなら、31へ進め。"
+next_node_id = "31"
+
+[[nodes]]
+id = "89"
+type = ""
+text = """埃と岩の雲の中、急な斜面を転がり落ちる。クラーンが上空を旋回し、ギアクを君に導くようだ。
+ランダムナンバーテーブルから数字を一つ選べ。"""
+[[nodes.choices]]
+description = "もし0～1を選んだなら、53へ進め。"
+next_node_id = "53"
+[[nodes.choices]]
+description = "もし2～4なら、274へ進め。"
+next_node_id = "274"
+[[nodes.choices]]
+description = "もし5～9なら、316へ進め。"
+next_node_id = "316"
+
+[[nodes]]
+id = "90"
+type = "story"
+text = """夜が落ち、完全な闇に包まれる。先に進むのは無意味で、道を見失うだろう。馬を木に繋ぎ、緑のカイのマントをまとい、落ち着かない眠りに落ちる。"""
+[[nodes.choices]]
+description = "18へ進め。"
+next_node_id = "18"
+
+[[nodes]]
+id = "91"
+type = "story"
+text = """小さな店は暗く、黴臭い。本や瓶が棚を埋め、さまざまな大きさと色がある。扉を閉めると、小さな黒い犬が吠え始める。禿げた男が大きなスクリーンの後ろから現れ、歓迎する。彼は丁寧に訪問の目的を尋ね、ガラスのカウンターから商品を選ぶよう勧める。"""
+[[nodes.choices]]
+description = "もしカイの第六の感覚の技を持っているなら、198へ進め。"
+required_discipline = "Sixth Sense"
+next_node_id = "198"
+[[nodes.choices]]
+description = "もし商品を見るなら、152へ進め。"
+next_node_id = "152"
+[[nodes.choices]]
+description = "もし申し出を断り、通りへ戻るなら、7へ進め。"
+next_node_id = "7"
+
+[[nodes]]
+id = "92"
+type = "story"
+text = """身を投げるタイミングを逃さず、黒い矢の雨が数秒前まで立っていた場所に降り注ぐ。マントをまとい、密なシダに溶け込み、隠れた待ち伏せ者から森を駆け抜け、できる限り早く逃げる。この一帯はギアクに溢れ、一刻も早く脱出せねばならぬ。1時間以上休まず走り、偶然、東へ向かうまっすぐな森の道に出る。敵の気配に注意しながら道を進む。"""
+[[nodes.choices]]
+description = "13へ進め。"
+next_node_id = "13"
+
+[[nodes]]
+id = "93"
+type = "story"
+text = """階段に走り寄ると、背後で大きな岩が落ちる音がする。いた部屋は完全に封鎖された。日光に逃げると、背後で老ドルイドの曲がった姿が杖を上げるのが見える。次の瞬間、足元で雷が爆発する。立ち止まらず、丘を駆け下り、遅延を呪うが、第六の感覚に感謝する。"""
+[[nodes.choices]]
+description = "106へ進め。"
+next_node_id = "106"
+
+[[nodes]]
+id = "94"
+type = "story"
+text = """賢者が息子を殺したのを見て、店の裏口から逃げる。
+強盗の財布に12ゴールドクラウン、カウンター下の木箱に4ゴールドクラウンを見つける。薬や杖を慎重に調べると、すべて安物の偽物だと分かる。店全体が偽物だらけだ。首を振って大通りに戻る。"""
+[[nodes.choices]]
+description = "7へ進め。"
+next_node_id = "7"
+
+[[nodes]]
+id = "95"
+type = "story"
+text = """すぐに狭い森の道に出くわし、南北に走っている。"""
+[[nodes.choices]]
+description = "もし北へ進むなら、240へ進め。"
+next_node_id = "240"
+[[nodes.choices]]
+description = "もし南へ進むなら、5へ進め。"
+next_node_id = "5"
+
+[[nodes]]
+id = "96"
+type = "story"
+text = """息を止め、武器を強く握り、攻撃の準備をする。緊張は耐え難く、ギアクが近く、洗われていない体の悪臭が鼻を突く。彼らの奇妙な異邦の言葉で呪う声が聞こえ、彼らが崖を離れ、頂上へ登る。去ったと確信し、ようやく息を吐き、目から汗を拭う。"""
+[[nodes.choices]]
+description = "もし洞窟をさらに探るなら、33へ進め。"
+next_node_id = "33"
+[[nodes.choices]]
+description = "もしギアクが戻る場合に備えて洞窟を離れ、丘を下るなら、248へ進め。"
+next_node_id = "248"
+
+[[nodes]]
+id = "97"
+type = "story"
+text = """Illustration VII
+前方で、石の橋を越えて激しい戦闘が繰り広げられている。鋼の衝突と人や獣の叫び声が森に響く。戦いの中心で、国王の息子ペラサー王子が、鱗の頭上で黒い斧を振るう大きな灰色のグルガズと戦っている。王子が側面に黒い矢を受け、倒れる。"""
+[[nodes.choices]]
+description = "もし倒れた王子を守るなら、255へ進め。"
+next_node_id = "255"
+[[nodes.choices]]
+description = "もし森へ逃げるなら、306へ進め。"
+next_node_id = "306"
+
+[[nodes]]
+id = "98"
+type = "story"
+text = """衛兵たちは君の話を信じ、カイの領主の地位に敬意を表して頭を下げる。一人が隠されたベルロープを引き、巨大な扉が開き始める。彼らは君を中へ導き、背後で扉が閉まる音が聞こえる。"""
+[[nodes.choices]]
+description = "139へ進め。"
+next_node_id = "139"
+
+[[nodes]]
+id = "99"
+type = "story"
+text = """獣が頭上を叫びながら過ぎる瞬間、下草に飛び込む。急いで振り返ると、クラーンが再び急降下の準備で空中を旋回している。急いで立ち上がり、森の安全な奥へ走る。"""
+[[nodes.choices]]
+description = "222へ進め。"
+next_node_id = "222"
+
+[[nodes]]
+id = "100"
+type = "story"
+text = """冷たい廊下は突然東へ急に曲がる。遠くに緑色の光がトンネルを照らす。近づくと、廊下が大きな部屋に開ける。
+奇妙な光は、花崗岩の玉座の上に置かれた大きな鉢から発している。玉座の前の台座には、翼のある蛇が「S」の形に曲がった像が立っている。"""
+[[nodes.choices]]
+description = "もし玉座に座るなら、161へ進め。"
+next_node_id = "161"
+[[nodes.choices]]
+description = "もし像を調べるなら、133へ進め。"
+next_node_id = "133"
+[[nodes.choices]]
+description = "もしこの部屋の出口を探すなら、257へ進め。"
+next_node_id = "257"
+
+[[nodes]]
+id = "101"
+type = "story"
+text = """背後で戦闘の音が遠ざかるが、静寂は頭の中の声に破られる。それは君を臆病者と非難し、危険に瀕した仲間を捨てたと責める。任務がはるかに重要で、若き魔法使いだけでなく、国民全員の命が君が首都に生きて着くことにかかっていると自分に言い聞かせ、良心を振り払おうとする。
+突然、遠くにギアクの戦隊が見え、急いで身を隠す。しかし遅すぎた、彼らに気づかれ、全速力で逃げねばならぬ。"""
+[[nodes.choices]]
+description = "281へ進め。"
+next_node_id = "281"
+
+[[nodes]]
+id = "102"
+type = "story"
+text = """古の墓地へ岩の斜面を下ると、奇妙な霧と雲がこの灰色で不気味な場所を覆い、太陽を遮り、永遠の薄暗さに包んでいる。冷気が君を迎える。
+深い恐怖を感じながら、不気味な死者の都に入る。"""
+[[nodes.choices]]
+description = "284へ進め。"
+next_node_id = "284"
+
+[[nodes]]
+id = "103"
+type = "story"
+text = """生い茂った道は、東へ分岐する別の道との交差点に続く。"""
+[[nodes.choices]]
+description = "もしこの道を取るなら、13へ進め。"
+next_node_id = "13"
+[[nodes.choices]]
+description = "もし北東へ進むなら、287へ進め。"
+next_node_id = "287"
+
+[[nodes]]
+id = "104"
+type = "story"
+text = """壁は湿り、ぬるぬるとしている。空気は淀み、蜘蛛の巣が顔を掠める。トンネルが暗くなるにつれ、胃にパニックが握りつぶす。
+南北に走る廊下との交差点にたどり着く。"""
+[[nodes.choices]]
+description = "もし北へ進むなら、26へ進め。"
+next_node_id = "26"
+[[nodes.choices]]
+description = "もし南へ進むなら、100へ進め。"
+next_node_id = "100"
+
+[[nodes]]
+id = "105"
+type = "story"
+text = """遠く、古いオークの木の枝に真っ黒なカラスが止まっている。"""
+[[nodes.choices]]
+description = "もしカイの動物親和の技を持ち、鳥を呼ぶなら、298へ進め。"
+required_discipline = "Animal Kinship"
+next_node_id = "298"
+[[nodes.choices]]
+description = "もしその技を持っていない、または使わないなら、335へ進め。"
+next_node_id = "335"
+
+[[nodes]]
+id = "106"
+type = "story"
+text = """やがて、速い流れの冷たい小川の縁にたどり着く。白い水が苔むした岩を越え、東へ消える。"""
+[[nodes.choices]]
+description = "もし小川を東に沿って進むなら、263へ進め。"
+next_node_id = "263"
+[[nodes.choices]]
+description = "もし上流を探るなら、334へ進め。"
+next_node_id = "334"
+
+[[nodes]]
+id = "107"
+type = "story"
+text = """部屋を駆け抜け、頭蓋骨を叩き割り、破片に砕く。それぞれの頭蓋骨の中には、灰色のゼリーが泡立ち、形を変え、蝙蝠のような翼や吸盤を光る体から生やす。恐怖と嫌悪に駆られ、出口の廊下へ走り、鉄格子が落ちて部屋を完全に封鎖する直前に逃げる。"""
+[[nodes.choices]]
+description = "23へ進め。"
+next_node_id = "23"
+
+[[nodes]]
+id = "108"
+type = "story"
+text = """対岸の屋根へ弧を描いて飛ぶ。すべてがスローモーションのようだ。下の通りで群がる人々や、右の屋根の軒にカリスパロウの巣が見える。彼らの驚いた叫び声が聞こえ、対岸に激しく着地する。しかしそれが最後に聞く音となる。瓦が砕け崩れ、「グリーンスリッパー亭」の4階を突き破り、背骨を数か所折る。
+君の任務と命はここで終わる。"""
+
+[[nodes]]
+id = "109"
+type = "story"
+text = """絨毯の下には汚れしかない！"""
+[[nodes.choices]]
+description = "瓶を詳しく見るなら、164へ進め。"
+next_node_id = "164"
+[[nodes.choices]]
+description = "部屋を離れ、馬屋を調べるなら、308へ進め。"
+next_node_id = "308"
+
+[[nodes]]
+id = "110"
+type = "story"
+text = """素早く狙いを定め、ギアクの頭に石を全力で投げるが、恐怖にもかかわらず、ギアクが身をかわし、石はその背を無害に越える。魔法使いを救うため、即座に行動せねばならぬ。"""
+[[nodes.choices]]
+description = "55へ進め。"
+next_node_id = "55"
+
+[[nodes]]
+id = "111"
+type = "story"
+text = """交差点を離れて数分後、遠くに小さな丸太小屋と馬屋が見える。着くと、側窓から内部を確認する。小屋は無人に見える。"""
+[[nodes.choices]]
+description = "もし小屋に入るなら、57へ進め。"
+next_node_id = "57"
+[[nodes.choices]]
+description = "もし馬屋を調べるなら、308へ進め。"
+next_node_id = "308"
+
+[[nodes]]
+id = "112"
+type = ""
+text = """突然、隠れていた大きな岩が押し退けられ、死を望む二人のギアクが現れる。洞窟の入り口は狭く、ギアクとは一度に一人ずつ戦う。
+ギアク1：COMBAT SKILL 13 ENDURANCE 10
+ギアク2：COMBAT SKILL 12 ENDURANCE 10"""
+[[nodes.choices]]
+description = "もし勝つなら、洞窟をさらに探るなら、33へ進め。"
+next_node_id = "33"
+[[nodes.choices]]
+description = "または、洞窟を離れ、丘を下るなら、248へ進め。"
+next_node_id = "248"
+
+[[nodes]]
+id = "113"
+type = "story"
+text = """30分以上歩くと、苔むした土手近くに咲く鮮やかな赤い花が目に入る。それはラウムスパー、癒しの力で珍重される稀で美しいハーブだと分かる。
+膝をつき、ラウムスパーを一握り摘み、バックパックにしまう。このハーブを食べれば、失ったENDURANCEポイントを回復できる。ラウムスパーの食事1回で3ポイント回復し、2食分を集めた。バックパックを閉じ、任務を続ける。"""
+[[nodes.choices]]
+description = "もし北東へ進むなら、347へ進め。"
+next_node_id = "347"
+[[nodes.choices]]
+description = "もし東へ進むなら、295へ進め。"
+next_node_id = "295"
+
+[[nodes]]
+id = "114"
+type = "story"
+text = """馬を寝かせ、枝や枯れ葉で自分と馬を覆う。クラーンの翼の音が木々の上を過ぎる。戻ってきて上空を旋回するが、すぐに湖の向こうへ退却する。"""
+[[nodes.choices]]
+description = "239へ進め。"
+next_node_id = "239"
+
+[[nodes]]
+id = "115"
+type = "story"
+text = """最初の建物に飛び込み、疲れ果てて床に倒れる。調理された肉の匂いがする。消えかけの火の残り火の上に小さな鍋が吊るされ、食事の準備がされた大きなオークのテーブルがある。ここに住む者は今朝、急いで去ったに違いない。テーブルには水の入った水差しと焼きたてのパンがある。"""
+[[nodes.choices]]
+description = "もし急いで食事を取るなら、150へ進め。"
+required_item = "Meal"
+next_node_id = "150"
+[[nodes.choices]]
+description = "もし建物を調べるなら、177へ進め。"
+next_node_id = "177"
+[[nodes.choices]]
+description = "もし今すぐ出て走り続けるなら、83へ進め。"
+next_node_id = "83"
+
+[[nodes]]
+id = "116"
+type = "story"
+text = """泥水から這い出ると、黒い矢が周囲に降り注ぐ。急いで木々の陰に走り、ギアクが対岸を去るのを待って、徒歩で首都へ向かう。"""
+[[nodes.choices]]
+description = "321へ進め。"
+next_node_id = "321"
+
+[[nodes]]
+id = "117"
+type = "story"
+text = """男は重傷で死に瀕している。カイの癒しの技があれば、傷の痛みを和らげられるが、彼の傷は重すぎ、君の技だけでは癒せない。彼はすぐに意識を失う。大きな森のオークの下でできる限り快適にし、厚い森を北東へ進む。"""
+[[nodes.choices]]
+description = "330へ進め。"
+next_node_id = "330"
+
+[[nodes]]
+id = "118"
+type = "story"
+text = """馬を駆り、長いまっすぐな道を疾走する。遠くにホルムガードのシルエットが見え、高い壁と尖塔が朝日に輝く。道は南北に走る街道と交差し、トランと首都を結ぶ主要な街道だ。ホルムガードへ向かい、澄んだ朝の空にクラーンを警戒する。"""
+[[nodes.choices]]
+description = "224へ進め。"
+next_node_id = "224"
+
+[[nodes]]
+id = "119"
+type = "story"
+text = """ガロウブラシがマントを引き裂き、腕や足に深く傷つける。15分後、茨を抜け、木々の間をよろめき進む。
+受けた傷でENDURANCEを2ポイント失う。
+めまいを感じ、まぶたが重い。突然、急な木々の斜面の縁に立つ。"""
+[[nodes.choices]]
+description = "もし慎重に斜面を滑り降りるなら、226へ進め。"
+next_node_id = "226"
+[[nodes.choices]]
+description = "もし眠い状態でこの危険な下りを試す気になれず、尾根の縁を歩くなら、38へ進め。"
+next_node_id = "38"
+
+[[nodes]]
+id = "120"
+type = "story"
+text = """背後で血に狂ったギアクがキャラバンの馬を殺す音が聞こえる。肩越しに振り返ると、クラーンが空高く登る。君を攻撃するのか、別の何かに興味があるのか？ 周囲に広がる暗い影が、君がその標的だと告げる。クラーンが全力で急降下してくる！"""
+[[nodes.choices]]
+description = "もし攻撃の瞬間まで待ち、鞍から跳ぶなら、84へ進め。"
+next_node_id = "84"
+[[nodes.choices]]
+description = "もし全力で木々へ向かうなら、171へ進め。"
+next_node_id = "171"
+[[nodes.choices]]
+description = "もし頭を下げ、天に幸運を祈り、突き進むなら、54へ進め。"
+next_node_id = "54"
+
+
+
+[[nodes]]
+id = "121"
+type = "story"
+text = """Illustration VIII
+数分歩くと、前方の道の中央に赤い衣をまとった見知らぬ者が立っているのが見える。彼は背を向け、頭はローブのフードで覆われている。その伸ばした腕には、以前に見た黒いカラスが止まっている。"""
+[[nodes.choices]]
+description = "もしその見知らぬ者を呼ぶなら、342へ進め。"
+next_node_id = "342"
+[[nodes.choices]]
+description = "もし慎重に近づくなら、309へ進め。"
+next_node_id = "309"
+[[nodes.choices]]
+description = "もし武器を抜いて攻撃するなら、283へ進め。"
+next_node_id = "283"
+
+[[nodes]]
+id = "122"
+type = "story"
+text = """即座に馬が君の意思を感じ取り、落ち着く。美しいその獣に歩み寄り、安心させるように頭を撫でる。恐怖と混乱を感じているのが分かる。馬に乗り、再び南の道へと進む。"""
+[[nodes.choices]]
+description = "206へ進め。"
+next_node_id = "206"
+
+[[nodes]]
+id = "123"
+type = "story"
+text = """その生物が死ぬと、ゆっくりとその体は毒々しい緑色の液体に溶ける。煙を上げるその液体の下の草や植物が萎れ、死んでいくのに気づく。腐敗する体の近くの地面に、価値のありそうな大きなジェムがある。
+道の先に、ギアクの大戦隊が君に向かって走ってくるのが見える。"""
+[[nodes.choices]]
+description = "もしジェムを取るなら、304へ進め。"
+next_node_id = "304"
+[[nodes.choices]]
+description = "もしそれを見捨てて逃げるなら、2へ進め。"
+next_node_id = "2"
+
+[[nodes]]
+id = "124"
+type = "story"
+text = """箱の中には15ゴールドクラウンと銀の鍵がある。鍵を保持するなら、アクションチャートに記録せよ。
+トンネルの調査を続けるなら、211へ進め。"""
+[[nodes.choices]]
+description = "211へ進め。"
+next_node_id = "211"
+[[nodes.choices]]
+description = "または、丘を下って去るなら、106へ進め。"
+next_node_id = "106"
+
+[[nodes]]
+id = "125"
+type = "story"
+text = """道が開け、広い空き地に出る。地面に奇妙な爪の跡がある。クラーンがここに着地したのだ。跡の数と乱れた地面の広さから、過去12時間以内に少なくとも5匹の不浄な生物がここにいたと判断する。
+空き地の向こうに二つの出口がある。一つは西へ、もう一つは南へ。"""
+[[nodes.choices]]
+description = "もしカイの追跡の技を持っているなら、301へ進め。"
+required_discipline = "Tracking"
+next_node_id = "301"
+[[nodes.choices]]
+description = "もし南の道を取るなら、27へ進め。"
+next_node_id = "27"
+[[nodes.choices]]
+description = "もし西の道を取るなら、214へ進め。"
+next_node_id = "214"
+
+[[nodes]]
+id = "126"
+type = "story"
+text = """森の奥深くへ乗り進む。茨や根が絡まる地面でも、馬は一度もつまずかず、王子にこの素晴らしい馬を感謝する。ドゥームウルフは遠くに置き去りにされ、馬を止める。光は急速に薄れ、夜が近づく。"""
+[[nodes.choices]]
+description = "もし先に進むなら、46へ進め。"
+next_node_id = "46"
+[[nodes.choices]]
+description = "もし左へ進む（遥か後ろに残した道と同じ方向）なら、143へ進め。"
+next_node_id = "143"
+
+[[nodes]]
+id = "127"
+type = "story"
+text = """1時間の行軍の後、ドラッカリムが突然立ち止まる。大きな灰色の鱗の生物が道を進んでくる。その獣が近づくと、腐臭を放つ息が顔に当たる。咆哮を上げ、強力な水かきの手に君の頭を掴む。最後に聞こえるのは、背骨が折れる鋭い音だ。
+君の冒険はここで終わる。"""
+
+[[nodes]]
+id = "128"
+type = "story"
+text = """密な葉を慎重に分けると、衝撃的な光景が目に入る。前方の小さな空き地で、3人のギアクが男を木の杭に縛り、足元に薪の束を積んで火をつけている。男のチュニックは、ダーンクラグ山脈近くの王国を警備する王の国境騎兵のものだと分かる。彼はひどく殴られ、意識がほとんどない。"""
+[[nodes.choices]]
+description = "もしカイの狩猟の技を持っているなら、297へ進め。"
+required_discipline = "Hunting"
+next_node_id = "297"
+[[nodes.choices]]
+description = "そうでなければ、騎兵の命を救うため、今すぐギアクを攻撃せねばならぬ。336へ進め。"
+next_node_id = "336"
+
+[[nodes]]
+id = "129"
+type = "story"
+text = """首都の正門にたどり着き、城壁の高さに驚嘆する。200フィートもの高さのホルムガードの壁は、時間とダークロードの猛攻に耐えてきた。士官と共に、100ヤードの長さの内門のトンネルを駆け抜け、監視塔の扉の外で止まる。兵士や市民が慌ただしく行き交う。"""
+[[nodes.choices]]
+description = "もし士官を追い続けるなら、3へ進め。"
+next_node_id = "3"
+[[nodes.choices]]
+description = "もし王の城塞へ一人で向かう方が良いと考えるなら、144へ進め。"
+next_node_id = "144"
+
+[[nodes]]
+id = "130"
+type = "story"
+text = """すぐに森の小さな空き地に着く。倒れた木から削り出されたベンチが中央にある。空腹で、ここで食事を取らねばならぬ。
+食事を終えたら、南の道を去るなら、28へ進め。"""
+[[nodes.choices]]
+description = "もし南の道を去るなら、28へ進め。"
+required_item = "Meal"
+next_node_id = "28"
+[[nodes.choices]]
+description = "または、東へ向かう小さな道を選ぶなら、201へ進め。"
+required_item = "Meal"
+next_node_id = "201"
+
+[[nodes]]
+id = "131"
+type = "story"
+text = """Illustration IX
+4分の1マイルほど進むと、叫び声と雷鳴のような音が前方から聞こえる。近づくと、ラウマスの遺跡、古代の森の寺院の跡だと分かる。
+25～30人のギアクの戦隊が遺跡を全方位から攻撃している。多くのギアクが大理石の柱の間で死に、あるいは死にかけているが、なおも内部に隠れるものを襲う。突然、青い雷がギアクの前線を切り裂き、鎧をまとった者たちを四散させる。黒い鎖帷子をまとった背の高いギアクが、棘付きの鞭で部下を叱咤し、前進させる。
+武器を手に、密な葉の陰に身を潜め、空き地の縁に移動し、守備者を見ようとする。驚くことに、遺跡を守るのは君と同い年ほどの若者だ。星の刺繍が施された空色のローブから、トランの魔法使いギルドの若き術者、魔法の見習いだと分かる。
+5人のギアクが槍を構えて突進し、若者が遺跡の奥へ急いで退却する。彼が振り返り、左手を上げ、青い炎が指先から唸るギアクの兵士へ放たれる。君が隠れる近くで、ギアクが柱を登り、口に長く曲がった短剣をくわえ、眼下の若き魔法使いに飛びかかろうとしている。"""
+[[nodes.choices]]
+description = "もし魔法使いに警告を叫ぶなら、241へ進め。"
+next_node_id = "241"
+[[nodes.choices]]
+description = "もしギアクが飛びかかる時に攻撃するなら、55へ進め。"
+next_node_id = "55"
+[[nodes.choices]]
+description = "もし寺院の大理石の塊を拾い、ギアクの頭に投げるなら、302へ進め。"
+next_node_id = "302"
+[[nodes.choices]]
+description = "または、戦場を離れ、森へ戻るなら、101へ進め。"
+next_node_id = "101"
+
+[[nodes]]
+id = "132"
+type = "story"
+text = """護衛は疑わしげに君を見て、扉を閉める。キャラバン内でざわめく声が聞こえる。突然、扉が開き、裕福な商人の顔が現れる。彼は君のカイのマントを認め、召使の無礼を詫びる。
+彼はトランを離れてから何度も攻撃されたと言う。クラーン、盗賊、強盗に。君を盗賊と疑ったのだ。キャラバン内は絹や香辛料で溢れている。商人が食事を差し出し、君は感謝して受け取る。豪華な食事の後、試練の疲れが押し寄せ、深い眠りに落ちる。"""
+[[nodes.choices]]
+description = "64へ進め。"
+next_node_id = "64"
+
+[[nodes]]
+id = "133"
+type = ""
+text = """像に近づくと、表面にいくつもの亀裂が走る。突然、爆発し、本物の翼蛇が石の外殻を破り、君を襲う。
+この生物と戦わねばならぬ。
+翼蛇：COMBAT SKILL 16 ENDURANCE 18
+（この生物はマインドブラストに耐性がある。）"""
+[[nodes.choices]]
+description = "もし戦いに勝つなら、266へ進め。"
+next_node_id = "266"
+
+[[nodes]]
+id = "134"
+type = "story"
+text = """君の技を使い、空き地の周囲にギアクの足跡を見つける。跡は新しく、ダークロードの残忍な下僕が2時間以内にここにいたと分かる。"""
+[[nodes.choices]]
+description = "この知識に警告を受け、小屋を調べるなら、305へ進め。"
+next_node_id = "305"
+[[nodes.choices]]
+description = "もし空き地を避けるなら、40へ進め。"
+next_node_id = "40"
+
+[[nodes]]
+id = "135"
+type = "story"
+text = """川岸の急な切り込みを覗くと、水辺に漂着した流木の絡まりが見える。粘土の岸に大きな木の幹が打ち上げられ、その隣に小さなカヌーがある。"""
+[[nodes.choices]]
+description = "もし丸太を使って川を下るなら、223へ進め。"
+next_node_id = "223"
+[[nodes.choices]]
+description = "もしカヌーを使うなら、4へ進め。"
+next_node_id = "4"
+
+[[nodes]]
+id = "136"
+type = ""
+text = """ギアクが近づき、飛びかかる準備で身を屈める。槍の鋭い鋸歯状の先と、低い唸り声のような言葉が聞こえる。大きなギアクが「オルガダク・ターグ！ノグジャト・アガ・オク！」と叫び、君を襲う。
+ギアクを順番に戦わねばならぬ。この戦闘では高地の利があり、COMBAT SKILLに1ポイント加算せよ。
+ギアク1：COMBAT SKILL 13 ENDURANCE 10
+ギアク2：COMBAT SKILL 12 ENDURANCE 10"""
+[[nodes.choices]]
+description = "もし勝つなら、313へ進め。"
+next_node_id = "313"
+
+[[nodes]]
+id = "137"
+type = "story"
+text = """最後の不浄な生物が死ぬと、緑色の光が薄れ始める。砕けた頭蓋骨の中にそれぞれジェムがあるのに気づく。
+20個のジェムを取り、アクションチャートに記録せよ。闇が部屋を飲み込む前に、死した墓地の落とし子を後にし、先に進む。"""
+[[nodes.choices]]
+description = "23へ進め。"
+next_node_id = "23"
+
+[[nodes]]
+id = "138"
+type = ""
+text = """武器を構え、敵を迎える。山のギアクが2人おり、一人ずつ戦わねばならぬ。
+ギアク1：COMBAT SKILL 13 ENDURANCE 10
+ギアク2：COMBAT SKILL 12 ENDURANCE 10"""
+[[nodes.choices]]
+description = "もし勝つなら、291へ進め。"
+next_node_id = "291"
+
+[[nodes]]
+id = "139"
+type = "story"
+text = """内庭は活動で賑わっている。騎兵斥候が大広間内の指揮官からの伝言を待つ傍ら、神経質な馬のそばに立つ。命令を迅速に外郭陣地の守備者に届け、去るや否や、他の斥候が息を切らし、傷ついて戻る。
+庭を十数歩進むと、深い声が響く。「その男を止めろ！」"""
+[[nodes.choices]]
+description = "66へ進め。"
+next_node_id = "66"
+
+[[nodes]]
+id = "140"
+type = "story"
+text = """空き地にいる。いくつかの木が切り倒され、粗末な監視塔が作られている。塔の下には3つの異なる方向へ続く道がある。"""
+[[nodes.choices]]
+description = "もし南の道を取るなら、14へ進め。"
+next_node_id = "14"
+[[nodes.choices]]
+description = "もし東の道を取るなら、252へ進め。"
+next_node_id = "252"
+[[nodes.choices]]
+description = "もし南西の道を取るなら、215へ進め。"
+next_node_id = "215"
+[[nodes.choices]]
+description = "もし監視塔に登るなら、36へ進め。"
+next_node_id = "36"
+
+[[nodes]]
+id = "141"
+type = "story"
+text = """第六の感覚が警告する。修道院を襲った生物の一部が、生き残りを求めて二つの道を捜索している。しかし、森の下草を通れば両方の道を避けられる。"""
+[[nodes.choices]]
+description = "もし南へ進むなら、56へ進め。"
+next_node_id = "56"
+[[nodes.choices]]
+description = "または、より深い葉の下を北東へ進むなら、333へ進め。"
+next_node_id = "333"
+
+[[nodes]]
+id = "142"
+type = "story"
+text = """灰白色の高壁と輝くホルムガードの尖塔が見える。城壁の旗が朝の新鮮な風に揺れる。西へ伸びるエレディル川は、ダーンクラグ山脈からホルムガルフへ流れる。しかし、山の峰の下には、巨大な黒い軍が容赦なく首都へ進軍している。
+右には、なだらかな平原を越えてホルムガードへ続く街道がある。走れば1時間で都市の外郭陣地に着くが、ほとんどの時間、クラーンの攻撃に晒される。目の前には、ゆったりとエレディルへ流れる広い泥の川がある。川岸の陰を利用し、首都へ泳ぐこともできる。あるいは左には古の墓地がある。忘れられた時代の墓や崩れた記念碑は君の接近を隠すが、禁じられた場所だ。そこには名もなき恐怖が眠り、迂闊な侵入者を喰らうのを待っている。"""
+[[nodes.choices]]
+description = "もし街道で運を試すなら、58へ進め。"
+next_node_id = "58"
+[[nodes.choices]]
+description = "もし川を通って首都に着く方が良いと考えるなら、135へ進め。"
+next_node_id = "135"
+[[nodes.choices]]
+description = "または、古の墓地の知られざる危険を冒すなら、102へ進め。"
+next_node_id = "102"
+
+[[nodes]]
+id = "143"
+type = "story"
+text = """すぐに森から主要な街道に出る。北のトラン港と南の首都を結ぶ道だと分かる。馬を駆り、朝までに首都に着くと見込む。"""
+[[nodes.choices]]
+description = "149へ進め。"
+next_node_id = "149"
+
+[[nodes]]
+id = "144"
+type = "story"
+text = """大通りを人々の群れを押し分け、遠くの城塞へ向かう。市民はクラーンの叫び声が上空で響く中、パニックに駆られて走り回る。
+押し合いで、バックパックから1つのアイテムが盗まれる。バックパックがない、またはアイテムがない場合、武器を1つ失う。アクションチャートからこれを除け。
+暴走する馬車が通り過ぎ、君を扉に叩きつける。呆然とし、ENDURANCEを2ポイント失う。立ち上がると、扉が開き、狂った老人が肉切り包丁で襲いかかる。彼は完全に正気を失っており、戦うか回避せねばならぬ。"""
+[[nodes.choices]]
+description = "もし戦うなら、63へ進め。"
+next_node_id = "63"
+[[nodes.choices]]
+description = "もし戦いを避けるなら、217へ進め。"
+next_node_id = "217"
+
+[[nodes]]
+id = "145"
+type = "story"
+text = """まるで馬車に轢かれたかのようだ。前に倒れ、闇が君を覆う前に覚えている最後のことは、砂の道の味と背中の激しい痛みだ。"""
+[[nodes.choices]]
+description = "165へ進め。"
+next_node_id = "165"
+
+[[nodes]]
+id = "146"
+type = "story"
+text = """約1マイル乗ると、矢が額を掠め、馬から落とされる。ENDURANCEを3ポイント失う。
+立ち上がると、道の両側の森からドラッカリムの巡視隊が現れる。待ち伏せされ、森へ急いで逃げねばならぬ。"""
+[[nodes.choices]]
+description = "154へ進め。"
+next_node_id = "154"
+
+[[nodes]]
+id = "147"
+type = "story"
+text = """数分歩くと、道から外れた苔むした小屋を見つける。空腹で、ここで食事を取らねば、ENDURANCEを3ポイント失う。食べながら、道が東へ曲がり始めるのに気づく。"""
+[[nodes.choices]]
+description = "もしその道を進むなら、42へ進め。"
+required_item = "Meal"
+next_node_id = "42"
+[[nodes.choices]]
+description = "もし来た道を戻るなら、28へ進め。"
+required_item = "Meal"
+next_node_id = "28"
+
+[[nodes]]
+id = "148"
+type = "story"
+text = """扉を蹴り開け、農家に飛び込む。クラーンが上空を飛び、獲物を爪に吊るして勝利の叫びを上げる。立ち上がると、誰もいない。暖炉に立てかけられたウォーハンマーがある。望むならこの武器を取れる。"""
+[[nodes.choices]]
+description = "もし農家に留まるなら、81へ進め。"
+next_node_id = "81"
+[[nodes.choices]]
+description = "もし森の方が安全と感じ、走るなら、320へ進め。"
+next_node_id = "320"
+[[nodes.choices]]
+description = "もし部屋をさらに調べるなら、199へ進め。"
+next_node_id = "199"
+
+[[nodes]]
+id = "149"
+type = "story"
+text = """街道を進むと、光が悪くなる。まもなく完全な闇になり、危険が見えなくなる。森の縁に隠れ、朝まで休むことにする。
+誰も見ていないと確信し、暖かい緑のカイのマントをまとい、落ち着かない眠りに落ちる。"""
+[[nodes.choices]]
+description = "256へ進め。"
+next_node_id = "256"
+
+[[nodes]]
+id = "150"
+title = "Paragraph 150"
+description = """やや火が通りすぎているが、食事は美味で（1食分には足りないが）、清水が喉の渇きを癒す。
+この家で約30分休息したが、遅延に気づく。
+装備を整え、去る。"""
+[[nodes.outcomes]]
+next_node_id = "83"
+
+[[nodes]]
+id = "151"
+title = "Paragraph 151"
+description = """鍵穴に集中すれば、錠の仕組みを動かし、開けられる。ピンを浮かせ、錠板から外し、扉が開く際に仕掛けられた罠を避けられる。"""
+[[nodes.options]]
+text = "もしカイの物質支配の技を使って錠を開け、ピンを浮かせるなら"
+[[nodes.options]]
+text = "もしピンを取り除くなら"
+[[nodes.outcomes]]
+next_node_id = "87"
+[[nodes.outcomes]]
+next_node_id = "337"
+
+[[nodes]]
+id = "152"
+title = "Paragraph 152"
+description = """薬草師が特別な薬の数々を勧める。力を増すもの、不可視にするもの、隠密の力を与えるもの、気体に変身する力を与えるものがある。男がカウンターの下の引き出しを開け、壮大な杖を見せる。それはすべての邪悪な生物に対する強力な武器で、戦いで無敵にすると言う。黒い杖に刻まれた神秘的な銘文を指す。"""
+[[nodes.options]]
+text = "もしカウンターに身を乗り出し、奇妙な銘文を読むなら"
+[[nodes.options]]
+text = "もし薬に興味があるなら"
+[[nodes.outcomes]]
+next_node_id = "49"
+[[nodes.outcomes]]
+next_node_id = "231"
+
+[[nodes]]
+id = "153"
+title = "Paragraph 153"
+description = """目の前に、灰白色の高壁と輝くホルムガードの尖塔がある。城壁の旗が朝の新鮮な風に揺れる。西へ伸びるエレディル川は、ダーンクラグ山脈からホルムガルフへ流れる。しかし、山の峰の下には、巨大な黒い軍が容赦なく首都へ進軍している。
+右には、なだらかな平原を越えてホルムガードへ続く街道がある。疾駆すれば1時間足らずで都市の外郭陣地に着くが、ほとんどの時間、クラーンの攻撃に晒される。目の前には、ゆったりとエレディルへ流れる広い川がある。馬を捨て、川岸の陰を利用して外郭陣地へ泳ぐことができる。あるいは、左には古の墓地がある。忘れられた時代の墓や崩れた記念碑は接近を隠すが、禁じられた場所だ。そこには名もなき恐怖が眠り、迂闊な侵入者を喰らうのを待っている。"""
+[[nodes.options]]
+text = "もし街道で運を試すなら"
+[[nodes.options]]
+text = "もし川を通って首都に着く方が良いと考えるなら"
+[[nodes.options]]
+text = "または、古の墓地の知られざる危険を冒すなら"
+[[nodes.outcomes]]
+next_node_id = "202"
+[[nodes.outcomes]]
+next_node_id = "135"
+[[nodes.outcomes]]
+next_node_id = "329"
+
+[[nodes]]
+id = "154"
+title = "Paragraph 154"
+description = """傷で目眩がし、木々の間を盲人のようによろめく。
+突然、地面が消えたように前に倒れ、狩猟の落とし穴に頭から落ちる。上を見ると、4人のドラッカリムが弓を構え、醜い顔に同時に邪悪な笑みが広がる。
+世界が暗くなる中、最後に感じるのは胸に深く刺さる黒い矢だ。君の任務は失敗に終わる。"""
+
+[[nodes]]
+id = "155"
+title = "Paragraph 155"
+description = """近づくと、集団が話を止める。彼らの表情から、君の緑のカイのマントを認識したと分かる。ゆっくりと一人の男が手を差し出し、友情を示し、言う。「我が君、カイが滅んだとの噂を聞いた。天に感謝、噂は本当ではなかった。我々はすべてが失われたと恐れていた。」
+修道院の破壊は告げない。彼らはトランからの難民で、すべてを失っている。彼らの唯一の希望は、カイの領主が勝利へ軍を率いることだ。北部港が空と海から攻撃され、ダークロードの軍が王の勇敢な守備隊を遥かに上回ったと知る。ソマーランドは陥落しないと励まし、彼らの旅の幸運を祈る。"""
+[[nodes.outcomes]]
+next_node_id = "70"
+
+[[nodes]]
+id = "156"
+title = "Paragraph 156"
+description = """黒い矢が周囲の泥に突き刺さる。川岸の急な斜面にさらにギアクが現れ、君を狙っている。こちら側の川には隠れる場所がない。"""
+[[nodes.options]]
+text = "もし水に飛び込み、流れに乗るなら"
+[[nodes.options]]
+text = "もし対岸の木々の陰に泳ぐなら"
+[[nodes.outcomes]]
+next_node_id = "294"
+[[nodes.outcomes]]
+next_node_id = "245"
+
+[[nodes]]
+id = "157"
+title = "Paragraph 157"
+description = """森が薄くなり、ついに前方に木々の間を通る道が見える。街道は南へ向かう人で溢れ、多くの者が手押し車に荷物を積んでいる。"""
+[[nodes.options]]
+text = "もし難民に加わり、北で何が起きたか知るなら"
+[[nodes.options]]
+text = "もし木々の陰を南へ進むなら"
+[[nodes.outcomes]]
+next_node_id = "30"
+[[nodes.outcomes]]
+next_node_id = "167"
+
+[[nodes]]
+id = "158"
+title = "Paragraph 158"
+description = """鍵が合い、錠が開く。扉を引き開けると、奇妙な老人と対峙する。彼の右手には杖がある。突然、杖から雷が放たれ、胸に直撃する。ENDURANCEを6ポイント失う。痛みに喘ぎ、老人を押し退け、日光へ向かって急な階段を駆け上がる。階段の半ばで、彼が再び雷を放つ。
+ランダムナンバーテーブルから数字を一つ選べ。
+0～5なら、雷は外れ、壁の一部を砕く。
+6～9なら、背中に当たり、さらにENDURANCEを4ポイント失う。
+生き延びれば、日光によろめき出て、不運を呪う。邪悪なドルイドの秘密の寺院を発見したのは不運な偶然だった。命を保てたのは幸運だ。急いで丘を越える道に戻る。"""
+[[nodes.options]]
+text = "もし数字が0～5なら、雷は外れ、壁の一部を砕く。"
+[[nodes.options]]
+text = "もし6～9なら、背中に当たり、さらにENDURANCEを4ポイント失う。"
+[[nodes.outcomes]]
+next_node_id = "106"
+[[nodes.outcomes]]
+next_node_id = "106"
+
+[[nodes]]
+id = "159"
+title = "Paragraph 159"
+description = """策略は失敗し、商人はキャラバンへの入場を許さない。突然、彼が指を鳴らし、護衛がシミターの柄を握る。"""
+[[nodes.options]]
+text = "彼と戦うなら、191へ進め。"
+[[nodes.options]]
+text = "または、疾走するキャラバンから飛び降りる。"
+[[nodes.outcomes]]
+next_node_id = "191"
+[[nodes.outcomes]]
+next_node_id = "234"
+
+[[nodes]]
+id = "160"
+title = "Paragraph 160"
+description = """ランダムナンバーテーブルから数字を一つ選べ。
+0～4なら、君は見つかった。
+5～9なら、彼らは君を見ず、尾根の向こう側にゆっくりと去る。"""
+[[nodes.options]]
+text = "もし0～4なら、君は見つかった。"
+[[nodes.options]]
+text = "もし5～9なら、彼らは君を見ず、尾根の向こう側にゆっくりと去る。"
+[[nodes.outcomes]]
+next_node_id = "286"
+[[nodes.outcomes]]
+next_node_id = "10"
+
+[[nodes]]
+id = "161"
+title = "Paragraph 161"
+description = """座ると、石の蛇が台座の上でゆっくりと動き出す。冷や汗をかき、震える指で武器を握り、攻撃に備える。奇妙な像の頭から赤い二股の舌が現れ、頭上の緑の光の鉢に浸る。舌が再び現れ、驚くことに金の鍵を君の膝に落とす。東の壁のパネルが開き、出口が現れる。
+鍵を取り、急いで去る。"""
+[[nodes.outcomes]]
+next_node_id = "209"
+
+[[nodes]]
+id = "162"
+title = "Paragraph 162"
+description = """男たちに近づき、呼びかける。彼らが振り返ると、肌が冷え、心臓が鼓動する。彼らは変装したドラッカリムだ。突然、君に襲いかかり、地面に倒され、縄で縛られ、道に沿って引きずられる。バックパックと武器を取られるが、マントは調べられず、ゴールドクラウンは見つからない。彼らは不気味に笑い、キャンプでの拷問を長々と語る。"""
+[[nodes.options]]
+text = "もしカイの物質支配の技を持っているなら"
+[[nodes.options]]
+text = "もしその技を持っていないなら"
+[[nodes.outcomes]]
+next_node_id = "258"
+[[nodes.outcomes]]
+next_node_id = "127"
+
+[[nodes]]
+id = "163"
+title = "Paragraph 163"
+description = """約30分後、流れが強くなる。川の表面を見ると、大きな曲がり角の中央に渦が見える。その流れに巻き込まれれば、溺れるのは確実だ。急いで右の川岸へ泳ぎ、すべての装備を持ち、徒歩で任務を続ける。"""
+[[nodes.outcomes]]
+next_node_id = "321"
+
+[[nodes]]
+id = "164"
+title = "Paragraph 164"
+description = """各瓶の封を慎重に開け、匂いを嗅ぐ。すべて異なる種類のワインのようだ。突然、他の瓶の後ろに隠れた小さな瓶が目に入る。ガラス栓を抜くと、オレンジ色の力の薬、アレサーの匂いだと分かる。
+この薬を保持し、戦う前に飲めば、戦闘中COMBAT SKILLを2ポイント増やせる。アクションチャートに記録し、使用後は除け。
+馬屋を調べるため、308へ進む。"""
+[[nodes.outcomes]]
+next_node_id = "308"
+
+[[nodes]]
+id = "165"
+title = "Paragraph 165"
+description = """熱にうなされ目覚める。目の前で像が泳ぎ、やがて消える。背中の痛みは激しく、救いを求めて叫ぶ。額に冷たい湿った布が置かれ、若い女性の心配そうな顔が垣間見える。老人が彼女の耳に囁き、姿を消す。少女が君のそばに跪き、優しく安心させる言葉をかけるが、光は急速に消え、再び闇が君を飲み込む。"""
+[[nodes.outcomes]]
+next_node_id = "212"
+
+[[nodes]]
+id = "166"
+title = "Paragraph 166"
+description = """偉大な悪の存在を感じる。強力で永遠の存在が君の心を探り、守らねばならぬ。精神の戦いが始まり、正気が賭けられている。長く苦しい試練で、誘惑し、恐怖を与える多くの幻想や恐ろしい幻影を経験する。この後、ENDURANCEを4ポイント失い、トンネルへよろめく。"""
+[[nodes.outcomes]]
+next_node_id = "104"
+
+[[nodes]]
+id = "167"
+title = "Paragraph 167"
+description = """約1マイル進むと、大きな岩の後ろから2本の足が突き出ているのに気づく。"""
+[[nodes.options]]
+text = "もしカイの第六の感覚の技を持ち、使うなら"
+[[nodes.options]]
+text = "もし近づいて見るなら"
+[[nodes.options]]
+text = "もしその持ち主との遭遇を避け、森へ進むなら"
+[[nodes.outcomes]]
+next_node_id = "178"
+[[nodes.outcomes]]
+next_node_id = "88"
+[[nodes.outcomes]]
+next_node_id = "264"
+
+[[nodes]]
+id = "168"
+title = "Paragraph 168"
+description = """豪華なキャラバンの屋根に登り、旅行鞄や袋の間に身を潜める。まもなく夜が街道を飲み込む。西からの冷たい風にマントをまとい、暖を取る。下の声に耳を傾け、食欲をそそる香辛料の効いた肉の香りがする。空腹を思い出し、食事を取らねばならぬ。試練の疲れが押し寄せ、落ち着かない眠りに落ちる。"""
+[[nodes.outcomes]]
+next_node_id = "64"
+
+[[nodes]]
+id = "169"
+title = "Paragraph 169"
+description = """各頭蓋骨を通過するたび、ゆっくりと動き、君の動きを見ているようだ。部屋の半ばで、骨が割れる鋭い音が響く。突然、頭蓋骨の中で恐ろしい形が生まれ、翼を広げる。
+10匹のぬめった翼の生物が襲いかかり、一体の敵として戦わねばならぬ。
+墓地の落とし子：COMBAT SKILL 16 ENDURANCE 16
+戦闘の1ラウンド後に戦いを避け、拱門へ走るなら、23へ進め。
+戦いに勝つなら、137へ進め。"""
+[[nodes.outcomes]]
+next_node_id = "23"
+[[nodes.outcomes]]
+next_node_id = "137"
+
+[[nodes]]
+id = "170"
+title = "Paragraph 170"
+description = """トンネルは暗く、外よりはるかに冷たい。方向感覚を助けるため、片手を壁に当てて慎重に進む。3分間完全な闇の中を進むと、前方から腐った肉のような悪臭がする。バックパックに松明と火口箱があれば、松明を点けて前を見られる。
+突然、トンネルの天井から重いものが背中に落ち、膝をつく。それはバロウクローラーで、長いぬめった触手で君を絞めようとする。
+バロウクローラー：COMBAT SKILL 17 ENDURANCE 7
+松明がない場合、この戦闘中COMBAT SKILLを3ポイント減らせ。バロウクローラーはマインドブラストと動物親和に耐性がある。"""
+[[nodes.outcomes]]
+next_node_id = "319"
+
+[[nodes]]
+id = "171"
+title = "Paragraph 171"
+description = """森の縁に着く瞬間、馬が苦痛に嘶く。クラーンが馬の後脚に爪を深く突き刺し、翼で君を地面に叩きつけようとする。幽鬼のようなギアクの騎手が槍で刺しながら歓喜の叫びを上げる。地面に飛び降り、木々へ走り、死にゆく馬をクラーンの爪に残す。"""
+[[nodes.outcomes]]
+next_node_id = "303"
+
+[[nodes]]
+id = "172"
+title = "Paragraph 172"
+description = """夜が落ち、すぐに闇に包まれる。これ以上進むのは無益で、道を見失うだろう。馬を木に繋ぎ、緑のカイのマントをまとい、落ち着かない眠りに落ちる。
+遠くの軍の音で目覚める。湖の向こうにドラッカリムとドゥームウルフの群れの黒い影が見える。木々の上からクラーンが現れ、小さな木の小屋の屋根に着地する。赤いローブの生物が乗っている。クラーンが飛び立ち、君が隠れる湖のこちら側へ向かう。"""
+[[nodes.options]]
+text = "もしカイの偽装の技を使って自分と馬を隠すなら"
+[[nodes.options]]
+text = "もしクラーンから逃れるため森の奥へ乗るなら"
+[[nodes.options]]
+text = "もしその生物と戦う準備をするなら"
+[[nodes.outcomes]]
+next_node_id = "114"
+[[nodes.outcomes]]
+next_node_id = "239"
+[[nodes.outcomes]]
+next_node_id = "29"
+
+[[nodes]]
+id = "173"
+title = "Paragraph 173"
+description = """扉に着くと、巨大な石板が天井から落ちる音がする。振り返ると、出口が完全に塞がれている。"""
+[[nodes.options]]
+text = "もし銀の鍵を持っているなら、それで扉を開けるなら、158へ進め。"
+[[nodes.options]]
+text = "もし銀の鍵を持っていないなら"
+[[nodes.outcomes]]
+next_node_id = "158"
+[[nodes.outcomes]]
+next_node_id = "259"
+
+[[nodes]]
+id = "174"
+title = "Paragraph 174"
+description = """約1時間川を下ると、水流が強くなる。川が大きく曲がる中央に渦が見え、巻き込まれれば水死は確実だ。泥の川に飛び込み、岸へ泳ぐが、残念ながらバックパックと武器を失う。装備なしで、森の岸にたどり着く。"""
+[[nodes.outcomes]]
+next_node_id = "190"
+
+[[nodes]]
+id = "175"
+title = "Paragraph 175"
+description = """近づく騎兵に手を振ると、彼らが王の軍の国境騎兵、西部国境を警備するタフな森の者だと分かる。喜びも束の間、唸るギアクの騎手と共にドゥームウルフの群れから逃れていると気づく。黒い矢が騎兵の周囲に降り注ぎ、獰猛なドゥームウルフが迫る。"""
+[[nodes.options]]
+text = "もしカイの偽装の技を持っているなら"
+[[nodes.options]]
+text = "もし隠れて身を潜めるなら"
+[[nodes.options]]
+text = "もし対岸へ向かうなら"
+[[nodes.outcomes]]
+next_node_id = "182"
+[[nodes.outcomes]]
+next_node_id = "41"
+[[nodes.outcomes]]
+next_node_id = "116"
+
+[[nodes]]
+id = "176"
+title = "Paragraph 176"
+description = """白い馬が見えないよう、密な茂みの陰に隠れる。幸い成功し、ドゥームウルフとその騎手は通り過ぎ、来た道を消える。"""
+[[nodes.options]]
+text = "もし残りのドゥームウルフとその騎手を攻撃するなら"
+[[nodes.options]]
+text = "もし森の奥へ進むなら"
+[[nodes.outcomes]]
+next_node_id = "253"
+[[nodes.outcomes]]
+next_node_id = "126"
+
+[[nodes]]
+id = "177"
+title = "Paragraph 177"
+description = """小さな小屋のすべての戸棚を調べるが、役立つものや価値あるものは見つからない。ここで時間を無駄にしたと気づき、遅滞なく先に進まねばならぬ。"""
+[[nodes.outcomes]]
+next_node_id = "83"
+
+
+[[nodes]]
+id = "178"
+title = "Paragraph 178"
+description = """君の技により、王の兵士のブーツと脚絆を認識する。男が傷つき、助けを必要としていることを感じる。"""
+[[nodes.options]]
+text = "もし彼を助けるなら"
+[[nodes.options]]
+text = "もし彼をここに残すなら"
+[[nodes.outcomes]]
+next_node_id = "88"
+[[nodes.outcomes]]
+next_node_id = "264"
+
+[[nodes]]
+id = "179"
+title = "Paragraph 179"
+description = """衛兵に見つかり、クロスボウを向けられる。"""
+[[nodes.options]]
+text = "もし両手を頭上に挙げ、ゆっくりと近づくなら"
+[[nodes.options]]
+text = "もし木々の陰に逃げるなら"
+[[nodes.outcomes]]
+next_node_id = "318"
+[[nodes.outcomes]]
+next_node_id = "51"
+
+[[nodes]]
+id = "180"
+title = "Paragraph 180"
+description = """君が武器を構えるのを見て、彼らが即座に襲いかかる。戦うなら、一人ずつ相手せねばならぬ。
+リーダー：COMBAT SKILL 15 ENDURANCE 22
+兵士1：COMBAT SKILL 13 ENDURANCE 20
+兵士2：COMBAT SKILL 12 ENDURANCE 20
+3人全員を倒すなら、62へ進め。
+戦闘を回避するなら、22へ進め。"""
+[[nodes.outcomes]]
+next_node_id = "62"
+[[nodes.outcomes]]
+next_node_id = "22"
+
+[[nodes]]
+id = "181"
+title = "Paragraph 181"
+description = """本能的に身をかがめ、クロスボウの矢を避ける。盗賊が発射し、矢が左腕をかすめ、ジャケットの袖が裂ける。幸運に感謝し、走り続ける。
+他の盗賊に弓はなく、すぐに追跡を諦める。遠くへ走り、彼らを置き去りにする。武器と装備は失ったが、命は保った。
+傷ついた腕を縛り、首都の外郭陣地へ向かって進む。"""
+[[nodes.outcomes]]
+next_node_id = "288"
+
+[[nodes]]
+id = "182"
+title = "Paragraph 182"
+description = """3人の騎兵が川岸を駆け抜け、唸るドゥームウルフに乗ったギアクが続く。しかし、君の偽装の技が発見を防いだ。邪悪なギアクの群れは川を見ず、追跡を続ける。"""
+[[nodes.outcomes]]
+next_node_id = "174"
+
+[[nodes]]
+id = "183"
+title = "Paragraph 183"
+description = """士官が部下に停止を命じ、君の目的を尋ねる。君は自分の正体と修道院の壊滅を告げる。彼は悲しみを深く感じ、馬を貸し、王の息子ペラサー王子に同行するよう頼む。"""
+[[nodes.options]]
+text = "もし受け入れるなら"
+[[nodes.options]]
+text = "もしその申し出を断るなら"
+[[nodes.outcomes]]
+next_node_id = "97"
+[[nodes.outcomes]]
+next_node_id = "200"
+
+[[nodes]]
+id = "184"
+title = "Paragraph 184"
+description = """キャラバンは制御を失い、街道脇の荒れた地面を激しく揺れる。苦労して怯えた馬を道に戻し、キャラバンを止める。
+内部を調べると、40ゴールドクラウン、剣、4食分の食料が見つかる。望むならこれらをアクションチャートに記録せよ。
+試練の疲れが押し寄せ、食事を取った後、深い眠りに落ちる。"""
+[[nodes.outcomes]]
+next_node_id = "64"
+
+[[nodes]]
+id = "185"
+title = "Paragraph 185"
+description = """目を細め、隠れた射手を木々の間に探す。待つ間もなく、胸を突き刺す激痛と、3本の矢の衝撃で後ろに倒れる。2本の黒い矢が肋骨に深く刺さり、3本目が太ももを貫く。
+最後に見るのは、頭上のシダの木々と、ベルトのバックルに止まる大きな緑のトンボだ。
+君の命と任務はここで終わる。"""
+
+[[nodes]]
+id = "186"
+title = "Paragraph 186"
+description = """カカルミが密な下草に消え、すぐに道に迷う。約2時間歩くと、流水の音が聞こえる。近くを調べることにする。"""
+[[nodes.outcomes]]
+next_node_id = "106"
+
+[[nodes]]
+id = "187"
+title = "Paragraph 187"
+description = """木の幹の上に毛むくじゃらの顔が2つ現れる。両方の目が君の武器を凝視し、2匹の生物が恐怖の叫びを上げる。幹から飛び降り、森へ消える。"""
+[[nodes.options]]
+text = "もし彼らを追うなら"
+[[nodes.options]]
+text = "もし彼らを放し、進むなら"
+[[nodes.outcomes]]
+next_node_id = "186"
+[[nodes.outcomes]]
+next_node_id = "228"
+
+[[nodes]]
+id = "188"
+title = "Paragraph 188"
+description = """クラーンの影が周囲に大きく広がる。突然襲いかかり、その力で君を顔から地面に叩きつける。
+ランダムナンバーテーブルから数字を一つ選べ。
+0～6なら、クラーンがバックパックを裂き、内部の装備すべてを失う。
+7～9なら、バックパックは無事だが両腕に傷を負い、ENDURANCEを3ポイント失う。木々へ走れ。"""
+[[nodes.options]]
+text = "もし選んだ数字が0～6なら、クラーンがバックパックを裂き、内部の装備すべてを失う。"
+[[nodes.options]]
+text = "もし7～9なら、バックパックは無事だが両腕に傷を負い、ENDURANCEを3ポイント失う。木々へ走れ。"
+[[nodes.outcomes]]
+next_node_id = "303"
+[[nodes.outcomes]]
+next_node_id = "303"
+
+[[nodes]]
+id = "189"
+title = "Paragraph 189"
+description = """カイの訓練と素早い思考に感謝する。この沼はドラッカリムやクラーンと同じく致命的だったかもしれない。
+時間を失う心配から、木々の間を南へ急ぐ。目の前に、南へ続く広い道が見える。"""
+[[nodes.outcomes]]
+next_node_id = "118"
+
+[[nodes]]
+id = "190"
+title = "Paragraph 190"
+description = """水辺を3マイル歩くと、難破した川船に出くわす。甲板の穴からベッドや調理器具が見え、誰かが避難所として使ったようだ。"""
+[[nodes.options]]
+text = "もし船を調べるなら"
+[[nodes.options]]
+text = "もし先に進むなら"
+[[nodes.outcomes]]
+next_node_id = "20"
+[[nodes.outcomes]]
+next_node_id = "273"
+
+[[nodes]]
+id = "191"
+title = "Paragraph 191"
+description = """護衛が大きなシミターを抜き、君の頭を狙う。
+護衛：COMBAT SKILL 11 ENDURANCE 21
+勝つなら、24へ進め。
+戦闘中に戦いを避けたいなら、疾走するキャラバンから飛び降り、234へ進め。"""
+[[nodes.outcomes]]
+next_node_id = "24"
+[[nodes.outcomes]]
+next_node_id = "234"
+
+[[nodes]]
+id = "192"
+title = "Paragraph 192"
+description = """ドゥームウルフの鋭い牙の口と、ギアクの恐ろしい叫び声が見える。2人が君にまっすぐ向かってくる。馬が襲い来る獣に飛びかかり、両者を地面に倒すことで死を免れる。ギアクに斬りつけ、頭に大きな傷を負わせる。突然、奇跡のように群れを抜け、街道を疾走し、他の敵を置き去りにする。
+しかし、影が追う。クラーンが急降下を始め、標的は君だ。"""
+[[nodes.options]]
+text = "もし街道を外れ、木々の陰へ向かうなら"
+[[nodes.options]]
+text = "もしクラーンを無視し、街道を全力で疾走するなら"
+[[nodes.outcomes]]
+next_node_id = "171"
+[[nodes.outcomes]]
+next_node_id = "120"
+
+[[nodes]]
+id = "193"
+title = "Paragraph 193"
+description = """獣とその騎手は死に、ギアクのベルトに巻物が挟まっている。望むなら取り、アクションチャートに記録せよ。他のドゥームウルフが道を突進してくる。"""
+[[nodes.options]]
+text = "もし彼らと戦うなら"
+[[nodes.options]]
+text = "もし森へ逃げるなら"
+[[nodes.outcomes]]
+next_node_id = "253"
+[[nodes.outcomes]]
+next_node_id = "126"
+
+[[nodes]]
+id = "194"
+title = "Paragraph 194"
+description = """荷車へ走る。人々はクラーンの攻撃でパニックに陥り、犠牲者が暗い空へ連れ去られる。大きなクラーンが荷車の上に浮かび、3人の唸るギアクが背から驚いた馬に飛び降りる。彼らと戦うか、近くの農家へ走り、身の安全を確保せねばならぬ。"""
+[[nodes.options]]
+text = "もしギアクと戦うなら"
+[[nodes.options]]
+text = "もし農家へ走るなら"
+[[nodes.outcomes]]
+next_node_id = "208"
+[[nodes.outcomes]]
+next_node_id = "148"
+
+[[nodes]]
+id = "195"
+title = "Paragraph 195"
+description = """熊の血を武器から拭い、熊が襲ってきた岩の背後に洞窟の入口があるのに気づく。"""
+[[nodes.options]]
+text = "もしこの洞窟をさらに調べるなら"
+[[nodes.options]]
+text = "もし先に進むなら"
+[[nodes.outcomes]]
+next_node_id = "59"
+[[nodes.outcomes]]
+next_node_id = "106"
+
+[[nodes]]
+id = "196"
+title = "Paragraph 196"
+description = """男に従い、大広間脇の小さな図書室に入る。彼は四方の壁を埋める本棚の一つを押すと、金属のクリック音が聞こえる。本棚の一部がゆっくりと滑り、隠された通路が現れる。"""
+[[nodes.options]]
+text = "もし男に従い通路に入るなら"
+[[nodes.options]]
+text = "もし暗い廊下に入りたくなく、ギルドホールを出て通りへ戻るなら"
+[[nodes.outcomes]]
+next_node_id = "332"
+[[nodes.outcomes]]
+next_node_id = "144"
+
+[[nodes]]
+id = "197"
+title = "Paragraph 197"
+description = """ドラッカリムがフェリーの底で死んでいる。彼は短剣と6ゴールドクラウンを持っており、望むなら保持できる。死体を水に押し込むと、数秒浮かび、冷たい深みへ消える。
+竿を握り、湖の対岸へ操り、フェリーを捨てる。"""
+[[nodes.outcomes]]
+next_node_id = "172"
+
+[[nodes]]
+id = "198"
+title = "Paragraph 198"
+description = """屏風の後ろに誰かがいると感じる。この店には邪悪な雰囲気が漂う。警戒せよ、ここには何か問題がある。"""
+[[nodes.options]]
+text = "もし通りに戻るなら"
+[[nodes.options]]
+text = "もしガラスカウンターの商品を調べるなら"
+[[nodes.outcomes]]
+next_node_id = "7"
+[[nodes.outcomes]]
+next_node_id = "152"
+
+[[nodes]]
+id = "199"
+title = "Paragraph 199"
+description = """ほとんどの戸棚と引き出しは空だ。ここに住んでいた者はほぼ全てを持ち去ったが、地下室で1食分の果物を集める。アクションチャートに記録せよ。"""
+[[nodes.outcomes]]
+next_node_id = "81"
+
+[[nodes]]
+id = "200"
+title = "Paragraph 200"
+description = """夜が迫り、森の影が長く暗くなる。休息しようとした時、木々の間から南へ向かう人々の列が見える。近づくと、埃っぽい街道の中央に大きな商人のキャラバンがある。6頭の大きな馬に引かれ、他の通行者より速く進む。これが首都へ最速で着く機会かもしれない。"""
+[[nodes.options]]
+text = "もしカイの偽装の技を使い、屋根に積まれた荷箱に隠れるなら"
+[[nodes.options]]
+text = "もしキャラバンに飛び乗るなら"
+[[nodes.outcomes]]
+next_node_id = "168"
+[[nodes.outcomes]]
+next_node_id = "78"
+
+[[nodes]]
+id = "201"
+title = "Paragraph 201"
+description = """粗い道を約1時間進むと、広い道が南に分岐しているのが見える。"""
+[[nodes.options]]
+text = "もし新しい南の道を進むなら"
+[[nodes.options]]
+text = "もし東へ進むなら"
+[[nodes.options]]
+text = "もし西へ進むなら"
+[[nodes.outcomes]]
+next_node_id = "238"
+[[nodes.outcomes]]
+next_node_id = "15"
+[[nodes.outcomes]]
+next_node_id = "130"
+
+[[nodes]]
+id = "202"
+title = "Paragraph 202"
+description = """馬を急かし、首都へ続く長い街道を疾走する。数分後、馬が急に減速し、ついに足を引きずって止まる。降りて右前脚を調べると、蹄鉄を失い、蹄がひどく傷ついている。不運を呪い、馬を残し、徒歩で急いで進む。"""
+[[nodes.outcomes]]
+next_node_id = "58"
+
+[[nodes]]
+id = "203"
+title = "Paragraph 203"
+description = """突然、胸を焼く痛みが走り、赤い火花のシャワーで何かが爆発する。
+ENDURANCEを10ポイント失う。煙の中、賢者がさらなる爆薬を投げる準備をしている。"""
+[[nodes.options]]
+text = "もしENDURANCEが10ポイント以上残っているなら"
+[[nodes.options]]
+text = "もし10ポイント未満なら"
+[[nodes.outcomes]]
+next_node_id = "80"
+[[nodes.outcomes]]
+next_node_id = "344"
+
+[[nodes]]
+id = "204"
+title = "Paragraph 204"
+description = """1時間歩くと、交差点に着く。道は南へ続き、西からの別の道が合流する。西の道は沼に戻ると気づき、南へ進む。"""
+[[nodes.outcomes]]
+next_node_id = "111"
+
+[[nodes]]
+id = "205"
+title = "Paragraph 205"
+description = """リーダーが君の捨てた装備を拾い、前方の道へ急かす。他の2人の男の顔に邪悪な笑みが広がり、彼らが兵士でないと気づく。脱出し、遠くの首都へ走る。
+背後で、クロスボウの引き金を引く不吉な音が背筋を凍らせる。
+ランダムナンバーテーブルから数字を一つ選べ。
+0～4なら、181へ進め。
+5～9なら、145へ進め。"""
+[[nodes.options]]
+text = "もし選んだ数字が0～4なら"
+[[nodes.options]]
+text = "もし5～9なら"
+[[nodes.outcomes]]
+next_node_id = "181"
+[[nodes.outcomes]]
+next_node_id = "145"
+
+[[nodes]]
+id = "206"
+title = "Paragraph 206"
+description = """道はすぐに街道に合流し、標識が北にトラン、南にホルムガードを示す。首都へ南に進む。"""
+[[nodes.outcomes]]
+next_node_id = "224"
+
+[[nodes]]
+id = "207"
+title = "Paragraph 207"
+description = """道は大きな道に続き、石橋で小川を渡る。橋の標識は北にトラン、南にホルムガードを示す。道は南へ向かう人で溢れ、荷物を手押し車で運ぶ者もいる。難民の列に加わり、首都へ向かう。"""
+[[nodes.outcomes]]
+next_node_id = "30"
+
+[[nodes]]
+id = "208"
+title = "Paragraph 208"
+description = """幽鬼のような生物が槍を突き出し、襲いかかる。一体の敵として戦え。
+ギアク：COMBAT SKILL 15 ENDURANCE 13
+勝つなら、農家の安全へ走り、148へ進め。
+または、森へ戻るなら、320へ進め。"""
+[[nodes.outcomes]]
+next_node_id = "148"
+[[nodes.outcomes]]
+next_node_id = "320"
+
+[[nodes]]
+id = "209"
+title = "Paragraph 209"
+description = """前方に上り坂の廊下が見え、頂上に着くと石の門が滑り、別の通路が現れる。
+開口部をくぐると、すぐにガリッと閉まる。"""
+[[nodes.outcomes]]
+next_node_id = "23"
+
+[[nodes]]
+id = "210"
+title = "Paragraph 210"
+description = """扉を入ると、ギルドホールの職人に止められ、侵入の理由を求められる。落ち着いて王への緊急の伝言を伝え、彼は君をギルドマスターの部屋へ急ぐ。
+紫のローブの気品ある老人が振り返り、君の話を聞く。腕を取られ、隣の図書室に導かれ、扉を閉める。何千もの本の一つを押し、壁の隠しパネルを開き、従うよう促す。"""
+[[nodes.options]]
+text = "もし暗い通路に彼に従うなら"
+[[nodes.options]]
+text = "もしこの男に完全な信頼がなく、ギルドホールを出るなら"
+[[nodes.outcomes]]
+next_node_id = "332"
+[[nodes.outcomes]]
+next_node_id = "37"
+
+[[nodes]]
+id = "211"
+title = "Paragraph 211"
+description = """薄暗い廊下を進むと、広い四角い部屋に出る。遠い壁にオークの扉がある。"""
+[[nodes.options]]
+text = "もしカイの第六の感覚の技を持っているなら"
+[[nodes.options]]
+text = "もし扉に歩くなら"
+[[nodes.options]]
+text = "もし地上に戻り、旅を続けるなら"
+[[nodes.outcomes]]
+next_node_id = "244"
+[[nodes.outcomes]]
+next_node_id = "173"
+[[nodes.outcomes]]
+next_node_id = "106"
+
+[[nodes]]
+id = "212"
+title = "Paragraph 212"
+description = """目覚めると、痛みは記憶だけだ。失ったENDURANCEを元の値に戻せ。白いローブの背の高い男が、薬草の鉢を持って立つ。葉を沸騰する釜に入れ、君に挨拶する。
+「カイの領主よ、死に近く、その顔を見たが、灰色の者が君をその群れに奪わなかった。肉体は癒されたが、魂に傷を負っている。何が君を悩ませる？」
+男は王の主任医師の一人で、袖の金の鳩の紋章がその尊敬される職業を示す。修道院の出来事と王への危険な旅を語る。
+優しく腕を引かれ、ベッドから起こされ、豪華な部屋からタペストリーの並ぶ長い廊下へ出る。ここがホルムガードの城塞だと気づく。
+王に会う時が来た。"""
+[[nodes.outcomes]]
+next_node_id = "350"
+
+[[nodes]]
+id = "213"
+title = "Paragraph 213"
+description = """約2時間森を歩き、迷った恐れが現実になる。遠くでクラーンの叫び声が時折聞こえる以外、この森に敵の気配はない。岩の丘を下ると、前方の木々の間に異常なものが見える。"""
+[[nodes.outcomes]]
+next_node_id = "331"
+
+[[nodes]]
+id = "214"
+title = "Paragraph 214"
+description = """道は徐々に狭まり、密な植生に完全に消える。このルートでは進めず、空き地に戻らねばならぬ。"""
+[[nodes.outcomes]]
+next_node_id = "125"
+
+[[nodes]]
+id = "215"
+title = "Paragraph 215"
+description = """小さな空き地に出る。中央に大きな動物の骨が残る。南に細い道が遠くへ続く。"""
+[[nodes.options]]
+text = "もし骨を調べるなら"
+[[nodes.options]]
+text = "もし先に進むなら"
+[[nodes.outcomes]]
+next_node_id = "346"
+[[nodes.outcomes]]
+next_node_id = "14"
+
+[[nodes]]
+id = "216"
+title = "Paragraph 216"
+description = """片手を額に、もう片手を傷ついた腕に置き、癒しの力が体から出て、傷ついた男に力を与える。
+彼はトリミスと名乗り、ペラサー王子の軍の兵士だと言う。王子と軍は南で、アレマの橋を攻撃するダークロードの生物の大軍と戦っている。戦闘中、クラーンに空中にさらわれ、森に落とされた。
+兵士をできる限り快適にし、任務を続ける。"""
+[[nodes.outcomes]]
+next_node_id = "264"
+
+[[nodes]]
+id = "217"
+title = "Paragraph 217"
+description = """狂人から素早く逃げ、小さな家々が密集する暗い路地に身をかわす。路地の端に緑の扉があり、上に看板がある。
+もし入るなら、91へ進め。
+狂人が消えたのを確認し、大通りへ戻るなら、7へ進め。"""
+[[nodes.options]]
+text = "もし入るなら"
+[[nodes.options]]
+text = "狂人が消えたのを確認し、大通りへ戻るなら"
+[[nodes.outcomes]]
+next_node_id = "91"
+[[nodes.outcomes]]
+next_node_id = "7"
+
+[[nodes]]
+id = "218"
+title = "Paragraph 218"
+description = """感覚が、馬だけでなく何かが近づいていると告げる。遠くでギアクの戦叫びの甲高い声が聞こえる。叫び声と呪いの数から、12人以上のギアクと、恐らくドゥームウルフがいると推測する。自分の存在を明かすのは賢明でないと気づく！"""
+[[nodes.outcomes]]
+next_node_id = "75"
+
+[[nodes]]
+id = "219"
+title = "Paragraph 219"
+description = """君の体は、立っていた階段に5フィート埋まり、巨大な花崗岩の下に潰される。
+任務と命はここで終わる。"""
+
+[[nodes]]
+id = "220"
+title = "Paragraph 220"
+description = """護衛がシミターを抜き、君の頭を狙う。
+護衛：COMBAT SKILL 11 ENDURANCE 20
+勝つなら、24へ進め。
+戦闘中に戦いを避けるなら、疾走するキャラバンから飛び降り、234へ進め。"""
+[[nodes.outcomes]]
+next_node_id = "24"
+[[nodes.outcomes]]
+next_node_id = "234"
+
+[[nodes]]
+id = "221"
+title = "Paragraph 221"
+description = """慎重に丸太の壁の基部に近づく。粗い木の幹は足場が多く、登りやすい。壁の頂上に着くと、クロスボウが顔に突きつけられる。兵士が木の梯子で地面に降りるよう促す。逆らわず、ゆっくり降りる。"""
+[[nodes.outcomes]]
+next_node_id = "318"
+
+[[nodes]]
+id = "222"
+title = "Paragraph 222"
+description = """進むと、森の道が分岐する点に出る。"""
+[[nodes.options]]
+text = "もしカイの追跡の技を使うなら"
+[[nodes.options]]
+text = "もし南の分岐を取るなら"
+[[nodes.options]]
+text = "もし東の分岐を取るなら"
+[[nodes.outcomes]]
+next_node_id = "67"
+[[nodes.outcomes]]
+next_node_id = "140"
+[[nodes.outcomes]]
+next_node_id = "252"
+
+[[nodes]]
+id = "223"
+title = "Paragraph 223"
+description = """苦労して重い幹を川岸から解放する。装備を束ね、丸太の上に置き、ゆっくり川に進む。流れに乗り、ゆったりと下る。
+20分後、左岸で馬の音が聞こえる。"""
+[[nodes.options]]
+text = "もし丸太の陰に隠れるなら"
+[[nodes.options]]
+text = "もし丸太に登り、騎手の注意を引く準備をするなら"
+[[nodes.outcomes]]
+next_node_id = "75"
+[[nodes.outcomes]]
+next_node_id = "175"
+
+[[nodes]]
+id = "224"
+title = "Paragraph 224"
+description = """数マイル乗り、難民や敵の気配はない。遠くの尾根へ急ぐ。そこから首都が見えるはずだ。
+頂上に着くと、希望の光景が広がるが、なお直面すべき試練がある。"""
+[[nodes.outcomes]]
+next_node_id = "153"
+
+[[nodes]]
+id = "225"
+title = "Paragraph 225"
+description = """言葉がカカルミ、ソマーランドの森に住み、世話をする知的な動物の言語だと分かる。彼らは臆病で穏やかで、恐れる必要はない。動物親和の技を使い、彼らの奇妙な言語で呼びかける。"""
+[[nodes.options]]
+text = "もし「恐れるな、友だ」と言うなら"
+[[nodes.options]]
+text = "もし「カイの領主だ。害意はない。話したい」と言うなら"
+[[nodes.outcomes]]
+next_node_id = "187"
+[[nodes.outcomes]]
+next_node_id = "39"
+
+[[nodes]]
+id = "226"
+title = "Paragraph 226"
+description = """最初は下りが簡単だが、視界が悪くなり、脚がひどく弱る。スリープトゥースの傷が影響し、突然前に倒れ、闇に滑り落ちる。
+ランダムナンバーテーブルから数字を一つ選べ。
+0～4なら、277へ進め。
+5～9なら、338へ進め。"""
+[[nodes.options]]
+text = "もし選んだ数字が0～4なら"
+[[nodes.options]]
+text = "もし5～9なら"
+[[nodes.outcomes]]
+next_node_id = "277"
+[[nodes.outcomes]]
+next_node_id = "338"
+
+[[nodes]]
+id = "227"
+title = "Paragraph 227"
+description = """腰までぬめった水に浸かる。空気は顔を刺し、鼻を詰まらせる小さな虫で厚い。何かが脚に巻きつく。沼の毒蛇で、戦わねばならぬ。
+沼の毒蛇：COMBAT SKILL 16 ENDURANCE 6
+戦闘でENDURANCEを失うなら、271へ進め。
+ENDURANCEを失わず倒すなら、348へ進め。"""
+[[nodes.outcomes]]
+next_node_id = "271"
+[[nodes.outcomes]]
+next_node_id = "348"
+
+[[nodes]]
+id = "228"
+title = "Paragraph 228"
+description = """道は東へ続き、すぐに密な下草に消える。"""
+[[nodes.options]]
+text = "もし武器で植生を切り、東へ進むなら"
+[[nodes.options]]
+text = "もし茂みが薄い南へ向かい、森を進むなら"
+[[nodes.outcomes]]
+next_node_id = "140"
+[[nodes.outcomes]]
+next_node_id = "215"
+
+[[nodes]]
+id = "229"
+title = "Paragraph 229"
+description = """クラーンが頭上に浮かび、巨大な黒い翼で埃を巻き上げる。埃が目と鼻に入り、咳き込む。獣が襲いかかる。
+死ぬまで戦わねばならぬ。埃のせいでCOMBAT SKILLを1ポイント減らせ。
+クラーン：COMBAT SKILL 16 ENDURANCE 25
+勝つなら、選択肢がある。
+死体を調べるなら、267へ進め。
+東の道を進むなら、125へ進め。"""
+[[nodes.outcomes]]
+next_node_id = "267"
+[[nodes.outcomes]]
+next_node_id = "125"
+
+[[nodes]]
+id = "230"
+title = "Paragraph 230"
+description = """遠くに、川を横切る列に並ぶ兵士のシルエットが見える。対岸でドゥームウルフの低い唸り声が戻る。慎重さを捨て、遠くの船へ向かい、川岸を走る。"""
+[[nodes.outcomes]]
+next_node_id = "179"
+
+[[nodes]]
+id = "231"
+title = "Paragraph 231"
+description = """薬の値段を尋ねようとすると、竹の屏風が倒れ、若い男が飛びかかる。手に長く曲がった短剣がある。
+彼に襲われ、命をかけて戦わねばならぬ。
+強盗：COMBAT SKILL 13 ENDURANCE 20
+4ラウンド以内に倒すなら、94へ進め。
+4ラウンド後も戦闘が続くなら、203へ進め。
+2ラウンド後に戦いを避け、正面の扉を駆け抜けるなら、7へ進め。"""
+[[nodes.outcomes]]
+next_node_id = "94"
+[[nodes.outcomes]]
+next_node_id = "203"
+[[nodes.outcomes]]
+next_node_id = "7"
+
+[[nodes]]
+id = "232"
+title = "Paragraph 232"
+description = """粗野なリーダーが近づき、「我々の望みは簡単だ、親切な方。金か命か！」と言う。"""
+[[nodes.options]]
+text = "もし彼らと戦うなら"
+[[nodes.options]]
+text = "もし逃げるなら"
+[[nodes.outcomes]]
+next_node_id = "180"
+[[nodes.outcomes]]
+next_node_id = "22"
+
+[[nodes]]
+id = "233"
+title = "Paragraph 233"
+description = """約1時間後、馬に追いつき、落ち着かせる。山小屋の北にいるが、戻る自信がある。
+馬に乗り、山小屋を過ぎ、再び南へ進む。"""
+[[nodes.outcomes]]
+next_node_id = "206"
+
+[[nodes]]
+id = "234"
+title = "Paragraph 234"
+description = """疾走するキャラバンから飛び降りるが、着地に失敗し、足首を折る。激しい痛みで意識を失う。
+残念ながら二度と目覚めず、君の頭はクラーンの鞍を飾っている。
+君の命と任務はここで終わる。"""
+
+[[nodes]]
+id = "235"
+title = "Paragraph 235"
+description = """王子の馬は素晴らしく、速く確実に走る。曲がりくねった道をまっすぐな街道のように疾走し、戦いの音を遠くに残す。乗馬中、空腹で食事を取らねばならぬ。
+数マイル後、道が突然交差点で終わる。標識はあるが、切り倒されている。"""
+[[nodes.options]]
+text = "もしカイの追跡の技を使うなら"
+[[nodes.options]]
+text = "もし左に進むなら、32へ。"
+[[nodes.options]]
+text = "もし右に進むなら、146へ。"
+[[nodes.outcomes]]
+next_node_id = "254"
+[[nodes.outcomes]]
+next_node_id = "32"
+[[nodes.outcomes]]
+next_node_id = "146"
+
+[[nodes]]
+id = "236"
+title = "Paragraph 236"
+description = """ジェムがスケルトンキングの口の上に浮かび、激しい赤で輝く。突然、石棺から燃えるような真紅の炎が爆発し、ジェムを完全に破壊する。
+君は遠い壁に投げ出され、意識を失う。目覚めると、部屋は完全に空だ。スケルトンキングと石棺は消えている。ENDURANCEを6ポイント失い、初期COMBAT SKILLが生涯1ポイント減る。"""
+[[nodes.outcomes]]
+next_node_id = "104"
+
+[[nodes]]
+id = "237"
+title = "Paragraph 237"
+description = """カイの技を最大限に使い、丘の緩い土に深く潜る。マントで体を覆い、急ごしらえの隠れ家に枝を引く。
+ランダムナンバーテーブルから数字を一つ選べ。
+0～4なら、気づかれず通過する。265へ進め。
+5～9なら、運が悪い！72へ進め。"""
+[[nodes.options]]
+text = "もし選んだ数字が0～4なら、気づかれず通過する。"
+[[nodes.options]]
+text = "もし5～9なら、運が悪い！"
+[[nodes.outcomes]]
+next_node_id = "265"
+[[nodes.outcomes]]
+next_node_id = "72"
+
+[[nodes]]
+id = "238"
+title = "Paragraph 238"
+description = """道は小さな森の丘の間を蛇行し、焼けた丸太小屋の廃墟に至る。灰はまだ温かく、煙が漂う。危険を感じる。"""
+[[nodes.options]]
+text = "南のルートで去るなら、42へ進め。"
+[[nodes.options]]
+text = "北の道を取るなら、68へ進め。"
+[[nodes.outcomes]]
+next_node_id = "42"
+[[nodes.outcomes]]
+next_node_id = "68"
+
+[[nodes]]
+id = "239"
+title = "Paragraph 239"
+description = """森の奥へ進むと、クラーンの翼が木々の上を通り、北へ消える。約1時間乗り、開けた空き地に出る。向こう側に南へ続く道がある。"""
+[[nodes.options]]
+text = "もし空き地に入り、南の出口を取るなら"
+[[nodes.options]]
+text = "もし空き地の縁を迂回し、さらに道を拾うなら"
+[[nodes.outcomes]]
+next_node_id = "34"
+[[nodes.outcomes]]
+next_node_id = "118"
+
+[[nodes]]
+id = "240"
+title = "Paragraph 240"
+description = """道は森の丘の尾根に沿い、東へ進む。"""
+[[nodes.outcomes]]
+next_node_id = "79"
+
+[[nodes]]
+id = "241"
+title = "Paragraph 241"
+description = """魔法使いが君の叫びを聞き、振り向いてギアクに燃えるエネルギーの雷を放つ。ギアクの頭が炎で崩壊し、痙攣する体が柱の足元に倒れる。ギアクの士官が君を見て、「オゴト…オゴト！」と叫び、怯えた部下は遺跡から森の安全へ逃げる。
+若い魔法使いが額を拭い、感謝と友情の手を差し伸べて近づく。"""
+[[nodes.outcomes]]
+next_node_id = "349"
+
+[[nodes]]
+id = "242"
+title = "Paragraph 242"
+description = """石棺の蓋が鈍い音で床に落ちる。古代の王の遺骸が宝に囲まれ、静かに横たわる。頭蓋骨には豪華な冠が残る。顎が大きく開き、口の闇は奇妙に底がない。地中深くから遠い轟音が聞こえる。"""
+[[nodes.options]]
+text = "もしカイの精神防壁の技を持っているなら"
+[[nodes.options]]
+text = "もし持っていないなら"
+[[nodes.outcomes]]
+next_node_id = "166"
+[[nodes.outcomes]]
+next_node_id = "9"
+
+[[nodes]]
+id = "243"
+title = "Paragraph 243"
+description = """森を急ぐと、つまずき、急な斜面を転がり、隠された道に落ちる。そこに死体がある。ダークロードの悪意ある幽鬼の従者、ギアクだ。遠い昔、その祖先はダークロードに使われ、ダーンクラグ山脈の火山荒野にあるヘルゲダッドの地獄都市を建設した。建設は長く苦しい悪夢で、ヘルゲダッドの熱と毒の大気に耐えた強いギアクだけが生き残った。この死体はその奴隷の子孫だ。頭に剣の傷があり、そばにメイスがある。望むならこの武器を取れる。
+隠された道を進み、97へ。"""
+[[nodes.outcomes]]
+next_node_id = "97"
+
+[[nodes]]
+id = "244"
+title = "Paragraph 244"
+description = """感覚が、君は一人ではないと告げる。非常に危険だ。急いで地上に戻れ。"""
+[[nodes.outcomes]]
+next_node_id = "93"
+
+
+[[nodes]]
+id = "245"
+title = "Paragraph 245"
+description = """矢が水面を打ち、君が対岸へ泳ぐ中、無害に沈む。
+急いで川から上がり、木々へ走る。ギアクの射程外となり、彼らはドゥームウルフに乗り直し、追跡を続ける。"""
+[[nodes.outcomes]]
+next_node_id = "190"
+
+[[nodes]]
+id = "246"
+title = "Paragraph 246"
+description = """フェリーが湖の中央に着くと、男が漕ぐのを止め、立ち上がる。不気味に笑い、マントのフードを下げ、正体を現す。ドラッカリムだ。戦わねばならぬ。
+ドラッカリム：COMBAT SKILL 15 ENDURANCE 23
+勝つなら、197へ進め。"""
+[[nodes.outcomes]]
+next_node_id = "197"
+
+[[nodes]]
+id = "247"
+title = "Paragraph 247"
+description = """商人が怒った顔で護衛を呼ぶ。素早く何か考えねばならぬ。"""
+[[nodes.options]]
+text = "もしバックパックにあるより価値あるものを差し出すなら"
+[[nodes.options]]
+text = "もし護衛と戦う準備をするなら"
+[[nodes.outcomes]]
+next_node_id = "159"
+[[nodes.outcomes]]
+next_node_id = "220"
+
+[[nodes]]
+id = "248"
+title = "Paragraph 248"
+description = """丘の麓に着き、森へ急ぐ。数分後、古い森の道を見つける。"""
+[[nodes.options]]
+text = "もしこの道を北に進むなら"
+[[nodes.options]]
+text = "もしこの道を東に進むなら"
+[[nodes.outcomes]]
+next_node_id = "44"
+[[nodes.outcomes]]
+next_node_id = "300"
+
+[[nodes]]
+id = "249"
+title = "Paragraph 249"
+description = """石の階段を降りると、大きな部屋に着く。恐ろしい光景が待つ。向かいの大きな石の部屋を横切り、闇へ続く華やかなアーチがある。奇妙な緑の光が、台座に置かれた二列の頭蓋骨から放たれ、部屋を横切る不気味な通路を形成する。"""
+[[nodes.options]]
+text = "もし部屋を渡り、アーチへ進むなら"
+[[nodes.options]]
+text = "もし頭蓋骨を攻撃するなら"
+[[nodes.outcomes]]
+next_node_id = "169"
+[[nodes.outcomes]]
+next_node_id = "107"
+
+[[nodes]]
+id = "250"
+title = "Paragraph 250"
+description = """幹の頂から飛び降り、2匹の小さな毛むくじゃらの生物の前に着地する。カカルミ、ソマーランドの森に住み世話をする知的な動物だと分かる。劇的な登場を謝る前に、怯えた小さな生物が森へ逃げる。"""
+[[nodes.options]]
+text = "もし彼らを追うなら"
+[[nodes.options]]
+text = "もし進むなら"
+[[nodes.outcomes]]
+next_node_id = "186"
+[[nodes.outcomes]]
+next_node_id = "228"
+
+[[nodes]]
+id = "251"
+title = "Paragraph 251"
+description = """幸運にも、彼らに気づかれていないようだ。ゆっくりと尾根の向こうへ消え、君は走り続ける。"""
+[[nodes.outcomes]]
+next_node_id = "10"
+
+[[nodes]]
+id = "252"
+title = "Paragraph 252"
+description = """小さな空き地の中央で、興奮して話し、手を激しく振る人間の集団が見える。2人の子、3人の男、1人の女がいる。荷物は肩に担ぐ束に包まれ、服は上質で高価だが、汚れ、破れている。"""
+[[nodes.options]]
+text = "もし近づき、彼らが誰か尋ねるなら"
+[[nodes.options]]
+text = "もし避け、任務を続けるなら"
+[[nodes.outcomes]]
+next_node_id = "155"
+[[nodes.outcomes]]
+next_node_id = "70"
+
+[[nodes]]
+id = "253"
+title = "Paragraph 253"
+description = """ドゥームウルフがすぐ迫り、一匹ずつ戦わねばならぬ。
+ドゥームウルフ1：COMBAT SKILL 13 ENDURANCE 24
+ドゥームウルフ2：COMBAT SKILL 14 ENDURANCE 23
+ドゥームウルフ3：COMBAT SKILL 14 ENDURANCE 22
+ドゥームウルフ4：COMBAT SKILL 15 ENDURANCE 21
+全て倒すなら、278へ進め。"""
+[[nodes.outcomes]]
+next_node_id = "278"
+
+[[nodes]]
+id = "254"
+title = "Paragraph 254"
+description = """追跡の技が、右の道から左の道へ続く複数の足跡が大きな狼によるものだと告げる。ダークロードが軍の斥候に使う獰猛な獣で、しばしばギアクが乗る。左の道はホルムガードへ、右の道はダーンクラグ山脈へ続く。選択は君に委ねられる。"""
+[[nodes.options]]
+text = "もし左に進むなら、32へ。"
+[[nodes.options]]
+text = "もし右に進むなら、146へ。"
+[[nodes.outcomes]]
+next_node_id = "32"
+[[nodes.outcomes]]
+next_node_id = "146"
+
+[[nodes]]
+id = "255"
+title = "Paragraph 255"
+description = """対峙する生物はグルガズ、マアケンマイアの危険な沼に棲む冷血な爬虫類だ。人間の肉が大好物だ！
+王子の剣が足元にある。望むなら拾って使える。グルガズが襲いかかり、死ぬまで戦わねばならぬ。
+グルガズ：COMBAT SKILL 20 ENDURANCE 30
+この生物はマインドブラストに耐性がある。
+勝つなら、82へ進め。"""
+[[nodes.outcomes]]
+next_node_id = "82"
+
+[[nodes]]
+id = "256"
+title = "Paragraph 256"
+description = """朝の澄んだ空で、クラーンの叫び声に目覚める。目をこすり、枝の隙間から見上げると、3匹の忌まわしい生物が北へ飛び去る。
+見つかっていないと確信するが、念のため今すぐ去るべきだ。馬に乗り、街道を南へ進む。"""
+[[nodes.outcomes]]
+next_node_id = "224"
+
+[[nodes]]
+id = "257"
+title = "Paragraph 257"
+description = """東の壁に石の門があるが、開ける方法は見当たらない。"""
+[[nodes.options]]
+text = "もし像を調べるなら"
+[[nodes.options]]
+text = "もし座席に座るなら"
+[[nodes.outcomes]]
+next_node_id = "133"
+[[nodes.outcomes]]
+next_node_id = "161"
+
+[[nodes]]
+id = "258"
+title = "Paragraph 258"
+description = """カイの物質制御の技を使い、手を縛るロープを解く。脱出の機会を待ち、密な下草へ全力で走る。黒い矢が耳元を飛び過ぎるが、木々の間に隠れ、安全を確保する。バックパックと武器は失ったが、命と手足は無事だ。森の奥へ進む。"""
+[[nodes.outcomes]]
+next_node_id = "50"
+
+[[nodes]]
+id = "259"
+title = "Paragraph 259"
+description = """部屋が冷え、硫黄の匂いが漂う。遠くで詠唱が聞こえ、別の洞窟部分から響く。石壁の隙間が開き、黒い杖の先が現れる。突然、青い稲妻が杖から飛び、胸を打つ。
+命がゆっくりと消え、最後に見るのは黒いローブの老人が喉元に短剣を上げる姿だ。
+君の命と任務はここで終わる。"""
+
+[[nodes]]
+id = "260"
+title = "Paragraph 260"
+description = """岸へ泳ぐと、水辺に倒れた騎兵が見える。だが、首を折って死んでいる。
+突然、2人のギアクが上から飛びかかり、戦わねばならぬ。武器を持たず、素手で戦う。COMBAT SKILLを4ポイント減らし、一人ずつ戦え。
+ギアク1：COMBAT SKILL 11 ENDURANCE 18
+ギアク2：COMBAT SKILL 12 ENDURANCE 17
+勝つなら、156へ進め。"""
+[[nodes.outcomes]]
+next_node_id = "156"
+
+[[nodes]]
+id = "261"
+title = "Paragraph 261"
+description = """汗をかき、息を切らし、密な下草を分けて進むと、荷車の上に浮かぶクラーンが見える。3人の幽鬼のようなギアクが背から飛び降り、馬を驚かせる。彼らが槍で無力な子らに迫る。"""
+[[nodes.options]]
+text = "もし荷車に戻り、子らを守るなら"
+[[nodes.options]]
+text = "もし森の奥へ逃げるなら"
+[[nodes.outcomes]]
+next_node_id = "208"
+[[nodes.outcomes]]
+next_node_id = "264"
+
+[[nodes]]
+id = "262"
+title = "Paragraph 262"
+description = """商人が金を手にし、指を鳴らす。護衛がシミターで襲いかかる。"""
+[[nodes.options]]
+text = "もし戦うなら"
+[[nodes.options]]
+text = "もし戦闘を避け、疾走するキャラバンから飛び降りるなら、234へ。"
+[[nodes.outcomes]]
+next_node_id = "191"
+[[nodes.outcomes]]
+next_node_id = "234"
+
+[[nodes]]
+id = "263"
+title = "Paragraph 263"
+description = """慎重に小川を東へたどると、突然何かで立ち止まる。
+急流に大きな黒いダムのように横たわる死んだクラーンだ。木々の陰に隠れ近づくと、胸に3本の矢が深く刺さっている。獣の下にその騎手の死体がある。ダークロードの悪意ある幽鬼の従者、ギアクだ。遠い昔、その祖先はダークロードに使われ、ダーンクラグ山脈の火山荒野にあるヘルゲダッドの地獄都市を建設した。建設は長く苦しい悪夢で、ヘルゲダッドの熱と毒の大気に耐えた強いギアクだけが生き残った。この生物は溺死したようだ。ギアクの袋に3ゴールドクラウンがある。望むなら取れる。
+下流を進むなら、70へ。
+または、小川を離れ、丘の森を南へ徒歩で進むなら、157へ。"""
+[[nodes.options]]
+text = "下流を進むなら、70へ。"
+[[nodes.options]]
+text = "小川を離れ、丘の森を南へ徒歩で進むなら、157へ。"
+[[nodes.outcomes]]
+next_node_id = "70"
+[[nodes.outcomes]]
+next_node_id = "157"
+
+[[nodes]]
+id = "264"
+title = "Paragraph 264"
+description = """遠からずして、西から戦いの音が聞こえる。"""
+[[nodes.options]]
+text = "もしその音を追うなら"
+[[nodes.options]]
+text = "もし南へ進むなら"
+[[nodes.outcomes]]
+next_node_id = "97"
+[[nodes.outcomes]]
+next_node_id = "6"
+
+[[nodes]]
+id = "265"
+title = "Paragraph 265"
+description = """ドゥームウルフやクラーンが現れる前に、森へ急いで移動する。
+1時間以上歩き、岩の丘の頂に着く。向こう側には希望の光景が広がるが、なお直面すべき恐るべき試練がある。"""
+[[nodes.outcomes]]
+next_node_id = "142"
+
+[[nodes]]
+id = "266"
+title = "Paragraph 266"
+description = """獣が黒い石の床で最後の苦悶に悶えると、東壁の門がカチッと開き、向こうの廊下が現れる。急いで隠し扉をくぐると、すぐにガリッと閉まる。"""
+[[nodes.outcomes]]
+next_node_id = "209"
+
+[[nodes]]
+id = "267"
+title = "Paragraph 267"
+description = """マントで鼻を覆い、慎重に死んだ獣に近づく。悪臭を放つ黒い血の匂いで胃が締め付けられるが、決意して進む。胸に大きな鞍袋があるのに気づく。開けると、動物の皮に書かれたメッセージがある。
+袋の奥に短剣がある。望むならメッセージと短剣を保持できる。
+死体を残し、東の道を進む。"""
+[[nodes.outcomes]]
+next_node_id = "125"
+
+[[nodes]]
+id = "268"
+title = "Paragraph 268"
+description = """数分意識を失い、強い酒で目覚める。疲れ果てつつも生きていることに感謝し、王の兵に肩を借り、外郭陣地へよろめく。"""
+[[nodes.outcomes]]
+next_node_id = "288"
+
+[[nodes]]
+id = "269"
+title = "Paragraph 269"
+description = """狂人が足元で死に、2人の兵士が扉に現れ、すぐに君を称賛する。彼は2日間追っていた脱走した狂人だったと言う。1人が報酬として10ゴールドクラウンを渡し、城塞への護送を申し出る。"""
+[[nodes.options]]
+text = "もしその申し出を受け入れるなら"
+[[nodes.options]]
+text = "もし自分の方向感覚を信じるなら"
+[[nodes.outcomes]]
+next_node_id = "314"
+[[nodes.outcomes]]
+next_node_id = "7"
+
+[[nodes]]
+id = "270"
+title = "Paragraph 270"
+description = """湖を渡る敵の怒りの叫び声が聞こえる。クラーンが現れる前に去らねばならぬ。馬に乗り、森の奥へ進む。"""
+[[nodes.outcomes]]
+next_node_id = "21"
+
+[[nodes]]
+id = "271"
+title = "Paragraph 271"
+description = """非常に弱り、蛇の毒が血に入り、体の筋肉が勝手に締まり緩む。突然脚が崩れ、沼のぬめった水が頭を覆う。
+君の命はここで終わる。"""
+
+[[nodes]]
+id = "272"
+title = "Paragraph 272"
+description = """空を注視しつつ、道を急ぐ。このルートはフォグウッド、50年近く炭焼き家族が使う小屋の集まりへ続く。20分後、空き地の縁に着く。フォグウッドの名の由来の木煙の霧はなく、小屋は異様に静かだ。"""
+[[nodes.options]]
+text = "もしカイの追跡の技を持っているなら、134へ。"
+[[nodes.options]]
+text = "もしその技がなく、武器を準備し小屋に忍び寄るなら、305へ。"
+[[nodes.outcomes]]
+next_node_id = "134"
+[[nodes.outcomes]]
+next_node_id = "305"
+
+[[nodes]]
+id = "273"
+title = "Paragraph 273"
+description = """都市の外郭陣地が見える。川には船が鎖で繋がれ、浮かぶ防壁を形成する。兵士が丸太の壁を走り、西から戦いの微かな音が漂う。"""
+[[nodes.options]]
+text = "もし船に近づくなら"
+[[nodes.options]]
+text = "もし木々の陰に隠れるなら"
+[[nodes.outcomes]]
+next_node_id = "179"
+[[nodes.outcomes]]
+next_node_id = "51"
+
+[[nodes]]
+id = "274"
+title = "Paragraph 274"
+description = """敵を避ける急ぎで、木の根に足を引っかけ、埃と葉にまみれて転がる。急いで立ち上がり、丘の麓の下草を突き進み、森へ走る。10分近く走ると、武器を失ったと気づく。命とバックパックは残り、顔の汚れを拭い、木々の間を進む。"""
+[[nodes.outcomes]]
+next_node_id = "331"
+
+[[nodes]]
+id = "275"
+title = "Paragraph 275"
+description = """20分ほど曲がりくねった道を進むと、木々の上を翼の音が響く。見上げると、北から大きなクラーンが近づき、巨大な黒い翼が下の木々に影を落とす。
+背には長い槍を持つ2匹の生物。山のギアク、憎しみと悪意に満ちた小さな醜い生物だ。遠い昔、その祖先はダークロードに使われ、ダーンクラグ山脈の火山荒野にあるヘルゲダッドの地獄都市を建設した。建設は長く苦しい悪夢で、ヘルゲダッドの熱と毒の大気に耐えた強い者だけが生き残った。
+急いで大きなシダの木の陰に飛び込み、心臓が高鳴り、見つからぬよう祈る。
+ランダムナンバーテーブルから数字を一つ選べ。
+0～4なら、345へ進め。
+5～9なら、74へ進め。"""
+[[nodes.options]]
+text = "もし選んだ数字が0～4なら"
+[[nodes.options]]
+text = "もし5～9なら"
+[[nodes.outcomes]]
+next_node_id = "345"
+[[nodes.outcomes]]
+next_node_id = "74"
+
+[[nodes]]
+id = "276"
+title = "Paragraph 276"
+description = """武器を手に、木と絡まる枝の塊を切り開き、開けた森へ進む。マントは数カ所破れ、右膝上がひどく打撲する。
+ENDURANCEを1ポイント失い、213へ進め。"""
+[[nodes.outcomes]]
+next_node_id = "213"
+
+[[nodes]]
+id = "277"
+title = "Paragraph 277"
+description = """目覚めると、急な斜面の麓、背の高い草に絡まって横たわる。バックパックと武器はなく、頭が痛む。どれだけ意識を失っていたか分からないが、任務を急がねばならぬ。
+立ち上がると、バックパックは無事だが、武器は折れて使い物にならない。アクションチャートから消せ。（武器が複数ある場合、1つだけが折れる。どれか選べ。）急いでバックパックを拾い、木々の間へ進む。"""
+[[nodes.outcomes]]
+next_node_id = "113"
+
+[[nodes]]
+id = "278"
+title = "Paragraph 278"
+description = """急いで道を離れ、首都へ向かう道を疾走する。ドゥームウルフが止まった地点で、牧草地の先に北の港トランからホルムガードへ続く主要街道が見える。朝までに首都に着くはずだ。"""
+[[nodes.outcomes]]
+next_node_id = "149"
+
+[[nodes]]
+id = "279"
+title = "Paragraph 279"
+description = """岩をよじ登り、洞窟の入口に進む。急いで大きな岩を入口に押し込む。
+数分後、岩の棚にギアクが現れ、邪悪な黄色の目で丘のあらゆる隙間を探す。あまりに近く、すぐに発見されると感じる。
+ランダムナンバーテーブルから数字を一つ選べ。
+0～6なら、112へ進め。
+7～9なら、96へ進め。"""
+[[nodes.options]]
+text = "もし選んだ数字が0～6なら"
+[[nodes.options]]
+text = "もし7～9なら"
+[[nodes.outcomes]]
+next_node_id = "112"
+[[nodes.outcomes]]
+next_node_id = "96"
+
+[[nodes]]
+id = "280"
+title = "Paragraph 280"
+description = """登り始めると、西から翼の音が近づく。クラーンだ！その音から10匹以上、恐らくそれ以上と推測する。丘は空からの攻撃に隠れる場所がなく、運の悪さを呪う。この難しい登攀中に襲われれば、戦いながら立つのはほぼ不可能だ。"""
+[[nodes.options]]
+text = "もし武器を抜き、クラーンに見つからないよう完全に静止するなら"
+[[nodes.options]]
+text = "もし急いで丘を降り、トンネルに隠れるなら"
+[[nodes.outcomes]]
+next_node_id = "327"
+[[nodes.outcomes]]
+next_node_id = "170"
+
+[[nodes]]
+id = "281"
+title = "Paragraph 281"
+description = """木々の間を走ると、背後でギアクの恐ろしい笑い声が迫る。木々がまばらになり、正面に岩の丘が見える。"""
+[[nodes.options]]
+text = "もし隠れ場所を離れ、丘を登るなら"
+[[nodes.options]]
+text = "もし方向を変え、森を走り続けるなら"
+[[nodes.outcomes]]
+next_node_id = "311"
+[[nodes.outcomes]]
+next_node_id = "77"
+
+[[nodes]]
+id = "282"
+title = "Paragraph 282"
+description = """群衆の頭上を見ると、正門の向かいに医者の木造の診療所がある。大胆な計画が閃く。人々の流れに逆らい、通りを渡る。急いで入り、窓際の籠の色鮮やかなオウム以外、生命の気配はない。
+小さな瓶を手に、白い医者のマントを羽織り、正門へ戻る。「緊急だ！」と衛兵に叫び、止められると「王室の料理人の妻が…赤子を産む！」とごまかす。
+衛兵が一瞬ためらうが、急を要すると説得し、入ることを許される。大きな扉が2フィートほど開き、狭い隙間を押し込まれ、庭へ進む。"""
+[[nodes.outcomes]]
+next_node_id = "11"
+
+[[nodes]]
+id = "283"
+title = "Paragraph 283"
+description = """ローブの男に10フィートほど近づくと、カラスが主人に警告の叫びを上げる。振り返ったその姿に凍りつく。ダークロードの副官で死霊のヴォルダックだ。戦わねばならぬ。
+奇襲により、初回戦闘ラウンドのみCOMBAT SKILLに2ポイント加算できる。
+カイの精神防壁の技がなければ、2ラウンド目以降、ヴォルダックの精神攻撃と大きな黒いメイスでCOMBAT SKILLを2ポイント減らす！
+ヴォルダック：COMBAT SKILL 17 ENDURANCE 25
+勝つなら、123へ進め。"""
+[[nodes.outcomes]]
+next_node_id = "123"
+
+[[nodes]]
+id = "284"
+title = "Paragraph 284"
+description = """墓地を進むのは容易でない。地面は荒れ、棘の墓草に覆われる。邪悪な茨がマントを裂き、脚を切る。空気は重く、静まり、開いた墓から悪臭が漂い、遠くの囁きが耳に響く。
+慎重に2本の古い柱の隙間に近づき、マントの手で墓草を分ける。突然、足元の地面が崩れ、土と石にまみれて落ちる。"""
+[[nodes.outcomes]]
+next_node_id = "71"
+
+[[nodes]]
+id = "285"
+title = "Paragraph 285"
+description = """大理石の塊がギアクの後頭部を砕き、膝をつき、遺跡の下に倒れる。技に高揚し、若い魔法使いを助けに走る。"""
+[[nodes.outcomes]]
+next_node_id = "325"
+
+[[nodes]]
+id = "286"
+title = "Paragraph 286"
+description = """死の使者たるドゥームウルフが、熱心にその報せを届けるべく君を囲み、襲いかかる。勇敢に戦うが、数が多い。
+命の血が流れ、永遠の闇が迫る中、最後に見るのはホルムガードの尖塔に映る陽光だ。
+任務は失敗に終わる。"""
+
+[[nodes]]
+id = "287"
+title = "Paragraph 287"
+description = """道は完全に棘の茨と低く枝分かれするモミの木の絡まりに消える。"""
+[[nodes.options]]
+text = "もし交差点に戻り、東へ進むなら"
+[[nodes.options]]
+text = "もしこの方向で下草を切り開き進むなら"
+[[nodes.outcomes]]
+next_node_id = "13"
+[[nodes.outcomes]]
+next_node_id = "330"
+
+[[nodes]]
+id = "288"
+title = "Paragraph 288"
+description = """陣地の壁に着くと、大きなオークの門が開き、急いで中へ導かれる。血まみれで戦いに疲れた軍曹が将校を呼び、君の緑のカイのマントを認める。
+「我が主よ」と彼は言う。「他のカイの達人はどこに？彼らの知恵が切実に必要だ。ダークロードが我々を激しく圧迫し、死傷者が多い。」
+君は同胞の悲惨な運命と、王の会議を求める任務の急務を告げる。言葉なく、兵士に馬2頭を用意させ、共にホルムガードの高壁へ疾走する。"""
+[[nodes.outcomes]]
+next_node_id = "129"
+
+[[nodes]]
+id = "289"
+title = "Paragraph 289"
+description = """2人の衛兵は疲れ、不安げだ。王のハルバードを神経質に構え、近づく者を押し返す。怒った女が1人の胸を拳で叩き、倒れ、もう1人と共に揉み合う。機会を捉え、大きなレバーを引き、巨大な扉を開く。隙間を滑り込み、衛兵に見られず扉が閉まる。"""
+[[nodes.outcomes]]
+next_node_id = "139"
+
+[[nodes]]
+id = "290"
+title = "Paragraph 290"
+description = """長い箱に革で包まれたクォータースタッフがある。望むならこの武器を取れる。箱を閉じ、壊れていない梯子の段を使い、空き地へ降りる。"""
+[[nodes.outcomes]]
+next_node_id = "140"
+
+[[nodes]]
+id = "291"
+title = "Paragraph 291"
+description = """2人のギアクが足元に倒れ、身をよじり、死に絶える。急いで調べると、6ゴールドクラウン、2本の槍、短剣が見つかる。
+金と、短剣か槍のどちらかを保持できる。アクションチャートに記録せよ。
+戦闘中、クラーンは飛び去り、道は静かだ。バックパックを整え、任務を続ける。"""
+[[nodes.outcomes]]
+next_node_id = "272"
+
+[[nodes]]
+id = "292"
+title = "Paragraph 292"
+description = """この世で最後に感じるのは、闇の虚空に吸い込まれる感覚だ。君の痕跡はこの世に残らず、永遠の存在の領域へ渡る。古の邪悪の奴隷となる。
+冒険はここで終わる。"""
+
+[[nodes]]
+id = "293"
+title = "Paragraph 293"
+description = """バネドンが手を振って遺跡を去り、君は任務を続け、密な木々の間を進む。間もなく、左の下草から複数の黄色の目が君を注視する。突然、黒い矢が頭上をかすめる。ギアクの待ち伏せだ。全力で逃げねばならぬ。"""
+[[nodes.outcomes]]
+next_node_id = "281"
+
+[[nodes]]
+id = "294"
+title = "Paragraph 294"
+description = """できる限り水中に留まり、浮上するとギアクが遠くにいる。武器とバックパックは失ったが、命は保った。
+泥水から上がり、右岸の木々の陰を進む。
+ランダムナンバーテーブルから数字を一つ選べ。
+0～2なら、230へ進め。
+3～6なら、190へ進め。
+7～9なら、321へ進め。"""
+[[nodes.options]]
+text = "もし選んだ数字が0～2なら"
+[[nodes.options]]
+text = "もし3～6なら"
+[[nodes.options]]
+text = "もし7～9なら"
+[[nodes.outcomes]]
+next_node_id = "230"
+[[nodes.outcomes]]
+next_node_id = "190"
+[[nodes.outcomes]]
+next_node_id = "321"
+
+[[nodes]]
+id = "295"
+title = "Paragraph 295"
+description = """15分ほど進むと、突然黒い矢が頭上を飛び、木に刺さる。本能的に身をかがめ、武器を抜く。"""
+[[nodes.options]]
+text = "もしその場に留まり、隠れた射手を特定するなら"
+[[nodes.options]]
+text = "もし密な下草の隠れ場所へ走るなら"
+[[nodes.outcomes]]
+next_node_id = "185"
+[[nodes.outcomes]]
+next_node_id = "92"
+
+[[nodes]]
+id = "296"
+title = "Paragraph 296"
+description = """何かおかしいと感じる。戦いが周囲にあり、ダークロードの軍が近いのに、なぜこの男が森に留まる？彼に邪悪な雰囲気を感知し、申し出を断る。"""
+[[nodes.outcomes]]
+next_node_id = "90"
+
+[[nodes]]
+id = "297"
+title = "Paragraph 297"
+description = """狩りの技を使い、木々の間を気づかれず進む。1分足らずで、騎兵が縛られた杭の真後ろ、わずか数フィートにいる。木材が燃え、煙が犠牲者を包む。武器を手に、煙に隠れて走り、一撃で縄を切り、彼を森の安全へ引き出す。森の奥へ進むと、ギアクが囚人が煙と共に消えたと気づき、叫び声を上げる！"""
+[[nodes.outcomes]]
+next_node_id = "117"
+
+[[nodes]]
+id = "298"
+title = "Paragraph 298"
+description = """鳥の頭がゆっくり向き、君を呪う。一瞬後、木々の上を飛び、すぐに消える。
+衝撃を受けるが、雛鳥がダークロードの斥候で、君の居場所を報告しに行くのは確実だ。"""
+[[nodes.options]]
+text = "もし道を進むなら"
+[[nodes.options]]
+text = "もし道を離れ、森を進むなら"
+[[nodes.outcomes]]
+next_node_id = "121"
+[[nodes.outcomes]]
+next_node_id = "38"
+
+[[nodes]]
+id = "299"
+title = "Paragraph 299"
+description = """すぐに森の沼の奥へ進んでいるのに気づく。この方向は遅く、危険だ。"""
+[[nodes.options]]
+text = "もし進むなら"
+[[nodes.options]]
+text = "もし方向を変え、固い地面へ進むなら"
+[[nodes.outcomes]]
+next_node_id = "227"
+[[nodes.outcomes]]
+next_node_id = "95"
+
+[[nodes]]
+id = "300"
+title = "Paragraph 300"
+description = """1時間以上歩き、空のクラーンに常に警戒する。2度その影を見つけ、素早い機転で捕獲を免れる。非常に空腹で、食事を取らねばならぬ。
+旅を続け、13へ進め。"""
+[[nodes.outcomes]]
+next_node_id = "13"
+
+[[nodes]]
+id = "301"
+title = "Paragraph 301"
+description = """カイの技が西の道が行き止まりだと告げる。南の道を選び、27へ進め。"""
+[[nodes.outcomes]]
+next_node_id = "27"
+
+[[nodes]]
+id = "302"
+title = "Paragraph 302"
+description = """ランダムナンバーテーブルから数字を一つ選べ。
+0～2なら、110へ進め。
+3～9なら、285へ進め。"""
+[[nodes.options]]
+text = "もし選んだ数字が0～2なら"
+[[nodes.options]]
+text = "もし3～9なら"
+[[nodes.outcomes]]
+next_node_id = "110"
+[[nodes.outcomes]]
+next_node_id = "285"
+
+[[nodes]]
+id = "303"
+title = "Paragraph 303"
+description = """ここはまばらで丘の多い森で、空からの攻撃に隠れる場所は少ない。クラーンを避け、木から木へ急ぐが、背後でドゥームウルフの音が近い。"""
+[[nodes.options]]
+text = "もしカイの偽装の技を持っているなら"
+[[nodes.options]]
+text = "もし持っていないなら"
+[[nodes.outcomes]]
+next_node_id = "237"
+[[nodes.outcomes]]
+next_node_id = "72"
+
+[[nodes]]
+id = "304"
+title = "Paragraph 304"
+description = """ジェムが熱く、手を焼く。ENDURANCEを2ポイント失う。
+急いでカイのマントの端で拾い、バックパックにしまう。その大きさは数百クラウンの価値があるだろう。だが、ギアクが近く、矢が頭上を飛び、森の安全へ走る。"""
+[[nodes.outcomes]]
+next_node_id = "2"
+
+[[nodes]]
+id = "305"
+title = "Paragraph 305"
+description = """最初の小屋の開いた扉から、炭焼きの男が粗い石の床にうつ伏せで死んでいる。背中に槍で刺され、殺された。家具と持ち物は全て壊され、破片もない。
+ギアクの悪辣な仕業に間違いなく、彼らは破壊を喜ぶ。他の小屋も同様に殺戮と破壊の跡だ。最後の小屋でギアクの槍を見つけ、疑いを確信する。望むならこの武器を取れる。
+任務の成功をさらに決意し、道を進む。"""
+[[nodes.outcomes]]
+next_node_id = "105"
+
+[[nodes]]
+id = "306"
+title = "Paragraph 306"
+description = """戦いの音が背後で消える。突然、地面に引き倒される。木の上から3人のドラッカリムが落ち、抵抗するが数が多く、非常に強い。
+最後に聞くのは、ドラッカリムの凶悪な唸り声と槍を上げる音だ。
+君の命と任務はここで終わる。"""
+
+[[nodes]]
+id = "307"
+title = "Paragraph 307"
+description = """登攀は迅速で容易だ。トラン近くで果物を摘み、ソマーランドの美しい田園を見下ろした幼少期の木登りを思い出す。
+ツリーハウスの扉を開けると、小さな小屋の隅に隠れる老隠者がいる。緑のカイのマントを認め、安心の笑みが広がる。この地域はギアクで溢れ、3時間で40匹以上のクラーンが東へ飛ぶのを見たと語る。
+隠者が戸棚に急ぎ、新鮮な果物の皿を戻す。バックパックに1食分として入れる。隠者は立派なウォーハンマーをテーブルに置き、「カイの領主よ、君の必要の方が大きい」と言う。望むならこの武器を取れるが、持っている武器と交換せねばならぬ。それが隠者の唯一の防衛だ。
+老人に感謝し、慎重に木を降り、任務を続ける。"""
+[[nodes.outcomes]]
+next_node_id = "213"
+
+[[nodes]]
+id = "308"
+title = "Paragraph 308"
+description = """馬小屋の扉は開き、暗い内部から馬の息遣いが聞こえる。突然、馬が君の存在を感知し、突進し、地面に倒す。ENDURANCEを1ポイント失う。"""
+[[nodes.options]]
+text = "もしカイの動物親和の技を使うなら"
+[[nodes.options]]
+text = "もし逃げた馬を追うなら"
+[[nodes.outcomes]]
+next_node_id = "122"
+[[nodes.outcomes]]
+next_node_id = "233"
+
+[[nodes]]
+id = "309"
+title = "Paragraph 309"
+description = """10歩も進まぬうちに、カラスがローブの男に警告を叫ぶ。向き合い、血を凍らせる叫び声が恐怖とパニックで胃を締め付ける。ダークロードの副官で死霊のヴォルダックだ。数秒でギアクの群れが現れ、襲いかかる。勇敢に戦うが、数が多すぎる。
+最後に覚えているのは、ヴォルダックの骨の手が喉を締める冷たい感触だ。
+君の命と任務はここで終わる。"""
+
+[[nodes]]
+id = "310"
+title = "Paragraph 310"
+description = """向かいの建物の壁に小さな色褪せた看板がある。王の裁判は城塞内で開かれ、西の道がそこへ続く確信がある。"""
+[[nodes.outcomes]]
+next_node_id = "37"
+
+
+[[nodes]]
+id = "311"
+title = "Paragraph 311"
+description = """丘の斜面は急で、土は緩く滑りやすい。肩越しに振り返ると、森から2人のギアクが現れ、君を追って登り始める。丘の頂上まで半分ほどで、右に土砂でほぼ隠れた洞窟を見つける。"""
+[[nodes.options]]
+text = "もしカイの偽装の技を持っているなら"
+[[nodes.options]]
+text = "もし洞窟に隠れるなら"
+[[nodes.options]]
+text = "もし洞窟を避け、頂上へ登り続けるなら"
+[[nodes.outcomes]]
+next_node_id = "324"
+[[nodes.outcomes]]
+next_node_id = "279"
+[[nodes.outcomes]]
+next_node_id = "47"
+
+[[nodes]]
+id = "312"
+title = "Paragraph 312"
+description = """不運を呪う。自然とダークロードが結託して君を阻むが、王に会う決意は揺るがない。
+服の粘つく泥を拭い、森の奥へ進む。"""
+[[nodes.outcomes]]
+next_node_id = "299"
+
+[[nodes]]
+id = "313"
+title = "Paragraph 313"
+description = """武器の汚れたギアクの血を拭い、クラーンが死んだ騎手を見つける前に急いで丘を降りる。緩い岩で何度も足を滑らせ、数フィート転がる。
+脚の切り傷と打撲でENDURANCEを1ポイント失う。"""
+[[nodes.outcomes]]
+next_node_id = "248"
+
+[[nodes]]
+id = "314"
+title = "Paragraph 314"
+description = """城塞に着くのにほぼ1時間かかる。ホルムガードの市民はパニックと混乱に陥っている。護送者が正門の武装した衛兵に近づき、王への急務の伝言を告げる。
+ランダムナンバーテーブルから数字を一つ選べ。
+0～6なら、341へ進め。
+7～9なら、98へ進め。"""
+[[nodes.options]]
+text = "もし選んだ数字が0～6なら"
+[[nodes.options]]
+text = "もし7～9なら"
+[[nodes.outcomes]]
+next_node_id = "341"
+[[nodes.outcomes]]
+next_node_id = "98"
+
+[[nodes]]
+id = "315"
+title = "Paragraph 315"
+description = """女物の服の束に包まれた小さなビロードの袋に、6ゴールドクラウンと香りの石鹸が入っている。望むならこれらを持ち、旅を続ける。"""
+[[nodes.outcomes]]
+next_node_id = "213"
+
+[[nodes]]
+id = "316"
+title = "Paragraph 316"
+description = """敵を避ける急ぎで、木の根に足を引っかけ、埃と葉にまみれて転がる。丘の麓の下草を突き進み、武器を拾い、密な森へ走る。
+クラーンは上空を旋回しなくなり、丘の頂に2人のギアクの影が見える。
+目の汚れを拭うと、額に大きなあざに顔をしかめる。遅れず、森の安全へ深く進む。"""
+[[nodes.outcomes]]
+next_node_id = "331"
+
+[[nodes]]
+id = "317"
+title = "Paragraph 317"
+description = """本能的に階段から飛び離れ、石の床に着地する。素早い反応が命を救い、巨大な花崗岩の塊が天井から落ち、錠板の前で階段を砕く！
+震えつつも無傷で立ち上がり、上から薄暗い光が部屋に差し込む。墓草と曇った空が見える天井の穴をよじ登り、死霊都市の南門へ急ぐ。尖った丸太の外郭陣地が見える。"""
+[[nodes.outcomes]]
+next_node_id = "61"
+
+[[nodes]]
+id = "318"
+title = "Paragraph 318"
+description = """2人の兵士と軍曹が石弓を頭に狙い、走ってくる。近づくとカイのマントを認め、安心の表情が広がる。
+「我が主よ」と軍曹が言う。「他のカイの達人はどこに？彼らの知恵が切実に必要だ。ダークロードが我々を激しく圧迫し、死傷者が多い。」
+同胞の運命と王に会う急務を告げる。彼は君を船に戻し、将校が馬でホルムガードの高壁と正門へ案内する。"""
+[[nodes.outcomes]]
+next_node_id = "129"
+
+[[nodes]]
+id = "319"
+title = "Paragraph 319"
+description = """ぬめった生物が長い恐ろしい死の叫びを上げ、倒れる。パニックに近く、立ち上がり、死んだ獣の顎からベルトと思うものを掴む。遠くに光が見え、全力で走る。日光に出ると、葉の地面に倒れ、苦しい息を吐く。
+ゆっくり起き上がると、ベルトはまだつけている—失っていなかった。バロウクロウラーの顎から掴んだのは、革の紐と小さな袋、鞘の短剣だった。留め金を外すと、20ゴールドクラウンがある。望むなら短剣とクラウンを取れる。
+気分が良くなり、装備を集め、東の森へ進む。"""
+[[nodes.outcomes]]
+next_node_id = "157"
+
+[[nodes]]
+id = "320"
+title = "Paragraph 320"
+description = """開けた野原を森へ走ると、クラーンが急降下し、腕を爪で裂く。反撃する前に、冷たい悪意の叫びと共に飛び去る。
+森に入るが、ENDURANCEを2ポイント失う。"""
+[[nodes.outcomes]]
+next_node_id = "264"
+
+[[nodes]]
+id = "321"
+title = "Paragraph 321"
+description = """川の曲がりくねった縁をほぼ1時間歩き、次の曲がり角で戦いの微かな音が聞こえる。より良く見るため、急な小丘を慎重に登る。"""
+[[nodes.outcomes]]
+next_node_id = "273"
+
+[[nodes]]
+id = "322"
+title = "Paragraph 322"
+description = """永遠とも思える苦闘の末、急な丘の頂に着く。木々の上を見ると、修道院の燻る残骸が残る。北に真っ黒な煙の柱が空高く上がり、基部で小さなオレンジの炎がちらつく。トラン港が燃えていると心が沈む。
+突然、上空の鋭い叫びがクラーンの襲撃を警告する。30ヤード先に殺しに急降下する。"""
+[[nodes.options]]
+text = "もし立ち向かい、急降下するクラーンと戦うなら"
+[[nodes.options]]
+text = "もし攻撃を避け、丘の反対側へ滑り降り、クラーンから逃れるなら"
+[[nodes.outcomes]]
+next_node_id = "17"
+[[nodes.outcomes]]
+next_node_id = "89"
+
+[[nodes]]
+id = "323"
+title = "Paragraph 323"
+description = """塔の頂から全方向の木々の上を見渡せる。北に遠く、真っ黒な煙の柱が空高く上がり、基部で小さなオレンジの炎がちらつく。トラン港が燃えていると心が沈む。南西から戦いの音が風に乗り、最も近くても5マイル以内だ。
+見張り塔の床に大きな長方形の箱がある。"""
+[[nodes.options]]
+text = "もしこの箱を開けるなら"
+[[nodes.options]]
+text = "もし梯子を降り、壊れていない段を使い、塔を去るなら"
+[[nodes.outcomes]]
+next_node_id = "290"
+[[nodes.outcomes]]
+next_node_id = "140"
+
+[[nodes]]
+id = "324"
+title = "Paragraph 324"
+description = """緑のカイのマントのフードを上げ、洞窟の入口の岩の陰に身を隠す。息を止め、身体を丸め、マントで完全に覆う。数分後、ギアクが外の岩の棚をよじ登り、邪悪な黄色の目で丘の隙間を探す。
+奇妙な言葉で呪い、頂上へ登り始める。カイの偽装の技を教えてくれた師に心から感謝する—この技が命を救った。"""
+[[nodes.options]]
+text = "もし洞窟を探るなら"
+[[nodes.options]]
+text = "もしギアクが戻る場合に備え、丘を降りるなら"
+[[nodes.outcomes]]
+next_node_id = "33"
+[[nodes.outcomes]]
+next_node_id = "248"
+
+[[nodes]]
+id = "325"
+title = "Paragraph 325"
+description = """森から現れると、ギアクの将校が「オゴット！オゴット！」と叫び、怯える部下は遺跡を逃げ、森の安全へ走る。
+黒い鎧のギアクが拳を振り、「ラネグ・ロガグ・オク—オルガダカ・オカク・ロガグ・ガジ！」と叫び去る。戦場の光景を眺め、ラウマスの壊れた柱に15体以上のギアクの死体を数える。
+若い魔法使いが額の汗を拭い、友情の手を差し伸べて歩み寄る。"""
+[[nodes.outcomes]]
+next_node_id = "349"
+
+[[nodes]]
+id = "326"
+title = "Paragraph 326"
+description = """鍵を慎重に差し込み、時計回りに回す。鈍いクリック音—鍵が効いた。ピンを外すと、大きな花崗岩の扉が隠れた蝶番でゆっくり開く。墓地の薄暗い光が墓に流れ込む。出口は墓草に覆われ、顔と腕に多くの傷を負いながら表面に進む。
+振り返ると、墓の扉がゆっくり閉まり、立っている地面から残酷な非人間の笑い声が響く。パニックで、死霊都市の南門へ走る。"""
+[[nodes.outcomes]]
+next_node_id = "61"
+
+[[nodes]]
+id = "327"
+title = "Paragraph 327"
+description = """数分後、クラーンが背後の丘の上で旋回する。少なくとも16匹、背に2人以上のギアクが長い槍と鈍い青銅の尖った兜で武装している。興奮したギアクの唸り声が聞こえ、君を見つけた。
+25フィート下のトンネル入口へ飛び降りるが、靴が棘の茨に引っかかり、逆さで無力に吊るされる。武器もなく脆弱だ。幸い、終わりは早い。最初のギアクの槍が心臓を刺し、死は即座だ。
+君の命と任務はここで終わる。"""
+
+[[nodes]]
+id = "328"
+title = "Paragraph 328"
+description = """生物が死ぬと、身体がゆっくりと不快な緑の液体に溶ける。煙る液体の下の草や植物がしおれ、死ぬ。だが、腐敗する身体の近くに大きく価値あるジェムがある。"""
+[[nodes.options]]
+text = "もしジェムを取るなら"
+[[nodes.options]]
+text = "もし一刻も早く去るなら"
+[[nodes.outcomes]]
+next_node_id = "76"
+[[nodes.outcomes]]
+next_node_id = "118"
+
+[[nodes]]
+id = "329"
+title = "Paragraph 329"
+description = """古人の墓地へ下ると、灰色で不気味な場所を包む奇妙な霧と雲が太陽を遮り、永遠の薄暗さに保つ。
+這うような寒さが骨に染みる。馬が怯え、どれだけ促してもこの恐ろしい場所に近づかぬ。馬を残し、徒歩で進まねばならぬ。"""
+[[nodes.outcomes]]
+next_node_id = "284"
+
+[[nodes]]
+id = "330"
+title = "Paragraph 330"
+description = """疲労で倒れた木で数分休息する。幹の下に大きな束を見つける。"""
+[[nodes.options]]
+text = "もし束の内容を調べるなら"
+[[nodes.options]]
+text = "もしそのまま残し、任務を続けるなら"
+[[nodes.outcomes]]
+next_node_id = "315"
+[[nodes.outcomes]]
+next_node_id = "213"
+
+[[nodes]]
+id = "331"
+title = "Paragraph 331"
+description = """棘の茨と密に絡まる根に囲まれ、丘の向こうへ消えるトンネルの入口が見える。高さ約7フィート、幅10フィート強だ。近づくと、暗闇から微かな風を感じる。このトンネルが丘の反対側に出るなら、困難な登攀を数時間節約できる。だが、知られざる危険も潜むかもしれない。"""
+[[nodes.options]]
+text = "もしトンネルに入るなら"
+[[nodes.options]]
+text = "もし丘を登るなら"
+[[nodes.outcomes]]
+next_node_id = "170"
+[[nodes.outcomes]]
+next_node_id = "280"
+
+[[nodes]]
+id = "332"
+title = "Paragraph 332"
+description = """暗く曲がりくねった廊下を10分近く歩き、急な階段を登り、小さな木の扉へ。男が隠し金具を押し、扉が開く。豪華な装飾の寝室に入り、部屋の隅に大きな大理石の浴槽がある。男は王との謁見を求める間、ここで休息するよう提案する。
+急いで浴槽で体を洗い、大理石のテーブルに置かれた白いローブに着替える。男が戻り、精巧なタペストリーが並ぶ長い廊下を案内する。銀の鎧の2人の兵士が守る大きな扉に着く。
+王に会う時が来た。"""
+[[nodes.outcomes]]
+next_node_id = "350"
+
+[[nodes]]
+id = "333"
+title = "Paragraph 333"
+description = """木々がまばらになり、30分近く厚い下草を切り進むと、木々の上を翼の音が響く。北から近づくクラーンの形がかすかに見え、修道院を襲った怪物だ。背には長い槍を持つ2匹の灰色の生物がいる。
+山のギアク、ダークロードの邪悪な従者で、憎しみと悪意に満ちる。遠い昔、その祖先はダークロードに使われ、ダーンクラグ山脈の火山荒野にあるヘルゲダッドの地獄都市を建設した。建設は長く苦しい悪夢で、ヘルゲダッドの熱と毒の大気に耐えた強いギアクだけが生き残った。
+木々に隠れ、クラーンが南へ飛び去るまで完全に静止する。去ったと確信し、森の奥へ再び進む。"""
+[[nodes.outcomes]]
+next_node_id = "131"
+
+[[nodes]]
+id = "334"
+title = "Paragraph 334"
+description = """小川が岩の丘に消えると、上に4人の兵士と将校が見える。王の軍の制服を着ている。"""
+[[nodes.options]]
+text = "もしカイの第六の感覚の技を使うなら"
+[[nodes.options]]
+text = "もしカイの偽装の技を使い、彼らが通り過ぎるのを待つなら"
+[[nodes.options]]
+text = "もし彼らに近づくなら"
+[[nodes.outcomes]]
+next_node_id = "48"
+[[nodes.outcomes]]
+next_node_id = "73"
+[[nodes.outcomes]]
+next_node_id = "162"
+
+[[nodes]]
+id = "335"
+title = "Paragraph 335"
+description = """近づくと、黒い鳥が木々の上を飛び、すぐに消える。止まっていた木を探るが異常はない。貴重な時間を無駄にするより、道を進む。"""
+[[nodes.outcomes]]
+next_node_id = "121"
+
+[[nodes]]
+id = "336"
+title = "Paragraph 336"
+description = """空き地に突進し、ギアクを完全に驚かせる。躊躇なく、最も近い者に攻撃し、地面に倒れる前に死ぬ。他のギアクが曲がった剣を抜き、襲いかかる。一人ずつ戦わねばならぬ。
+ギアク1：COMBAT SKILL 14 ENDURANCE 11
+ギアク2：COMBAT SKILL 13 ENDURANCE 11
+勝ち、騎兵を解放したら、117へ進め。"""
+[[nodes.outcomes]]
+next_node_id = "117"
+
+[[nodes]]
+id = "337"
+title = "Paragraph 337"
+description = """華やかなピンを外すと、大きな破裂音が耳を聾する。
+ランダムナンバーテーブルから数字を一つ選べ。
+0～4なら、219へ進め。
+5～9なら、317へ進め。"""
+[[nodes.options]]
+text = "もし選んだ数字が0～4なら"
+[[nodes.options]]
+text = "もし5～9なら"
+[[nodes.outcomes]]
+next_node_id = "219"
+[[nodes.outcomes]]
+next_node_id = "317"
+
+[[nodes]]
+id = "338"
+title = "Paragraph 338"
+description = """目覚めると、急な斜面の麓、長い草に絡まって横たわる。バックパックと武器はなく、頭が激しく痛む。どれだけ意識を失っていたか分からないが、時間がなく、急がねばならぬ。立ち上がると、斜面の上にバックパックと武器がある。落下時に外れたようだ。急いで回収し、木々の間へ進む。"""
+[[nodes.outcomes]]
+next_node_id = "113"
+
+[[nodes]]
+id = "339"
+title = "Paragraph 339"
+description = """素早く横に飛び、長い短剣がカウンターのガラスを砕く。浅黒い若者が襲いかかり、戦わねばならぬ。
+強盗：COMBAT SKILL 13 ENDURANCE 20
+4ラウンド以内に倒すなら、94へ進め。
+4ラウンド後も戦闘が続くなら、203へ。
+戦闘中いつでも正面玄関から逃げるなら、7へ。"""
+[[nodes.options]]
+text = "もし4ラウンド以内に倒すなら"
+[[nodes.options]]
+text = "もし4ラウンド後も戦闘が続くなら"
+[[nodes.options]]
+text = "戦闘中いつでも正面玄関から逃げるなら"
+[[nodes.outcomes]]
+next_node_id = "94"
+[[nodes.outcomes]]
+next_node_id = "203"
+[[nodes.outcomes]]
+next_node_id = "7"
+
+[[nodes]]
+id = "340"
+title = "Paragraph 340"
+description = """武器を構え、迫るドゥームウルフと騎手を迎え撃つ。ギアクが君を見てシミターを抜く。ギアクとドゥームウルフを一つの敵として戦わねばならぬ。
+ギアク＋ドゥームウルフ：COMBAT SKILL 14 ENDURANCE 24
+勝つなら、193へ進め。"""
+[[nodes.outcomes]]
+next_node_id = "193"
+
+[[nodes]]
+id = "341"
+title = "Paragraph 341"
+description = """衛兵は君の話を信じず、入場を拒む。護送者は群衆に消え、混乱の街で一人道を探す。
+拒絶に衝撃と落胆を覚え、群衆に押され、ギルド橋の入口に立つ。エレディル川がホルムガルフと合流する近くにある。"""
+[[nodes.options]]
+text = "もしカイの追跡の技を使うなら"
+[[nodes.options]]
+text = "もしギルドホールに入るなら"
+[[nodes.options]]
+text = "もし城塞への別のルートを探すなら"
+[[nodes.outcomes]]
+next_node_id = "310"
+[[nodes.outcomes]]
+next_node_id = "210"
+[[nodes.outcomes]]
+next_node_id = "37"
+
+[[nodes]]
+id = "342"
+title = "Paragraph 342"
+description = """声が木々に響き、異邦人がゆっくり振り返る。心臓が高鳴り、血が凍る。人間ではない。ダークロードの恐ろしい副官、死霊のヴォルダックだ。鋭い叫び声が耳を満たし、巨大な黒いメイスを頭上に掲げ、襲いかかる。恐怖で凍りつき、ヴォルダックの精神攻撃を感じる。
+カイの精神防壁の技がなければ、COMBAT SKILLを2ポイント減らす。この生物はマインドブラストに耐性がある。
+ヴォルダック：COMBAT SKILL 18 ENDURANCE 26
+勝つなら、123へ進め。"""
+[[nodes.outcomes]]
+next_node_id = "123"
+
+[[nodes]]
+id = "343"
+title = "Paragraph 343"
+description = """絡まる枝と根に捕まり、右手を解放し、武器を掴み、ゆっくりと木々の間を切り開き、開けた森へ進む。マントは数カ所破れ、左腕は肘上で切り傷とひどい打撲を負う。
+ENDURANCEを2ポイント失い、213へ進め。"""
+[[nodes.outcomes]]
+next_node_id = "213"
+
+[[nodes]]
+id = "344"
+title = "Paragraph 344"
+description = """弱り、目眩がする。脚の感覚がなく、体重を支えない。扉へ這うが、強盗が飛び乗り、地面に押さえつける。"""
+[[nodes.outcomes]]
+next_node_id = "60"
+
+[[nodes]]
+id = "345"
+title = "Paragraph 345"
+description = """緑のカイのマントのフードを上げ、クラーンが上空を旋回する中、息を止める。数分後、ギアクの焦燥の呪い声が聞こえ、クラーンの翼の音が西へ消える。素早い反応が捕獲と死を免れた。
+道に戻るなら、272へ。
+または、木々の陰を進むなら、19へ。"""
+[[nodes.options]]
+text = "道に戻るなら"
+[[nodes.options]]
+text = "木々の陰を進むなら"
+[[nodes.outcomes]]
+next_node_id = "272"
+[[nodes.outcomes]]
+next_node_id = "19"
+
+[[nodes]]
+id = "346"
+title = "Paragraph 346"
+description = """骸骨の肋骨に深く刺さった槍がある。状態が良く、望むなら取れる。
+空き地を去るなら、14へ進め。"""
+[[nodes.outcomes]]
+next_node_id = "14"
+
+[[nodes]]
+id = "347"
+title = "Paragraph 347"
+description = """木々がまばらになり、オークの木の下に古い丸太小屋のシルエットが見える。放棄され、価値あるものはほとんど残っていない。正門近くの小さな箱を開けると、丈夫な紐で束ねた小枝があり、一端にピッチが塗られた松明だ。箱の横に短剣と火打石がある。望むなら松明とそれらを取れ。アクションチャートに記録せよ。
+小屋の扉を閉め、北東の草生した道を進む。"""
+[[nodes.outcomes]]
+next_node_id = "103"
+
+[[nodes]]
+id = "348"
+title = "Paragraph 348"
+description = """死んだ蛇を蹴り飛ばそうと靴を上げ、心臓が止まる。赤い沼バイパーだ！その毒の咬傷に治療法はない。この方向を進むのは自殺だ。慎重に足を戻し、固い地面に着き、任務を続ける。"""
+[[nodes.outcomes]]
+next_node_id = "95"
+
+[[nodes]]
+id = "349"
+title = "Paragraph 349"
+description = """金髪の若い男で、深い思索の瞳を持つ。顔は疲労と戦いの汚れに刻まれ、空色の長いローブは野で暮らした証だ。手を振って握り、頭を下げる。「永遠の感謝を、カイの領主。私の力はほぼ尽きた。君の助けがなければ、ギアクの槍の上で終わっていただろう。」
+彼は弱り、足元が不安定だ。腕を支え、倒れた柱に座らせ、彼の言葉に耳を傾ける。
+「私の名はバネドン。クリスタル・スターの同胞団、トランの魔法使いギルドの徒弟だ。ギルドマスターがこの急務の伝言を君の修道院に送った。」彼はローブから羊皮紙の封筒を出し、渡す。
+「ご覧の通り、封を切り、内容を読んだ。戦争が始まり、2人の旅の仲間と街道にいた。クラーンに襲われ、逃げる中、森で離れた。」
+手紙はダークロードがダーンクラグ山脈の向こうに大軍を集めた警告だ。ギルドマスターはフェーマンの祝祭を中止し、戦争の準備をカイに促す。
+「我々は裏切られた」とバネドンが悲しげに頭を下げる。
+「我々の同胞、ヴォノターが黒魔術の禁断の謎を探り、10日前、同胞団を非難し、長老を殺した。彼は消え、ダークロードを助けていると噂される。」
+君は修道院の出来事と王に警告する任務を告げる。静かに、バネドンは首の金の鎖を外し、渡す。鎖には小さなクリスタル・スターのペンダントがある。「私の同胞団の象徴だ。この暗黒の時に我々は真の兄弟だ。幸運の護符—これからの道を守るように。」君は感謝し、鎖を首にかけ、ペンダントを服にしまう。（アクションチャートに記録せよ。）
+バネドンが別れを告げる。「ギアクが卑劣な仲間を連れて戻る前に去らねばならぬ。私はギルドに戻る。さらば、兄弟。神の幸運が共にあらんことを。」"""
+[[nodes.outcomes]]
+next_node_id = "293"
+
+[[nodes]]
+id = "350"
+title = "Paragraph 350"
+description = """国家の間に入ると、白と金で豪華に飾られた壮麗な広間だ。王と側近が中央の大理石の台に広げた大きな地図を吟味し、顔は心配と集中に刻まれる。君が同胞の死と城塞への危険な旅を語ると、広間に静寂が満ちる。物語を終えると、王が近づき、君の右手を握る。
+「ローン・ウルフ、君は無私の勇気を持つ。真のカイの領主の資質だ。この危険な旅は大きな痛手だが、君の決意の精神は暗黒の時に我々に希望の光だ。君は師の記憶に大いなる名誉をもたらした。それを称える。」
+広間全体の称賛と心からの感謝を受け、若々しい顔が赤らむ。王が手を上げ、声が止まる。
+「君はソマーランドが忠実な子に求める全てを果たしたが、なお必要だ。ダークロードが再び力を増し、その野望に限界はない。我々の希望はデュレノールにあり、かつてダークロードを破った力にある。ローン・ウルフ、君は最後のカイだ—技を持つ。デュレノールへ旅し、太陽の剣ソマースウェルドを持ち帰るか？神の贈り物でこの悪を打ち砕き、祖国を救うのだ。」
+ソマースウェルドの探索を受け入れるなら、ローン・ウルフ冒険の第2巻『Fire on the Water』で冒険を始めなさい。"""
+[[nodes.options]]
+text = "もしソマースウェルドの探索を受け入れるなら、ローン・ウルフ冒険の第2巻『Fire on the Water』で冒険を始めなさい"
+[[nodes.outcomes]]
+next_node_id = "Book 2"
