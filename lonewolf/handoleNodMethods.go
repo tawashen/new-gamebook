@@ -162,7 +162,7 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node Node) error {
 				subW = gs.Player.Equipments.Weapon1.Name
 			}
 
-			fmt.Printf("現在の装備は%s　別の装備%sに持ち替えるか？\n", currentW, subW)
+			fmt.Printf("現在の装備は%s　別の装備%sに持ち替えるか？Y/N\n", currentW, subW)
 			battleinput, _ := gs.Reader.ReadString('\n')
 			battleinput = strings.TrimSpace(battleinput)
 			battleinput = strings.ToUpper(battleinput)
@@ -201,7 +201,7 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node Node) error {
 		// エンカウント情報が完全かチェックし、敵を設定
 
 		for {
-			fmt.Printf("\nLone Wolf (HP:%d CS;%d CSBonus:%d)",
+			fmt.Printf("\nLone Wolf (HP:%d CS:%d CSBonus:%d)",
 				gs.Player.Stats["HP"], gs.Player.Stats["CS"], csBonus)
 			fmt.Printf("\n%s (HP:%d CS:%d)\n",
 				currentEnemy.Name, currentEnemy.HP, currentEnemy.CS) // 敵のHPを更新して表示
