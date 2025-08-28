@@ -10,8 +10,24 @@ import (
 
 func (lw *LoneWolfSystem) HandleNode(gs *GameState, node Node) error {
 	UpdatePlayer(gs, "heal")
+
 	switch node.Type {
 	case "story":
+		if node.WeaponGetBefore != "" {
+			weapon := lw.Tables.WeaponsMap[node.WeaponGetBefore]
+			weapon.Get(gs)
+		}
+
+		if node.ArmorGetBefore != "" {
+			armor := lw.Tables.ArmorsMap[node.ArmorGetBefore]
+			armor.Get(gs)
+		}
+
+		if node.ItemGetBefore != "" {
+			item := lw.Tables.ItemsMap[node.ItemGetBefore]
+			item.Get(gs)
+		}
+
 		fmt.Printf("Story: %s\n", node.Text)
 		return lw.handleStoryNode(gs, node)
 
@@ -24,6 +40,7 @@ func (lw *LoneWolfSystem) HandleNode(gs *GameState, node Node) error {
 		return lw.handleRandomNode(gs, node)
 
 	//case "itemget":
+
 	//	return lw.handleItemgetNode(gs, node)
 
 	default:

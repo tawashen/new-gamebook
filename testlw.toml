@@ -272,7 +272,7 @@ next_node_id = "106"
 [[nodes]]
 id = "15"
 type = "story"
-itemgetbefore = "Sword"
+weapongetbefore = "Sword"
 text = """長い、暗い枝のトンネルを抜け、大きな空き地に出る。
 空き地の中央の石の台座には、黒い革の鞘に収められた剣がある。
 柄には手書きのメモが結ばれているが、君には知らない言語だ。

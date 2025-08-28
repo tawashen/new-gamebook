@@ -347,6 +347,10 @@ func (w Weapon) Get(gs *GameState) {
 	}
 }
 
+func (i Item) Get(gs *GameState) {
+	//kokokara
+}
+
 func (a Armor) Get(gs *GameState) {
 	if gs.Player.Equipments.Body == nil && a.Slot == "Body" {
 		fmt.Printf("%sを身につけた\n耐久力が%d上昇した\n", a.Name, a.HPBonus)
