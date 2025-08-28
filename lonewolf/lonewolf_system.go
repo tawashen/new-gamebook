@@ -264,7 +264,7 @@ func (lw *LoneWolfSystem) MakingPlayer(gs *GameState) error {
 		randomNumWeaponSkill := lw.Rand.Intn(10)
 		favoriteWeapon := lw.Tables.WeaponSkillTable[randomNumWeaponSkill]
 		gs.Player.FavoriteWeapon = favoriteWeapon
-		fmt.Printf("ちなみにお前の得意な武器は%sである", favoriteWeapon)
+		fmt.Printf("ちなみにお前の得意な武器は%sである\n", favoriteWeapon)
 	}
 
 	//first equipment

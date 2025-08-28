@@ -183,6 +183,7 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node Node) error {
 		}
 	}
 
+	//得意武器の場合はCSボーナス発生
 	var csBonus int
 	var currentWeaponStr string
 	if contains_str(gs.Player.KaiDisciplines, "WeaponSkill") {

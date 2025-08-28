@@ -48,7 +48,7 @@ FirstEquipmentTable = ["Broadsword", "Sword", "Helmet", "Meal", "ChainmailWaistc
     CSBonus = 1
 
     [[Tables.Items]]
-    Name = "Meals"
+    Name = "Meal"
     Effect = "Meal"
 
     [[Tables.Items]]
