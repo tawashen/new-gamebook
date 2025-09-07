@@ -349,6 +349,26 @@ func (w Weapon) Get(gs *GameState) {
 
 func (i Item) Get(gs *GameState) {
 	//kokokara
+	backpack := gs.Player.Equipments.Backpack
+
+	if len(backpack) > 8 {
+		fmt.Printf("残念荷物が一杯のようだ。%sを手に入れるために何を諦める？", i.Name)
+		for num, item := range backpack {
+			fmt.Printf("%d：%s\n", num, item.Name)
+		}
+		fmt.Printf("その他：%sを諦める\n", i.Name)
+
+		for {
+			input, _ := gs.Reader.ReadString('\n')
+			input = strings.TrimSpace(input)
+			choicunum, err := strconv.Atoi(input)
+
+			if err == nil && choicunum >= 0 && choicunum < len(backpack)-1 {
+
+			}
+		}
+
+	}
 }
 
 func (a Armor) Get(gs *GameState) {
