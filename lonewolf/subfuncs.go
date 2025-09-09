@@ -210,3 +210,7 @@ func convertWideToNarrow(s string) string {
 		return r
 	}, s)
 }
+
+func remove_slice[T any](slice []T, num int) []T {
+	return append(slice[:num], slice[num+1:]...)
+}

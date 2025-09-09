@@ -347,7 +347,7 @@ func (w Weapon) Get(gs *GameState) {
 	}
 }
 
-func (i Item) Get(gs *GameState) {
+func (i *Item) Get(gs *GameState) {
 	//kokokara
 	backpack := gs.Player.Equipments.Backpack
 
@@ -364,10 +364,20 @@ func (i Item) Get(gs *GameState) {
 			choicunum, err := strconv.Atoi(input)
 
 			if err == nil && choicunum >= 0 && choicunum < len(backpack)-1 {
-
+				removeItem := gs.Player.Equipments.Backpack[choicunum]
+				gs.Player.Equipments.Backpack = remove_slice(gs.Player.Equipments.Backpack, choicunum)
+				gs.Player.Equipments.Backpack = append(gs.Player.Equipments.Backpack, i)
+				fmt.Printf("君は%sを捨てて%sを手に入れた\n", removeItem.Name, i.Name)
+				break
+			} else {
+				fmt.Printf("君は%sを諦めた\n", i.Name)
+				break
 			}
-		}
 
+		}
+	} else {
+		gs.Player.Equipments.Backpack = append(gs.Player.Equipments.Backpack, i)
+		fmt.Printf("君は%sを手に入れた\n", i.Name)
 	}
 }
 
