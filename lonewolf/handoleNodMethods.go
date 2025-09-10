@@ -239,6 +239,8 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node Node) error {
 		}
 	}
 
+	csBonus = csBonus + node.CSChange //cschange分をそのまま追加
+
 	for _, currentEnemy := range node.Enemies {
 		// エンカウント情報が完全かチェックし、敵を設定
 

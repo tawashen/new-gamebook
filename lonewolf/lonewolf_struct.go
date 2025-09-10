@@ -88,6 +88,7 @@ type Node struct {
 	Enemies         []*Enemy  `toml:"enemies,omitempty"`
 	Outcomes        []Outcome `toml:"outcomes,omitempty"`
 	Item            string    //処理用文字列
+	CSChange        int       `toml:"cschange,omitempty"`
 }
 
 // Choice は選択肢を表す
