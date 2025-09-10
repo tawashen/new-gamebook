@@ -301,15 +301,35 @@ text = """キャラバンから馬を解放し、近づくドゥームウルフ�
 description = "192へ進め。"
 next_node_id = "192"
 
+
 [[nodes]]
 id = "17"
-type = ""
+type = "encounter"
+cschange = -1
 text = """武器を振り上げ、獣の鋭い牙の口が頭の数インチ手前で閉じる瞬間を狙う。
 翼の羽ばたきに押され、立っているのが難しい。
 COMBAT SKILLから1ポイントを引いて、クラーンと戦え。
-クラーン：COMBAT SKILL 16 ENDURANCE 24
 もしこの生物を倒したら、ギアクを避けるため丘の反対側を急いで下る。
 ランダムナンバーテーブルから数字を一つ選べ。"""
+
+    [[nodes.enemies]]
+    Name = "クラーン"
+    HP = 24
+    CS = 16
+
+    [[node.outcomes]]
+    condition = "combat_won"
+    next_node_id = "17B"
+
+    [[node.outcomes]]
+    condition = "combat_lost"
+    next_node_id = "game_over"
+
+[[nodes]]
+id = "17B"
+type = "random_roll"
+
+
 [[nodes.choices]]
 description = "もし0を選んだなら、53へ進め。"
 next_node_id = "53"
