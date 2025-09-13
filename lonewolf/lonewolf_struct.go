@@ -81,6 +81,7 @@ type Node struct {
 	ID              string    `toml:"id"`
 	Type            string    `toml:"type"`
 	ItemGetBefore   string    `toml:"itemgetbefore,omitempty"`
+	ItemGetNum      int       `toml:"itemgetnum"`
 	WeaponGetBefore string    `toml:"weapongetbefore,omitempty"`
 	ArmorGetBefore  string    `toml:"armorgetbefore,omitempty"`
 	Text            string    `toml:"text"`

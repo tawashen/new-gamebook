@@ -391,6 +391,7 @@ text = """ここに住んでいた者は、最近、急いで去ったようだ�
 箱や小さな衣装棚を調べると、バックパック、食料（2食分）、短剣が見つかる。"""
 weapongetbefore = "Dagger"
 itemgetbefore = "Meal"
+itemgetnum = 2
 [[nodes.choices]]
 description = "これらのアイテムを取るなら、アクションチャートに記録せよ。任務を続けるなら、273へ進め。"
 next_node_id = "273"

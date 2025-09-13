@@ -347,8 +347,8 @@ func (w Weapon) Get(gs *GameState) {
 	}
 }
 
-func (i *Item) Get(gs *GameState) {
-	//kokokara
+func (i *Item) Get(gs *GameState, num int) {
+
 	backpack := gs.Player.Equipments.Backpack
 
 	if len(backpack) > 8 {
@@ -358,7 +358,6 @@ func (i *Item) Get(gs *GameState) {
 		}
 		fmt.Printf("その他：%sを諦める\n", i.Name)
 
-		//for {
 		input, _ := gs.Reader.ReadString('\n')
 		input = strings.TrimSpace(input)
 		choicunum, err := strconv.Atoi(input)
@@ -368,13 +367,47 @@ func (i *Item) Get(gs *GameState) {
 			gs.Player.Equipments.Backpack = remove_slice(gs.Player.Equipments.Backpack, choicunum)
 			gs.Player.Equipments.Backpack = append(gs.Player.Equipments.Backpack, i)
 			fmt.Printf("君は%sを捨てて%sを手に入れた\n", removeItem.Name, i.Name)
-			//	break
 		} else {
 			fmt.Printf("君は%sを諦めた\n", i.Name)
-			//	break
 		}
 
-		//}
+	} else if len(backpack)+num > 8 {
+		itemremain := num
+
+		for {
+			backpackremain := len(backpack)
+			fmt.Printf("残念ながら全ては手に入れられないようだ。\n手持ちの何かを捨てるか（0-%d）\n手に入れるアイテムの個数を減らすか（その他のキー)", backpackremain-1)
+			for number, item := range backpack {
+				fmt.Printf("%d：%s\n", number, item.Name)
+			}
+			input, _ := gs.Reader.ReadString('\n')
+			input = strings.TrimSpace(input)
+			choicunum, err := strconv.Atoi(input)
+
+			if err == nil && choicunum < backpackremain {
+				dropitem := backpack[choicunum].Name
+				remove_slice(backpack, choicunum)
+				backpack = append(backpack, i)
+				itemremain -= 1
+				fmt.Printf("君は%sを捨てて%sを１つ手に入れた\n", dropitem, i.Name)
+			} else { //残りのスペースをアイテムで埋める
+				for {
+					backpack = append(backpack, i)
+					if len(backpack) == 8 {
+						itemremain = 0
+						fmt.Printf("君はバックパックに%sを可能な限り詰め込んだ\n", i.Name)
+						break
+					} else {
+						continue
+					}
+				}
+			}
+			if itemremain == 0 {
+				break
+			}
+			continue
+		}
+
 	} else {
 		gs.Player.Equipments.Backpack = append(gs.Player.Equipments.Backpack, i)
 		fmt.Printf("君は%sを手に入れた\n", i.Name)

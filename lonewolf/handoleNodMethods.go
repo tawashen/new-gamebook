@@ -25,7 +25,7 @@ func (lw *LoneWolfSystem) HandleNode(gs *GameState, node Node) error {
 
 		if node.ItemGetBefore != "" {
 			item := lw.Tables.ItemsMap[node.ItemGetBefore]
-			item.Get(gs)
+			item.Get(gs, node.ItemGetNum)
 		}
 
 		fmt.Printf("Story: %s\n", node.Text)
@@ -94,6 +94,19 @@ func (lw *LoneWolfSystem) handleStoryNode(gs *GameState, node Node) error {
 	}
 
 	//itemgetbeforeを実装する
+
+	if node.ArmorGetBefore != "" {
+		lw.Tables.ArmorsMap[node.ArmorGetBefore].Get(gs)
+	}
+
+	if node.WeaponGetBefore != "" {
+		lw.Tables.WeaponsMap[node.WeaponGetBefore].Get(gs)
+	}
+
+	if node.ItemGetBefore != "" {
+		num := node.ItemGetNum
+		lw.Tables.ItemsMap[node.ItemGetBefore].Get(gs, num)
+	}
 
 	fmt.Println("\n選択肢:")
 	for i, choice := range node.Choices {
