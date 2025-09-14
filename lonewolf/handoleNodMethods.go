@@ -200,6 +200,9 @@ func (lw *LoneWolfSystem) handleStoryNode(gs *GameState, node Node) error {
 
 // handleEncounterNode は遭遇戦ノードの処理 (簡易版)
 func (lw *LoneWolfSystem) Encounter(gs *GameState, node Node) error {
+
+	gs.CurrentCondition = ""
+
 	fmt.Println("\n--- エンカウント！ ---")
 
 	//装備を変更するか選択
@@ -290,22 +293,26 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node Node) error {
 
 		if gs.Player.Stats["HP"] <= 0 {
 			fmt.Println("あなたは倒れた！")
-			gs.CurrentNodeID = "game_over"
+			gs.CurrentCondition = "combat_lost"
 			break // プレイヤーのHPが0以下になった場合、ゲームオーバーへ
 		}
+
+		gs.CurrentCondition = "combat_won"
 	}
 
-	foundOutcome := false
 	for _, outcome := range node.Outcomes {
-		if outcome.Condition == "combat_won" { // "combat_won" 条件をチェック
+		if outcome.Condition == "combat_won" && gs.CurrentCondition == "combat_won" { // "combat_won" 条件をチェック
 			gs.CurrentNodeID = outcome.NextNodeID
-			foundOutcome = true
 			break
 		}
 	}
-	if !foundOutcome {
-		fmt.Println("エラー: 勝利時の次のノードが見つかりません。ゲーム終了。")
-		gs.CurrentNodeID = "game_over"
+
+	for _, outcome := range node.Outcomes {
+		if outcome.Condition == "combat_lost" && gs.CurrentCondition == "combat_lost" {
+			gs.CurrentNodeID = outcome.NextNodeID
+			break
+		}
 	}
+
 	return nil
 }

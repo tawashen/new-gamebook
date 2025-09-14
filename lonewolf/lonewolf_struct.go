@@ -64,11 +64,12 @@ type Inventory interface {
 
 // GameState はゲームの状態を保持
 type GameState struct {
-	Player        *Player
-	CurrentNodeID string
-	Nodes         map[string]Node
-	Reader        *bufio.Reader
-	System        *LoneWolfSystem // System フィールドを追加
+	Player           *Player
+	CurrentNodeID    string
+	CurrentCondition string
+	Nodes            map[string]Node
+	Reader           *bufio.Reader
+	System           *LoneWolfSystem // System フィールドを追加
 }
 
 // TOML全体を受け取るための構造体

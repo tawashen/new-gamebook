@@ -317,11 +317,11 @@ COMBAT SKILLから1ポイントを引いて、クラーンと戦え。
     HP = 24
     CS = 16
 
-    [[node.outcomes]]
+    [[nodes.outcomes]]
     condition = "combat_won"
     next_node_id = "17B"
 
-    [[node.outcomes]]
+    [[nodes.outcomes]]
     condition = "combat_lost"
     next_node_id = "game_over"
 
@@ -329,6 +329,7 @@ COMBAT SKILLから1ポイントを引いて、クラーンと戦え。
 id = "17B"
 type = "random_roll"
 text = """
+君はクラーンに勝利した！
 もし0を選んだなら、53へ進め。
 もし1～2を選んだなら、274へ進め。
 もし3～9を選んだなら、316へ進め。"""
@@ -337,12 +338,12 @@ text = """
     condition_int = [0]
     next_node_id = "53"
     [[nodes.outcomes]]
-    descripiton = "1-2なので274へ"
+    description = "1-2なので274へ"
     condition_int =[1,2]
     next_node_id = "274"
     [[nodes.outcomes]]
     description = "3-9なので316へ"
-    condition_id = [3,4,5,6,7,8,9]
+    condition_int = [3,4,5,6,7,8,9]
     next_node_id = "316"
 
 [[nodes]]
