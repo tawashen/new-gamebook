@@ -55,6 +55,11 @@ FirstEquipmentTable = ["Broadsword", "Sword", "Helmet", "Meal", "ChainmailWaistc
     Name = "HealingPotion"
     Effet = "Heal"
 
+    [[Tables.Weapons]]
+    Kind = "Dagger"
+    Name = "Dagger"
+    CSB = 1
+
 [[nodes]]
 id = "1"
 type = "story"
