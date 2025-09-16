@@ -67,7 +67,7 @@ type GameState struct {
 	Player           *Player
 	CurrentNodeID    string
 	CurrentCondition string
-	Nodes            map[string]Node
+	Nodes            map[string]*Node
 	Reader           *bufio.Reader
 	System           *LoneWolfSystem // System フィールドを追加
 }

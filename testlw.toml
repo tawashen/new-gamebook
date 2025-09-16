@@ -399,7 +399,7 @@ weapongetbefore = "Dagger"
 itemgetbefore = "Meal"
 itemgetnum = 2
 [[nodes.choices]]
-description = "これらのアイテムを取るなら、アクションチャートに記録せよ。任務を続けるなら、273へ進め。"
+description = "273へ進め。"
 next_node_id = "273"
 
 [[nodes]]

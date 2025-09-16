@@ -8,27 +8,28 @@ import (
 	"time"
 )
 
-func (lw *LoneWolfSystem) HandleNode(gs *GameState, node Node) error {
+func (lw *LoneWolfSystem) HandleNode(gs *GameState, node *Node) error {
 	UpdatePlayer(gs, "heal")
 
 	switch node.Type {
 	case "story":
+		fmt.Printf("Story: %s\n", node.Text)
+
 		if node.WeaponGetBefore != "" {
 			weapon := lw.Tables.WeaponsMap[node.WeaponGetBefore]
-			weapon.Get(gs)
+			weapon.Get(gs, node)
 		}
 
 		if node.ArmorGetBefore != "" {
 			armor := lw.Tables.ArmorsMap[node.ArmorGetBefore]
-			armor.Get(gs)
+			armor.Get(gs, node)
 		}
 
 		if node.ItemGetBefore != "" {
 			item := lw.Tables.ItemsMap[node.ItemGetBefore]
-			item.Get(gs, node.ItemGetNum)
+			item.Get(gs, node.ItemGetNum, node)
 		}
 
-		fmt.Printf("Story: %s\n", node.Text)
 		return lw.handleStoryNode(gs, node)
 
 	case "encounter":
@@ -52,7 +53,7 @@ func (lw *LoneWolfSystem) HandleNode(gs *GameState, node Node) error {
 //	itemInstance := node.Item //その前に各アイテムインスタンスをテーブルにGameStateの各テーブルに作成する
 //}
 
-func (lw *LoneWolfSystem) handleRandomNode(gs *GameState, node Node) error {
+func (lw *LoneWolfSystem) handleRandomNode(gs *GameState, node *Node) error {
 
 	source := rand.NewSource(time.Now().UnixNano())
 	r := rand.New(source)
@@ -86,7 +87,7 @@ func (lw *LoneWolfSystem) handleRandomNode(gs *GameState, node Node) error {
 }
 
 // handleStoryNode はストーリーノードの処理
-func (lw *LoneWolfSystem) handleStoryNode(gs *GameState, node Node) error {
+func (lw *LoneWolfSystem) handleStoryNode(gs *GameState, node *Node) error {
 	if len(node.Choices) == 0 {
 		fmt.Println("このノードには選択肢がありません。ゲーム終了。")
 		gs.CurrentNodeID = "game_over" // 選択肢がなければゲームオーバーに送るか、別の処理
@@ -96,16 +97,16 @@ func (lw *LoneWolfSystem) handleStoryNode(gs *GameState, node Node) error {
 	//itemgetbeforeを実装する
 
 	if node.ArmorGetBefore != "" {
-		lw.Tables.ArmorsMap[node.ArmorGetBefore].Get(gs)
+		lw.Tables.ArmorsMap[node.ArmorGetBefore].Get(gs, node)
 	}
 
 	if node.WeaponGetBefore != "" {
-		lw.Tables.WeaponsMap[node.WeaponGetBefore].Get(gs)
+		lw.Tables.WeaponsMap[node.WeaponGetBefore].Get(gs, node)
 	}
 
 	if node.ItemGetBefore != "" {
 		num := node.ItemGetNum
-		lw.Tables.ItemsMap[node.ItemGetBefore].Get(gs, num)
+		lw.Tables.ItemsMap[node.ItemGetBefore].Get(gs, num, node)
 	}
 
 	fmt.Println("\n選択肢:")
@@ -199,7 +200,7 @@ func (lw *LoneWolfSystem) handleStoryNode(gs *GameState, node Node) error {
 }
 
 // handleEncounterNode は遭遇戦ノードの処理 (簡易版)
-func (lw *LoneWolfSystem) Encounter(gs *GameState, node Node) error {
+func (lw *LoneWolfSystem) Encounter(gs *GameState, node *Node) error {
 
 	gs.CurrentCondition = ""
 
