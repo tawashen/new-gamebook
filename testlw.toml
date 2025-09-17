@@ -404,55 +404,79 @@ next_node_id = "273"
 
 [[nodes]]
 id = "21"
-type = ""
+type = "random_roll"
 text = """2マイルほど木々の絡まる中を進むと、地面が非常に沼地になる。
 ランダムナンバーテーブルから数字を一つ選べ。
 もし5未満なら、馬が突然、腹まで深い泥に沈む。
-もし5以上なら、泥沼を回避し、189へ進める。
-もし泥に嵌まった場合、再度ランダムナンバーテーブルから数字を選べ。
+もし5以上なら、泥沼を回避し、189へ進める。"""
+
+    [[nodes.outcomes]]
+    description = "もし5未満なら、馬が突然、腹まで深い泥に沈む。189へ"
+    condition_int = [0,1,2,3,4]
+    next_node_id = "21B"
+    [[nodes.outcomes]]
+    description = "5異常なのでなので189へ"
+    condition_int =[5,6,7,8,9]
+    next_node_id = "189"
+
+[[nodes]]
+id = "21B"
+type = "random_roll"
+text = """
+再度ランダムナンバーテーブルから数字を選べ。
 今度、7以下なら、泥が腋まで君を飲み込む。
 馬は最後の絶望的な叫び声を上げ、鼻が泡立つ泥に沈む。
 もし7を超えたなら、固い地面に這い上がり、189へ進む。
 それでも駄目なら、これが最後の機会だ！
 9以外の数字を選んだなら、悪臭を放つ沼が君を飲み込み、また一人の犠牲者を奪う。
 君の命と任務はここで終わる。だが、もし9を選んだなら、312へ進め。"""
-[[nodes.choices]]
-description = "もし5未満なら、馬が突然、腹まで深い泥に沈む。"
-next_node_id = "189"
 
-[[nodes.choices]]
-description = "もし5以上なら、泥沼を回避し、189へ進める。"
-next_node_id = "189"
+   [[nodes.outcomes]]
+    description = "もし7以下なら、馬が突然、腹まで深い泥に沈む。189へ"
+    condition_int = [0,1,2,3,4,5,6,7]
+    next_node_id = "21C"
+    [[nodes.outcomes]]
+    description = "7を超えたので硬い地面に這い上がれた189へ"
+    condition_int =[8,9]
+    next_node_id = "189"
 
-[[nodes.choices]]
-description = "もし7以下なら、泥が腋まで君を飲み込む。"
-next_node_id = "189"
+[[nodes]]
+id = "21C"
+type = "random_roll"
+text = """
+これが最後の機会だ！
+9以外の数字を選んだなら、悪臭を放つ沼が君を飲み込み、また一人の犠牲者を奪う。
+君の命と任務はここで終わる。だが、もし9を選んだなら、312へ進め。"""
 
-[[nodes.choices]]
-description = "もし7を超えたなら、固い地面に這い上がり、189へ進む。"
-next_node_id = "189"
+   [[nodes.outcomes]]
+    description = "もし7以下なら、馬が突然、腹まで深い泥に沈む。GameOver"
+    condition_int = [0,1,2,3,4,5,6,7,8]
+    next_node_id = "game_over"
+    [[nodes.outcomes]]
+    description = "9を選ぶことが出来たので312へ"
+    condition_int =[9]
+    next_node_id = "312"
 
-[[nodes.choices]]
-description = "もし9以外の数字を選んだなら、悪臭を放つ沼が君を飲み込み、また一人の犠牲者を奪う。"
-next_node_id = "312"
 
-[[nodes.choices]]
-description = "もし9を選んだなら、312へ進め。"
-next_node_id = "312"
+
+
 
 [[nodes]]
 id = "22"
-type = ""
+type = "random_roll"
 text = """リーダーを押し退け、大道を駆け出す。
 背後で、クロスボウが装填される不吉なクリック音が背筋を凍らせる。
 ランダムナンバーテーブルから数字を一つ選べ。"""
-[[nodes.choices]]
-description = "もし選んだ数字が0～4なら、181へ進め。"
-next_node_id = "181"
 
-[[nodes.choices]]
-description = "もし選んだ数字が5～9なら、145へ進め。"
-next_node_id = "145"
+   [[nodes.outcomes]]
+    description = "もし選んだ数字が0～4なら、181へ進め。"
+    condition_int = [0,1,2,3,4]
+    next_node_id = "181"
+    [[nodes.outcomes]]
+    description = "もし選んだ数字が5～9なら、145へ進め。"
+    condition_int =[5,6,7,8,9]
+    next_node_id = "145"
+
 
 [[nodes]]
 id = "23"
@@ -543,17 +567,36 @@ next_node_id = "130"
 description = "もし南へ進むなら、147へ進め。"
 next_node_id = "147"
 
+#kokokara
 [[nodes]]
 id = "29"
-type = ""
+type = "encounter"
 text = """湖畔に堂々と立ち、戦闘の準備をする。
 クラーンとその騎手が君を見つけ、湖面すれすれを疾走してくる。
 騎手が血を凍らせる叫び声を上げる。彼はダークロードの猛烈な副官、ヴォルダックだ。
-彼が襲いかかり、戦わねばならぬ。マインドシールドのカイの技がない場合、COMBAT SKILLから2ポイントを引く。この生物はマインドフォースと巨大な黒いメイスで攻撃してくる。
-ヴォルダック：COMBAT SKILL 17 ENDURANCE 25"""
-[[nodes.choices]]
-description = "もし戦いに勝つなら、270へ進め。"
-next_node_id = "270"
+彼が襲いかかり、戦わねばならぬ。マインドシールドのカイの技がない場合、COMBAT SKILLから2ポイントを引く。
+この生物はマインドフォースと巨大な黒いメイスで攻撃してくる。
+ヴォルダック：COMBAT SKILL 17 ENDURANCE 25
+もし戦いに勝つなら、270へ進め。"""
+
+
+   [[nodes.enemies]]
+    Name = "ヴォルダック"
+    HP = 25
+    CS = 17
+
+    [[nodes.outcomes]]
+    condition = "combat_won"
+    next_node_id = "270"
+
+    [[nodes.outcomes]]
+    condition = "combat_lost"
+    next_node_id = "game_over"
+
+required_discipline = "Mindshield"
+effect = -2
+
+
 
 [[nodes]]
 id = "30"

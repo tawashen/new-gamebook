@@ -246,7 +246,7 @@ next_node_id = "192"
 
 [[nodes]]
 id = "17"
-type = ""
+type = "encounter&random"
 text = """武器を振り上げ、獣の鋭い牙の口が頭の数インチ手前で閉じる瞬間を狙う。
 翼の羽ばたきに押され、立っているのが難しい。
 COMBAT SKILLから1ポイントを引いて、クラーンと戦え。

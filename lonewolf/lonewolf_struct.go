@@ -79,18 +79,23 @@ type NodesFile struct {
 
 // Node はゲームの各ステップ（ノード）を表す
 type Node struct {
-	ID              string    `toml:"id"`
-	Type            string    `toml:"type"`
-	ItemGetBefore   string    `toml:"itemgetbefore,omitempty"`
-	ItemGetNum      int       `toml:"itemgetnum"`
-	WeaponGetBefore string    `toml:"weapongetbefore,omitempty"`
-	ArmorGetBefore  string    `toml:"armorgetbefore,omitempty"`
-	Text            string    `toml:"text"`
-	Choices         []Choice  `toml:"choices,omitempty"`
-	Enemies         []*Enemy  `toml:"enemies,omitempty"`
-	Outcomes        []Outcome `toml:"outcomes,omitempty"`
-	Item            string    //処理用文字列
-	CSChange        int       `toml:"cschange,omitempty"`
+	ID                      string    `toml:"id"`
+	Type                    string    `toml:"type"`
+	ItemGetBefore           string    `toml:"itemgetbefore,omitempty"`
+	ItemGetNum              int       `toml:"itemgetnum"`
+	WeaponGetBefore         string    `toml:"weapongetbefore,omitempty"`
+	ArmorGetBefore          string    `toml:"armorgetbefore,omitempty"`
+	Text                    string    `toml:"text"`
+	Choices                 []Choice  `toml:"choices,omitempty"`
+	Enemies                 []*Enemy  `toml:"enemies,omitempty"`
+	Outcomes                []Outcome `toml:"outcomes,omitempty"`
+	Item                    string    //処理用文字列
+	CSChange                int       `toml:"cschange,omitempty"`
+	RequiredDisciplineMinus string    `toml:"required_discipline_minus"` //無いとマイナス
+	RequiredDisciplinePlus  string    `toml:"required_discipline_plus"`  //有るとプラス
+	RequiredItemMinus       string    `toml:"required_item_minus"`       //無いとマイナス
+	RequiredItemPlus        string    `toml:"required_item_plus"`        //有るとプラス
+	Effect                  int       `toml:"effect"`
 }
 
 // Choice は選択肢を表す

@@ -47,7 +47,7 @@ func (i *Item) Get(gs *GameState, num int, node *Node) {
 
 	backpack := gs.Player.Equipments.Backpack
 
-	if len(backpack) > 1 {
+	if len(backpack) > 8 { //すでにバックパックが満タンの場合
 		fmt.Printf("残念荷物が一杯のようだ。%sを手に入れるために何を諦める？", i.Name)
 		for num, item := range backpack {
 			fmt.Printf("%d：%s\n", num, item.Name)
@@ -67,7 +67,7 @@ func (i *Item) Get(gs *GameState, num int, node *Node) {
 			fmt.Printf("君は%sを諦めた\n", i.Name)
 		}
 
-	} else if len(backpack)+num > 8 {
+	} else if len(backpack)+num > 8 { //
 		itemremain := num
 
 		for {
