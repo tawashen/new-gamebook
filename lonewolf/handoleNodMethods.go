@@ -78,11 +78,16 @@ func (lw *LoneWolfSystem) handleRandomNode(gs *GameState, node *Node) error {
 		if err == nil &&
 			contains_int(outcome.ConditionInt, randomNumber) {
 			gs.CurrentNodeID = outcome.NextNodeID
+			if outcome.HPChange != 0 {
+				gs.Player.Stats["HP"] += outcome.HPChange
+				fmt.Printf("耐久値が%d変化した\n", outcome.HPChange)
+			}
 			break //RunLoopへ戻る
 		} else {
 			fmt.Println("条件を満たしていません。")
 		}
 	}
+
 	return nil
 }
 
@@ -245,6 +250,32 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node *Node) error {
 	//得意武器の場合はCSボーナス発生
 	var csBonus int
 	var currentWeaponStr string
+
+	//技能を持ってないとCSマイナス発生
+	if node.RequiredDisciplineMinus != "" && !contains_str(gs.Player.KaiDisciplines, node.RequiredDisciplineMinus) {
+		csBonus += node.Effect
+	}
+
+	//技能を持ってる場合にはCSプラス発生
+	if node.RequiredDisciplinePlus != "" && contains_str(gs.Player.KaiDisciplines, node.RequiredDisciplinePlus) {
+		csBonus += node.Effect
+	}
+
+	//アイテムを持ってないとCSマイナス発生
+
+	var items_string_slice []string
+	for _, item := range gs.Player.Equipments.Backpack {
+		items_string_slice = append(items_string_slice, item.Name)
+	}
+
+	if node.RequiredItemMinus != "" && !contains_str(items_string_slice, node.RequiredItemMinus) {
+		csBonus += node.Effect
+	}
+
+	if node.RequiredItemPlus != "" && contains_str(items_string_slice, node.RequiredItemPlus) {
+		csBonus += node.Effect
+	}
+
 	if contains_str(gs.Player.KaiDisciplines, "WeaponSkill") {
 		if gs.Player.Equipments.Currentweapon == 1 {
 			currentWeaponStr = gs.Player.Equipments.Weapon1.Name

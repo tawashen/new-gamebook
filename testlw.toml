@@ -567,7 +567,7 @@ next_node_id = "130"
 description = "もし南へ進むなら、147へ進め。"
 next_node_id = "147"
 
-#kokokara
+
 [[nodes]]
 id = "29"
 type = "encounter"
@@ -651,15 +651,28 @@ next_node_id = "248"
 
 [[nodes]]
 id = "34"
-type = ""
+type = "encounter"
 text = """Illustration III
 警告もなく、赤いローブの恐ろしい亡魂がクラーンの背に乗って空から急降下する。
 その叫び声は血を凍らせる。ダークロードの猛烈な副官、ヴォルダックだ。
 彼が君の上に迫り、戦わねばならぬ。マインドシールドのカイの技がない場合、COMBAT SKILLから2ポイントを引く。この生物はマインドフォースと巨大な黒いメイスで攻撃してくる。
 ヴォルダック：COMBAT SKILL 17 ENDURANCE 25"""
-[[nodes.choices]]
-description = "もし勝つなら、328へ進め。"
-next_node_id = "328"
+
+
+   [[nodes.enemies]]
+    Name = "ヴォルダック"
+    HP = 25
+    CS = 17
+
+    [[nodes.outcomes]]
+    condition = "combat_won"
+    next_node_id = "328"
+
+    [[nodes.outcomes]]
+    condition = "combat_lost"
+    next_node_id = "game_over"
+
+
 
 [[nodes]]
 id = "35"
@@ -673,20 +686,20 @@ next_node_id = "207"
 
 [[nodes]]
 id = "36"
-type = ""
+type = "random_roll"
 text = """古い監視塔の梯子は腐っており、登る際にいくつかの段が壊れる。
 ランダムナンバーテーブルから数字を一つ選べ。"""
-[[nodes.choices]]
-description = "もし4以下なら、落下する。"
-next_node_id = "140"
 
-[[nodes.choices]]
-description = "ENDURANCEを2ポイント失い、140へ進め。"
-next_node_id = "140"
+   [[nodes.outcomes]]
+    description = "もし4以下なら、落下する。ENDURANCEを2ポイント失い、140へ進め"
+    condition_int = [0,1,2,3,4]
+    hpchange = -2
+    next_node_id = "140"
+    [[nodes.outcomes]]
+    description = "もし5以上なら、落下しない。323へ"
+    condition_int = [5,6,7,8,9]
+    next_node_id = "323"
 
-[[nodes.choices]]
-description = "もし5以上なら、落下しない。"
-next_node_id = "323"
 
 [[nodes]]
 id = "37"
@@ -776,13 +789,33 @@ next_node_id = "157"
 description = "もし西へ進むなら、147へ進め。"
 next_node_id = "147"
 
+
+
+#kokokara
 [[nodes]]
 id = "43"
-type = ""
+type = "encounter"
 text = """岩の後ろから巨大な黒熊が現れる。
 ゆっくりと君に向かい、口を開け、怒りと痛みに顔を歪める。
 首と背中から血を流し、ひどく傷ついているのがわかる。戦わねばならぬ。
-黒熊：COMBAT SKILL 16 ENDURANCE 10"""
+黒熊：COMBAT SKILL 16 ENDURANCE 10
+もし勝つなら、195へ進め。
+3ラウンドの戦闘後、丘を駆け下りる位置を取る。
+もしこの時点で逃げるなら、106へ進み、逃げる際に傷つく可能性に挑む。
+"""
+
+    [[nodes.enemies]]
+    Name = "黒熊"
+    HP = 10
+    CS = 16
+    [[node.outcomes]]
+    condition = "combat_won"
+    next_node_id = "195"
+    [[node.outcomes]]
+    condition = "combat_lost"
+    next_node_id = "game_over"
+
+
 [[nodes.choices]]
 description = "もし勝つなら、195へ進め。"
 next_node_id = "195"

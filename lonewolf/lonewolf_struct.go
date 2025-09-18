@@ -121,6 +121,7 @@ type Outcome struct {
 	Condition    string `toml:"condition,omitempty"`
 	ConditionInt []int  `toml:"condition_int,omitempty"`
 	NextNodeID   string `toml:"next_node_id"`
+	HPChange     int    `toml:"hpchange"`
 }
 
 // KeyPair は戦闘結果テーブルのキーを定義
