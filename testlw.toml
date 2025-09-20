@@ -803,14 +803,26 @@ text = """岩の後ろから巨大な黒熊が現れる。
 3ラウンドの戦闘後、丘を駆け下りる位置を取る。
 もしこの時点で逃げるなら、106へ進み、逃げる際に傷つく可能性に挑む。
 """
+escape_before = "on"
+escape_halfway = 3
 
     [[nodes.enemies]]
     Name = "黒熊"
     HP = 10
     CS = 16
+ 
     [[node.outcomes]]
     condition = "combat_won"
     next_node_id = "195"
+    [[node.outcomes]]
+    description = "丘を駆け下りる位置を取る。106へ"
+    condition = "escape_halfway"
+    next_node_id = "106"
+    [[node.outcomes]]
+    description = "もしこの時点で逃げるなら、106へ進み、逃げる際に傷つく可能性に挑む。"
+    condition = "escape_before"
+    next_node_id = "106"
+    hpchangerandom = "on"
     [[node.outcomes]]
     condition = "combat_lost"
     next_node_id = "game_over"

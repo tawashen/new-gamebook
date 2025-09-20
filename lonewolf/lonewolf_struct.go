@@ -96,6 +96,8 @@ type Node struct {
 	RequiredItemMinus       string    `toml:"required_item_minus"`       //無いとマイナス
 	RequiredItemPlus        string    `toml:"required_item_plus"`        //有るとプラス
 	Effect                  int       `toml:"effect"`
+	EscapeBefore            string    `toml:"escapebefre"`   //戦闘の頭で逃亡可能
+	EscapeHalfway           int       `toml:"escapehalfway"` //戦闘の規定ターン経過で逃亡可能
 }
 
 // Choice は選択肢を表す
@@ -117,11 +119,12 @@ type Enemy struct {
 
 // Outcome は遭遇戦の結果と次に進むノードを表す
 type Outcome struct {
-	Description  string `toml:"description,omitempty"`
-	Condition    string `toml:"condition,omitempty"`
-	ConditionInt []int  `toml:"condition_int,omitempty"`
-	NextNodeID   string `toml:"next_node_id"`
-	HPChange     int    `toml:"hpchange"`
+	Description    string `toml:"description,omitempty"`
+	Condition      string `toml:"condition,omitempty"`
+	ConditionInt   []int  `toml:"condition_int,omitempty"`
+	NextNodeID     string `toml:"next_node_id"`
+	HPChange       int    `toml:"hpchange"`
+	HPChangeRandom string `toml:"hpchangerandom"`
 }
 
 // KeyPair は戦闘結果テーブルのキーを定義
