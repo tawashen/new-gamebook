@@ -314,23 +314,22 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node *Node) error {
 			node.EscapeBefore = ""            //逃亡可能フラグオフ
 			gs.CurrentNodeID = nextid         //逃亡後のID
 			gs.Player.Stats["HP"] -= hpchange //逃亡時にHPペナルティあり
-			fmt.Printf("君の体力はマイナス%dされたが逃げ延びた\n", hpchange)
-
+			if hpchange != 0 {
+				fmt.Printf("君の体力はマイナス%dされたが逃げ延びた\n", hpchange)
+			}
 			return nil
-
 		}
-
 		node.EscapeBefore = ""
-
 	}
+
+	roundnum := 1 //敵ごとのラウンド数
 
 	for _, currentEnemy := range node.Enemies {
 		// エンカウント情報が完全かチェックし、敵を設定
 
-		roundnum := 0 //敵ごとのラウンド数
-
 		for {
 
+			fmt.Printf("\n第%dラウンド！\n", roundnum)
 			fmt.Printf("\nLone Wolf (HP:%d CS:%d CSBonus:%d)",
 				gs.Player.Stats["HP"], gs.Player.Stats["CS"], csBonus)
 			fmt.Printf("\n%s (HP:%d CS:%d)\n",
@@ -359,8 +358,39 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node *Node) error {
 				break // プレイヤーのHPが0以下になった場合、抜ける
 			}
 
-			roundnum += 1
+			//途中離脱が許されてる場合
+			if roundnum == node.EscapeHalfway {
+				escapetext := ""
+				nextid := ""
+				hpchange := 0
+				for _, outcome := range node.Outcomes { //各種データを用意
 
+					if outcome.Condition == "escape_halfway" {
+						escapetext = outcome.Description
+						nextid = outcome.NextNodeID
+						if outcome.HPChangeRandom != "" {
+							hpchange = lw.Rand.Intn(10)
+						}
+						break
+					}
+				}
+				fmt.Printf("%s Y/N?\n", escapetext)
+
+				escapeinput, _ := gs.Reader.ReadString('\n')
+				escapeinput = strings.TrimSpace(escapeinput)
+				escapeinput = strings.ToUpper(escapeinput)
+
+				if escapeinput == "Y" {
+					node.EscapeHalfway = 0    //逃亡可能フラグオフ
+					gs.CurrentNodeID = nextid //逃亡後のID
+					if hpchange != 0 {
+						gs.Player.Stats["HP"] -= hpchange //逃亡時にHPペナルティあり
+						fmt.Printf("君の体力はマイナス%dされたが逃げ延びた\n", hpchange)
+					}
+					return nil
+				}
+			}
+			roundnum += 1
 		}
 
 		if gs.Player.Stats["HP"] <= 0 {
