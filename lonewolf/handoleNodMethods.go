@@ -290,31 +290,38 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node *Node) error {
 	csBonus = csBonus + node.CSChange //cschange分をそのまま追加
 
 	if node.EscapeBefore == "on" { //戦闘前に逃亡可能な場合の処理
-		text := ""
+		escapetext := ""
 		nextid := ""
 		hpchange := 0
 		for _, outcome := range node.Outcomes { //各種データを用意
-			if outcome.Condition == "escapebefre" {
-				text = outcome.Description
+
+			if outcome.Condition == "escape_before" {
+				escapetext = outcome.Description
 				nextid = outcome.NextNodeID
 				if outcome.HPChangeRandom != "" {
 					hpchange = lw.Rand.Intn(10)
 				}
-			}
-			fmt.Printf("%s Y/N?\n", text)
-
-			escapeinput, _ := gs.Reader.ReadString('\n')
-			escapeinput = strings.TrimSpace(escapeinput)
-			escapeinput = strings.ToUpper(escapeinput)
-
-			if escapeinput == "Y" {
-				node.EscapeBefore = ""            //逃亡可能フラグオフ
-				gs.CurrentNodeID = nextid         //逃亡後のID
-				gs.Player.Stats["HP"] -= hpchange //逃亡時にHPペナルティあり
-
+				break
 			}
 		}
-		return nil
+		fmt.Printf("%s Y/N?\n", escapetext)
+
+		escapeinput, _ := gs.Reader.ReadString('\n')
+		escapeinput = strings.TrimSpace(escapeinput)
+		escapeinput = strings.ToUpper(escapeinput)
+
+		if escapeinput == "Y" {
+			node.EscapeBefore = ""            //逃亡可能フラグオフ
+			gs.CurrentNodeID = nextid         //逃亡後のID
+			gs.Player.Stats["HP"] -= hpchange //逃亡時にHPペナルティあり
+			fmt.Printf("君の体力はマイナス%dされたが逃げ延びた\n", hpchange)
+
+			return nil
+
+		}
+
+		node.EscapeBefore = ""
+
 	}
 
 	for _, currentEnemy := range node.Enemies {

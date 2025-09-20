@@ -96,8 +96,8 @@ type Node struct {
 	RequiredItemMinus       string    `toml:"required_item_minus"`       //無いとマイナス
 	RequiredItemPlus        string    `toml:"required_item_plus"`        //有るとプラス
 	Effect                  int       `toml:"effect"`
-	EscapeBefore            string    `toml:"escapebefre"`   //戦闘の頭で逃亡可能
-	EscapeHalfway           int       `toml:"escapehalfway"` //戦闘の規定ターン経過で逃亡可能
+	EscapeBefore            string    `toml:"escape_before"`  //戦闘の頭で逃亡可能
+	EscapeHalfway           int       `toml:"escape_halfway"` //戦闘の規定ターン経過で逃亡可能
 }
 
 // Choice は選択肢を表す

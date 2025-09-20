@@ -811,19 +811,19 @@ escape_halfway = 3
     HP = 10
     CS = 16
  
-    [[node.outcomes]]
+    [[nodes.outcomes]]
     condition = "combat_won"
     next_node_id = "195"
-    [[node.outcomes]]
+    [[nodes.outcomes]]
     description = "丘を駆け下りる位置を取る。106へ"
     condition = "escape_halfway"
     next_node_id = "106"
-    [[node.outcomes]]
+    [[nodes.outcomes]]
     description = "もしこの時点で逃げるなら、106へ進み、逃げる際に傷つく可能性に挑む。"
     condition = "escape_before"
     next_node_id = "106"
     hpchangerandom = "on"
-    [[node.outcomes]]
+    [[nodes.outcomes]]
     condition = "combat_lost"
     next_node_id = "game_over"
 
