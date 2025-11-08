@@ -105,8 +105,10 @@ func (i *Item) Get(gs *GameState, num int, node *Node) {
 		}
 
 	} else {
-		gs.Player.Equipments.Backpack = append(gs.Player.Equipments.Backpack, i)
-		fmt.Printf("君は%sを手に入れた\n", i.Name)
+		for range num {
+			gs.Player.Equipments.Backpack = append(gs.Player.Equipments.Backpack, i)
+		}
+		fmt.Printf("君は%sを%d個手に入れた\n", i.Name, num)
 	}
 	node.ItemGetBefore = ""
 }

@@ -64,15 +64,15 @@ func (gs *GameState) DisplayStatus() {
 	}
 
 	// Inventory の表示
-	fmt.Println("インベントリ:")
-	if //gs.Player.Inventory != nil &&
-	len(gs.Player.Equipments.Backpack) > 0 {
-		for _, item := range gs.Player.Equipments.Backpack {
-			fmt.Printf("  - %s\n", item.Name)
-		}
-	} else {
-		fmt.Println("  アイテムがありません。")
-	}
+	//fmt.Println("インベントリ:")
+	//if //gs.Player.Inventory != nil &&
+	//len(gs.Player.Equipments.Backpack) > 0 {
+	//	for _, item := range gs.Player.Equipments.Backpack {
+	//		fmt.Printf("  - %s\n", item.Name)
+	//	}
+	//} else {
+	//	fmt.Println("  アイテムがありません。")
+	//}
 
 	// Equipment の表示
 	fmt.Println("武器") // "Equipment" を「装備」に変更

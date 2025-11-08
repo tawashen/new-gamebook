@@ -85,6 +85,7 @@ type Node struct {
 	ItemGetNum              int       `toml:"itemgetnum"`
 	WeaponGetBefore         string    `toml:"weapongetbefore,omitempty"`
 	ArmorGetBefore          string    `toml:"armorgetbefore,omitempty"`
+	GoldGetBefore           int       `toml:"goldgetbefore"`
 	Text                    string    `toml:"text"`
 	Choices                 []Choice  `toml:"choices,omitempty"`
 	Enemies                 []*Enemy  `toml:"enemies,omitempty"`

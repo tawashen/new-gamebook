@@ -3,6 +3,7 @@ package lonewolf
 import (
 	"fmt"
 	"math/rand"
+	"os"
 	"strconv"
 	"strings"
 	"time"
@@ -30,6 +31,11 @@ func (lw *LoneWolfSystem) HandleNode(gs *GameState, node *Node) error {
 			item.Get(gs, node.ItemGetNum, node)
 		}
 
+		if node.GoldGetBefore != 0 {
+			gs.Player.Gold += node.GoldGetBefore
+			fmt.Printf("君は%dゴールドクラウンを手に入れた\n", node.GoldGetBefore)
+		}
+
 		return lw.handleStoryNode(gs, node)
 
 	case "encounter":
@@ -39,6 +45,11 @@ func (lw *LoneWolfSystem) HandleNode(gs *GameState, node *Node) error {
 		return fmt.Errorf("no enemy defined for combat node")
 	case "random_roll":
 		return lw.handleRandomNode(gs, node)
+
+	//case "game_over":
+	//	fmt.Print("Game Over")
+	//	os.Exit(0)
+	//	return nil
 
 	//case "itemget":
 
@@ -96,6 +107,7 @@ func (lw *LoneWolfSystem) handleStoryNode(gs *GameState, node *Node) error {
 	if len(node.Choices) == 0 {
 		fmt.Println("このノードには選択肢がありません。ゲーム終了。")
 		gs.CurrentNodeID = "game_over" // 選択肢がなければゲームオーバーに送るか、別の処理
+		os.Exit(0)
 
 	}
 

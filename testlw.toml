@@ -761,37 +761,37 @@ text = """Illustration IV
 ギアクのリーダーは5人の部下に弓で君を攻撃するよう命じる。
 急な岸で君は見つかり、ギアクのリーダーが5人の部下に弓で攻撃するよう命じる。
 黒い矢が雨のように降り注ぐ。"""
-[[nodes.choices]]
-description = "もし全速力で川を下るなら、174へ進め。"
-next_node_id = "174"
+    [[nodes.choices]]
+    description = "もし全速力で川を下るなら、174へ進め。"
+    next_node_id = "174"
 
-[[nodes.choices]]
-description = "もし対岸の木々の陰に逃げるなら、116へ進め。"
-next_node_id = "116"
+    [[nodes.choices]]
+    description = "もし対岸の木々の陰に逃げるなら、116へ進め。"
+    next_node_id = "116"
 
 [[nodes]]
 id = "42"
 type = "story"
 text = """ほぼ1時間、道を進むと十字路にたどり着く。"""
-[[nodes.choices]]
-description = "もし東へ進むなら、86へ進め。"
-next_node_id = "86"
+    [[nodes.choices]]
+    description = "もし東へ進むなら、86へ進め。"
+    next_node_id = "86"
 
-[[nodes.choices]]
-description = "もし北へ進むなら、238へ進め。"
-next_node_id = "238"
+    [[nodes.choices]]
+    description = "もし北へ進むなら、238へ進め。"
+    next_node_id = "238"
 
-[[nodes.choices]]
-description = "もし南へ進むなら、157へ進め。"
-next_node_id = "157"
+    [[nodes.choices]]
+    description = "もし南へ進むなら、157へ進め。"
+    next_node_id = "157"
 
-[[nodes.choices]]
-description = "もし西へ進むなら、147へ進め。"
-next_node_id = "147"
+    [[nodes.choices]]
+    description = "もし西へ進むなら、147へ進め。"
+    next_node_id = "147"
 
 
 
-#kokokara
+
 [[nodes]]
 id = "43"
 type = "encounter"
@@ -808,7 +808,7 @@ escape_halfway = 3
 
     [[nodes.enemies]]
     Name = "黒熊"
-    HP = 10
+    HP = 100
     CS = 16
  
     [[nodes.outcomes]]
@@ -828,31 +828,35 @@ escape_halfway = 3
     next_node_id = "game_over"
 
 
-[[nodes.choices]]
-description = "もし勝つなら、195へ進め。"
-next_node_id = "195"
+    [[nodes.choices]]
+    description = "もし勝つなら、195へ進め。"
+    next_node_id = "195"
 
-[[nodes.choices]]
-description = "3ラウンドの戦闘後、丘を駆け下りる位置を取る。"
-next_node_id = "106"
+    [[nodes.choices]]
+    description = "3ラウンドの戦闘後、丘を駆け下りる位置を取る。"
+    next_node_id = "106"
 
-[[nodes.choices]]
-description = "もしこの時点で逃げるなら、106へ進み、逃げる際に傷つく可能性に挑む。"
-next_node_id = "106"
+    [[nodes.choices]]
+    description = "もしこの時点で逃げるなら、106へ進み、逃げる際に傷つく可能性に挑む。"
+    next_node_id = "106"
+
 
 [[nodes]]
 id = "44"
-type = ""
+type = "random_roll"
 text = """警告もなく、古い道が急な斜面の縁で突然終わる。
 ここは地面が非常に緩く、不安定だ。足を滑らせ、頭から斜面を転げ落ちる。
 ランダムナンバーテーブルから数字を一つ選べ。"""
-[[nodes.choices]]
-description = "もし選んだ数字が0～4なら、277へ進め。"
-next_node_id = "277"
+    [[nodes.outcomes]]
+    description = "もし選んだ数字が0～4なら、277へ進め。"
+    condition_int = [0,1,2,3,4]
+    next_node_id = "277"
 
-[[nodes.choices]]
-description = "もし選んだ数字が5～9なら、338へ進め。"
-next_node_id = "338"
+    [[nodes.outcomes]]
+    description = "もし選んだ数字が5～9なら、338へ進め。"
+    condition_int = [5,6,7,8,9]
+    next_node_id = "338"
+
 
 [[nodes]]
 id = "45"
@@ -862,9 +866,11 @@ text = """この者たちは見た目通りではない。
 彼らの武器は軍のものではなく、ドゥレノールの鎧職人が作るような高価で豪華な装飾が施されている。
 リーダーの背にはクロスボウが掛かっている。逃げるのは自殺行為だ。
 武器を下ろせば即座に殺されると悟り、戦う決意をする。"""
-[[nodes.choices]]
-description = "180へ進め。"
-next_node_id = "180"
+    [[nodes.choices]]
+    description = "180へ進め。"
+    next_node_id = "180"
+
+
 
 [[nodes]]
 id = "46"
@@ -879,10 +885,12 @@ required_discipline = "Sixth Sense"
 [[nodes.choices]]
 description = "もし申し出を受け入れるなら、246へ進め。"
 next_node_id = "246"
+required_gold = "2"
 
 [[nodes.choices]]
 description = "もし断り、湖の周りを進むなら、90へ進め。"
 next_node_id = "90"
+
 
 [[nodes]]
 id = "47"
@@ -911,15 +919,17 @@ next_node_id = "243"
 
 [[nodes]]
 id = "49"
-type = ""
+type = "random_roll"
 text = """碑文を読み始めると、スクリーンの後ろから影が動くのが見える。
 ランダムナンバーテーブルから数字を一つ選べ。"""
-[[nodes.choices]]
+[[nodes.outcomes]]
 description = "もし選んだ数字が0～4なら、339へ進め。"
+condition_int = [0,1,2,3,4]
 next_node_id = "339"
 
 [[nodes.choices]]
 description = "もし選んだ数字が5～9なら、60へ進め。"
+condition_int = [5,6,7,8,9]
 next_node_id = "60"
 
 [[nodes]]
@@ -965,6 +975,7 @@ required_discipline = "Animal Kinship"
 description = "そうでなければ、木を登り、向こう側に潜むものと対峙せねばならぬ。"
 next_node_id = "250"
 
+
 [[nodes]]
 id = "53"
 type = "story"
@@ -987,13 +998,24 @@ text = """天は君の祈りを聞いてはいなかったようだ。
 
 [[nodes]]
 id = "55"
-type = ""
+type = "encounter"
+cschange = 4
 text = """ギアクが跳びかかる瞬間、君は前に飛び出し、武器を振り下ろし、若き魔法使いの背中からその者を弾き飛ばす。
 もがくギアクに飛び乗り、再び攻撃する。奇襲の効果により、この戦闘中はCOMBAT SKILLに4ポイント加算せよ。ただし、戦闘が終われば元に戻すこと。
-ギアク：COMBAT SKILL 9 ENDURANCE 9"""
-[[nodes.choices]]
-description = "もし勝つなら、325へ進め。"
-next_node_id = "325"
+"""
+    [[nodes.enemies]]
+    Name = "ギアク"
+    HP = 9
+    CS = 9
+
+    [[nodes.outcomes]]
+    condition = "combat_won"
+    next_node_id = "325"
+    [[nodes.outcomes]]
+    condition = "combat_lost"
+    next_node_id = "game_over"
+
+
 
 [[nodes]]
 id = "56"
@@ -1067,25 +1089,43 @@ text = """ついに外郭都市を囲む木の野戦陣地にたどり着く。�
 description = "268へ進め。"
 next_node_id = "268"
 
+
+
 [[nodes]]
 id = "62"
 type = "story"
 text = """「兵士」たちは足元で死に絶える。彼らはトランからの難民や、周辺の放棄された家や農場から盗みを働く盗賊だった。
 彼らの体を調べると、28ゴールドクラウンと、3食分の食料が入ったバックパック2つが見つかる。彼らはクロスボウと3本の剣で武装していた。クロスボウは戦闘で壊れたが、剣は無傷で、望むなら1本を取っても良い。
 装備を整え、西を慎重に見やり、首都の外郭防衛線へ走り続ける。"""
+weapongetbefore = "Dagger"
+itemgetbefore = "Meal"
+itemgetnum = 6
+goldgetbefore = 28
 [[nodes.choices]]
 description = "288へ進め。"
 next_node_id = "288"
 
+
+
 [[nodes]]
 id = "63"
-type = ""
+type = "encounter"
 text = """Illustration VI
 狂った老人が君に叫び、戦争の責任を君に押し付け、カイの領主をダークロードの代理人と呪う。彼は道理を聞かず、戦わねばならぬ。
-狂人：COMBAT SKILL 11 ENDURANCE 10"""
-[[nodes.choices]]
-description = "もし勝つなら、269へ進め。"
-next_node_id = "269"
+"""
+
+[[nodes.enemies]]
+Name = "狂人"
+HP = 10
+CS = 11
+   [[nodes.outcomes]]
+    description = "もし勝つなら、269へ進め。"
+    condition = "combat_won"
+    next_node_id = "269"
+    [[nodes.outcomes]]
+    condition = "combat_lost"
+    next_node_id = "game_over"
+
 
 [[nodes]]
 id = "64"
@@ -1179,12 +1219,22 @@ next_node_id = "104"
 
 [[nodes]]
 id = "72"
-type = ""
+type = "encounter"
 text = """振り返ると、ギアクとその鋭い牙の騎獣が唸る。彼らを一体の敵として戦わねばならぬ。
-ギアク＋ドゥームウルフ：COMBAT SKILL 15 ENDURANCE 24"""
-[[nodes.choices]]
-description = "もし勝つなら、265へ進め。"
-next_node_id = "265"
+"""
+[[nodes.enemies]]
+Name = "ギアク＆ドゥームウルフ"
+HP = 24
+CS = 15
+
+    [[nodes.outcomes]]
+    description = "もし勝つなら、265へ進め"
+    condition = "combat_won"
+    next_node_id = "265"
+    [[nodes.outcomes]]
+    condition = "combat_lost"
+    next_node_id = "game_over"
+
 
 [[nodes]]
 id = "73"
@@ -1244,7 +1294,6 @@ description = "もしカイの領主として王に急ぎの伝言があると�
 next_node_id = "132"
 [[nodes.choices]]
 description = "もし安全な通行のためにゴールドクラウンを差し出すなら、12へ進め。"
-required_item = "Gold Crowns"
 next_node_id = "12"
 [[nodes.choices]]
 description = "もし武器で護衛を攻撃するなら、220へ進め。"
@@ -1366,9 +1415,11 @@ next_node_id = "216"
 description = "もしその技を持っていない、または使わないなら、31へ進め。"
 next_node_id = "31"
 
+
+#kokokara
 [[nodes]]
 id = "89"
-type = ""
+type = "random_roll"
 text = """埃と岩の雲の中、急な斜面を転がり落ちる。クラーンが上空を旋回し、ギアクを君に導くようだ。
 ランダムナンバーテーブルから数字を一つ選べ。"""
 [[nodes.choices]]

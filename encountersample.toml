@@ -19,3 +19,138 @@ text = """
     [[node.outcomes]]
     condition = "combat_lost"
     next_node_id = "game_over"
+
+
+
+    system = "lonewolf"
+
+
+[Tables]
+KaiTable = ["Camouflage", "Hunting", "SixthSense", "Tracking","Healing",
+ "WeaponSkill","Mindshield", "Mindblast", "AnimalKinship", "MindOverMatter"]
+WeaponSkillTable = ["Dagger", "Spear", "Mace", "Shortsword", "Warhammer", "Sword", "Axe", "Sword", "Quaterstaff", "Broadsword"]
+FirstEquipmentTable = ["Broadsword", "Sword", "Helmet", "Meal", "ChainmailWaistcoat", "Mace", "HealingPotion", "Quaterstaff", "Spear", "Gold"]
+
+    [[Tables.Armors]]
+    Name = "ChainmailWaistcoat"
+    Slot = "Body"
+    HPBonus = 2
+
+    [[Tables.Armors]]
+    Name = "Helmet"
+    Slot = "Head"
+    HPBonus = 2
+
+    [[Tables.Weapons]]
+    Kind = "Sword"
+    Name = "Broadsword"
+    CSBonus = 1
+
+    [[Tables.Weapons]]
+    Kind = "Sword"
+    Name = "Sword"
+    CSBonus = 1
+
+    [[Tables.Weapons]]
+    Kind = "Mace"
+    Name = "Mace"
+    CSBonus = 1
+
+    [[Tables.Weapons]]
+    Kind = "Staff"
+    Name = "Quaterstaff"
+    CSBonus = 1
+
+    [[Tables.Weapons]]
+    Kind = "Spear"
+    Name = "Spear"
+    CSB = 1
+
+    [[Tables.Weapons]]
+    Kind = "Axe"
+    Name = "Axe"
+    CSBonus = 1
+
+    [[Tables.Items]]
+    Name = "Meal"
+    Effect = "Meal"
+
+    [[Tables.Items]]
+    Name = "HealingPotion"
+    Effet = "Heal"
+
+
+
+[[nodes]]
+id = "7"
+type = "itemGet"
+text = """
+Dragon Slayerをゲットするチャンス！
+どうしますか？
+"""
+Item = "DragonSylayer"
+    [[node.outcomes]]
+    next_node_id = "6"
+
+
+[[nodes]]
+id = "1"
+type = "story"
+text = """
+これはテストデータです
+テキストも仮のものです
+"""
+    [[nodes.choices]]
+    description = "If you wish to use your Kai Discipline of Sixth Sense, turn to 2."
+    next_node_id = "2"
+    required_discipline = "SixthSense"
+
+    [[nodes.choices]]
+    description = "If you wish to take the right path into the wood, turn to 3."
+    next_node_id = "3"
+    required_item = "SilverKey"
+
+    [[nodes.choices]]
+    description = "If you wish to follow the left track, turn to 4."
+    next_node_id = "4"
+
+[[nodes]]
+id = "2"
+type = "encounter"
+text = """
+これはテストデータです
+アークデーモンが現れた
+"""
+    [[nodes.enemies]]
+    Name = "アークデーモンA"
+    HP = 10
+    CS = 5
+    [[nodes.enemies]]
+    Name = "アークデーモンB"
+    HP = 10
+    CS = 5
+    [[nodes.outcomes]]
+    condition = "combat_won"
+    next_node_id = "5"
+    [[nodes.outcomes]]
+    condition = "combat_lost"
+    next_node_id = "game_over"
+
+[[nodes]]
+id = "3"
+type = "random_roll"
+text = "1-5なら6へ　6-0なら7へ"
+    [[nodes.outcomes]]
+    description = "1-5なので6へ"
+    condition_int = [1,2,3,4,5]
+    next_node_id = "6"
+    [[nodes.outcomes]]
+    description = "6-0なので7へ"
+    condition_int = [6,7,8,9,0]
+    next_node_id = "7"
+
+
+[[nodes]]
+id = "game_over"
+type = "end"
+text = "ゲームオーバー。あなたの旅はここで終わりました。"
