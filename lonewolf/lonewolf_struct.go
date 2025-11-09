@@ -113,9 +113,10 @@ type Choice struct {
 
 // Enemy は戦闘の敵キャラクター
 type Enemy struct {
-	Name string `toml:"Name"`
-	HP   int    `toml:"HP"`
-	CS   int    `toml:"CS"`
+	Name          string `toml:"Name"`
+	HP            int    `toml:"HP"`
+	CS            int    `toml:"CS"`
+	AntiMindBlast int    `toml:"AntiMindBlast"`
 }
 
 // Outcome は遭遇戦の結果と次に進むノードを表す

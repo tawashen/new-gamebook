@@ -339,6 +339,11 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node *Node) error {
 	for _, currentEnemy := range node.Enemies {
 		// エンカウント情報が完全かチェックし、敵を設定
 
+		//Mind Blastを持ってる場合にCSプラス発生＆耐性持ちには無効
+		if contains_str(gs.Player.KaiDisciplines, "MindBlast") && currentEnemy.AntiMindBlast != 0 {
+			csBonus += 2
+		}
+
 		for {
 
 			fmt.Printf("\n第%dラウンド！\n", roundnum)
