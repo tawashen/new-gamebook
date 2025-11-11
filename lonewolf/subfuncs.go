@@ -118,6 +118,7 @@ func (gs *GameState) DisplayStatus() {
 	}
 
 	fmt.Printf("所持金：%dゴールド\n", gs.Player.Gold)
+	fmt.Printf("ジェム:%d個\n", gs.Player.Gem)
 
 	fmt.Println("--- ステータス ---")
 }

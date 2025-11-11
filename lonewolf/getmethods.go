@@ -46,8 +46,11 @@ func (w *Weapon) Get(gs *GameState, node *Node) {
 func (i *Item) Get(gs *GameState, num int, node *Node) {
 
 	backpack := gs.Player.Equipments.Backpack
+	bpsize := gs.Player.Equipments.BackpackSize
 
-	if len(backpack) > 8 { //すでにバックパックが満タンの場合
+	if bpsize <= 0 {
+		fmt.Println("バックパックを持っていない")
+	} else if len(backpack) > bpsize { //すでにバックパックが満タンの場合
 		fmt.Printf("残念荷物が一杯のようだ。%sを手に入れるために何を諦める？", i.Name)
 		for num, item := range backpack {
 			fmt.Printf("%d：%s\n", num, item.Name)
@@ -67,7 +70,7 @@ func (i *Item) Get(gs *GameState, num int, node *Node) {
 			fmt.Printf("君は%sを諦めた\n", i.Name)
 		}
 
-	} else if len(backpack)+num > 8 { //
+	} else if len(backpack)+num > bpsize { //
 		itemremain := num
 
 		for {
@@ -89,7 +92,7 @@ func (i *Item) Get(gs *GameState, num int, node *Node) {
 			} else { //残りのスペースをアイテムで埋める
 				for {
 					backpack = append(backpack, i)
-					if len(backpack) == 8 {
+					if len(backpack) == bpsize {
 						itemremain = 0
 						fmt.Printf("君はバックパックに%sを可能な限り詰め込んだ\n", i.Name)
 						break

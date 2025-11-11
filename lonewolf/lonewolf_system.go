@@ -117,6 +117,11 @@ func (lw *LoneWolfSystem) InitializeGPT() error {
 }
 */
 
+func (lw *LoneWolfSystem) LostRandomItem(gs *GameState, num int) error {
+	backpackNum := len(gs.Player.Equipments.Backpack)
+	randomIndex := lw.Rand.Intn(backpackNum)
+
+}
 func (lw *LoneWolfSystem) MakingGameState() (*GameState, error) {
 
 	reader := bufio.NewReader(os.Stdin)
@@ -151,8 +156,10 @@ func (lw *LoneWolfSystem) MakingGameState() (*GameState, error) {
 				Weapon2:       nil,
 				Shield:        false,
 				Backpack:      []*Item{},
+				BackpackSize:  8,
 			},
 			Gold: 0,
+			Gem:  0,
 		},
 
 		CurrentNodeID: "62",

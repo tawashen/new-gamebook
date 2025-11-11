@@ -30,6 +30,7 @@ type Player struct {
 	FavoriteWeapon string
 	Equipments     *Equipment
 	Gold           int
+	Gem            int
 }
 
 // ゲーム内装備データ構造体　GameConfigに文字列のスライスで持たせておいて
@@ -54,6 +55,7 @@ type Equipment struct {
 	Weapon2       *Weapon
 	Shield        bool
 	Backpack      []*Item
+	BackpackSize  int
 }
 
 type Inventory interface {
@@ -86,6 +88,7 @@ type Node struct {
 	WeaponGetBefore         string    `toml:"weapongetbefore,omitempty"`
 	ArmorGetBefore          string    `toml:"armorgetbefore,omitempty"`
 	GoldGetBefore           int       `toml:"goldgetbefore"`
+	GemGetBefore            int       `toml:"gemgetbefore"`
 	Text                    string    `toml:"text"`
 	Choices                 []Choice  `toml:"choices,omitempty"`
 	Enemies                 []*Enemy  `toml:"enemies,omitempty"`
@@ -97,8 +100,9 @@ type Node struct {
 	RequiredItemMinus       string    `toml:"required_item_minus"`       //無いとマイナス
 	RequiredItemPlus        string    `toml:"required_item_plus"`        //有るとプラス
 	Effect                  int       `toml:"effect"`
-	EscapeBefore            string    `toml:"escape_before"`  //戦闘の頭で逃亡可能
-	EscapeHalfway           int       `toml:"escape_halfway"` //戦闘の規定ターン経過で逃亡可能
+	EscapeBefore            string    `toml:"escape_before"`     //戦闘の頭で逃亡可能
+	EscapeHalfway           int       `toml:"escape_halfway"`    //戦闘の規定ターン経過で逃亡可能
+	LostRandomItemNum       int       `toml:"LostRandomItemNum"` //0以外だった場合にはアイテムロスト実行
 }
 
 // Choice は選択肢を表す

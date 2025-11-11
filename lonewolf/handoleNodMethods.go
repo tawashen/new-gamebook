@@ -36,6 +36,15 @@ func (lw *LoneWolfSystem) HandleNode(gs *GameState, node *Node) error {
 			fmt.Printf("君は%dゴールドクラウンを手に入れた\n", node.GoldGetBefore)
 		}
 
+		if node.GemGetBefore != 0 {
+			gs.Player.Gem += node.GemGetBefore
+			fmt.Printf("君は%d個のジェムを手に入れた\n", node.GemGetBefore)
+		}
+
+		if node.LostRandomItemNum != 0 {
+			lw.LostRandomItem(gs, node.LostRandomItemNum)
+		}
+
 		return lw.handleStoryNode(gs, node)
 
 	case "encounter":
