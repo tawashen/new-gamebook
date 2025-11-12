@@ -179,3 +179,55 @@ func (a Armor) Get(gs *GameState, node *Node) {
 	}
 	node.ArmorGetBefore = ""
 }
+
+func (gs *GameState) GetMeal(node *Node) error {
+	var backpaklist []string
+	for _, name := range gs.Player.Equipments.Backpack {
+		backpaklist = append(backpaklist, name.Name)
+	}
+
+	for {
+		if contains_str(backpaklist, "Meal") && contains_str(backpaklist, "ラウムスパーハーブ") {
+			fmt.Println("通常のMeal(1)か体力回復効果のあるラウムスパーハーブ(2)どちらを食べる？")
+			fmt.Println("あえて食べない場合にはその他の数字を選ぶのも良い。ただし体力が3減ることになる")
+			input, _ := gs.Reader.ReadString('\n')
+			input = strings.TrimSpace(input)
+
+			num, err := strconv.Atoi(input)
+			if err != nil {
+				fmt.Println("半角数字で選択せよ！")
+				continue
+			}
+
+			switch num {
+			case 1:
+				fmt.Println("君はMealを食べた。")
+				gs.Player.Equipments.Backpack = remove_items_by_name(gs.Player.Equipments.Backpack, "Meal")
+				break
+			case 2:
+				fmt.Println("君はラウムスパーハーブを食べた。体力が完全に回復した！")
+				gs.Player.Equipments.Backpack = remove_items_by_name(gs.Player.Equipments.Backpack, "ラウムスパーハーブ")
+				gs.Player.Stats["HP"] = gs.Player.Stats["MaxHP"]
+				break
+			default:
+				fmt.Println("君は敢えて食べないことにした。体力が3減った")
+				gs.Player.Stats["HP"] += -3
+				break
+			}
+		} else if contains_str(backpaklist, "Meal") {
+			fmt.Println("君はMealを食べた")
+			gs.Player.Equipments.Backpack = remove_items_by_name(gs.Player.Equipments.Backpack, "Meal")
+			break
+		} else if contains_str(backpaklist, "ラウムスパーハーブ") {
+			fmt.Println("君はラウムスパーハーブを食べた。体力が完全に回復した！")
+			gs.Player.Stats["HP"] = gs.Player.Stats["MaxHP"]
+			gs.Player.Equipments.Backpack = remove_items_by_name(gs.Player.Equipments.Backpack, "ラウムスパーハーブ")
+			break
+		} else {
+			fmt.Println("君は食べるものを持っていない。空腹で体力が3減った")
+			gs.Player.Stats["HP"] -= 3
+			break
+		}
+	}
+	return nil
+}

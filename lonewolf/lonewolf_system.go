@@ -71,52 +71,6 @@ func (lw *LoneWolfSystem) Initialize() error {
 	return nil
 }
 
-/*
-func (lw *LoneWolfSystem) InitializeGPT() error {
-	// CRT 読み込み（元コード）
-	var data CRTData
-	if _, err := toml.DecodeFile("combat_result_table.toml", &data); err != nil {
-		return fmt.Errorf("error decoding CRT file %q: %w", lw.CRTFile, err)
-	}
-	for _, result := range data.Results {
-		lw.CRT[result.KeyPair] = result.DamagePair
-	}
-	fmt.Println("Lone Wolf CRT initialized successfully.")
-
-	// Tables 読み込み
-	var cfg LWCfg
-	if _, err := toml.DecodeFile("testlw.toml", &cfg); err != nil {
-		return fmt.Errorf("failed to decode tables from testlw.toml: %w", err)
-	}
-	lw.Tables = cfg.Tables
-
-	// デバッグ出力：読み込まれた長さを確認
-	fmt.Printf("DEBUG: FirstEquipmentTable len=%d, Weapons=%d Armors=%d Items=%d\n",
-		len(lw.Tables.FirstEquipmentTable), len(lw.Tables.Weapons), len(lw.Tables.Armors), len(lw.Tables.Items))
-
-	// マップ組み立て（安全に、ポインタ取りの落とし穴回避）
-	lw.Tables.ArmorsMap = make(map[string]*Armor, len(lw.Tables.Armors))
-	for i := range lw.Tables.Armors {
-		a := &lw.Tables.Armors[i]
-		lw.Tables.ArmorsMap[a.Name] = a
-	}
-
-	lw.Tables.WeaponsMap = make(map[string]*Weapon, len(lw.Tables.Weapons))
-	for i := range lw.Tables.Weapons {
-		w := &lw.Tables.Weapons[i]
-		lw.Tables.WeaponsMap[w.Name] = w
-	}
-
-	lw.Tables.ItemsMap = make(map[string]*Item, len(lw.Tables.Items))
-	for i := range lw.Tables.Items {
-		it := &lw.Tables.Items[i]
-		lw.Tables.ItemsMap[it.Name] = it
-	}
-
-	return nil
-}
-*/
-
 func (lw *LoneWolfSystem) LostRandomItem(gs *GameState, num int) error {
 
 	if gs.Player.Equipments.BackpackSize <= 0 || len(gs.Player.Equipments.Backpack) == 0 {
@@ -190,7 +144,7 @@ func (lw *LoneWolfSystem) MakingGameState() (*GameState, error) {
 			Gem:  0,
 		},
 
-		CurrentNodeID: "144",
+		CurrentNodeID: "147",
 		Nodes:         nodeMap,
 		Reader:        reader,
 		System:        lw,

@@ -50,6 +50,10 @@ func (lw *LoneWolfSystem) HandleNode(gs *GameState, node *Node) error {
 			fmt.Printf("君の体力は%dされた！\n", node.HPChangeStory)
 		}
 
+		if node.GetMeal != 0 {
+			gs.GetMeal(node)
+		}
+
 		return lw.handleStoryNode(gs, node)
 
 	case "encounter":

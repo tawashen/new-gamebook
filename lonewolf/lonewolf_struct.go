@@ -104,6 +104,7 @@ type Node struct {
 	EscapeHalfway           int       `toml:"escape_halfway"`    //戦闘の規定ターン経過で逃亡可能
 	LostRandomItemNum       int       `toml:"LostRandomItemNum"` //0以外だった場合にはアイテムロスト実行
 	HPChangeStory           int       `toml:"HPChangeStory"`     //Story Typeの時にHPの変更
+	GetMeal                 int       `toml:"GetMeal"`           //食事の指示あり
 }
 
 // Choice は選択肢を表す

@@ -215,3 +215,12 @@ func convertWideToNarrow(s string) string {
 func remove_slice[T any](slice []T, num int) []T {
 	return append(slice[:num], slice[num+1:]...)
 }
+
+func remove_items_by_name(items []*Item, name string) []*Item {
+	for i, item := range items {
+		if item.Name == name {
+			return append(items[:i], items[i+1:]...)
+		}
+	}
+	return items
+}
