@@ -1812,7 +1812,7 @@ type = "story"
 text = """ガロウブラシがマントを引き裂き、腕や足に深く傷つける。15分後、茨を抜け、木々の間をよろめき進む。
 受けた傷でENDURANCEを2ポイント失う。
 めまいを感じ、まぶたが重い。突然、急な木々の斜面の縁に立つ。"""
-hpchange = -2
+HPChangeStory = -2
 [[nodes.choices]]
 description = "もし慎重に斜面を滑り降りるなら、226へ進め。"
 next_node_id = "226"
@@ -2052,7 +2052,7 @@ text = """ギアクが近づき、飛びかかる準備で身を屈める。槍�
 大きなギアクが「オルガダク・ターグ！ノグジャト・アガ・オク！」と叫び、君を襲う。
 ギアクを順番に戦わねばならぬ。この戦闘では高地の利があり、COMBAT SKILLに1ポイント加算せよ。
 """
-hpchange = 2
+HPChangeStory = 2
 [[nedes.enemies]]
 Name = "ギアク１"
 HP = 10
@@ -2175,7 +2175,7 @@ text = """大通りを人々の群れを押し分け、遠くの城塞へ向か�
 暴走する馬車が通り過ぎ、君を扉に叩きつける。呆然とし、ENDURANCEを2ポイント失う。
 立ち上がると、扉が開き、狂った老人が肉切り包丁で襲いかかる。彼は完全に正気を失っており、戦うか回避せねばならぬ。"""
 LostRandomItemNum = 1
-hpchange = -2
+HPChangeStory = -2
 [[nodes.choices]]
 description = "もし戦うなら、63へ進め。"
 next_node_id = "63"

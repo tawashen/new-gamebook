@@ -118,10 +118,38 @@ func (lw *LoneWolfSystem) InitializeGPT() error {
 */
 
 func (lw *LoneWolfSystem) LostRandomItem(gs *GameState, num int) error {
-	backpackNum := len(gs.Player.Equipments.Backpack)
-	randomIndex := lw.Rand.Intn(backpackNum)
 
+	if gs.Player.Equipments.BackpackSize <= 0 || len(gs.Player.Equipments.Backpack) == 0 {
+		if gs.Player.Equipments.Currentweapon == 1 && gs.Player.Equipments.Weapon2 != nil { //装備してない武器があれば失う２
+			fmt.Printf("君は%sを盗まれた\n", gs.Player.Equipments.Weapon2.Name)
+			gs.Player.Equipments.Weapon2 = nil
+		} else if gs.Player.Equipments.Currentweapon == 2 && gs.Player.Equipments.Weapon1 != nil { //装備してない武器があれば失う１
+			fmt.Printf("君は%sを盗まれた\n", gs.Player.Equipments.Weapon1.Name)
+			gs.Player.Equipments.Weapon1 = nil
+		} else if gs.Player.Equipments.Weapon1 == nil && gs.Player.Equipments.Weapon2 != nil { //装備してる武器しかない２
+			fmt.Printf("君は%sを盗まれた\n", gs.Player.Equipments.Weapon2.Name)
+			gs.Player.Equipments.Weapon2 = nil
+			gs.Player.Equipments.Currentweapon = 0
+		} else if gs.Player.Equipments.Weapon2 != nil && gs.Player.Equipments.Weapon2 == nil { //装備してる武器しかない１
+			fmt.Printf("君は%sを盗まれた\n", gs.Player.Equipments.Weapon1.Name)
+			gs.Player.Equipments.Weapon1 = nil
+			gs.Player.Equipments.Currentweapon = 0
+		} else {
+			fmt.Println("君には幸い失うものは何も無い")
+		}
+	} else {
+		for range num {
+			backpackNum := len(gs.Player.Equipments.Backpack) //ランダムの範囲決定用
+			randomIndex := lw.Rand.Intn(backpackNum)          //ランダムでアイテムを決めるためのインデックス生成
+			lostItem := gs.Player.Equipments.Backpack[randomIndex]
+
+			fmt.Printf("君はバックパックから%sを失った\n", lostItem.Name)
+			gs.Player.Equipments.Backpack = remove_slice(gs.Player.Equipments.Backpack, randomIndex)
+		}
+	}
+	return nil
 }
+
 func (lw *LoneWolfSystem) MakingGameState() (*GameState, error) {
 
 	reader := bufio.NewReader(os.Stdin)
@@ -162,7 +190,7 @@ func (lw *LoneWolfSystem) MakingGameState() (*GameState, error) {
 			Gem:  0,
 		},
 
-		CurrentNodeID: "62",
+		CurrentNodeID: "144",
 		Nodes:         nodeMap,
 		Reader:        reader,
 		System:        lw,

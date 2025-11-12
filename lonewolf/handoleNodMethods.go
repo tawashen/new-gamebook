@@ -45,6 +45,11 @@ func (lw *LoneWolfSystem) HandleNode(gs *GameState, node *Node) error {
 			lw.LostRandomItem(gs, node.LostRandomItemNum)
 		}
 
+		if node.HPChangeStory != 0 {
+			gs.Player.Stats["HP"] += node.HPChangeStory
+			fmt.Printf("君の体力は%dされた！\n", node.HPChangeStory)
+		}
+
 		return lw.handleStoryNode(gs, node)
 
 	case "encounter":

@@ -103,6 +103,7 @@ type Node struct {
 	EscapeBefore            string    `toml:"escape_before"`     //戦闘の頭で逃亡可能
 	EscapeHalfway           int       `toml:"escape_halfway"`    //戦闘の規定ターン経過で逃亡可能
 	LostRandomItemNum       int       `toml:"LostRandomItemNum"` //0以外だった場合にはアイテムロスト実行
+	HPChangeStory           int       `toml:"HPChangeStory"`     //Story Typeの時にHPの変更
 }
 
 // Choice は選択肢を表す
