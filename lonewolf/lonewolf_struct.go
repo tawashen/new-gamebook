@@ -21,6 +21,8 @@ type Weapon struct {
 type Item struct {
 	Name   string
 	Effect string
+	Power  int
+	Timing string
 }
 
 // こちらの方が良いのでは？
@@ -105,6 +107,8 @@ type Node struct {
 	LostRandomItemNum       int       `toml:"LostRandomItemNum"` //0以外だった場合にはアイテムロスト実行
 	HPChangeStory           int       `toml:"HPChangeStory"`     //Story Typeの時にHPの変更
 	GetMeal                 int       `toml:"GetMeal"`           //食事の指示あり
+	LostBackpack            int       `toml:"LostBackpack"`
+	LostWeapon              int       `toml:"LostWeapon"`
 }
 
 // Choice は選択肢を表す

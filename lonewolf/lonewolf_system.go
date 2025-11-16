@@ -144,7 +144,7 @@ func (lw *LoneWolfSystem) MakingGameState() (*GameState, error) {
 			Gem:  0,
 		},
 
-		CurrentNodeID: "147",
+		CurrentNodeID: "136",
 		Nodes:         nodeMap,
 		Reader:        reader,
 		System:        lw,
@@ -277,10 +277,10 @@ func (lw *LoneWolfSystem) MakingPlayer(gs *GameState) error {
 		gs.Player.Stats["MaxHP"] += 4
 		gs.Player.Stats["HP"] += 4
 	case 3: //食料２つ
-		gs.Player.Equipments.Backpack = append(gs.Player.Equipments.Backpack, lw.Tables.ItemsMap["Meal"], lw.Tables.ItemsMap["Meal"])
+		gs.Player.Equipments.Backpack = append(gs.Player.Equipments.Backpack, lw.Tables.ItemsMap["アレサーポーション"], lw.Tables.ItemsMap["Meal"])
 		fmt.Print("初期装備！\n君は焼け跡からMealを2つ発見した！\n")
 	case 6: //通常アイテム
-		gs.Player.Equipments.Backpack = append(gs.Player.Equipments.Backpack, lw.Tables.ItemsMap["HealingPotion"])
+		gs.Player.Equipments.Backpack = append(gs.Player.Equipments.Backpack, lw.Tables.ItemsMap["アレサーポーション"])
 		fmt.Print("初期装備！\n君は焼け跡からHealingPotionを発見した！\n")
 	case 9: //ゴールド
 		gs.Player.Gold += 12

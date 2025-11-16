@@ -224,3 +224,14 @@ func remove_items_by_name(items []*Item, name string) []*Item {
 	}
 	return items
 }
+
+func (gs *GameState) UseItem(UsableItemBeforeFight []*Item, num int) (csbonus int) {
+	TargetItem := UsableItemBeforeFight[num]
+	switch TargetItem.Effect {
+	case "SkillUp":
+		fmt.Printf("君は%sを飲むことでCSが%d変化した\n", TargetItem.Name, TargetItem.Power)
+		remove_items_by_name(gs.Player.Equipments.Backpack, TargetItem.Name)
+		return TargetItem.Power
+	}
+	return 0
+}

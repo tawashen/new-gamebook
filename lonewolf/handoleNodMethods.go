@@ -54,6 +54,17 @@ func (lw *LoneWolfSystem) HandleNode(gs *GameState, node *Node) error {
 			gs.GetMeal(node)
 		}
 
+		if node.LostBackpack != 0 {
+			gs.Player.Equipments.BackpackSize = 0
+			fmt.Println("バックパックを失った！")
+		}
+
+		if node.LostWeapon != 0 {
+			gs.Player.Equipments.Weapon1 = nil
+			gs.Player.Equipments.Weapon2 = nil
+			fmt.Println("武器を失った！")
+		}
+
 		return lw.handleStoryNode(gs, node)
 
 	case "encounter":
@@ -280,6 +291,37 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node *Node) error {
 	//得意武器の場合はCSボーナス発生
 	var csBonus int
 	var currentWeaponStr string
+	var UsableItemBeforeFight []*Item
+
+	//戦闘前に使えるアイテムを使う
+	for _, item := range gs.Player.Equipments.Backpack { //アイテムネームのスライス作成
+		if item.Timing == "BeforeFight" {
+			UsableItemBeforeFight = append(UsableItemBeforeFight, item)
+		}
+	}
+
+	if len(UsableItemBeforeFight) > 0 {
+		for {
+			fmt.Println("君はどのアイテムを使う？")
+			for index, item := range UsableItemBeforeFight {
+				fmt.Printf("%d：%s\n", index, item.Name)
+			}
+			input, _ := gs.Reader.ReadString('\n')
+			input = strings.TrimSpace(input)
+			num, err := strconv.Atoi(input)
+			if err != nil {
+				fmt.Println("数値を入力してください。")
+				continue
+			}
+			if num > len(UsableItemBeforeFight) {
+				fmt.Println("数字が範囲を超えています")
+				continue
+			}
+
+			csBonus = csBonus + (gs.UseItem(UsableItemBeforeFight, num)) //アイテム使用でボーナスとアイテム数変更
+			break
+		}
+	}
 
 	//技能を持ってないとCSマイナス発生
 	if node.RequiredDisciplineMinus != "" && !contains_str(gs.Player.KaiDisciplines, node.RequiredDisciplineMinus) {
