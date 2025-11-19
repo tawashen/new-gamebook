@@ -26,10 +26,16 @@ func (lw *LoneWolfSystem) HandleNode(gs *GameState, node *Node) error {
 			armor.Get(gs, node)
 		}
 
-		if node.ItemGetBefore != "" {
-			item := lw.Tables.ItemsMap[node.ItemGetBefore]
-			item.Get(gs, node.ItemGetNum, node)
+		if node.CSChangeE != 0 {
+			fmt.Printf("君の戦闘技能は永久に%d変化した\n", node.CSChangeE)
+			gs.Player.Stats["CS"] += node.CSChangeE
 		}
+
+		//ここは不要か？
+		//if node.ItemGetBefore != "" {
+		//	item := lw.Tables.ItemsMap[node.ItemGetBefore]
+		//	item.Get(gs, node.ItemGetNum, node)
+		//}
 
 		if node.GoldGetBefore != 0 {
 			gs.Player.Gold += node.GoldGetBefore
@@ -52,11 +58,6 @@ func (lw *LoneWolfSystem) HandleNode(gs *GameState, node *Node) error {
 
 		if node.GetMeal != 0 {
 			gs.GetMeal(node)
-		}
-
-		if node.LostBackpack != 0 {
-			gs.Player.Equipments.BackpackSize = 0
-			fmt.Println("バックパックを失った！")
 		}
 
 		if node.LostWeapon != 0 {
@@ -113,28 +114,36 @@ func (lw *LoneWolfSystem) handleRandomNode(gs *GameState, node *Node) error {
 		input = strings.TrimSpace(input)
 		choiceNum, err := strconv.Atoi(input)
 
+		if err != nil || choiceNum < 1 || choiceNum > len(node.Outcomes) {
+			fmt.Println("正しい番号を入力してください。")
+			continue
+		}
+
 		outcome := node.Outcomes[choiceNum-1]
 
 		if err == nil &&
-			contains_int(outcome.ConditionInt, randomNumber) {
+			contains_int(outcome.ConditionInt, randomNumber) { //乱数にInputが含まれているか？
 			gs.CurrentNodeID = outcome.NextNodeID
 			if outcome.HPChange != 0 {
 				gs.Player.Stats["HP"] += outcome.HPChange
 				fmt.Printf("耐久値が%d変化した\n", outcome.HPChange)
+			}
+			if outcome.LostContents != 0 {
+				gs.Player.Equipments.Backpack = []*Item{}
+				fmt.Println("君はバックバックの中身を全部失った！")
 			}
 			break //RunLoopへ戻る
 		} else {
 			fmt.Println("条件を満たしていません。")
 		}
 	}
-
 	return nil
 }
 
 // handleStoryNode はストーリーノードの処理
 func (lw *LoneWolfSystem) handleStoryNode(gs *GameState, node *Node) error {
 	if len(node.Choices) == 0 {
-		fmt.Println("このノードには選択肢がありません。ゲーム終了。")
+		fmt.Println("残念君の冒険はここで終わってしまった！ゲーム終了")
 		gs.CurrentNodeID = "game_over" // 選択肢がなければゲームオーバーに送るか、別の処理
 		os.Exit(0)
 
@@ -150,9 +159,29 @@ func (lw *LoneWolfSystem) handleStoryNode(gs *GameState, node *Node) error {
 		lw.Tables.WeaponsMap[node.WeaponGetBefore].Get(gs, node)
 	}
 
+	//ここを複数対応に書き換える
+	if node.ItemGetBeforeList != nil {
+		for _, item := range node.ItemGetBeforeList {
+			num := item.Num
+			lw.Tables.ItemsMap[item.Name].Get(gs, num, node)
+		}
+	}
+
+	//書き換えが面倒なので単品アイテム様に残しておく
 	if node.ItemGetBefore != "" {
 		num := node.ItemGetNum
 		lw.Tables.ItemsMap[node.ItemGetBefore].Get(gs, num, node)
+	}
+
+	if node.LostBackpack != 0 { //バックパックを失う場合
+		gs.Player.Equipments.BackpackSize = -1
+		gs.Player.Equipments.Backpack = []*Item{}
+		fmt.Println("君はバックパックを失った！")
+	}
+
+	if node.LostContents != 0 { //中身だけ全部ロストの場合
+		gs.Player.Equipments.Backpack = []*Item{}
+		fmt.Println("君はバックバックの中身を全部失った！")
 	}
 
 	fmt.Println("\n選択肢:")
@@ -194,6 +223,15 @@ func (lw *LoneWolfSystem) handleStoryNode(gs *GameState, node *Node) error {
 			required_gold_num = goldnum
 		}
 
+		if choice.LostRandomItem != 0 {
+			lw.LostRandomItem(gs, choice.LostRandomItem)
+		}
+
+		//var require_HP int
+		//if choice.RequireHP != 0 {
+		//	require_HP = choice.RequireHP
+		//}
+
 		//fmt.Print(required_discipline_name)
 
 		var backpackcontains []string
@@ -205,7 +243,17 @@ func (lw *LoneWolfSystem) handleStoryNode(gs *GameState, node *Node) error {
 			choiceNum <= len(node.Choices) && //選択肢数以下で
 			choice.RequiredDiscipline == "" && //必須ディシプリンなし
 			choice.RequiredGold == "" && //お金の要求無し
+			choice.RequireHP == 0 && //必須体力無し
 			choice.RequiredItem == "" { //必須アイテムなし
+			gs.CurrentNodeID = node.Choices[choiceNum-1].NextNodeID
+			break
+		} else if //HPが必要
+		choiceNum >= 1 &&
+			choiceNum <= len(node.Choices) &&
+			choice.RequiredDiscipline != "" &&
+			choice.RequiredItem == "" &&
+			choice.RequiredGold == "" &&
+			gs.Player.Stats["HP"] >= choice.RequireHP {
 			gs.CurrentNodeID = node.Choices[choiceNum-1].NextNodeID
 			break
 		} else if //KaiDisciplines必要
@@ -214,6 +262,7 @@ func (lw *LoneWolfSystem) handleStoryNode(gs *GameState, node *Node) error {
 			choice.RequiredDiscipline != "" &&
 			choice.RequiredItem == "" &&
 			choice.RequiredGold == "" &&
+			choice.RequireHP == 0 &&
 			contains_str(gs.Player.KaiDisciplines, required_discipline_name) {
 			gs.CurrentNodeID = node.Choices[choiceNum-1].NextNodeID
 			break
@@ -223,6 +272,7 @@ func (lw *LoneWolfSystem) handleStoryNode(gs *GameState, node *Node) error {
 			choice.RequiredDiscipline == "" &&
 			choice.RequiredItem != "" &&
 			choice.RequiredGold == "" &&
+			choice.RequireHP == 0 &&
 			contains_str(backpackcontains, required_item_name) {
 			gs.CurrentNodeID = node.Choices[choiceNum-1].NextNodeID
 			break
@@ -232,13 +282,14 @@ func (lw *LoneWolfSystem) handleStoryNode(gs *GameState, node *Node) error {
 			choice.RequiredDiscipline == "" &&
 			choice.RequiredItem == "" &&
 			choice.RequiredGold != "" &&
+			choice.RequireHP == 0 &&
 			required_gold_num < gs.Player.Gold {
 			gs.Player.Gold -= required_gold_num
 			gs.CurrentNodeID = node.Choices[choiceNum-1].NextNodeID
 			break
 		} else {
-			//fmt.Println("無効な入力です。もう一度入力してください。")
-			gs.DisplayStatus()
+			fmt.Println("条件を満たしていません。もう一度入力してください。")
+			//gs.DisplayStatus()
 			continue
 		}
 	}
@@ -348,6 +399,10 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node *Node) error {
 		csBonus += node.Effect
 	}
 
+	//戦闘でDamegeを受けたかどうかをチェックするため
+	var Damage int
+
+	//対応武器スキルを持ってるとCSプラス
 	if contains_str(gs.Player.KaiDisciplines, "WeaponSkill") {
 		if gs.Player.Equipments.Currentweapon == 1 {
 			currentWeaponStr = gs.Player.Equipments.Weapon1.Name
@@ -359,7 +414,7 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node *Node) error {
 		}
 	}
 
-	csBonus = csBonus + node.CSChange //cschange分をそのまま追加
+	csBonus = csBonus + node.CSChangeT //cschange分をそのまま追加
 
 	if node.EscapeBefore == "on" { //戦闘前に逃亡可能な場合の処理
 		escapetext := ""
@@ -420,6 +475,7 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node *Node) error {
 			Pdamage := lw.makeCombatResult(gs.Player.Stats["CS"]+csBonus, currentEnemy.CS).PlayerLoss
 			currentEnemy.HP -= Edamage
 			gs.Player.Stats["HP"] -= Pdamage
+			Damage += Pdamage //Damageチェック用
 			fmt.Printf("あなたは%sに%dダメージを与えた！\nそしてあなたは%dダメージを受けた！\n",
 				currentEnemy.Name, Edamage, Pdamage)
 
@@ -467,6 +523,11 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node *Node) error {
 					return nil
 				}
 			}
+			//戦闘ラウンドの制限が設定されてる場合
+			if node.BattleLimit == roundnum {
+				gs.CurrentCondition = "BattleLimit"
+				break
+			}
 			roundnum += 1
 		}
 
@@ -475,22 +536,31 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node *Node) error {
 			gs.CurrentCondition = "combat_lost"
 			break // プレイヤーのHPが0以下になった場合、ゲームオーバーへ
 		}
-
-		gs.CurrentCondition = "combat_won"
+		if gs.CurrentCondition != "BattleLimit" {
+			gs.CurrentCondition = "combat_won"
+		}
 	}
 
 	for _, outcome := range node.Outcomes {
 		if outcome.Condition == "combat_won" && gs.CurrentCondition == "combat_won" { // "combat_won" 条件をチェック
 			gs.CurrentNodeID = outcome.NextNodeID
 			break
-		}
-	}
-
-	for _, outcome := range node.Outcomes {
-		if outcome.Condition == "combat_lost" && gs.CurrentCondition == "combat_lost" {
+		} else if outcome.Condition == "combat_lost" && gs.CurrentCondition == "combat_lost" {
 			gs.CurrentNodeID = outcome.NextNodeID
 			break
+		} else if outcome.Condition == "combat_won_no_damage" && gs.CurrentCondition == "combat_won" && Damage == 0 {
+			gs.CurrentNodeID = outcome.NextNodeID
+		} else if outcome.Condition == "combat_won_with_damage" && gs.CurrentCondition == "combat_won" && Damage != 0 {
+			gs.CurrentNodeID = outcome.NextNodeID
+		} else if outcome.Condition == "BattleLimit" && gs.CurrentCondition == "BattleLimit" {
+			gs.CurrentNodeID = outcome.NextNodeID
 		}
+
+		//for _, outcome := range node.Outcomes {
+		//	if outcome.Condition == "combat_lost" && gs.CurrentCondition == "combat_lost" {
+		//		gs.CurrentNodeID = outcome.NextNodeID
+		//		break
+
 	}
 
 	return nil

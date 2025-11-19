@@ -48,7 +48,7 @@ func (i *Item) Get(gs *GameState, num int, node *Node) {
 	backpack := gs.Player.Equipments.Backpack
 	bpsize := gs.Player.Equipments.BackpackSize
 
-	if bpsize <= 0 {
+	if bpsize == -1 {
 		fmt.Println("バックパックを持っていない")
 	} else if len(backpack) > bpsize { //すでにバックパックが満タンの場合
 		fmt.Printf("残念荷物が一杯のようだ。%sを手に入れるために何を諦める？", i.Name)

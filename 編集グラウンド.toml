@@ -1,2 +1,87 @@
 #ground
 
+
+
+[Tables]
+KaiTable = ["Camouflage", "Hunting", "SixthSense", "Tracking","Healing",
+ "WeaponSkill","Mindshield", "Mindblast", "AnimalKinship", "MindOverMatter"]
+WeaponSkillTable = ["Dagger", "Spear", "Mace", "Shortsword", "Warhammer", "Sword", "Axe", "Sword", "Quaterstaff", "Broadsword"]
+FirstEquipmentTable = ["Broadsword", "Sword", "Helmet", "Meal", "ChainmailWaistcoat", "Mace", "HealingPotion", "Quaterstaff", "Spear", "Gold"]
+
+    [[Tables.Armors]]
+    Name = "ChainmailWaistcoat"
+    Slot = "Body"
+    HPBonus = 2
+
+    [[Tables.Armors]]
+    Name = "Helmet"
+    Slot = "Head"
+    HPBonus = 2
+
+    [[Tables.Weapons]]
+    Kind = "Sword"
+    Name = "Broadsword"
+    CSBonus = 1
+
+    [[Tables.Weapons]]
+    Kind = "Sword"
+    Name = "Sword"
+    CSBonus = 1
+
+    [[Tables.Weapons]]
+    Kind = "Mace"
+    Name = "Mace"
+    CSBonus = 1
+
+    [[Tables.Weapons]]
+    Kind = "Staff"
+    Name = "Quaterstaff"
+    CSBonus = 1
+
+    [[Tables.Weapons]]
+    Kind = "Spear"
+    Name = "Spear"
+    CSB = 1
+
+    [[Tables.Weapons]]
+    Kind = "Axe"
+    Name = "Axe"
+    CSBonus = 1
+
+    [[Tables.Items]]
+    Name = "Meal"
+    Effect = "Meal"
+
+    [[Tables.Items]]
+    Name = "HealingPotion"
+    Effet = "Heal"
+
+    [[Tables.Weapons]]
+    Kind = "Dagger"
+    Name = "Dagger"
+    CSB = 1
+
+    [[Tables.Items]]
+    Name = "ラウムスパーハーブ"
+    Effect = "Meal&Heal"
+
+    [[Tables.Items]]
+    Name = "鍵124"
+    Effect = "Key"
+
+    [[Tables.Items]]
+    Name = "金の鍵"
+    Effect = "key"
+
+    [[Tables.Items]]
+    Name = "アレサーポーション"
+    Effect = "SkillUp"
+    Power = 2
+    Timing = "BeforeFight"
+
+    [[Tables.Items]]
+    Name = "松明"
+    Effect = -3
+
+    [[Tables.Items]]
+    Name = "火打ち石"

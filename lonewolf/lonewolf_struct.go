@@ -107,8 +107,18 @@ type Node struct {
 	LostRandomItemNum       int       `toml:"LostRandomItemNum"` //0以外だった場合にはアイテムロスト実行
 	HPChangeStory           int       `toml:"HPChangeStory"`     //Story Typeの時にHPの変更
 	GetMeal                 int       `toml:"GetMeal"`           //食事の指示あり
-	LostBackpack            int       `toml:"LostBackpack"`
+	LostBackpack            int       `toml:"LostBackpack"`      //バッグを失うサイズ数値を-1にする必要あり
+	LostContents            int       `toml:"LostContents"`      //バッグは残り中身はロスト
 	LostWeapon              int       `toml:"LostWeapon"`
+	ItemGetBeforeList       []ItemGet `toml:"itemgetbeforelist"`
+	BattleLimit             int       `toml:"BattleLimit"` //戦闘ラウンドの限界
+	CSChangeT               int       `toml:"CSChangeT"`   //CSを一時的に変更＝CSBonusが対象
+	CSChangeE               int       `toml:"CSChangeE"`   //CSを永続的に変更
+}
+
+type ItemGet struct {
+	Name string `toml:"name"`
+	Num  int    `toml:"num"`
 }
 
 // Choice は選択肢を表す
@@ -119,14 +129,19 @@ type Choice struct {
 	RequiredItem       string            `toml:"required_item,omitempty"`
 	RequiredGold       string            `toml:"required_gold,omitempty"` //追加
 	Conditions         map[string]string `toml:"conditions,omitempty"`
+	RequireHP          int               `toml:"RequireHP"`
+	LostRandomItem     int               `toml:"LostRandomItem"`
 }
 
 // Enemy は戦闘の敵キャラクター
 type Enemy struct {
-	Name          string `toml:"Name"`
-	HP            int    `toml:"HP"`
-	CS            int    `toml:"CS"`
-	AntiMindBlast int    `toml:"AntiMindBlast"`
+	Name              string `toml:"Name"`
+	HP                int    `toml:"HP"`
+	CS                int    `toml:"CS"`
+	AntiMindBlast     int    `toml:"AntiMindBlast"`
+	AntiAnimalKinship int    `toml:"AntiAnimalKinship"`
+	RequiredItem      string `toml:"RequiredItem"`
+	ItemPower         int    `toml:"ItemPower"`
 }
 
 // Outcome は遭遇戦の結果と次に進むノードを表す
@@ -137,6 +152,7 @@ type Outcome struct {
 	NextNodeID     string `toml:"next_node_id"`
 	HPChange       int    `toml:"hpchange"`
 	HPChangeRandom string `toml:"hpchangerandom"`
+	LostContents   int    `toml:"LostBackpack"` //OutcomesにもLostContentsを作る
 }
 
 // KeyPair は戦闘結果テーブルのキーを定義

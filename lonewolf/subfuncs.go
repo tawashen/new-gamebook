@@ -109,7 +109,7 @@ func (gs *GameState) DisplayStatus() {
 	}
 
 	fmt.Println("バックパック")
-	if len(gs.Player.Equipments.Backpack) == 0 {
+	if len(gs.Player.Equipments.Backpack) == -1 {
 		fmt.Println("バックパックは空です")
 	} else {
 		for _, item := range gs.Player.Equipments.Backpack {

@@ -144,7 +144,7 @@ func (lw *LoneWolfSystem) MakingGameState() (*GameState, error) {
 			Gem:  0,
 		},
 
-		CurrentNodeID: "136",
+		CurrentNodeID: "236",
 		Nodes:         nodeMap,
 		Reader:        reader,
 		System:        lw,
