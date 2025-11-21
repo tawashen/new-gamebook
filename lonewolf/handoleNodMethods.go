@@ -199,6 +199,13 @@ func (lw *LoneWolfSystem) handleStoryNode(gs *GameState, node *Node) error {
 		lw.Tables.WeaponsMap[node.WeaponGetBefore].Get(gs, node)
 	}
 
+	if node.WeaponGetBeforeList != nil {
+		for _, weaponGet := range node.WeaponGetBeforeList {
+			weapon := lw.Tables.WeaponsMap[weaponGet.Name]
+			weapon.Get(gs, node)
+		}
+	}
+
 	//ここを複数対応に書き換える
 	if node.ItemGetBeforeList != nil {
 		for _, item := range node.ItemGetBeforeList {

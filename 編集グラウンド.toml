@@ -1,10 +1,3 @@
-
-
-RequireDescipline = "Mindshield"
-CSChangeNoDescipline = -2 #Power
-CSChangeNoDesciplineStartTiming = 2 #開始ラウンド
-CSChangeNoDesciplineEndTiming = 0 #終了ラウンド
-RequiredItem = ""
-CSChangeNoItem = 0 #Power
-CSChangeNoItemStartTiming = 0 #開始ラウンド
-CSChangeNoItemEndTiming = 0 #終了ラウンド
+[[nodes.weapongetbeforelist]]
+name = "Sword"
+num = 1

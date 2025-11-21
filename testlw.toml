@@ -1,94 +1,125 @@
 system = "lonewolf"
 
 [Tables]
-KaiTable = ["Camouflage", "Hunting", "SixthSense", "Tracking","Healing",
- "WeaponSkill","Mindshield", "Mindblast", "AnimalKinship", "MindOverMatter"]
-WeaponSkillTable = ["Dagger", "Spear", "Mace", "Shortsword", "Warhammer", "Sword", "Axe", "Sword", "Quaterstaff", "Broadsword"]
-FirstEquipmentTable = ["Broadsword", "Sword", "Helmet", "Meal", "ChainmailWaistcoat", "Mace", "HealingPotion", "Quaterstaff", "Spear", "Gold"]
+KaiTable = [
+    "Camouflage",
+    "Hunting",
+    "SixthSense",
+    "Tracking",
+    "Healing",
+    "WeaponSkill",
+    "Mindshield",
+    "Mindblast",
+    "AnimalKinship",
+    "MindOverMatter",
+]
+WeaponSkillTable = [
+    "Dagger",
+    "Spear",
+    "Mace",
+    "Shortsword",
+    "Warhammer",
+    "Sword",
+    "Axe",
+    "Sword",
+    "Quaterstaff",
+    "Broadsword",
+]
+FirstEquipmentTable = [
+    "Broadsword",
+    "Sword",
+    "Helmet",
+    "Meal",
+    "ChainmailWaistcoat",
+    "Mace",
+    "HealingPotion",
+    "Quaterstaff",
+    "Spear",
+    "Gold",
+]
 
-    [[Tables.Armors]]
-    Name = "ChainmailWaistcoat"
-    Slot = "Body"
-    HPBonus = 2
+[[Tables.Armors]]
+Name = "ChainmailWaistcoat"
+Slot = "Body"
+HPBonus = 2
 
-    [[Tables.Armors]]
-    Name = "Helmet"
-    Slot = "Head"
-    HPBonus = 2
+[[Tables.Armors]]
+Name = "Helmet"
+Slot = "Head"
+HPBonus = 2
 
-    [[Tables.Weapons]]
-    Kind = "Sword"
-    Name = "Broadsword"
-    CSBonus = 1
+[[Tables.Weapons]]
+Kind = "Sword"
+Name = "Broadsword"
+CSBonus = 1
 
-    [[Tables.Weapons]]
-    Kind = "Sword"
-    Name = "Sword"
-    CSBonus = 1
+[[Tables.Weapons]]
+Kind = "Sword"
+Name = "Sword"
+CSBonus = 1
 
-    [[Tables.Weapons]]
-    Kind = "Mace"
-    Name = "Mace"
-    CSBonus = 1
+[[Tables.Weapons]]
+Kind = "Mace"
+Name = "Mace"
+CSBonus = 1
 
-    [[Tables.Weapons]]
-    Kind = "Staff"
-    Name = "Quaterstaff"
-    CSBonus = 1
+[[Tables.Weapons]]
+Kind = "Staff"
+Name = "Quaterstaff"
+CSBonus = 1
 
-    [[Tables.Weapons]]
-    Kind = "Spear"
-    Name = "Spear"
-    CSB = 1
+[[Tables.Weapons]]
+Kind = "Spear"
+Name = "Spear"
+CSB = 1
 
-    [[Tables.Weapons]]
-    Kind = "Axe"
-    Name = "Axe"
-    CSBonus = 1
+[[Tables.Weapons]]
+Kind = "Axe"
+Name = "Axe"
+CSBonus = 1
 
-    [[Tables.Items]]
-    Name = "Meal"
-    Effect = "Meal"
+[[Tables.Items]]
+Name = "Meal"
+Effect = "Meal"
 
-    [[Tables.Items]]
-    Name = "HealingPotion"
-    Effet = "Heal"
+[[Tables.Items]]
+Name = "HealingPotion"
+Effet = "Heal"
 
-    [[Tables.Weapons]]
-    Kind = "Dagger"
-    Name = "Dagger"
-    CSB = 1
+[[Tables.Weapons]]
+Kind = "Dagger"
+Name = "Dagger"
+CSB = 1
 
-    [[Tables.Items]]
-    Name = "ラウムスパーハーブ"
-    Effect = "Meal&Heal"
+[[Tables.Items]]
+Name = "ラウムスパーハーブ"
+Effect = "Meal&Heal"
 
-    [[Tables.Items]]
-    Name = "鍵124"
-    Effect = "Key"
+[[Tables.Items]]
+Name = "鍵124"
+Effect = "Key"
 
-    [[Tables.Items]]
-    Name = "金の鍵"
-    Effect = "key"
+[[Tables.Items]]
+Name = "金の鍵"
+Effect = "key"
 
-    [[Tables.Items]]
-    Name = "アレサーポーション"
-    Effect = "SkillUp"
-    Power = 2
-    Timing = "BeforeFight"
+[[Tables.Items]]
+Name = "アレサーポーション"
+Effect = "SkillUp"
+Power = 2
+Timing = "BeforeFight"
 
-    [[Tables.Items]]
-    Name = "松明"
-    Effect = "Torch"
+[[Tables.Items]]
+Name = "松明"
+Effect = "Torch"
 
-    [[Tables.Items]]
-    Name = "火打ち石"
-    Effect = "Flint"
+[[Tables.Items]]
+Name = "火打ち石"
+Effect = "Flint"
 
-    [[Tables.Items]]
-    Name = "メッセージ"
-    Effect = "Message"
-
+[[Tables.Items]]
+Name = "メッセージ"
+Effect = "Message"
 
 
 [[nodes]]
@@ -207,14 +238,14 @@ text = """Illustration I
 耳に血が脈打つ音を聞きながら、屋根の端まで疾走し、対岸の屋根に目を固定して宙へ跳ぶ。
 ランダムナンバーテーブルから数字を一つ選べ。"""
 
-    [[nodes.outcomes]]
-    description = "0~2なので108へ"
-    condition_int = [0,1,2]
-    next_node_id = "108"
-    [[nodes.outcomes]]
-    description = "3~9なので25へ"
-    condition_int = [3,4,5,6,7,8,9]
-    next_node_id = "25"
+[[nodes.outcomes]]
+description = "0~2なので108へ"
+condition_int = [0, 1, 2]
+next_node_id = "108"
+[[nodes.outcomes]]
+description = "3~9なので25へ"
+condition_int = [3, 4, 5, 6, 7, 8, 9]
+next_node_id = "25"
 
 
 [[nodes]]
@@ -312,7 +343,9 @@ next_node_id = "106"
 [[nodes]]
 id = "15"
 type = "story"
-weapongetbefore = "Sword"
+[[nodes.weapongetbeforelist]]
+name = "Sword"
+num = 1
 text = """長い、暗い枝のトンネルを抜け、大きな空き地に出る。
 空き地の中央の石の台座には、黒い革の鞘に収められた剣がある。
 柄には手書きのメモが結ばれているが、君には知らない言語だ。
@@ -351,18 +384,18 @@ COMBAT SKILLから1ポイントを引いて、クラーンと戦え。
 もしこの生物を倒したら、ギアクを避けるため丘の反対側を急いで下る。
 ランダムナンバーテーブルから数字を一つ選べ。"""
 CSChangeT = -1
-    [[nodes.enemies]]
-    Name = "クラーン"
-    HP = 24
-    CS = 16
+[[nodes.enemies]]
+Name = "クラーン"
+HP = 24
+CS = 16
 
-    [[nodes.outcomes]]
-    condition = "combat_won"
-    next_node_id = "17B"
+[[nodes.outcomes]]
+condition = "combat_won"
+next_node_id = "17B"
 
-    [[nodes.outcomes]]
-    condition = "combat_lost"
-    next_node_id = "game_over"
+[[nodes.outcomes]]
+condition = "combat_lost"
+next_node_id = "game_over"
 
 [[nodes]]
 id = "17B"
@@ -372,18 +405,18 @@ text = """
 もし0を選んだなら、53へ進め。
 もし1～2を選んだなら、274へ進め。
 もし3～9を選んだなら、316へ進め。"""
-    [[nodes.outcomes]]
-    description = "0なので53へ"
-    condition_int = [0]
-    next_node_id = "53"
-    [[nodes.outcomes]]
-    description = "1-2なので274へ"
-    condition_int =[1,2]
-    next_node_id = "274"
-    [[nodes.outcomes]]
-    description = "3-9なので316へ"
-    condition_int = [3,4,5,6,7,8,9]
-    next_node_id = "316"
+[[nodes.outcomes]]
+description = "0なので53へ"
+condition_int = [0]
+next_node_id = "53"
+[[nodes.outcomes]]
+description = "1-2なので274へ"
+condition_int = [1, 2]
+next_node_id = "274"
+[[nodes.outcomes]]
+description = "3-9なので316へ"
+condition_int = [3, 4, 5, 6, 7, 8, 9]
+next_node_id = "316"
 
 [[nodes]]
 id = "18"
@@ -429,7 +462,9 @@ type = "story"
 text = """ここに住んでいた者は、最近、急いで去ったようだ。
 テーブルには食べかけの食事が残り、ダークジャラのマグはまだ温かい。
 箱や小さな衣装棚を調べると、バックパック、食料（2食分）、短剣が見つかる。"""
-weapongetbefore = "Dagger"
+[[nodes.weapongetbeforelist]]
+name = "Dagger"
+num = 1
 itemgetbefore = "Meal"
 itemgetnum = 2
 [[nodes.choices]]
@@ -444,14 +479,14 @@ text = """2マイルほど木々の絡まる中を進むと、地面が非常に
 もし5未満なら、馬が突然、腹まで深い泥に沈む。
 もし5以上なら、泥沼を回避し、189へ進める。"""
 
-    [[nodes.outcomes]]
-    description = "もし5未満なら、馬が突然、腹まで深い泥に沈む。189へ"
-    condition_int = [0,1,2,3,4]
-    next_node_id = "21B"
-    [[nodes.outcomes]]
-    description = "5異常なのでなので189へ"
-    condition_int =[5,6,7,8,9]
-    next_node_id = "189"
+[[nodes.outcomes]]
+description = "もし5未満なら、馬が突然、腹まで深い泥に沈む。189へ"
+condition_int = [0, 1, 2, 3, 4]
+next_node_id = "21B"
+[[nodes.outcomes]]
+description = "5異常なのでなので189へ"
+condition_int = [5, 6, 7, 8, 9]
+next_node_id = "189"
 
 [[nodes]]
 id = "21B"
@@ -465,14 +500,14 @@ text = """
 9以外の数字を選んだなら、悪臭を放つ沼が君を飲み込み、また一人の犠牲者を奪う。
 君の命と任務はここで終わる。だが、もし9を選んだなら、312へ進め。"""
 
-   [[nodes.outcomes]]
-    description = "もし7以下なら、馬が突然、腹まで深い泥に沈む。189へ"
-    condition_int = [0,1,2,3,4,5,6,7]
-    next_node_id = "21C"
-    [[nodes.outcomes]]
-    description = "7を超えたので硬い地面に這い上がれた189へ"
-    condition_int =[8,9]
-    next_node_id = "189"
+[[nodes.outcomes]]
+description = "もし7以下なら、馬が突然、腹まで深い泥に沈む。189へ"
+condition_int = [0, 1, 2, 3, 4, 5, 6, 7]
+next_node_id = "21C"
+[[nodes.outcomes]]
+description = "7を超えたので硬い地面に這い上がれた189へ"
+condition_int = [8, 9]
+next_node_id = "189"
 
 [[nodes]]
 id = "21C"
@@ -482,17 +517,14 @@ text = """
 9以外の数字を選んだなら、悪臭を放つ沼が君を飲み込み、また一人の犠牲者を奪う。
 君の命と任務はここで終わる。だが、もし9を選んだなら、312へ進め。"""
 
-   [[nodes.outcomes]]
-    description = "もし7以下なら、馬が突然、腹まで深い泥に沈む。GameOver"
-    condition_int = [0,1,2,3,4,5,6,7,8]
-    next_node_id = "game_over"
-    [[nodes.outcomes]]
-    description = "9を選ぶことが出来たので312へ"
-    condition_int =[9]
-    next_node_id = "312"
-
-
-
+[[nodes.outcomes]]
+description = "もし7以下なら、馬が突然、腹まで深い泥に沈む。GameOver"
+condition_int = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+next_node_id = "game_over"
+[[nodes.outcomes]]
+description = "9を選ぶことが出来たので312へ"
+condition_int = [9]
+next_node_id = "312"
 
 
 [[nodes]]
@@ -502,14 +534,14 @@ text = """リーダーを押し退け、大道を駆け出す。
 背後で、クロスボウが装填される不吉なクリック音が背筋を凍らせる。
 ランダムナンバーテーブルから数字を一つ選べ。"""
 
-   [[nodes.outcomes]]
-    description = "もし選んだ数字が0～4なら、181へ進め。"
-    condition_int = [0,1,2,3,4]
-    next_node_id = "181"
-    [[nodes.outcomes]]
-    description = "もし選んだ数字が5～9なら、145へ進め。"
-    condition_int =[5,6,7,8,9]
-    next_node_id = "145"
+[[nodes.outcomes]]
+description = "もし選んだ数字が0～4なら、181へ進め。"
+condition_int = [0, 1, 2, 3, 4]
+next_node_id = "181"
+[[nodes.outcomes]]
+description = "もし選んだ数字が5～9なら、145へ進め。"
+condition_int = [5, 6, 7, 8, 9]
+next_node_id = "145"
 
 
 [[nodes]]
@@ -614,22 +646,21 @@ text = """湖畔に堂々と立ち、戦闘の準備をする。
 もし戦いに勝つなら、270へ進め。"""
 
 
-   [[nodes.enemies]]
-    Name = "ヴォルダック"
-    HP = 25
-    CS = 17
+[[nodes.enemies]]
+Name = "ヴォルダック"
+HP = 25
+CS = 17
 
-    [[nodes.outcomes]]
-    condition = "combat_won"
-    next_node_id = "270"
+[[nodes.outcomes]]
+condition = "combat_won"
+next_node_id = "270"
 
-    [[nodes.outcomes]]
-    condition = "combat_lost"
-    next_node_id = "game_over"
+[[nodes.outcomes]]
+condition = "combat_lost"
+next_node_id = "game_over"
 
 required_discipline = "Mindshield"
 effect = -2
-
 
 
 [[nodes]]
@@ -694,19 +725,18 @@ text = """Illustration III
 ヴォルダック：COMBAT SKILL 17 ENDURANCE 25"""
 
 
-   [[nodes.enemies]]
-    Name = "ヴォルダック"
-    HP = 25
-    CS = 17
+[[nodes.enemies]]
+Name = "ヴォルダック"
+HP = 25
+CS = 17
 
-    [[nodes.outcomes]]
-    condition = "combat_won"
-    next_node_id = "328"
+[[nodes.outcomes]]
+condition = "combat_won"
+next_node_id = "328"
 
-    [[nodes.outcomes]]
-    condition = "combat_lost"
-    next_node_id = "game_over"
-
+[[nodes.outcomes]]
+condition = "combat_lost"
+next_node_id = "game_over"
 
 
 [[nodes]]
@@ -725,15 +755,15 @@ type = "random_roll"
 text = """古い監視塔の梯子は腐っており、登る際にいくつかの段が壊れる。
 ランダムナンバーテーブルから数字を一つ選べ。"""
 
-   [[nodes.outcomes]]
-    description = "もし4以下なら、落下する。ENDURANCEを2ポイント失い、140へ進め"
-    condition_int = [0,1,2,3,4]
-    hpchange = -2
-    next_node_id = "140"
-    [[nodes.outcomes]]
-    description = "もし5以上なら、落下しない。323へ"
-    condition_int = [5,6,7,8,9]
-    next_node_id = "323"
+[[nodes.outcomes]]
+description = "もし4以下なら、落下する。ENDURANCEを2ポイント失い、140へ進め"
+condition_int = [0, 1, 2, 3, 4]
+hpchange = -2
+next_node_id = "140"
+[[nodes.outcomes]]
+description = "もし5以上なら、落下しない。323へ"
+condition_int = [5, 6, 7, 8, 9]
+next_node_id = "323"
 
 
 [[nodes]]
@@ -796,35 +826,33 @@ text = """Illustration IV
 ギアクのリーダーは5人の部下に弓で君を攻撃するよう命じる。
 急な岸で君は見つかり、ギアクのリーダーが5人の部下に弓で攻撃するよう命じる。
 黒い矢が雨のように降り注ぐ。"""
-    [[nodes.choices]]
-    description = "もし全速力で川を下るなら、174へ進め。"
-    next_node_id = "174"
+[[nodes.choices]]
+description = "もし全速力で川を下るなら、174へ進め。"
+next_node_id = "174"
 
-    [[nodes.choices]]
-    description = "もし対岸の木々の陰に逃げるなら、116へ進め。"
-    next_node_id = "116"
+[[nodes.choices]]
+description = "もし対岸の木々の陰に逃げるなら、116へ進め。"
+next_node_id = "116"
 
 [[nodes]]
 id = "42"
 type = "story"
 text = """ほぼ1時間、道を進むと十字路にたどり着く。"""
-    [[nodes.choices]]
-    description = "もし東へ進むなら、86へ進め。"
-    next_node_id = "86"
+[[nodes.choices]]
+description = "もし東へ進むなら、86へ進め。"
+next_node_id = "86"
 
-    [[nodes.choices]]
-    description = "もし北へ進むなら、238へ進め。"
-    next_node_id = "238"
+[[nodes.choices]]
+description = "もし北へ進むなら、238へ進め。"
+next_node_id = "238"
 
-    [[nodes.choices]]
-    description = "もし南へ進むなら、157へ進め。"
-    next_node_id = "157"
+[[nodes.choices]]
+description = "もし南へ進むなら、157へ進め。"
+next_node_id = "157"
 
-    [[nodes.choices]]
-    description = "もし西へ進むなら、147へ進め。"
-    next_node_id = "147"
-
-
+[[nodes.choices]]
+description = "もし西へ進むなら、147へ進め。"
+next_node_id = "147"
 
 
 [[nodes]]
@@ -841,39 +869,39 @@ text = """岩の後ろから巨大な黒熊が現れる。
 escape_before = "on"
 escape_halfway = 3
 
-    [[nodes.enemies]]
-    Name = "黒熊"
-    HP = 100
-    CS = 16
- 
-    [[nodes.outcomes]]
-    condition = "combat_won"
-    next_node_id = "195"
-    [[nodes.outcomes]]
-    description = "丘を駆け下りる位置を取る。106へ"
-    condition = "escape_halfway"
-    next_node_id = "106"
-    [[nodes.outcomes]]
-    description = "もしこの時点で逃げるなら、106へ進み、逃げる際に傷つく可能性に挑む。"
-    condition = "escape_before"
-    next_node_id = "106"
-    hpchangerandom = "on"
-    [[nodes.outcomes]]
-    condition = "combat_lost"
-    next_node_id = "game_over"
+[[nodes.enemies]]
+Name = "黒熊"
+HP = 100
+CS = 16
+
+[[nodes.outcomes]]
+condition = "combat_won"
+next_node_id = "195"
+[[nodes.outcomes]]
+description = "丘を駆け下りる位置を取る。106へ"
+condition = "escape_halfway"
+next_node_id = "106"
+[[nodes.outcomes]]
+description = "もしこの時点で逃げるなら、106へ進み、逃げる際に傷つく可能性に挑む。"
+condition = "escape_before"
+next_node_id = "106"
+hpchangerandom = "on"
+[[nodes.outcomes]]
+condition = "combat_lost"
+next_node_id = "game_over"
 
 
-    [[nodes.choices]]
-    description = "もし勝つなら、195へ進め。"
-    next_node_id = "195"
+[[nodes.choices]]
+description = "もし勝つなら、195へ進め。"
+next_node_id = "195"
 
-    [[nodes.choices]]
-    description = "3ラウンドの戦闘後、丘を駆け下りる位置を取る。"
-    next_node_id = "106"
+[[nodes.choices]]
+description = "3ラウンドの戦闘後、丘を駆け下りる位置を取る。"
+next_node_id = "106"
 
-    [[nodes.choices]]
-    description = "もしこの時点で逃げるなら、106へ進み、逃げる際に傷つく可能性に挑む。"
-    next_node_id = "106"
+[[nodes.choices]]
+description = "もしこの時点で逃げるなら、106へ進み、逃げる際に傷つく可能性に挑む。"
+next_node_id = "106"
 
 
 [[nodes]]
@@ -882,15 +910,15 @@ type = "random_roll"
 text = """警告もなく、古い道が急な斜面の縁で突然終わる。
 ここは地面が非常に緩く、不安定だ。足を滑らせ、頭から斜面を転げ落ちる。
 ランダムナンバーテーブルから数字を一つ選べ。"""
-    [[nodes.outcomes]]
-    description = "もし選んだ数字が0～4なら、277へ進め。"
-    condition_int = [0,1,2,3,4]
-    next_node_id = "277"
+[[nodes.outcomes]]
+description = "もし選んだ数字が0～4なら、277へ進め。"
+condition_int = [0, 1, 2, 3, 4]
+next_node_id = "277"
 
-    [[nodes.outcomes]]
-    description = "もし選んだ数字が5～9なら、338へ進め。"
-    condition_int = [5,6,7,8,9]
-    next_node_id = "338"
+[[nodes.outcomes]]
+description = "もし選んだ数字が5～9なら、338へ進め。"
+condition_int = [5, 6, 7, 8, 9]
+next_node_id = "338"
 
 
 [[nodes]]
@@ -901,10 +929,9 @@ text = """この者たちは見た目通りではない。
 彼らの武器は軍のものではなく、ドゥレノールの鎧職人が作るような高価で豪華な装飾が施されている。
 リーダーの背にはクロスボウが掛かっている。逃げるのは自殺行為だ。
 武器を下ろせば即座に殺されると悟り、戦う決意をする。"""
-    [[nodes.choices]]
-    description = "180へ進め。"
-    next_node_id = "180"
-
+[[nodes.choices]]
+description = "180へ進め。"
+next_node_id = "180"
 
 
 [[nodes]]
@@ -959,12 +986,12 @@ text = """碑文を読み始めると、スクリーンの後ろから影が動�
 ランダムナンバーテーブルから数字を一つ選べ。"""
 [[nodes.outcomes]]
 description = "もし選んだ数字が0～4なら、339へ進め。"
-condition_int = [0,1,2,3,4]
+condition_int = [0, 1, 2, 3, 4]
 next_node_id = "339"
 
 [[nodes.choices]]
 description = "もし選んだ数字が5～9なら、60へ進め。"
-condition_int = [5,6,7,8,9]
+condition_int = [5, 6, 7, 8, 9]
 next_node_id = "60"
 
 [[nodes]]
@@ -1038,18 +1065,17 @@ text = """ギアクが跳びかかる瞬間、君は前に飛び出し、武器�
 もがくギアクに飛び乗り、再び攻撃する。奇襲の効果により、この戦闘中はCOMBAT SKILLに4ポイント加算せよ。ただし、戦闘が終われば元に戻すこと。
 """
 CSChangeT = 4
-    [[nodes.enemies]]
-    Name = "ギアク"
-    HP = 9
-    CS = 9
+[[nodes.enemies]]
+Name = "ギアク"
+HP = 9
+CS = 9
 
-    [[nodes.outcomes]]
-    condition = "combat_won"
-    next_node_id = "325"
-    [[nodes.outcomes]]
-    condition = "combat_lost"
-    next_node_id = "game_over"
-
+[[nodes.outcomes]]
+condition = "combat_won"
+next_node_id = "325"
+[[nodes.outcomes]]
+condition = "combat_lost"
+next_node_id = "game_over"
 
 
 [[nodes]]
@@ -1128,7 +1154,6 @@ description = "268へ進め。"
 next_node_id = "268"
 
 
-
 [[nodes]]
 id = "62"
 type = "story"
@@ -1145,7 +1170,6 @@ description = "288へ進め。"
 next_node_id = "288"
 
 
-
 [[nodes]]
 id = "63"
 type = "encounter"
@@ -1157,13 +1181,13 @@ text = """Illustration VI
 Name = "狂人"
 HP = 10
 CS = 11
-   [[nodes.outcomes]]
-    description = "もし勝つなら、269へ進め。"
-    condition = "combat_won"
-    next_node_id = "269"
-    [[nodes.outcomes]]
-    condition = "combat_lost"
-    next_node_id = "game_over"
+[[nodes.outcomes]]
+description = "もし勝つなら、269へ進め。"
+condition = "combat_won"
+next_node_id = "269"
+[[nodes.outcomes]]
+condition = "combat_lost"
+next_node_id = "game_over"
 
 
 [[nodes]]
@@ -1270,13 +1294,13 @@ Name = "ギアク＆ドゥームウルフ"
 HP = 24
 CS = 15
 
-    [[nodes.outcomes]]
-    description = "もし勝つなら、265へ進め"
-    condition = "combat_won"
-    next_node_id = "265"
-    [[nodes.outcomes]]
-    condition = "combat_lost"
-    next_node_id = "game_over"
+[[nodes.outcomes]]
+description = "もし勝つなら、265へ進め"
+condition = "combat_won"
+next_node_id = "265"
+[[nodes.outcomes]]
+condition = "combat_lost"
+next_node_id = "game_over"
 
 
 [[nodes]]
@@ -1472,7 +1496,6 @@ description = "もしその技を持っていない、または使わないな�
 next_node_id = "31"
 
 
-
 [[nodes]]
 id = "89"
 type = "random_roll"
@@ -1481,15 +1504,15 @@ text = """埃と岩の雲の中、急な斜面を転がり落ちる。クラー�
 [[nodes.outcomes]]
 description = "もし0～1を選んだなら、53へ進め。"
 next_node_id = "53"
-condition_int = [0,1]
+condition_int = [0, 1]
 [[nodes.outcomes]]
 description = "もし2～4なら、274へ進め。"
 next_node_id = "274"
-condition_int = [2,3,4]
+condition_int = [2, 3, 4]
 [[nodes.outcomes]]
 description = "もし5～9なら、316へ進め。"
 next_node_id = "316"
-condition_int = [5,6,7,8,9]
+condition_int = [5, 6, 7, 8, 9]
 
 
 [[nodes]]
@@ -1859,7 +1882,6 @@ description = "もし頭を下げ、天に幸運を祈り、突き進むなら�
 next_node_id = "54"
 
 
-
 [[nodes]]
 id = "121"
 type = "story"
@@ -2030,19 +2052,17 @@ type = "encounter"
 text = """像に近づくと、表面にいくつもの亀裂が走る。突然、爆発し、本物の翼蛇が石の外殻を破り、君を襲う。
 この生物と戦わねばならぬ。
 """
-    [[nodes.enemies]]
-    Name = "翼蛇"
-    HP = 18
-    CS = 16
-    AntiMindBlast = 1
-    [[nodes.outcomes]]
-    condition = "combat_won"
-    next_node_id = "266"
-    [[nodes.outcomes]]
-    condition = "combat_lost"
-    next_node_id = "game_over"
-
-
+[[nodes.enemies]]
+Name = "翼蛇"
+HP = 18
+CS = 16
+AntiMindBlast = 1
+[[nodes.outcomes]]
+condition = "combat_won"
+next_node_id = "266"
+[[nodes.outcomes]]
+condition = "combat_lost"
+next_node_id = "game_over"
 
 
 [[nodes]]
@@ -2083,12 +2103,12 @@ CS = 13
 Name = "ギアク２"
 HP = 10
 CS = 12
-   [[nodes.outcomes]]
-    condition = "combat_won"
-    next_node_id = "313"
-    [[nodes.outcomes]]
-    condition = "combat_lost"
-    next_node_id = "game_over"
+[[nodes.outcomes]]
+condition = "combat_won"
+next_node_id = "313"
+[[nodes.outcomes]]
+condition = "combat_lost"
+next_node_id = "game_over"
 
 
 [[nodes]]
@@ -2114,12 +2134,12 @@ CS = 13
 Name = "ギアク２"
 HP = 10
 CS = 12
-   [[nodes.outcomes]]
-    condition = "combat_won"
-    next_node_id = "291"
-    [[nodes.outcomes]]
-    condition = "combat_lost"
-    next_node_id = "game_over"
+[[nodes.outcomes]]
+condition = "combat_won"
+next_node_id = "291"
+[[nodes.outcomes]]
+condition = "combat_lost"
+next_node_id = "game_over"
 
 [[nodes]]
 id = "139"
@@ -2223,7 +2243,6 @@ description = "154へ進め。"
 next_node_id = "154"
 
 
-
 [[nodes]]
 id = "147"
 type = "story"
@@ -2287,9 +2306,6 @@ description = "もしピンを取り除くなら337"
 next_node_id = "337"
 
 
-
-
-
 [[nodes]]
 id = "152"
 title = "Paragraph 152"
@@ -2303,9 +2319,6 @@ next_node_id = "49"
 [[nodes.choices]]
 description = "もし薬に興味があるなら231"
 next_node_id = "231"
-
-
-
 
 
 [[nodes]]
@@ -2326,11 +2339,6 @@ next_node_id = "135"
 [[nodes.choices]]
 description = "または、古の墓地の知られざる危険を冒すなら329"
 next_node_id = "329"
-
-
-
-
-
 
 
 [[nodes]]
@@ -2366,9 +2374,6 @@ description = "もし対岸の木々の陰に泳ぐなら245"
 next_node_id = "245"
 
 
-
-
-
 [[nodes]]
 id = "157"
 title = "Paragraph 157"
@@ -2380,9 +2385,6 @@ next_node_id = "30"
 [[nodes.choices]]
 description = "もし木々の陰を南へ進むなら167"
 next_node_id = "167"
-
-
-
 
 
 [[nodes]]
@@ -2398,11 +2400,11 @@ ENDURANCEを6ポイント失う。痛みに喘ぎ、老人を押し退け、日�
 命を保てたのは幸運だ。急いで丘を越える道に戻る。"""
 [[nodes.outcomes]]
 description = "もし数字が0～5なら、雷は外れ、壁の一部を砕く。106"
-condition_int = [0,1,2,3,4,5]
+condition_int = [0, 1, 2, 3, 4, 5]
 next_node_id = "106"
 [[nodes.outcomes]]
 description = "もし6～9なら、背中に当たり、さらにENDURANCEを4ポイント失う。"
-condition_int = [6,7,8,9]
+condition_int = [6, 7, 8, 9]
 next_node_id = "158B"
 
 [[nodes]]
@@ -2428,9 +2430,6 @@ description = "または、疾走するキャラバンから飛び降りる。23
 next_node_id = "234"
 
 
-
-
-
 [[nodes]]
 id = "160"
 title = "Paragraph 160"
@@ -2440,11 +2439,11 @@ text = """ランダムナンバーテーブルから数字を一つ選べ。
 5～9なら、彼らは君を見ず、尾根の向こう側にゆっくりと去る。"""
 [[nodes.outcomes]]
 description = "もし0～4なら、君は見つかった。"
-condition_int = [0,1,2,3,4]
+condition_int = [0, 1, 2, 3, 4]
 next_node_id = "286"
 [[nodes.outcomes]]
 description = "もし5～9なら、彼らは君を見ず、尾根の向こう側にゆっくりと去る。"
-condition_int = [5,6,7,8,9]
+condition_int = [5, 6, 7, 8, 9]
 next_node_id = "10"
 
 [[nodes]]
@@ -2476,9 +2475,6 @@ required_discipline = "MindOverMatter"
 [[nodes.choices]]
 description = "もしその技を持っていないなら127"
 next_node_id = "127"
-
-
-
 
 
 [[nodes]]
@@ -2531,7 +2527,6 @@ description = "104へ"
 next_node_id = "104"
 
 
-
 [[nodes]]
 id = "167"
 title = "Paragraph 167"
@@ -2547,7 +2542,6 @@ next_node_id = "88"
 [[nodes.choices]]
 description = "もしその持ち主との遭遇を避け、森へ進むなら264へ"
 next_node_id = "264"
-
 
 
 [[nodes]]
@@ -2578,16 +2572,16 @@ Name = "墓地の落し子"
 HP = 16
 CS = 16
 
-    [[nodes.outcomes]]
-    condition = "combat_won"
-    next_node_id = "137"
-    [[nodes.outcomes]]
-    description = "拱門へ走る。23へ"
-    condition = "escape_halfway"
-    next_node_id = "23"
-    [[nodes.outcomes]]
-    condition = "combat_lost"
-    next_node_id = "game_over"
+[[nodes.outcomes]]
+condition = "combat_won"
+next_node_id = "137"
+[[nodes.outcomes]]
+description = "拱門へ走る。23へ"
+condition = "escape_halfway"
+next_node_id = "23"
+[[nodes.outcomes]]
+condition = "combat_lost"
+next_node_id = "game_over"
 
 
 [[nodes]]
@@ -2752,10 +2746,10 @@ CS = 12
 [[nodes.outcomes]]
 condition = "combat_won"
 next_node_id = "62"
-    [[nodes.outcomes]]
-    description = "戦闘を回避する。22へ。"
-    condition = "escape_before"
-    next_node_id = "22"
+[[nodes.outcomes]]
+description = "戦闘を回避する。22へ。"
+condition = "escape_before"
+next_node_id = "22"
 [[nodes.outcomes]]
 condition = "combat_lost"
 next_node_id = "game_over"
@@ -2795,8 +2789,6 @@ description = "もしその申し出を断るなら200へ"
 next_node_id = "200"
 
 
-
-
 [[nodes]]
 id = "184"
 title = "Paragraph 184"
@@ -2809,16 +2801,15 @@ GetMeal = 1
 
 [[nodes.itemgetbeforelist]]
 name = "Sword"
-num  = 1
+num = 1
 
 [[nodes.itemgetbeforelist]]
 name = "Meal"
-num  = 4
+num = 4
 
 [[nodes.choices]]
 description = "64へ"
 next_node_id = "64"
-
 
 
 [[nodes]]
@@ -2853,9 +2844,6 @@ description = "もし彼らを放し、進むなら228へ"
 next_node_id = "228"
 
 
-
-
-
 [[nodes]]
 id = "188"
 title = "Paragraph 188"
@@ -2863,17 +2851,17 @@ type = "random_roll"
 text = """クラーンの影が周囲に大きく広がる。突然襲いかかり、その力で君を顔から地面に叩きつける。
 ランダムナンバーテーブルから数字を一つ選べ。
 0～6なら、クラーンがバックパックを裂き、内部の装備すべてを失う。
-7～9なら、バックパックは無事だが両腕に傷を負い、ENDURANCEを3ポイント失う。木々へ走れ。"""    
-    [[nodes.outcomes]]
-    description = "もし選んだ数字が0～6なら、クラーンがバックパックを裂き、内部の装備すべてを失う。303へ"
-    condition_int = [0,1,2,3,4,5,6]
-    LostContents = 1 #バックパックは残るが中身は失う
-    next_node_id = "303"
-    [[nodes.outcomes]]
-    description = "もし7～9なら、バックパックは無事だが両腕に傷を負い、ENDURANCEを3ポイント失う。木々へ走れ。"
-    hpchange = -3
-    condition_int = [7,8,9]
-    next_node_id = "303"
+7～9なら、バックパックは無事だが両腕に傷を負い、ENDURANCEを3ポイント失う。木々へ走れ。"""
+[[nodes.outcomes]]
+description = "もし選んだ数字が0～6なら、クラーンがバックパックを裂き、内部の装備すべてを失う。303へ"
+condition_int = [0, 1, 2, 3, 4, 5, 6]
+LostContents = 1                                              #バックパックは残るが中身は失う
+next_node_id = "303"
+[[nodes.outcomes]]
+description = "もし7～9なら、バックパックは無事だが両腕に傷を負い、ENDURANCEを3ポイント失う。木々へ走れ。"
+hpchange = -3
+condition_int = [7, 8, 9]
+next_node_id = "303"
 
 
 [[nodes]]
@@ -3068,7 +3056,6 @@ description = "58へ"
 next_node_id = "58"
 
 
-
 [[nodes]]
 id = "203"
 title = "Paragraph 203"
@@ -3104,11 +3091,11 @@ text = """リーダーが君の捨てた装備を拾い、前方の道へ急か�
 5～9なら、145へ進め。"""
 [[nodes.outcomes]]
 description = "もし選んだ数字が0～4なら181へ"
-condition_int = [0,1,2,3,4]
+condition_int = [0, 1, 2, 3, 4]
 next_node_id = "181"
 [[nodes.outcomes]]
 description = "もし5～9なら145へ"
-condition_int = [5,6,7,8,9]
+condition_int = [5, 6, 7, 8, 9]
 next_node_id = "145"
 
 [[nodes]]
@@ -3382,13 +3369,12 @@ text = """最初は下りが簡単だが、視界が悪くなり、脚がひど�
 5～9なら、338へ進め。"""
 [[nodes.outcomes]]
 description = "もし選んだ数字が0～4なら277へ"
-condition_int = [0,1,2,3,4]
+condition_int = [0, 1, 2, 3, 4]
 next_node_id = "277"
 [[nodes.outcomes]]
 description = "もし5～9なら338へ"
-condition_int = [5,6,7,8,9]
+condition_int = [5, 6, 7, 8, 9]
 next_node_id = "338"
-
 
 
 [[nodes]]
@@ -3500,7 +3486,6 @@ condition = "combat_lost"
 next_node_id = "game_over"
 
 
-
 [[nodes]]
 id = "232"
 title = "Paragraph 232"
@@ -3574,11 +3559,11 @@ text = """カイの技を最大限に使い、丘の緩い土に深く潜る。�
 5～9なら、運が悪い！72へ進め。"""
 [[nodes.outcomes]]
 description = "もし選んだ数字が0～4なら、気づかれず通過する。265へ"
-condition_int = [0,1,2,3,4]
+condition_int = [0, 1, 2, 3, 4]
 next_node_id = "265"
 [[nodes.outcomes]]
 description = "もし5～9なら、運が悪い！72へ"
-condition_int = [5,6,7,8,9]
+condition_int = [5, 6, 7, 8, 9]
 next_node_id = "72"
 
 [[nodes]]
@@ -3992,14 +3977,13 @@ text = """マントで鼻を覆い、慎重に死んだ獣に近づく。悪臭�
 死体を残し、東の道を進む。"""
 [[nodes.itemgetbeforelist]]
 name = "Dagger"
-num = 1 
+num = 1
 [[nodes.itemgetbeforelist]]
 name = "メッセージ"
 num = 1
 [[nodes.choices]]
 description = "125へ"
 next_node_id = "125"
-
 
 
 [[nodes]]
@@ -4096,11 +4080,11 @@ text = """20分ほど曲がりくねった道を進むと、木々の上を翼�
 5～9なら、74へ進め。"""
 [[nodes.outcomes]]
 description = "もし選んだ数字が0～4なら345へ"
-condition_int = [0,1,2,3,4]
+condition_int = [0, 1, 2, 3, 4]
 next_node_id = "345"
 [[nodes.outcomes]]
 description = "もし5～9なら74へ"
-condition_int = [5,6,7,8,9]
+condition_int = [5, 6, 7, 8, 9]
 next_node_id = "74"
 
 [[nodes]]
@@ -4150,11 +4134,11 @@ text = """岩をよじ登り、洞窟の入口に進む。急いで大きな岩�
 7～9なら、96へ進め。"""
 [[nodes.outcomes]]
 description = "もし選んだ数字が0～6なら112へ"
-condition_int = [0,1,2,3,4,5,6]
+condition_int = [0, 1, 2, 3, 4, 5, 6]
 next_node_id = "112"
 [[nodes.outcomes]]
 description = "もし7～9なら96へ"
-condition_int = [7,8,9]
+condition_int = [7, 8, 9]
 next_node_id = "96"
 
 [[nodes]]
@@ -4196,7 +4180,6 @@ description = "11へ"
 next_node_id = "11"
 
 
-
 [[nodes]]
 id = "283"
 title = "Paragraph 283"
@@ -4215,13 +4198,13 @@ Name = "ヴォルダック"
 HP = 25
 CS = 17
 RequireDescipline = "Mindshield"
-CSChangeNoDescipline = -2 #Power
+CSChangeNoDescipline = -2           #Power
 CSChangeNoDesciplineStartTiming = 2 #開始ラウンド
-CSChangeNoDesciplineEndTiming = 0 #終了ラウンド
+CSChangeNoDesciplineEndTiming = 0   #終了ラウンド
 RequireItem = ""
-CSChangeNoItem = 0 #Power
-CSChangeNoItemStartTiming = 0 #開始ラウンド
-CSChangeNoItemEndTiming = 0 #終了ラウンド
+CSChangeNoItem = 0                  #Power
+CSChangeNoItemStartTiming = 0       #開始ラウンド
+CSChangeNoItemEndTiming = 0         #終了ラウンド
 
 [[nodes.outcomes]]
 condition = "combat_won"
@@ -4229,7 +4212,6 @@ next_node_id = "123"
 [[nodes.outcomes]]
 condition = "combat_lost"
 next_node_id = "game_over"
-
 
 
 [[nodes]]
@@ -4363,15 +4345,15 @@ LostBackpack = 1
 LostWeapon = 2
 [[nodes.outcomes]]
 description = "もし選んだ数字が0～2なら230へ"
-condition_int = [0,1,2]
+condition_int = [0, 1, 2]
 next_node_id = "230"
 [[nodes.outcomes]]
 description = "もし3～6なら190へ"
-condition_int = [3,4,5,6]
+condition_int = [3, 4, 5, 6]
 next_node_id = "190"
 [[nodes.outcomes]]
 description = "もし7～9なら321へ"
-condition_int = [7,8,9]
+condition_int = [7, 8, 9]
 next_node_id = "321"
 
 [[nodes]]
@@ -4464,11 +4446,11 @@ text = """ランダムナンバーテーブルから数字を一つ選べ。
 3～9なら、285へ進め。"""
 [[nodes.outcomes]]
 description = "もし選んだ数字が0～2なら110へ"
-condition_int = [0,1,2]
+condition_int = [0, 1, 2]
 next_node_id = "110"
 [[nodes.outcomes]]
 description = "もし3～9なら285へ"
-condition_int = [3,4,5,6,7,8,9]
+condition_int = [3, 4, 5, 6, 7, 8, 9]
 next_node_id = "285"
 
 [[nodes]]
@@ -4627,11 +4609,11 @@ text = """城塞に着くのにほぼ1時間かかる。ホルムガードの市
 7～9なら、98へ進め。"""
 [[nodes.outcomes]]
 description = "もし選んだ数字が0～6なら341へ"
-condition_int = [0,1,2,3,4,5,6]
+condition_int = [0, 1, 2, 3, 4, 5, 6]
 next_node_id = "341"
 [[nodes.outcomes]]
 description = "もし7～9なら98へ"
-condition_int = [7,8,9]
+condition_int = [7, 8, 9]
 next_node_id = "98"
 
 [[nodes]]
@@ -4912,11 +4894,11 @@ text = """華やかなピンを外すと、大きな破裂音が耳を聾する�
 5～9なら、317へ進め。"""
 [[nodes.outcomes]]
 description = "もし選んだ数字が0～4なら219へ"
-condition_int = [0,1,2,3,4]
+condition_int = [0, 1, 2, 3, 4]
 next_node_id = "219"
 [[nodes.outcomes]]
 description = "もし5～9なら317へ"
-condition_int = [5,6,7,8,9]
+condition_int = [5, 6, 7, 8, 9]
 next_node_id = "317"
 
 [[nodes]]
@@ -5064,11 +5046,11 @@ type = "story"
 text = """木々がまばらになり、オークの木の下に古い丸太小屋のシルエットが見える。放棄され、価値あるものはほとんど残っていない。正門近くの小さな箱を開けると、丈夫な紐で束ねた小枝があり、一端にピッチが塗られた松明だ。箱の横に短剣と火打石がある。望むなら松明とそれらを取れ。アクションチャートに記録せよ。
 小屋の扉を閉め、北東の草生した道を進む。"""
 
+weapongetbefore = "Dagger"
+
+
 [[nodes.itemgetbeforelist]]
 name = "松明"
-num = 1
-[[nodes.itemgetbeforelist]]
-name = "Dagger"
 num = 1
 [[nodes.itemgetbeforelist]]
 name = "火打ち石"

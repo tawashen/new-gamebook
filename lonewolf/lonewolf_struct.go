@@ -83,42 +83,48 @@ type NodesFile struct {
 
 // Node はゲームの各ステップ（ノード）を表す
 type Node struct {
-	ID                      string    `toml:"id"`
-	Type                    string    `toml:"type"`
-	ItemGetBefore           string    `toml:"itemgetbefore,omitempty"`
-	ItemGetNum              int       `toml:"itemgetnum"`
-	WeaponGetBefore         string    `toml:"weapongetbefore,omitempty"`
-	ArmorGetBefore          string    `toml:"armorgetbefore,omitempty"`
-	GoldGetBefore           int       `toml:"goldgetbefore"`
-	GemGetBefore            int       `toml:"gemgetbefore"`
-	Text                    string    `toml:"text"`
-	Choices                 []Choice  `toml:"choices,omitempty"`
-	Enemies                 []*Enemy  `toml:"enemies,omitempty"`
-	Outcomes                []Outcome `toml:"outcomes,omitempty"`
-	Item                    string    //処理用文字列
-	CSChange                int       `toml:"cschange,omitempty"`
-	RequiredDisciplineMinus string    `toml:"required_discipline_minus"` //無いとマイナス
-	RequiredDisciplinePlus  string    `toml:"required_discipline_plus"`  //有るとプラス
-	RequiredItemMinus       string    `toml:"required_item_minus"`       //無いとマイナス
-	RequiredItemPlus        string    `toml:"required_item_plus"`        //有るとプラス
-	Effect                  int       `toml:"effect"`
-	EscapeBefore            string    `toml:"escape_before"`     //戦闘の頭で逃亡可能
-	EscapeHalfway           int       `toml:"escape_halfway"`    //戦闘の規定ターン経過で逃亡可能
-	LostRandomItemNum       int       `toml:"LostRandomItemNum"` //0以外だった場合にはアイテムロスト実行
-	HPChangeStory           int       `toml:"HPChangeStory"`     //Story Typeの時にHPの変更
-	GetMeal                 int       `toml:"GetMeal"`           //食事の指示あり
-	LostBackpack            int       `toml:"LostBackpack"`      //バッグを失うサイズ数値を-1にする必要あり
-	LostContents            int       `toml:"LostContents"`      //バッグは残り中身はロスト
-	LostWeapon              int       `toml:"LostWeapon"`
-	ItemGetBeforeList       []ItemGet `toml:"itemgetbeforelist"`
-	BattleLimit             int       `toml:"BattleLimit"` //戦闘ラウンドの限界
-	CSChangeT               int       `toml:"CSChangeT"`   //CSを一時的に変更＝CSBonusが対象
-	CSChangeE               int       `toml:"CSChangeE"`   //CSを永続的に変更
-	CSChangeT_Start         int       //効果開始ラウンド、0なら戦闘中ずっと
-	CSChangeT_End           int       //効果終了ラウンド、0なら開始後はずっと
+	ID                      string      `toml:"id"`
+	Type                    string      `toml:"type"`
+	ItemGetBefore           string      `toml:"itemgetbefore,omitempty"`
+	ItemGetNum              int         `toml:"itemgetnum"`
+	WeaponGetBefore         string      `toml:"weapongetbefore,omitempty"`
+	WeaponGetBeforeList     []WeaponGet `toml:"weapongetbeforelist"`
+	ArmorGetBefore          string      `toml:"armorgetbefore,omitempty"`
+	GoldGetBefore           int         `toml:"goldgetbefore"`
+	GemGetBefore            int         `toml:"gemgetbefore"`
+	Text                    string      `toml:"text"`
+	Choices                 []Choice    `toml:"choices,omitempty"`
+	Enemies                 []*Enemy    `toml:"enemies,omitempty"`
+	Outcomes                []Outcome   `toml:"outcomes,omitempty"`
+	Item                    string      //処理用文字列
+	CSChange                int         `toml:"cschange,omitempty"`
+	RequiredDisciplineMinus string      `toml:"required_discipline_minus"` //無いとマイナス
+	RequiredDisciplinePlus  string      `toml:"required_discipline_plus"`  //有るとプラス
+	RequiredItemMinus       string      `toml:"required_item_minus"`       //無いとマイナス
+	RequiredItemPlus        string      `toml:"required_item_plus"`        //有るとプラス
+	Effect                  int         `toml:"effect"`
+	EscapeBefore            string      `toml:"escape_before"`     //戦闘の頭で逃亡可能
+	EscapeHalfway           int         `toml:"escape_halfway"`    //戦闘の規定ターン経過で逃亡可能
+	LostRandomItemNum       int         `toml:"LostRandomItemNum"` //0以外だった場合にはアイテムロスト実行
+	HPChangeStory           int         `toml:"HPChangeStory"`     //Story Typeの時にHPの変更
+	GetMeal                 int         `toml:"GetMeal"`           //食事の指示あり
+	LostBackpack            int         `toml:"LostBackpack"`      //バッグを失うサイズ数値を-1にする必要あり
+	LostContents            int         `toml:"LostContents"`      //バッグは残り中身はロスト
+	LostWeapon              int         `toml:"LostWeapon"`
+	ItemGetBeforeList       []ItemGet   `toml:"itemgetbeforelist"`
+	BattleLimit             int         `toml:"BattleLimit"` //戦闘ラウンドの限界
+	CSChangeT               int         `toml:"CSChangeT"`   //CSを一時的に変更＝CSBonusが対象
+	CSChangeE               int         `toml:"CSChangeE"`   //CSを永続的に変更
+	CSChangeT_Start         int         //効果開始ラウンド、0なら戦闘中ずっと
+	CSChangeT_End           int         //効果終了ラウンド、0なら開始後はずっと
 }
 
 type ItemGet struct {
+	Name string `toml:"name"`
+	Num  int    `toml:"num"`
+}
+
+type WeaponGet struct {
 	Name string `toml:"name"`
 	Num  int    `toml:"num"`
 }
