@@ -231,6 +231,47 @@ func (lw *LoneWolfSystem) handleStoryNode(gs *GameState, node *Node) error {
 		fmt.Println("君はバックバックの中身を全部失った！")
 	}
 
+	if node.ExchangeWeapon != "" {
+		fmt.Printf("君は交換に応じて%sを手に入れるか？Y/N\n", node.ExchangeWeapon)
+		input, _ := gs.Reader.ReadString('\n')
+		input = strings.TrimSpace(input)
+		input = strings.ToUpper(input)
+
+		if input == "Y" {
+			if gs.Player.Equipments.Weapon1 == nil && gs.Player.Equipments.Weapon2 == nil {
+				fmt.Println("君は武器を持っていない、交換は諦めねばならない")
+			} else {
+				fmt.Printf("どの装備と交換する？スロット(1/2）")
+				input, _ := gs.Reader.ReadString('\n')
+				input = strings.TrimSpace(input)
+				num, err := strconv.Atoi(input)
+
+				if err == nil {
+					newWeapon := lw.Tables.WeaponsMap[node.ExchangeWeapon]
+					if num == 1 {
+						if gs.Player.Equipments.Weapon1 != nil {
+							fmt.Printf("君は%sと%sを交換した\n", gs.Player.Equipments.Weapon1.Name, newWeapon.Name)
+							gs.Player.Equipments.Weapon1 = newWeapon
+						} else {
+							fmt.Println("Weapon1は空です")
+						}
+					} else if num == 2 {
+						if gs.Player.Equipments.Weapon2 != nil {
+							fmt.Printf("君は%sと%sを交換した\n", gs.Player.Equipments.Weapon2.Name, newWeapon.Name)
+							gs.Player.Equipments.Weapon2 = newWeapon
+						} else {
+							fmt.Println("Weapon2は空です")
+						}
+					} else {
+						fmt.Println("無効な選択です")
+					}
+				} else {
+					fmt.Println("数値を入力してください")
+				}
+			}
+		}
+	}
+
 	fmt.Println("\n選択肢:")
 	for i, choice := range node.Choices {
 		fmt.Printf("%d. %s\n", i+1, choice.Description)

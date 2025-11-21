@@ -117,6 +117,7 @@ type Node struct {
 	CSChangeE               int         `toml:"CSChangeE"`   //CSを永続的に変更
 	CSChangeT_Start         int         //効果開始ラウンド、0なら戦闘中ずっと
 	CSChangeT_End           int         //効果終了ラウンド、0なら開始後はずっと
+	ExchangeWeapon          string      `toml:"ExchangeWeapon,omitempty"`
 }
 
 type ItemGet struct {
