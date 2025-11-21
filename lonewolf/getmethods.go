@@ -8,6 +8,7 @@ import (
 
 func (w *Weapon) Get(gs *GameState, node *Node) {
 
+	fmt.Printf("%sが目の前にある\n", w.Name)
 	if gs.Player.Equipments.Weapon1 == nil { //スロット1が空いてたら問答無用でここへ。でも普通はAxe持ってるのであり得ない
 		gs.Player.Equipments.Weapon1 = w
 		fmt.Printf("君は%sを手に入れた\n", w.Name)

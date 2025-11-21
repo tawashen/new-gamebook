@@ -2799,7 +2799,7 @@ text = """キャラバンは制御を失い、街道脇の荒れた地面を激�
 goldgetbefore = 40
 GetMeal = 1
 
-[[nodes.itemgetbeforelist]]
+[[nodes.weapongetbeforelist]]
 name = "Sword"
 num = 1
 
@@ -3975,7 +3975,7 @@ text = """マントで鼻を覆い、慎重に死んだ獣に近づく。悪臭�
 胸に大きな鞍袋があるのに気づく。開けると、動物の皮に書かれたメッセージがある。
 袋の奥に短剣がある。望むならメッセージと短剣を保持できる。
 死体を残し、東の道を進む。"""
-[[nodes.itemgetbeforelist]]
+[[nodes.weapongetbeforelist]]
 name = "Dagger"
 num = 1
 [[nodes.itemgetbeforelist]]
@@ -4290,7 +4290,6 @@ description = "140へ"
 next_node_id = "140"
 
 
-#kokokara
 [[nodes]]
 id = "291"
 title = "Paragraph 291"
@@ -4300,11 +4299,11 @@ text = """2人のギアクが足元に倒れ、身をよじり、死に絶える
 戦闘中、クラーンは飛び去り、道は静かだ。バックパックを整え、任務を続ける。"""
 goldgetbefore = 6
 
-[[nodes.itemgetbeforelist]]
+[[nodes.weapongetbeforelist]]
 name = "Spear"
 num = 1
 
-[[noes.itemgetbeforelist]]
+[[nodes.weapongetbeforelist]]
 name = "Dagger"
 num = 1
 
@@ -4519,6 +4518,7 @@ text = """登攀は迅速で容易だ。トラン近くで果物を摘み、ソ�
 老人に感謝し、慎重に木を降り、任務を続ける。"""
 
 ExchangeWeapon = "Warhammer"
+
 [[nodes.itemgetbeforelist]]
 name = "Meal"
 num = 1
