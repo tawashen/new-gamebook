@@ -60,10 +60,50 @@ func (lw *LoneWolfSystem) HandleNode(gs *GameState, node *Node) error {
 			gs.GetMeal(node)
 		}
 
-		if node.LostWeapon != 0 {
+		if node.LostWeapon == 2 {
 			gs.Player.Equipments.Weapon1 = nil
 			gs.Player.Equipments.Weapon2 = nil
-			fmt.Println("武器を失った！")
+			fmt.Println("武器をすべて失った！")
+		}
+
+		if node.LostWeapon == 1 {
+			if gs.Player.Equipments.Weapon1 != nil && gs.Player.Equipments.Weapon2 != nil {
+
+				for {
+					fmt.Println("どちらか失いたくない方を選べ(1or2)")
+					fmt.Printf("1:%s\n", gs.Player.Equipments.Weapon1.Name)
+					fmt.Printf("2:%s\n", gs.Player.Equipments.Weapon2.Name)
+					input, _ := gs.Reader.ReadString('\n')
+					input = strings.TrimSpace(input)
+					num, err := strconv.Atoi(input)
+					if err != nil {
+						fmt.Println("数値を入力してください。")
+						continue
+					}
+					if !(num == 1 || num == 2) {
+						fmt.Println("数字が範囲を超えています")
+						continue
+					}
+					if num == 1 {
+						fmt.Printf("君は泣く泣く%sを諦めた\n", gs.Player.Equipments.Weapon2.Name)
+						gs.Player.Equipments.Weapon2 = nil
+						break
+					}
+					if num == 2 {
+						fmt.Printf("君は泣く泣く%sを諦めた\n", gs.Player.Equipments.Weapon1.Name)
+						gs.Player.Equipments.Weapon1 = nil
+						break
+					}
+				}
+			} else if gs.Player.Equipments.Weapon1 != nil {
+				fmt.Printf("君は%sを失った\n", gs.Player.Equipments.Weapon1.Name)
+				gs.Player.Equipments.Weapon1 = nil
+			} else if gs.Player.Equipments.Weapon2 != nil {
+				fmt.Printf("君は%sを失った\n", gs.Player.Equipments.Weapon2.Name)
+				gs.Player.Equipments.Weapon2 = nil
+			} else {
+				fmt.Println("君にはそもそも失う武器が無い")
+			}
 		}
 
 		return lw.handleStoryNode(gs, node)
@@ -414,8 +454,6 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node *Node) error {
 		}
 	}
 
-	csBonus = csBonus + node.CSChangeT //cschange分をそのまま追加
-
 	if node.EscapeBefore == "on" { //戦闘前に逃亡可能な場合の処理
 		escapetext := ""
 		nextid := ""
@@ -459,7 +497,38 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node *Node) error {
 			csBonus += 2
 		}
 
+		roundnumS := 1 //敵1体ごとのラウンド数
+
+		var itemlist []string //アイテム名のStringスライス
+		for _, item := range gs.Player.Equipments.Backpack {
+			itemlist = append(itemlist, item.Name)
+		}
+
 		for {
+
+			if node.CSChangeT_Start == roundnum {
+				csBonus = csBonus + node.CSChangeT //cschange分をそのまま追加
+			}
+
+			if node.CSChangeT_Start == 0 {
+				csBonus = csBonus + node.CSChangeT //cschange分をそのまま追加
+			}
+
+			if currentEnemy.RequireDescipline != "" { //技能ペナルティスタート
+				if !(contains_str(gs.Player.KaiDisciplines, currentEnemy.RequireDescipline)) &&
+					currentEnemy.CSChangeNoDesciplineStartTiming == roundnumS {
+					csBonus += currentEnemy.CSChangeNoDescipline
+					fmt.Printf("%sの特殊能力が発動！戦闘技能が%dされた\n", currentEnemy.Name, currentEnemy.CSChangeNoDescipline)
+				}
+			}
+
+			if currentEnemy.RequireItem != "" { //アイテムペナルティスタート
+				if !(contains_str(itemlist, currentEnemy.RequireItem)) &&
+					currentEnemy.CSChangeNoItemStartTiming == roundnumS {
+					csBonus += currentEnemy.CSChangeNoItem
+					fmt.Printf("%sの特殊能力が発動！戦闘技能が%dされた\n", currentEnemy.Name, currentEnemy.CSChangeNoItem)
+				}
+			}
 
 			fmt.Printf("\n第%dラウンド！\n", roundnum)
 			fmt.Printf("\nLone Wolf (HP:%d CS:%d CSBonus:%d)",
@@ -528,7 +597,31 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node *Node) error {
 				gs.CurrentCondition = "BattleLimit"
 				break
 			}
+
+			//CSChangeTの効果時間による変化（終了）
+			if node.CSChangeT_End == roundnum {
+				fmt.Println("戦闘技能のボーナスが失われた！")
+				csBonus -= node.CSChangeT
+			}
+
+			if currentEnemy.RequireDescipline != "" { //技能ペナルティエンド
+				if !(contains_str(gs.Player.KaiDisciplines, currentEnemy.RequireDescipline)) &&
+					currentEnemy.CSChangeNoDesciplineEndTiming == roundnumS {
+					csBonus -= currentEnemy.CSChangeNoDescipline
+					fmt.Printf("%sの特殊能力から逃れた！\n", currentEnemy.Name)
+				}
+			}
+
+			if currentEnemy.RequireItem != "" { //アイテムペナルティエンド
+				if !(contains_str(itemlist, currentEnemy.RequireItem)) &&
+					currentEnemy.CSChangeNoItemEndTiming == roundnumS {
+					csBonus -= currentEnemy.CSChangeNoItem
+					fmt.Printf("%sの特殊能力から逃れた！\n", currentEnemy.Name)
+				}
+			}
+
 			roundnum += 1
+			roundnumS += 1
 		}
 
 		if gs.Player.Stats["HP"] <= 0 {

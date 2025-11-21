@@ -114,6 +114,8 @@ type Node struct {
 	BattleLimit             int       `toml:"BattleLimit"` //戦闘ラウンドの限界
 	CSChangeT               int       `toml:"CSChangeT"`   //CSを一時的に変更＝CSBonusが対象
 	CSChangeE               int       `toml:"CSChangeE"`   //CSを永続的に変更
+	CSChangeT_Start         int       //効果開始ラウンド、0なら戦闘中ずっと
+	CSChangeT_End           int       //効果終了ラウンド、0なら開始後はずっと
 }
 
 type ItemGet struct {
@@ -135,13 +137,18 @@ type Choice struct {
 
 // Enemy は戦闘の敵キャラクター
 type Enemy struct {
-	Name              string `toml:"Name"`
-	HP                int    `toml:"HP"`
-	CS                int    `toml:"CS"`
-	AntiMindBlast     int    `toml:"AntiMindBlast"`
-	AntiAnimalKinship int    `toml:"AntiAnimalKinship"`
-	RequiredItem      string `toml:"RequiredItem"`
-	ItemPower         int    `toml:"ItemPower"`
+	Name                            string `toml:"Name"`
+	HP                              int    `toml:"HP"`
+	CS                              int    `toml:"CS"`
+	AntiMindBlast                   int    `toml:"AntiMindBlast"`
+	RequireDescipline               string
+	CSChangeNoDescipline            int
+	CSChangeNoDesciplineStartTiming int
+	CSChangeNoDesciplineEndTiming   int
+	RequireItem                     string
+	CSChangeNoItem                  int
+	CSChangeNoItemStartTiming       int
+	CSChangeNoItemEndTiming         int
 }
 
 // Outcome は遭遇戦の結果と次に進むノードを表す
