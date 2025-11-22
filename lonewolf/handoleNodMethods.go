@@ -10,6 +10,8 @@ import (
 )
 
 func (lw *LoneWolfSystem) HandleNode(gs *GameState, node *Node) error {
+	lw.PlayBGM(node.Type + ".mp3") //追加//
+
 	UpdatePlayer(gs, "heal")
 
 	switch node.Type {

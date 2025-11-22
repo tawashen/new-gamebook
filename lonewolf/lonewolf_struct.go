@@ -4,6 +4,8 @@ import (
 	"bufio"
 	//"math/rand/v2"
 	"math/rand"
+
+	"github.com/gopxl/beep" //追加//
 )
 
 type Armor struct {
@@ -197,6 +199,10 @@ type LoneWolfSystem struct {
 	CRTFile   string
 	ConfigDir string
 	Tables    Tables `toml:"Tables"`
+	// Audio control fields
+	Streamer           beep.StreamSeekCloser //追加//
+	Format             beep.Format           //追加//
+	SpeakerInitialized bool                  //追加//
 }
 
 type LWCfg struct {

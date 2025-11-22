@@ -11,6 +11,9 @@ import (
 	"time"
 
 	"github.com/BurntSushi/toml"
+	"github.com/gopxl/beep"
+	"github.com/gopxl/beep/mp3"
+	"github.com/gopxl/beep/speaker"
 )
 
 // NewLoneWolfSystem は新しいLoneWolfSystemインスタンスを生成
@@ -22,6 +25,38 @@ func NewLoneWolfSystem(crtFile string) *LoneWolfSystem {
 		ConfigDir: ".",
 		Tables:    Tables{},
 	}
+}
+
+// PlayBGM plays the specified MP3 file in a loop. //追加//
+func (lw *LoneWolfSystem) PlayBGM(filename string) {
+	f, err := os.Open(filename)
+	if err != nil {
+		// ファイルがない場合は何もしない（BGMなし）
+		// fmt.Printf("BGM file not found: %s\n", filename)
+		return
+	}
+
+	streamer, format, err := mp3.Decode(f)
+	if err != nil {
+		fmt.Printf("Failed to decode MP3: %s\n", err)
+		return
+	}
+
+	if !lw.SpeakerInitialized {
+		speaker.Init(format.SampleRate, format.SampleRate.N(time.Second/10))
+		lw.SpeakerInitialized = true
+	}
+
+	// すでに再生中のものがあれば閉じる
+	if lw.Streamer != nil {
+		lw.Streamer.Close()
+	}
+
+	lw.Streamer = streamer
+	lw.Format = format
+
+	// ループ再生
+	speaker.Play(beep.Loop(-1, streamer))
 }
 
 // インターフェースの実装を明示
