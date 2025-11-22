@@ -49,8 +49,8 @@ func (lw *LoneWolfSystem) Initialize() error {
 	lw.Tables = cfg.Tables
 
 	// デバッグ出力：読み込まれた長さを確認
-	fmt.Printf("DEBUG: FirstEquipmentTable len=%d, Weapons=%d Armors=%d Items=%d\n",
-		len(lw.Tables.FirstEquipmentTable), len(lw.Tables.Weapons), len(lw.Tables.Armors), len(lw.Tables.Items))
+	//fmt.Printf("DEBUG: FirstEquipmentTable len=%d, Weapons=%d Armors=%d Items=%d\n",
+	//	len(lw.Tables.FirstEquipmentTable), len(lw.Tables.Weapons), len(lw.Tables.Armors), len(lw.Tables.Items))
 
 	lw.Tables.ArmorsMap = make(map[string]*Armor)
 	for i := range lw.Tables.Armors {
@@ -144,7 +144,7 @@ func (lw *LoneWolfSystem) MakingGameState() (*GameState, error) {
 			Gem:  0,
 		},
 
-		CurrentNodeID: "307",
+		CurrentNodeID: "1",
 		Nodes:         nodeMap,
 		Reader:        reader,
 		System:        lw,
@@ -160,7 +160,7 @@ func (lw *LoneWolfSystem) MakingPlayer(gs *GameState) error {
 	//CS-making
 	//for {
 	randomNumCS := lw.Rand.Intn(10)
-	fmt.Printf("戦闘力！\n運命の数は%d\n受け入れますか？(Y/N)\n", randomNumCS)
+	//fmt.Printf("戦闘力！\n運命の数は%dと定まった\n", randomNumCS)
 	//	input, _ := gs.Reader.ReadString('\n')
 	//	input = strings.TrimSpace(input)
 	//	input = strings.ToUpper(input)
@@ -181,7 +181,7 @@ func (lw *LoneWolfSystem) MakingPlayer(gs *GameState) error {
 	//HP-making
 	//for {
 	randomNumHP := lw.Rand.Intn(10)
-	fmt.Printf("生命力！\n運命の数は%d\n受け入れますか？(Y/N)\n", randomNumHP)
+	//fmt.Printf("生命力！\n運命の数は%dと定まった\n", randomNumHP)
 	//	input, _ := gs.Reader.ReadString('\n')
 	//	input = strings.TrimSpace(input)
 	//	input = strings.ToUpper(input)
@@ -204,7 +204,7 @@ func (lw *LoneWolfSystem) MakingPlayer(gs *GameState) error {
 	//Gold-making
 	//for {
 	randomNumGOLD := lw.Rand.Intn(10)
-	fmt.Printf("所持金！\n運命の数は%d\n受け入れますか？(Y/N)\n", randomNumGOLD)
+	//fmt.Printf("所持金！\n運命の数は%dと定まった\n", randomNumGOLD)
 	//	input, _ := gs.Reader.ReadString('\n')
 	//	input = strings.TrimSpace(input)
 	//	input = strings.ToUpper(input)
@@ -224,7 +224,7 @@ func (lw *LoneWolfSystem) MakingPlayer(gs *GameState) error {
 
 	//KaiDisciplines
 	for {
-		fmt.Print("KaiDisciplines!\n望みのスキルを5つ、カンマで区切って選ぶが良い！\n")
+		fmt.Print("KaiDisciplines!\n望みの技能を5つ、カンマで区切って選ぶが良い！\n")
 		for index, str := range lw.Tables.KaiTable {
 			fmt.Printf("%d：%s\n", index, str)
 		}
@@ -251,7 +251,7 @@ func (lw *LoneWolfSystem) MakingPlayer(gs *GameState) error {
 		randomNumWeaponSkill := lw.Rand.Intn(10)
 		favoriteWeapon := lw.Tables.WeaponSkillTable[randomNumWeaponSkill]
 		gs.Player.FavoriteWeapon = favoriteWeapon
-		fmt.Printf("ちなみにお前の得意な武器は%sである\n", favoriteWeapon)
+		fmt.Printf("君の得意な武器は%sだ\n", favoriteWeapon)
 	}
 
 	//first equipment
@@ -277,10 +277,10 @@ func (lw *LoneWolfSystem) MakingPlayer(gs *GameState) error {
 		gs.Player.Stats["MaxHP"] += 4
 		gs.Player.Stats["HP"] += 4
 	case 3: //食料２つ
-		gs.Player.Equipments.Backpack = append(gs.Player.Equipments.Backpack, lw.Tables.ItemsMap["アレサーポーション"], lw.Tables.ItemsMap["Meal"])
+		gs.Player.Equipments.Backpack = append(gs.Player.Equipments.Backpack, lw.Tables.ItemsMap["Meal"], lw.Tables.ItemsMap["Meal"])
 		fmt.Print("初期装備！\n君は焼け跡からMealを2つ発見した！\n")
 	case 6: //通常アイテム
-		gs.Player.Equipments.Backpack = append(gs.Player.Equipments.Backpack, lw.Tables.ItemsMap["アレサーポーション"])
+		gs.Player.Equipments.Backpack = append(gs.Player.Equipments.Backpack, lw.Tables.ItemsMap["HealingPotion"])
 		fmt.Print("初期装備！\n君は焼け跡からHealingPotionを発見した！\n")
 	case 9: //ゴールド
 		gs.Player.Gold += 12

@@ -27,8 +27,13 @@ func (lw *LoneWolfSystem) HandleNode(gs *GameState, node *Node) error {
 		}
 
 		if node.CSChangeE != 0 {
-			fmt.Printf("君の戦闘技能は永久に%d変化した\n", node.CSChangeE)
-			gs.Player.Stats["CS"] += node.CSChangeE
+			if node.CSChangeE > 0 {
+				fmt.Printf("君の戦闘技能は永久に%d増加した\n", node.CSChangeE)
+				gs.Player.Stats["CS"] += node.CSChangeE
+			} else {
+				fmt.Printf("君の戦闘技能は永久に%d減少した\n", node.CSChangeE)
+				gs.Player.Stats["CS"] += node.CSChangeE
+			}
 		}
 
 		//ここは不要か？
@@ -52,8 +57,19 @@ func (lw *LoneWolfSystem) HandleNode(gs *GameState, node *Node) error {
 		}
 
 		if node.HPChangeStory != 0 {
-			gs.Player.Stats["HP"] += node.HPChangeStory
-			fmt.Printf("君の体力は%dされた！\n", node.HPChangeStory)
+			if node.HPChangeStory > 0 {
+				fmt.Printf("君の体力は%d増加した！\n", node.HPChangeStory)
+				gs.Player.Stats["HP"] += node.HPChangeStory
+				if gs.Player.Stats["HP"] > gs.Player.Stats["MaxHP"] {
+					gs.Player.Stats["HP"] = gs.Player.Stats["MaxHP"]
+				}
+			} else {
+				fmt.Printf("君の体力は%d減少した！\n", node.HPChangeStory)
+				gs.Player.Stats["HP"] += node.HPChangeStory
+				if gs.Player.Stats["HP"] <= 0 {
+					gs.CurrentNodeID = "game_over"
+				}
+			}
 		}
 
 		if node.GetMeal != 0 {
@@ -253,14 +269,14 @@ func (lw *LoneWolfSystem) handleStoryNode(gs *GameState, node *Node) error {
 							fmt.Printf("君は%sと%sを交換した\n", gs.Player.Equipments.Weapon1.Name, newWeapon.Name)
 							gs.Player.Equipments.Weapon1 = newWeapon
 						} else {
-							fmt.Println("Weapon1は空です")
+							fmt.Println("Weapon1を持っていない")
 						}
 					} else if num == 2 {
 						if gs.Player.Equipments.Weapon2 != nil {
 							fmt.Printf("君は%sと%sを交換した\n", gs.Player.Equipments.Weapon2.Name, newWeapon.Name)
 							gs.Player.Equipments.Weapon2 = newWeapon
 						} else {
-							fmt.Println("Weapon2は空です")
+							fmt.Println("Weapon2を持っていない")
 						}
 					} else {
 						fmt.Println("無効な選択です")
@@ -306,7 +322,7 @@ func (lw *LoneWolfSystem) handleStoryNode(gs *GameState, node *Node) error {
 		if choice.RequiredGold != "" {
 			goldnum, err := strconv.Atoi(choice.RequiredGold)
 			if err != nil {
-				fmt.Println("intじゃないよ", err)
+				fmt.Println("半角数字ではないようです", err)
 			}
 			required_gold_num = goldnum
 		}
@@ -528,7 +544,7 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node *Node) error {
 			gs.CurrentNodeID = nextid         //逃亡後のID
 			gs.Player.Stats["HP"] -= hpchange //逃亡時にHPペナルティあり
 			if hpchange != 0 {
-				fmt.Printf("君の体力はマイナス%dされたが逃げ延びた\n", hpchange)
+				fmt.Printf("君の体力を%d失ったが逃げ延びた\n", hpchange)
 			}
 			return nil
 		}
@@ -566,7 +582,7 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node *Node) error {
 				if !(contains_str(gs.Player.KaiDisciplines, currentEnemy.RequireDescipline)) &&
 					currentEnemy.CSChangeNoDesciplineStartTiming == roundnumS {
 					csBonus += currentEnemy.CSChangeNoDescipline
-					fmt.Printf("%sの特殊能力が発動！戦闘技能が%dされた\n", currentEnemy.Name, currentEnemy.CSChangeNoDescipline)
+					fmt.Printf("%sの特殊能力が発動！戦闘技能が%d減少した\n", currentEnemy.Name, -(currentEnemy.CSChangeNoDescipline))
 				}
 			}
 
@@ -574,7 +590,7 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node *Node) error {
 				if !(contains_str(itemlist, currentEnemy.RequireItem)) &&
 					currentEnemy.CSChangeNoItemStartTiming == roundnumS {
 					csBonus += currentEnemy.CSChangeNoItem
-					fmt.Printf("%sの特殊能力が発動！戦闘技能が%dされた\n", currentEnemy.Name, currentEnemy.CSChangeNoItem)
+					fmt.Printf("%sの特殊能力が発動！戦闘技能が%d減少した\n", currentEnemy.Name, -(currentEnemy.CSChangeNoItem))
 				}
 			}
 
@@ -585,7 +601,7 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node *Node) error {
 				currentEnemy.Name, currentEnemy.HP, currentEnemy.CS) // 敵のHPを更新して表示
 
 			time.Sleep(1 * time.Second)
-			fmt.Println("\n力を込めて物理で殴る！")
+			fmt.Println("\nお互いの攻撃が交錯する！")
 			time.Sleep(2 * time.Second)
 
 			Edamage := lw.makeCombatResult(gs.Player.Stats["CS"]+csBonus, currentEnemy.CS).EnemyLoss
@@ -635,7 +651,7 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node *Node) error {
 					gs.CurrentNodeID = nextid //逃亡後のID
 					if hpchange != 0 {
 						gs.Player.Stats["HP"] -= hpchange //逃亡時にHPペナルティあり
-						fmt.Printf("君の体力はマイナス%dされたが逃げ延びた\n", hpchange)
+						fmt.Printf("君は体力を%d失ったが逃げ延びた\n", hpchange)
 					}
 					return nil
 				}
