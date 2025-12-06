@@ -884,7 +884,7 @@ escape_halfway = 3
 
 [[nodes.enemies]]
 Name = "黒熊"
-HP = 100
+HP = 10
 CS = 16
 
 [[nodes.outcomes]]
