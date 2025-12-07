@@ -164,12 +164,13 @@ type = "random_roll"
 text = """木々が密になる中を駆け抜けると、ギアクの叫び声が背後で次第に遠ざかる。
 彼らをほぼ完全に振り切ったその時、低い枝の絡まりに頭から突っ込んでしまう。
 ランダムナンバーテーブルから数字を一つ選べ。"""
-[[nodes.choices]]
+[[nodes.outcomes]]
 description = "もし選んだ数字が0～4なら、343へ進め。"
+condition_int = [0, 1, 2, 3, 4]
 next_node_id = "343"
-
-[[nodes.choices]]
+[[nodes.outcomes]]
 description = "もし選んだ数字が5～9なら、276へ進め。"
+condition_int = [5, 6, 7, 8, 9]
 next_node_id = "276"
 
 [[nodes]]
@@ -4487,8 +4488,7 @@ text = """ジェムが熱く、手を焼く。ENDURANCEを2ポイント失う。
 急いでカイのマントの端で拾い、バックパックにしまう。その大きさは数百クラウンの価値があるだろう。
 だが、ギアクが近く、矢が頭上を飛び、森の安全へ走る。"""
 HPChangeStory = -2
-itemgetbefore = "Gem"
-itemgetnum = 1
+gemgetbefore = 1
 [[nodes.choices]]
 description = "2へ"
 next_node_id = "2"
@@ -4502,8 +4502,7 @@ text = """最初の小屋の開いた扉から、炭焼きの男が粗い石の�
 ギアクの悪辣な仕業に間違いなく、彼らは破壊を喜ぶ。他の小屋も同様に殺戮と破壊の跡だ。
 最後の小屋でギアクの槍を見つけ、疑いを確信する。望むならこの武器を取れる。
 任務の成功をさらに決意し、道を進む。"""
-itemgetbefore = "Spear" #ちゃんと文意を汲み取って記述されてる、すげぇ
-itemgetnum = 1
+weapongetbefore = "Spear" #ちゃんと文意を汲み取って記述されてる、すげぇ
 [[nodes.choices]]
 description = "105へ"
 next_node_id = "105"
@@ -4692,8 +4691,7 @@ text = """ぬめった生物が長い恐ろしい死の叫びを上げ、倒れ�
 留め金を外すと、20ゴールドクラウンがある。望むなら短剣とクラウンを取れる。
 気分が良くなり、装備を集め、東の森へ進む。"""
 goldgetbefore = 20
-itemgetbefore = "Dagger"
-itemgetnum = 1
+weapongetbefore = "Dagger"
 [[nodes.choices]]
 description = "157へ"
 next_node_id = "157"

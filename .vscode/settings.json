@@ -1,3 +1,4 @@
 {
-    "terminal.integrated.fontFamily": "'Droid Sans Mono', 'monospace', 'Droid Sans Fallback'"
+    "terminal.integrated.fontFamily": "'Droid Sans Mono', 'monospace', 'Droid Sans Fallback'",
+    "kiroAgent.configureMCP": "Disabled"
 }

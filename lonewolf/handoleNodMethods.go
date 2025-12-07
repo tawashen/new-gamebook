@@ -14,9 +14,12 @@ func (lw *LoneWolfSystem) HandleNode(gs *GameState, node *Node) error {
 
 	UpdatePlayer(gs, "heal")
 
+	fmt.Println("")
+	fmt.Println("")
+	fmt.Println("")
 	switch node.Type {
 	case "story":
-		fmt.Printf("Story: %s\n", node.Text)
+		fmt.Printf("Story: %s\n\n", node.Text)
 
 		if node.WeaponGetBefore != "" {
 			weapon := lw.Tables.WeaponsMap[node.WeaponGetBefore]
@@ -159,6 +162,8 @@ func (lw *LoneWolfSystem) handleRandomNode(gs *GameState, node *Node) error {
 
 	randomNumber := r.Intn(10)
 
+	fmt.Printf("Story:%s\n", node.Text)
+	fmt.Println("")
 	fmt.Printf("RandomNumberは%dです\n", randomNumber)
 
 	fmt.Println("\n選択肢:")
@@ -407,6 +412,8 @@ func (lw *LoneWolfSystem) Encounter(gs *GameState, node *Node) error {
 
 	gs.CurrentCondition = ""
 
+	fmt.Printf("Story:%s\n", node.Text)
+	fmt.Println("")
 	fmt.Println("\n--- エンカウント！ ---")
 
 	//装備を変更するか選択

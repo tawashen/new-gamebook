@@ -149,7 +149,7 @@ func (lw *LoneWolfSystem) MakingGameState() (*GameState, error) {
 			Gem:  0,
 		},
 
-		CurrentNodeID: "1",
+		CurrentNodeID: "58",
 		Nodes:         nodeMap,
 		Reader:        reader,
 		System:        lw,
@@ -171,7 +171,7 @@ func (lw *LoneWolfSystem) MakingPlayer(gs *GameState) error {
 	//	input = strings.ToUpper(input)
 
 	//	if input == "Y" {
-	gs.Player.Stats["CS"] = 10 + randomNumCS
+	gs.Player.Stats["CS"] = 20 + randomNumCS
 	fmt.Printf("お前の戦闘力は%dと定まった！\n", gs.Player.Stats["CS"])
 	//		break
 
@@ -192,8 +192,8 @@ func (lw *LoneWolfSystem) MakingPlayer(gs *GameState) error {
 	//	input = strings.ToUpper(input)
 
 	//	if input == "Y" {
-	gs.Player.Stats["HP"] = 10 + randomNumHP
-	gs.Player.Stats["MaxHP"] = 10 + randomNumHP
+	gs.Player.Stats["HP"] = 100 + randomNumHP
+	gs.Player.Stats["MaxHP"] = 100 + randomNumHP
 	fmt.Printf("お前の生命力は%dと定まった！\n", gs.Player.Stats["HP"])
 	//		break
 
